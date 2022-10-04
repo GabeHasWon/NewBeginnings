@@ -13,8 +13,9 @@ namespace NewBeginnings.PlayerBackgrounds
         public int AdditionalMana;
         public (int head, int body, int legs) Armor = (0, 0, 0);
         public (int type, int stack)[] Inventory;
+        public int[] Accessories;
 
-        public PlayerBackgroundData(string name, string texName, string desc, int life = 200, int mana = 20, (int, int, int) armor = default, params (int, int)[] inv)
+        public PlayerBackgroundData(string name, string texName, string desc, int life = 100, int mana = 20, (int, int, int) armor = default, params (int, int)[] inv)
         {
             Name = name;
             Texture = texName;
@@ -23,15 +24,41 @@ namespace NewBeginnings.PlayerBackgrounds
             AdditionalMana = mana;
             Armor = armor;
             Inventory = inv;
+            Accessories = Array.Empty<int>();
+        }
+
+        /// <summary>Constructor with an additional Accessories parameter, for...accessories.</summary>
+        /// <param name="accessories">Ordered list of all accessory ItemIDs. Must be less than 6 values long.</param>
+        public PlayerBackgroundData(string name, string texName, string desc, int life = 100, int mana = 20, int[] accessories = null, (int, int, int) armor = default, params (int, int)[] inv) 
+            : this(name, texName, desc, life, mana, armor, inv)
+        {
+            Accessories = accessories ?? Array.Empty<int>();
         }
 
         public void ApplyToPlayer(Player player)
         {
-            player.statLifeMax = MaxLife;
-            player.statManaMax = AdditionalMana;
-
+            ApplyStats(player);
+            ApplyAccessories(player);
             ApplyArmor(player);
             ApplyInventory(player);
+        }
+
+        public void ApplyStats(Player player)
+        {
+            if (MaxLife > 20)
+                player.statLifeMax = MaxLife;
+
+            if (AdditionalMana >= 0)
+                player.statManaMax = AdditionalMana;
+        }
+
+        public void ApplyAccessories(Player player)
+        {
+            if (Accessories.Length > Player.InitialAccSlotCount)
+                throw new Exception("Inventory is too big. Fix it.");
+
+            for (int i = 0; i < Accessories.Length; ++i)
+                player.armor[3 + i] = new Item(Accessories[i].type);
         }
 
         public void ApplyArmor(Player player)

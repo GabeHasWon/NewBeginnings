@@ -27,9 +27,9 @@ namespace NewBeginnings.PlayerBackgrounds
         {
             AddNewBG("Purist", "Purist", "The normal Terraria experience.", 100, 0, default, false);
             AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", 100, 0, default, true, (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
-            AddNewBG("Fisherman", "Fisherman", $"Slimes want me, fish fear me...", 100, 0, (ItemID.AnglerHat, 0, 0), true, (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3), (ItemID.HighTestFishingLine, 1));
+            AddNewBG("Fisherman", "Fisherman", $"Slimes want me, fish fear me...", 100, 0, (ItemID.AnglerHat, 0, 0), new int[] { ItemID.HighTestFishingLine }, true, (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
             AddNewBG("Bookworm", "Bookworm", $"Mind over matter. The best way to fight is with a sharpened mind!", 100, 0, (0, 0, 0), true, (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
-            AddNewBG("Boomer", "Boomer", $"Back in my day...", 100, 0, (0, 0, 0), true, (ItemID.LawnMower, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
+            AddNewBG("Boomer", "Boomer", $"Back in my day...", 100, 0, (ItemID.Sunglasses, 0, 0), true, (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
             AddNewBG("Random", "Default", "Choose a random background.", 100, 0, (0, 0, 0), false);
         }
 
@@ -45,7 +45,25 @@ namespace NewBeginnings.PlayerBackgrounds
                 backgroundIcons.Add(item.Name["PlayerBackgrounds\\Textures\\".Length..], item as Asset<Texture2D>);
         }
 
-        private static void AddNewBG(string name, string tex, string desc, int maxLife, int startMana, (int, int, int) armor, bool addInvToDesc = true, params(int type, int stack)[] inv)
+        private static void AddNewBG(string name, string tex, string desc, int maxLife, int startMana, (int, int, int) armor, bool addInvToDesc = true, params (int type, int stack)[] inv)
+        {
+            if (addInvToDesc)
+                ExpandDesc(inv, ref desc);
+
+            var data = new PlayerBackgroundData(name, tex, desc, maxLife, startMana, armor, inv);
+            playerBackgroundDatas.Add(data);
+        }
+
+        private static void AddNewBG(string name, string tex, string desc, int maxLife, int startMana, (int, int, int) armor, int[] accessories, bool addInvToDesc = true, params (int type, int stack)[] inv)
+        {
+            if (addInvToDesc)
+                ExpandDesc(inv, ref desc, accessories);
+
+            var data = new PlayerBackgroundData(name, tex, desc, maxLife, startMana, accessories, armor, inv);
+            playerBackgroundDatas.Add(data);
+        }
+
+        private static void ExpandDesc((int type, int stack)[] inv, ref string desc, int[] accessories = null)
         {
             if (inv.Length > 0)
                 desc += "\n";
@@ -59,8 +77,11 @@ namespace NewBeginnings.PlayerBackgrounds
                 desc += itemText;
             }
 
-            var data = new PlayerBackgroundData(name, tex, desc, maxLife, startMana, armor, inv);
-            playerBackgroundDatas.Add(data);
+            if (accessories is not null)
+            {
+                foreach (var type in accessories) //Add every item in accessories to the description
+                    desc += $"[i:{type}]";
+            }
         }
     }
 }

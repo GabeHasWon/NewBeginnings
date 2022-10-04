@@ -127,7 +127,7 @@ namespace NewBeginnings
 
                 var plr = InternalPlayerField.GetValue(_self) as Player;
                 if (plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Name is null)
-                    plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.First();
+                    plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(PlayerBackgroundDatabase.playerBackgroundDatas.First());
 
                 var uiText = _difficultyDescriptionContainer.Children.FirstOrDefault(x => x is UIText text);
                 if (uiText is UIText tex)
@@ -203,7 +203,7 @@ namespace NewBeginnings
 
                     Player plr = InternalPlayerField.GetValue(_self) as Player;
                     item.ApplyArmor(plr);
-                    plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData = useData;
+                    plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(useData);
 
                     foreach (var item in allBGButtons.Where(x => x is UIColoredImageButton))
                         (item as UIColoredImageButton).SetColor(Color.Gray);
