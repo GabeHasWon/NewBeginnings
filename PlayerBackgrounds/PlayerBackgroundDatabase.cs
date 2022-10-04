@@ -14,27 +14,26 @@ namespace NewBeginnings.PlayerBackgrounds
         public static List<PlayerBackgroundData> playerBackgroundDatas = new();
         public static Dictionary<string, Asset<Texture2D>> backgroundIcons = new();
 
-        public static void Populate(Mod mod)
+        public static void Populate()
         {
             LoadBackgroundIcons();
 
             playerBackgroundDatas.Clear();
-
             LoadAllBackgrounds();
         }
 
         private static void LoadAllBackgrounds()
         {
-            AddNewBG("Purist", "Purist", "The normal Terraria experience.", 100, 0, default, false);
-            AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", 100, 0, default, true, (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
-            AddNewBG("Fisherman", "Fisherman", $"Slimes want me, fish fear me...", 100, 0, (ItemID.AnglerHat, 0, 0), new int[] { ItemID.HighTestFishingLine }, true, (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
-            AddNewBG("Bookworm", "Bookworm", $"Mind over matter. The best way to fight is with a sharpened mind!", 100, 0, (0, 0, 0), true, (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
-            AddNewBG("Boomer", "Boomer", $"Back in my day...", 100, 0, (ItemID.Sunglasses, 0, 0), true, (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
-            AddNewBG("Random", "Default", "Choose a random background.", 100, 0, (0, 0, 0), false);
+            AddNewBG("Purist", "Purist", "The normal Terraria experience.", 100, 20, default, false);
+            AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", 100, 20, default, true, (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
+            AddNewBG("Fisherman", "Fisherman", "Slimes want me, fish fear me...", 100, 20, (ItemID.AnglerHat, 0, 0), new int[] { ItemID.HighTestFishingLine }, true, (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
+            AddNewBG("Bookworm", "Bookworm", "Mind over matter. The best way to fight is with a sharpened mind!", 100, 20, (0, 0, 0), true, (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
+            AddNewBG("Boomer", "Boomer", "Back in my day...", 100, 20, (ItemID.Sunglasses, 0, 0), true, (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
+            AddNewBG("Random", "Default", "Choose a random background.", 100, 20, (0, 0, 0), false);
         }
 
         /// <summary>
-        /// Autoloads every texture in PlayerBackgrounds/Textures/
+        /// Autoloads every texture in PlayerBackgrounds/Textures/.
         /// </summary>
         private static void LoadBackgroundIcons()
         {
@@ -45,7 +44,16 @@ namespace NewBeginnings.PlayerBackgrounds
                 backgroundIcons.Add(item.Name["PlayerBackgrounds\\Textures\\".Length..], item as Asset<Texture2D>);
         }
 
-        private static void AddNewBG(string name, string tex, string desc, int maxLife, int startMana, (int, int, int) armor, bool addInvToDesc = true, params (int type, int stack)[] inv)
+        /// <summary>Adds a new background with the given info.</summary>
+        /// <param name="name">Name of the background; will be used in the UI and player title.</param>
+        /// <param name="tex">Name of the texture for the icon; i.e. Bookworm. Must be an image in PlayerBackgrounds/Textures/.</param>
+        /// <param name="desc">Description of the background to be shown on the char creation UI.</param>
+        /// <param name="maxLife">Max life of the player who uses this background.</param>
+        /// <param name="startMana">Max mana of the player who uses this background.</param>
+        /// <param name="armor">Set of armor for the player; (head, body, legs) respectively.</param>
+        /// <param name="addInvToDesc">Whether the backgrounds inventory and accessories are to be shown in the description.</param>
+        /// <param name="inv"></param>
+        private static void AddNewBG(string name, string tex, string desc, int maxLife, int startMana, (int head, int body, int legs) armor, bool addInvToDesc = true, params (int type, int stack)[] inv)
         {
             if (addInvToDesc)
                 ExpandDesc(inv, ref desc);
@@ -54,7 +62,9 @@ namespace NewBeginnings.PlayerBackgrounds
             playerBackgroundDatas.Add(data);
         }
 
-        private static void AddNewBG(string name, string tex, string desc, int maxLife, int startMana, (int, int, int) armor, int[] accessories, bool addInvToDesc = true, params (int type, int stack)[] inv)
+        /// <summary>Same as <see cref="AddNewBG(string, string, string, int, int, (int head, int body, int legs), bool, (int type, int stack)[])"/>, but also has accessories.</summary>
+        /// <param name="accessories">Accessories the player will have. Must be less than <see cref="Player.InitialAccSlotCount"/> (5).</param>
+        private static void AddNewBG(string name, string tex, string desc, int maxLife, int startMana, (int head, int body, int legs) armor, int[] accessories, bool addInvToDesc = true, params (int type, int stack)[] inv)
         {
             if (addInvToDesc)
                 ExpandDesc(inv, ref desc, accessories);
@@ -63,6 +73,10 @@ namespace NewBeginnings.PlayerBackgrounds
             playerBackgroundDatas.Add(data);
         }
 
+        /// <summary>Automatically writes everything in <paramref name="inv"/> and <paramref name="accessories"/> (if there are any accessories) to the description.</summary>
+        /// <param name="inv"></param>
+        /// <param name="desc"></param>
+        /// <param name="accessories"></param>
         private static void ExpandDesc((int type, int stack)[] inv, ref string desc, int[] accessories = null)
         {
             if (inv.Length > 0)

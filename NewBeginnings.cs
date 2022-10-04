@@ -8,7 +8,7 @@ namespace NewBeginnings
         public override void Load()
         {
             CharCreationEdit.Load();
-            PlayerBackgroundDatabase.Populate(this);
+            PlayerBackgroundDatabase.Populate();
         }
     }
 }

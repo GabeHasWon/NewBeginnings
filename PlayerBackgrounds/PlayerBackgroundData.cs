@@ -4,6 +4,7 @@ using Terraria.ID;
 
 namespace NewBeginnings.PlayerBackgrounds
 {
+    /// <summary>Info struct for a given player background.</summary>
     internal struct PlayerBackgroundData
     {
         public string Name;
@@ -57,8 +58,8 @@ namespace NewBeginnings.PlayerBackgrounds
             if (Accessories.Length > Player.InitialAccSlotCount)
                 throw new Exception("Inventory is too big. Fix it.");
 
-            for (int i = 0; i < Accessories.Length; ++i)
-                player.armor[3 + i] = new Item(Accessories[i].type);
+            for (int i = 0; i < Player.InitialAccSlotCount; ++i)
+                player.armor[3 + i] = new Item(i < Accessories.Length ? Accessories[i] : 0);
         }
 
         public void ApplyArmor(Player player)

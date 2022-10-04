@@ -16,15 +16,13 @@ using Terraria.UI;
 
 namespace NewBeginnings
 {
+    /// <summary>Handles most of the mod's UI modifications and detours.</summary>
     internal class CharCreationEdit
     {
-        public static MethodInfo Click_CharInfoMethod;
-
         public static bool _bgToggled = false;
         public static UICharacterCreation _self;
         public static UIElement _difficultyContainer;
         public static UISlicedImage _difficultyDescriptionContainer;
-        public static UIElement _parent;
         public static IEnumerable<UIElement> _originalChildren;
 
         public static FieldInfo InternalPlayerField;
@@ -36,20 +34,25 @@ namespace NewBeginnings
             IL.Terraria.GameContent.UI.States.UICharacterCreation.MakeInfoMenu += UICharacterCreation_MakeInfoMenu;
             On.Terraria.GameContent.UI.States.UICharacterCreation.Click_GoBack += UICharacterCreation_Click_GoBack;
             On.Terraria.GameContent.UI.States.UICharacterCreation.Click_NamingAndCreating += UICharacterCreation_Click_NamingAndCreating;
+
+            CharCreationHijackSaveDetour.Load();
         }
 
+        /// <summary>Just used to reset origin toggle if the player goes to a different screen.</summary>
         private static void UICharacterCreation_Click_NamingAndCreating(On.Terraria.GameContent.UI.States.UICharacterCreation.orig_Click_NamingAndCreating orig, UICharacterCreation self, UIMouseEvent evt, UIElement listeningElement)
         {
             _bgToggled = false;
             orig(self, evt, listeningElement);
         }
 
+        /// <summary>Just used to reset origin toggle if the player goes to a different screen.</summary>
         private static void UICharacterCreation_Click_GoBack(On.Terraria.GameContent.UI.States.UICharacterCreation.orig_Click_GoBack orig, UICharacterCreation self, UIMouseEvent evt, UIElement listeningElement)
         {
             _bgToggled = false;
             orig(self, evt, listeningElement);
         }
 
+        /// <summary>IL edit that shoves everything we want into the vanilla UI.</summary>
         private static void UICharacterCreation_MakeInfoMenu(ILContext il)
         {
             ILCursor c = new(il);
@@ -94,6 +97,7 @@ namespace NewBeginnings
             });
         }
 
+        /// <summary>Adds the background icon button to the UI.</summary>
         private static void AddNewButton(UIElement parent)
         {
             UIImageButton backgroundButton = new(ModContent.Request<Texture2D>("NewBeginnings/PlayerBackgrounds/BackgroundIcon"))
@@ -107,12 +111,14 @@ namespace NewBeginnings
             backgroundButton.OnMouseDown += BackgroundButton_OnMouseDown;
 
             parent.Append(backgroundButton);
-            _parent = parent;
         }
 
+        /// <summary>OnMouseDown event for the background icon button. Sets the background list, changes the description and sets defaults where necessary.</summary>
+        /// <param name="evt"></param>
+        /// <param name="listeningElement"></param>
         private static void BackgroundButton_OnMouseDown(UIMouseEvent evt, UIElement listeningElement)
         {
-            if (!_bgToggled)
+            if (!_bgToggled) //If we're switching to the bg section
             {
                 _bgToggled = true;
 
@@ -125,15 +131,15 @@ namespace NewBeginnings
 
                 BuildBackgroundSelections();
 
-                var plr = InternalPlayerField.GetValue(_self) as Player;
+                var plr = InternalPlayerField.GetValue(_self) as Player; //Set background data if it's null
                 if (plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Name is null)
                     plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(PlayerBackgroundDatabase.playerBackgroundDatas.First());
 
-                var uiText = _difficultyDescriptionContainer.Children.FirstOrDefault(x => x is UIText text);
+                var uiText = _difficultyDescriptionContainer.Children.FirstOrDefault(x => x is UIText text); //And set the description
                 if (uiText is UIText tex)
                     tex.SetText(plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Description);
             }
-            else
+            else //If we're switching out of the bg section
             {
                 _bgToggled = false;
 
@@ -160,19 +166,19 @@ namespace NewBeginnings
             }
         }
 
+        /// <summary>Builds the origin list and buttons.</summary>
         private static void BuildBackgroundSelections()
         {
-            UIList allBGButtons = new UIList()
+            UIList allBGButtons = new UIList() //List of all background buttons
             {
                 Width = StyleDimension.FromPixels(180),
                 Height = StyleDimension.FromPixels(120),
-
             };
             allBGButtons.ListPadding = 4;
 
             _difficultyContainer.Append(allBGButtons);
 
-            UIScrollbar scroll = new UIScrollbar()
+            UIScrollbar scroll = new UIScrollbar() //Scrollbar for above list
             {
                 HAlign = 1f,
                 Height = StyleDimension.FromPixelsAndPercent(-8, 1f),
@@ -182,7 +188,7 @@ namespace NewBeginnings
             allBGButtons.SetScrollbar(scroll);
             _difficultyContainer.Append(scroll);
 
-            foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas)
+            foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas) //Adds every background into the list as a button
             {
                 var asset = PlayerBackgroundDatabase.backgroundIcons.ContainsKey(item.Texture) ? PlayerBackgroundDatabase.backgroundIcons[item.Texture] : PlayerBackgroundDatabase.backgroundIcons["Default"];
                 UIColoredImageButton currentBGButton = new(asset)
@@ -195,23 +201,24 @@ namespace NewBeginnings
 
                 currentBGButton.OnMouseDown += (UIMouseEvent evt, UIElement listeningElement) =>
                 {
-                    PlayerBackgroundData useData = item.Name == "Random" ? Main.rand.Next(PlayerBackgroundDatabase.playerBackgroundDatas.SkipLast(1).ToList()) : item;
+                    PlayerBackgroundData useData = item.Name == "Random" ? Main.rand.Next(PlayerBackgroundDatabase.playerBackgroundDatas.SkipLast(1).ToList()) : item; //Hardcoding for random, sucks but eh
 
-                    var uiText = _difficultyDescriptionContainer.Children.FirstOrDefault(x => x is UIText text);
+                    var uiText = _difficultyDescriptionContainer.Children.FirstOrDefault(x => x is UIText text); //Changes the UIText's value to use the bg's description
                     if (uiText is UIText tex)
                         tex.SetText(item.Name != "Random" ? useData.Description : item.Description);
 
-                    Player plr = InternalPlayerField.GetValue(_self) as Player;
+                    Player plr = InternalPlayerField.GetValue(_self) as Player; //Applies the visuals for the background...
                     item.ApplyArmor(plr);
-                    plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(useData);
+                    item.ApplyAccessories(plr);
+                    plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(useData); //...and sets it.
 
                     foreach (var item in allBGButtons.Where(x => x is UIColoredImageButton))
                         (item as UIColoredImageButton).SetColor(Color.Gray);
                         
-                    currentBGButton.SetColor(Color.White);
+                    currentBGButton.SetColor(Color.White); //"Selects" the button visually.
                 };
 
-                UIText bgName = new(item.Name, 1.2f)
+                UIText bgName = new(item.Name, 1.2f) //Background's name
                 {
                     HAlign = 0f,
                     VAlign = 0.5f,
