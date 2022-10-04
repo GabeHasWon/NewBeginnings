@@ -1,0 +1,8 @@
+- New Beginnings -
+
+Adds in "Player Origins" (or sometimes Player Backgrounds), which allow you to start a new player off with different max life, mana, items, or even world changes like a different spawn.
+These are all accessible by default through the character creation screen; a little button next to the player name switches the menu to player origin mode.
+From then on, choose whichever background you like and enjoy!
+
+- Developers -
+- GabeHasWon: programming, art

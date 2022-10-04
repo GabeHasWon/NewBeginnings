@@ -1,0 +1,3 @@
+displayName = New Beginnings
+author = dev group
+version = 0.1
