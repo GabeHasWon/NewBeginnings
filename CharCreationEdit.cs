@@ -25,6 +25,12 @@ namespace NewBeginnings
         public static UISlicedImage _difficultyDescriptionContainer;
         public static IEnumerable<UIElement> _originalChildren;
 
+        //All of these are for the description changes
+        public static UIText _originalDifficultyDescription;
+        public static UIText _backgroundDescription;
+        public static UIList _descriptionList;
+        public static UIScrollbar _descScrollBar;
+
         public static FieldInfo InternalPlayerField;
 
         internal static void Load()
@@ -137,7 +143,10 @@ namespace NewBeginnings
 
                 var uiText = _difficultyDescriptionContainer.Children.FirstOrDefault(x => x is UIText text); //And set the description
                 if (uiText is UIText tex)
-                    tex.SetText(plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Description);
+                    _originalDifficultyDescription = tex;
+
+                _difficultyDescriptionContainer.RemoveChild(_originalDifficultyDescription);
+                BuildDescriptionScrollbar(plr);
             }
             else //If we're switching out of the bg section
             {
@@ -160,10 +169,42 @@ namespace NewBeginnings
                 else if (dif == 3)
                     text = Language.GetText("UI.CreativeDescriptionPlayer").Value;
 
-                var uiText = _difficultyDescriptionContainer.Children.FirstOrDefault(x => x is UIText text);
-                if (uiText is UIText tex)
-                    tex.SetText(text);
+                _difficultyDescriptionContainer.RemoveChild(_descScrollBar);
+                _difficultyDescriptionContainer.RemoveChild(_descriptionList);
+                _originalDifficultyDescription.SetText(text);
+                _difficultyDescriptionContainer.Append(_originalDifficultyDescription);
             }
+        }
+
+        private static void BuildDescriptionScrollbar(Player plr)
+        {
+            _descriptionList = new UIList() //List for use in the description
+            {
+                Width = StyleDimension.FromPixels(270),
+                Height = StyleDimension.FromPixels(200),
+                PaddingLeft = 8,
+                PaddingRight = 8,
+            };
+            _difficultyDescriptionContainer.Append(_descriptionList);
+
+            _descScrollBar = new UIScrollbar() //Scrollbar for above list
+            {
+                HAlign = 1f,
+                Height = StyleDimension.FromPixelsAndPercent(-8, 1f),
+                Top = StyleDimension.FromPixels(4)
+            };
+
+            _descriptionList.SetScrollbar(_descScrollBar);
+            _difficultyDescriptionContainer.Append(_descScrollBar);
+
+            _backgroundDescription = new UIText(plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Description)
+            {
+                Top = StyleDimension.FromPercent(0.1f),
+                Width = StyleDimension.FromPixelsAndPercent(-8, 1f),
+                IsWrapped = true,
+                MarginTop = 8
+            };
+            _descriptionList.Add(_backgroundDescription);
         }
 
         /// <summary>Builds the origin list and buttons.</summary>
@@ -173,8 +214,8 @@ namespace NewBeginnings
             {
                 Width = StyleDimension.FromPixels(180),
                 Height = StyleDimension.FromPixels(120),
+                ListPadding = 4,
             };
-            allBGButtons.ListPadding = 4;
 
             _difficultyContainer.Append(allBGButtons);
 
@@ -190,7 +231,7 @@ namespace NewBeginnings
 
             foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas) //Adds every background into the list as a button
             {
-                var asset = PlayerBackgroundDatabase.backgroundIcons.ContainsKey(item.Texture) ? PlayerBackgroundDatabase.backgroundIcons[item.Texture] : PlayerBackgroundDatabase.backgroundIcons["Default"];
+                var asset = PlayerBackgroundDatabase.backgroundIcons[PlayerBackgroundDatabase.backgroundIcons.ContainsKey(item.Texture) ? item.Texture : "Default"];
                 UIColoredImageButton currentBGButton = new(asset)
                 {
                     Width = StyleDimension.FromPercent(0.9f),
@@ -202,10 +243,7 @@ namespace NewBeginnings
                 currentBGButton.OnMouseDown += (UIMouseEvent evt, UIElement listeningElement) =>
                 {
                     PlayerBackgroundData useData = item.Name == "Random" ? Main.rand.Next(PlayerBackgroundDatabase.playerBackgroundDatas.SkipLast(1).ToList()) : item; //Hardcoding for random, sucks but eh
-
-                    var uiText = _difficultyDescriptionContainer.Children.FirstOrDefault(x => x is UIText text); //Changes the UIText's value to use the bg's description
-                    if (uiText is UIText tex)
-                        tex.SetText(item.Name != "Random" ? useData.Description : item.Description);
+                    _backgroundDescription.SetText(item.Name != "Random" ? useData.Description : item.Description); //Changes the UIText's value to use the bg's description
 
                     Player plr = InternalPlayerField.GetValue(_self) as Player; //Applies the visuals for the background...
                     item.ApplyArmor(plr);
