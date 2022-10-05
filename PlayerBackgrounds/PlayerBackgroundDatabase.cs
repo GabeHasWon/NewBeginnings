@@ -25,6 +25,10 @@ namespace NewBeginnings.PlayerBackgrounds
         private static void LoadAllBackgrounds()
         {
             AddNewBG("Purist", "Purist", "The normal Terraria experience.", 100, 20, default, false);
+            AddNewBG("Knight", "Knight", "A noble warrior, clad in iron.", 160, 20, (ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), true, (ItemID.SilverBroadsword, 1));
+            AddNewBG("Huntsman", "Huntsman", $"Steady hands and keen eyes, a master of the hunt.", 100, 20, (0, 0, 0), new int[] { ItemID.HunterCloak }, true, (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
+            AddNewBG("Wizard", "Wizard", $"An apprentice wizard with an affinity for the arcane.", 80, 60, (ItemID.WizardHat, ItemID.SapphireRobe, 0), true, (ItemID.SapphireStaff, 1));
+            AddNewBG("Beastmaster", "Beastmaster", $"Raised in the woodlands, they summon beasts to aid their journey.", 60, 20, (0, 0, 0), true, (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
             AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", 100, 20, default, true, (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
             AddNewBG("Fisherman", "Fisherman", "Slimes want me, fish fear me...", 100, 20, (ItemID.AnglerHat, 0, 0), new int[] { ItemID.HighTestFishingLine }, true, (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
             AddNewBG("Bookworm", "Bookworm", "Mind over matter. The best way to fight is with a sharpened mind!", 100, 20, (0, 0, 0), true, (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
