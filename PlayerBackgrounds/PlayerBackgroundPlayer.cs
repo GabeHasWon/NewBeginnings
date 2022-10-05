@@ -38,11 +38,8 @@ namespace NewBeginnings.PlayerBackgrounds
             _bgName = data.Name;
         }
 
-        //Save / Load data for if the player is just created
-        public override void SaveData(TagCompound tag)
-        {
-            tag.Add("bgName", _bgName);
-        }
+        //Save / Load data for the player's origin name
+        public override void SaveData(TagCompound tag) => tag.Add("bgName", _bgName);
 
         public override void LoadData(TagCompound tag)
         {
