@@ -236,7 +236,7 @@ namespace NewBeginnings
                 {
                     Width = StyleDimension.FromPercent(0.9f),
                     Height = StyleDimension.FromPixels(36),
-                    Left = StyleDimension.FromPixels(-50),
+                    Left = StyleDimension.FromPixels(-60),
                 };
                 currentBGButton.SetColor(Color.Gray);
 
