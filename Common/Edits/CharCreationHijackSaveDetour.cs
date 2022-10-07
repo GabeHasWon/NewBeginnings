@@ -1,8 +1,9 @@
-﻿using NewBeginnings.PlayerBackgrounds;
+﻿using NewBeginnings.Common.Edits;
+using NewBeginnings.PlayerBackgrounds;
 using Terraria;
 using Terraria.GameContent.UI.States;
 
-namespace NewBeginnings
+namespace NewBeginnings.Common.Edits
 {
     internal class CharCreationHijackSaveDetour
     {

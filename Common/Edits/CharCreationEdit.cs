@@ -14,7 +14,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace NewBeginnings
+namespace NewBeginnings.Common.Edits
 {
     /// <summary>Handles most of the mod's UI modifications and detours.</summary>
     internal class CharCreationEdit
@@ -42,6 +42,7 @@ namespace NewBeginnings
             On.Terraria.GameContent.UI.States.UICharacterCreation.Click_NamingAndCreating += UICharacterCreation_Click_NamingAndCreating;
 
             CharCreationHijackSaveDetour.Load();
+            CharNameEdit.Load();
         }
 
         /// <summary>Just used to reset origin toggle if the player goes to a different screen.</summary>

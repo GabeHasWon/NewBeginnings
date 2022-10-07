@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using NewBeginnings.Content.Items;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -32,14 +33,14 @@ namespace NewBeginnings.PlayerBackgrounds
             AddNewBG("Shinobi", "Shinobi", $"A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency", 80, 20, (0, 0, 0), new int[] { ItemID.Tabi }, true, (ItemID.Katana, 1));
             AddNewBG("Trailblazer", "Trailblazer", $"No time to explain. They have places to go, things to see", 100, 20, (0, 0, 0), new int[] { ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind }, true); //Needs the winged helmet vanity
             AddNewBG("Adventurer", "Adventurer", $"Tentative", 100, 20, (ItemID.ArchaeologistsHat, ItemID.ArchaeologistsJacket, ItemID.ArchaeologistsPants), true, (ItemID.GrapplingHook, 1), (ItemID.Torch, 100), (ItemID.TrapsightPotion, 5), (ItemID.SpelunkerPotion, 5));
-            AddNewBG("Farmer", "Farmer", $"It ain't much, but it's honest work", 100, 20, (ItemID.SummerHat, 0, 0), true, (ItemID.Sickle, 1), (ItemID.Hay, 200), (ItemID.DaybloomSeeds, 12), (ItemID.BlinkrootSeeds, 12), (ItemID.MoonglowSeeds, 12), (ItemID.WaterleafSeeds, 12), (ItemID.ShiverthornSeeds, 12), (ItemID.DeathweedSeeds, 12), (ItemID.FireblossomSeeds, 12));//Gonna need a custom straw hat vanity item to replace the summer hat. 
+            AddNewBG("Farmer", "Farmer", $"It ain't much, but it's honest work", 100, 20, (ItemID.SummerHat, 0, 0), true, (ItemID.Sickle, 1), (ItemID.Hay, 200), (ItemID.DaybloomSeeds, 12), (ItemID.BlinkrootSeeds, 12), (ItemID.MoonglowSeeds, 12), (ItemID.WaterleafSeeds, 12), (ItemID.ShiverthornSeeds, 12), (ItemID.DeathweedSeeds, 12), (ItemID.FireblossomSeeds, 12)); //Gonna need a custom straw hat vanity item to replace the summer hat. 
             AddNewBG("Alchemist", "Alchemist", $"Tentative", 100, 20, (0, 0, 0), true, (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
             AddNewBG("Spelunker", "Spelunker", $"The caves call and they answer. Those Ores aren't gonna mine themselves", 100, 20, (ItemID.MiningHelmet, 0, 0), new int[] { ItemID.AncientChisel }, true, (ItemID.GoldPickaxe, 1), (ItemID.Bomb, 15), (ItemID.SpelunkerPotion, 10));
             AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", 100, 20, default, true, (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
             AddNewBG("Fisherman", "Fisherman", "Slimes want me, fish fear me...", 100, 20, (ItemID.AnglerHat, 0, 0), new int[] { ItemID.HighTestFishingLine }, true, (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
-            AddNewBG("Bookworm", "Bookworm", "Mind over matter. The best way to fight is with a sharpened mind!", 100, 20, (0, 0, 0), true, (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
+            AddNewBG("Bookworm", "Bookworm", "Mind over matter. The best way to fight is with a sharpened mind!", 100, 20, (0, 0, 0), true, (ModContent.ItemType<WornSpellbook>(), 1), (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
             AddNewBG("Boomer", "Boomer", "Back in my day...", 100, 20, (ItemID.Sunglasses, 0, 0), true, (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
-            AddNewBG("Random", "Default", "Choose a random background.", 100, 20, (0, 0, 0), false);
+            AddNewBG("Random", "Default", "Choose a random background.", 100, 20, (0, 0, 0), false); //Keep this as the last bg for functionality reasons
         }
 
         /// <summary>
@@ -90,8 +91,9 @@ namespace NewBeginnings.PlayerBackgrounds
         private static void ExpandDesc((int type, int stack)[] inv, ref string desc, int[] accessories = null)
         {
             if (inv.Length > 0)
-                desc += "\n";
+                desc += Environment.NewLine;
 
+            int count = 0;
             foreach (var (type, stack) in inv) //Add every item in inv to the description
             {
                 string itemText = $"[i/s{stack}:{type}]";
@@ -99,6 +101,13 @@ namespace NewBeginnings.PlayerBackgrounds
                     itemText = $"[i:{type}]";
 
                 desc += itemText;
+
+                count += itemText.Length;
+                if (count > 22)
+                {
+                    desc += Environment.NewLine;
+                    count = 0;
+                }
             }
 
             if (accessories is not null)
@@ -109,30 +118,3 @@ namespace NewBeginnings.PlayerBackgrounds
         }
     }
 }
-
-/*
-Knight: Ready your sword! Charge fourth with tough armor and more health!
-Huntsman: Steady. Aim. Fire! Barrage your foes with a shower of arrows!
-Wizard: Dawn your hat and conjure magics to blast your enemies with a barrage of spells!
-+Magician: A wizard hat wasn't enough? Impress your enemy with a slew of magical attacks! 
-Beastmaster: Tame ferocious creatures and command an army into battle!
-Noble: Begin with deepened pockets and an all or nothing attitude. Spare no expense on luxuries.
-Shinobi: Hone your blade and stay light on your feet. They won't know what hit them.
-Trailblazer: No time to explain, places to go, things to see!
-Adventurer: Always come prepared. Use your arsenal to traverse all terrain!
-Acrobat: Dodge and weave around your enemies to gain the upper hand!
-Fisherman: Slimes want me, fish fear me...
-Farmer: It's not much, but it's honest work.
-Spelunker: The caves call and you answer. That ore won't mine itself you know.
-Demoman: Hurl explosives at ore, enemies, or anything that moves! You've got more to spare.
-Builder: Kick off your adventure with some building instead! Fighting is overrated anyways.
-Thief: Save some extra change with every purchase, every copper coin is a coin worth saving.
-Bookworm: Mind over matter. The best way to fight is with a sharpened mind!
-Firestarter: Mmph mmmph mph-mph mmph mmmmph!
-Tiger: Climb walls and ambush your enemies before they know what's going on!
-Druid: Channel the wrath of nature to aid you in your adventure!
-Deprived: The lowest of the low. Not even bunnies look your way.
-Pirate: Plunder your enemies with a barrage of canonballs and sail the seas for treasure!
-Zoomer: You are zoomer. 
-Boomer: I am boomer.
-*/
