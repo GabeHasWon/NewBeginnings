@@ -79,8 +79,8 @@ namespace NewBeginnings.PlayerBackgrounds
 
             for (int i = 0; i < Inventory.Length; ++i)
             {
-                player.inventory[i] = new Item(Inventory[i].type);
-                player.inventory[i].stack = Inventory[i].stack;
+                player.inventory[i + 3] = new Item(Inventory[i].type);
+                player.inventory[i + 3].stack = Inventory[i].stack;
             }
         }
     }
