@@ -10,33 +10,19 @@ namespace NewBeginnings.PlayerBackgrounds
         public string Name;
         public string Texture;
         public string Description;
-        public int MaxLife;
-        public int AdditionalMana;
-        public (int head, int body, int legs) Armor = (0, 0, 0);
         public (int type, int stack)[] Inventory;
-        public int[] Accessories;
-        public ExtraBackgroundData ExtraData;
+        public EquipData Equip;
+        public MiscData Misc;
 
-        public PlayerBackgroundData(string name, string texName, string desc, int life = 100, int mana = 20, (int, int, int) armor = default, params (int, int)[] inv)
+        public PlayerBackgroundData(string name, string texName, string desc, EquipData? equips, MiscData? misc, params (int, int)[] inv)
         {
             Name = name;
             Texture = texName;
             Description = desc;
-            MaxLife = life;
-            AdditionalMana = mana;
-            Armor = armor;
             Inventory = inv;
 
-            Accessories = Array.Empty<int>();
-            ExtraData = new ExtraBackgroundData(-1, -1, -1);
-        }
-
-        /// <summary>Constructor with an additional Accessories parameter, for...accessories.</summary>
-        /// <param name="accessories">Ordered list of all accessory ItemIDs. Must be less than 6 values long.</param>
-        public PlayerBackgroundData(string name, string texName, string desc, int life = 100, int mana = 20, int[] accessories = null, (int, int, int) armor = default, params (int, int)[] inv) 
-            : this(name, texName, desc, life, mana, armor, inv)
-        {
-            Accessories = accessories ?? Array.Empty<int>();
+            Equip = equips ?? new EquipData(0, 0, 0);
+            Misc = misc ?? new MiscData(100, 20, -1, -1, -1);
         }
 
         public void ApplyToPlayer(Player player)
@@ -49,30 +35,30 @@ namespace NewBeginnings.PlayerBackgrounds
 
         public void ApplyStats(Player player)
         {
-            if (MaxLife > 20)
-                player.statLifeMax = MaxLife;
+            if (Misc.MaxLife > 20)
+                player.statLifeMax = Misc.MaxLife;
 
-            if (AdditionalMana >= 0)
-                player.statManaMax = AdditionalMana;
+            if (Misc.AdditionalMana >= 0)
+                player.statManaMax = Misc.AdditionalMana;
         }
 
         public void ApplyAccessories(Player player)
         {
-            if (Accessories.Length > Player.InitialAccSlotCount)
+            if (Equip.Accessories.Length > Player.InitialAccSlotCount)
                 throw new Exception("Inventory is too big. Fix it.");
 
             for (int i = 0; i < Player.InitialAccSlotCount; ++i)
-                player.armor[3 + i] = new Item(i < Accessories.Length ? Accessories[i] : 0);
+                player.armor[3 + i] = new Item(i < Equip.Accessories.Length ? Equip.Accessories[i] : 0);
         }
 
         public void ApplyArmor(Player player)
         {
-            if (Armor.head < 0 || Armor.body < 0 || Armor.legs < 0)
+            if (Equip.Head < 0 || Equip.Body < 0 || Equip.Legs < 0)
                 throw new Exception("Uh oh! Negative armor IDs!");
 
-            player.armor[0] = new Item(Armor.head);
-            player.armor[1] = new Item(Armor.body);
-            player.armor[2] = new Item(Armor.legs);
+            player.armor[0] = new Item(Equip.Head);
+            player.armor[1] = new Item(Equip.Body);
+            player.armor[2] = new Item(Equip.Legs);
         }
 
         private void ApplyInventory(Player player)

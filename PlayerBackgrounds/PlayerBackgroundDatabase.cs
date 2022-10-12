@@ -28,41 +28,40 @@ namespace NewBeginnings.PlayerBackgrounds
             //FORMATTING: Try keeping single line backgrounds clumped together
             //Add new lines to make sure all very long backgrounds fit visibly on the screen at once, and keep them seperated
 
-            AddNewBG("Purist", "Purist", "The normal Terraria experience.", 100, 20, default, false);
-            AddNewBG("Knight", "Knight", "A noble warrior, clad in iron.", 160, 20, (ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), true, (ItemID.SilverBroadsword, 1));
-            AddNewBG("Huntsman", "Huntsman", "Steady hands and keen eyes, a master of the hunt.", 100, 20, (0, 0, 0), new int[] { ItemID.HunterCloak }, true, (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
-            AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", 80, 60, (ItemID.WizardHat, ItemID.SapphireRobe, 0), true, (ItemID.SapphireStaff, 1));
-            AddNewBG("Beastmaster", "Beastmaster", "Raised in the woodlands, they summon beasts to aid their journey.", 60, 20, (0, 0, 0), true, (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
-            AddNewBG("Shinobi", "Shinobi", "A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency", 80, 20, (0, 0, 0), new int[] { ItemID.Tabi }, true, (ItemID.Katana, 1));
-            AddNewBG("Alchemist", "Alchemist", "Tentative", 100, 20, (0, 0, 0), true, (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
-            AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", 100, 20, default, true, (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
-            AddNewBG("Fisherman", "Fisherman", "Slimes want me, fish fear me...", 100, 20, (ItemID.AnglerHat, 0, 0), new int[] { ItemID.HighTestFishingLine }, true, (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
-            AddNewBG("Boomer", "Boomer", "Back in my day...", 100, 20, (ItemID.Sunglasses, 0, 0), true, (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
-            AddNewBG("Zoomer", "Boomer", "Terreddit is popping off today, clout going mad", 40, 20, (ItemID.Goggles, 0, 0), true, (ItemID.CellPhone, 1));
+            AddNewBGItemlessDesc("Purist", "Purist", "The normal Terraria experience.", null, null);
+            AddNewBG("Knight", "Knight", "A noble warrior, clad in iron.", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), null, (ItemID.SilverBroadsword, 1));
+            AddNewBG("Huntsman", "Huntsman", "Steady hands and keen eyes, a master of the hunt.", EquipData.SingleAcc(ItemID.HunterCloak), (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
+            AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", new EquipData(ItemID.WizardHat, ItemID.SapphireRobe, 0), new MiscData(80, 60), (ItemID.SapphireStaff, 1));
+            AddNewBG("Beastmaster", "Beastmaster", "Raised in the woodlands, they summon beasts to aid their journey.", new MiscData(60), (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
+            AddNewBG("Shinobi", "Shinobi", "A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency", EquipData.SingleAcc(ItemID.Tabi), new MiscData(80), (ItemID.Katana, 1));
+            AddNewBG("Alchemist", "Alchemist", "Tentative", (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
+            AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
+            AddNewBG("Fisherman", "Fisherman", "Slimes want me, fish fear me...", EquipData.AccFirst(ItemID.HighTestFishingLine, ItemID.AnglerHat), (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
+            AddNewBG("Boomer", "Boomer", "Back in my day...", new EquipData(ItemID.Sunglasses), (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
+            AddNewBG("Zoomer", "Boomer", "Terreddit is popping off today, boutta frag some slimes fr fr", new EquipData(ItemID.Goggles), new MiscData(40), (ItemID.CellPhone, 1));
 
-            AddNewBG("Trailblazer", "Trailblazer", "No time to explain. They have places to go, things to see", 100, 20, (0, 0, 0), 
-                new int[] { ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind }, true); //Needs the winged helmet vanity
+            AddNewBG("Trailblazer", "Trailblazer", "No time to explain. They have places to go, things to see", 
+                EquipData.AccFirst(new int[] { ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind })); //Needs the winged helmet vanity
 
-            AddNewBG("Adventurer", "Adventurer", "Tentative", 100, 20, (ItemID.ArchaeologistsHat, ItemID.ArchaeologistsJacket, ItemID.ArchaeologistsPants), true, 
+            AddNewBG("Adventurer", "Adventurer", "Tentative", new EquipData(ItemID.ArchaeologistsHat, ItemID.ArchaeologistsJacket, ItemID.ArchaeologistsPants),
                 (ItemID.GrapplingHook, 1), (ItemID.Torch, 100), (ItemID.TrapsightPotion, 5), (ItemID.SpelunkerPotion, 5));
 
-            AddNewBG("Farmer", "Farmer", "It ain't much, but it's honest work", 100, 20, (ItemID.SummerHat, 0, 0), true, 
+            AddNewBG("Farmer", "Farmer", "It ain't much, but it's honest work", new EquipData(ItemID.SummerHat), 
                 (ItemID.Sickle, 1), (ItemID.Hay, 200), (ItemID.DaybloomSeeds, 12), (ItemID.BlinkrootSeeds, 12), (ItemID.MoonglowSeeds, 12), (ItemID.WaterleafSeeds, 12), 
                 (ItemID.ShiverthornSeeds, 12), (ItemID.DeathweedSeeds, 12), (ItemID.FireblossomSeeds, 12)); //Gonna need a custom straw hat vanity item to replace the summer hat. 
 
-            AddNewBG("Spelunker", "Spelunker", "The caves call and they answer. Those Ores aren't gonna mine themselves", 100, 20, (ItemID.MiningHelmet, 0, 0), 
-                new int[] { ItemID.AncientChisel }, true, (ItemID.GoldPickaxe, 1), (ItemID.Bomb, 15), (ItemID.SpelunkerPotion, 10));
+            AddNewBG("Spelunker", "Spelunker", "The caves call and they answer. Those ores aren't gonna mine themselves", EquipData.AccFirst(ItemID.AncientChisel, ItemID.MiningHelmet), 
+                (ItemID.GoldPickaxe, 1), (ItemID.Bomb, 15), (ItemID.SpelunkerPotion, 10));
 
-            AddNewBG("Bookworm", "Bookworm", "Mind over matter. The best way to fight is with a sharpened mind!", 100, 20, (0, 0, 0), true, 
+            AddNewBG("Bookworm", "Bookworm", "Mind over matter. The best way to fight is with a sharpened mind!", 
                 (ModContent.ItemType<WornSpellbook>(), 1), (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
 
-            AddNewBG("Druid", "Boomer", "A herald of nature, engaged with keeping the world alive and healthy!", 40, 20, (0, 0, 0), new int[] { ItemID.CordageGuide }, true, 
+            AddNewBG("Druid", "Boomer", "A herald of nature, engaged with keeping the world alive and healthy!", EquipData.SingleAcc(ItemID.CordageGuide),
                 (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
 
-            AddNewBG("Tiger", "Boomer", "Lightly more feral than other Terrarians, but not as much as you'd think", 40, 20, 
-                (ItemID.CatEars, 0, ItemID.FoxTail), new int[] { ItemID.TigerClimbingGear }, true, (ItemID.BladedGlove, 1));
+            AddNewBG("Tiger", "Boomer", "Lightly more feral than other Terrarians, but not as much as you'd think", new EquipData(ItemID.CatEars, 0, ItemID.FoxTail, ItemID.TigerClimbingGear), null, (ItemID.BladedGlove, 1));
 
-            AddNewBG("Random", "Default", "Choose a random background.", 100, 20, (0, 0, 0), false); //Keep this as the last bg for functionality reasons
+            AddNewBGItemlessDesc("Random", "Default", "Choose a random background.", null, null); //Keep this as the last bg for functionality reasons
         }
 
         /// <summary>
@@ -81,40 +80,22 @@ namespace NewBeginnings.PlayerBackgrounds
         /// <param name="name">Name of the background; will be used in the UI and player title.</param>
         /// <param name="tex">Name of the texture for the icon; i.e. Bookworm. Must be an image in PlayerBackgrounds/Textures/.</param>
         /// <param name="desc">Description of the background to be shown on the char creation UI.</param>
-        /// <param name="maxLife">Max life of the player who uses this background.</param>
-        /// <param name="startMana">Max mana of the player who uses this background.</param>
-        /// <param name="armor">Set of armor for the player; (head, body, legs) respectively.</param>
+        /// <param name="equipData">The armor and accessories the player will wear.</param>
         /// <param name="addInvToDesc">Whether the backgrounds inventory and accessories are to be shown in the description.</param>
-        /// <param name="inv"></param>
-        private static void AddNewBG(string name, string tex, string desc, int maxLife, int startMana, (int head, int body, int legs) armor, bool addInvToDesc = true, params (int type, int stack)[] inv)
+        private static void AddNewBG(string name, string tex, string desc, EquipData? equipData = null, MiscData? miscData = null, params (int type, int stack)[] inv)
         {
-            if (addInvToDesc)
-                ExpandDesc(inv, ref desc);
-
-            var data = new PlayerBackgroundData(name, tex, desc, maxLife, startMana, armor, inv);
+            ExpandDesc(inv, ref desc, equipData?.Accessories);
+            var data = new PlayerBackgroundData(name, tex, desc, equipData, miscData, inv);
             playerBackgroundDatas.Add(data);
         }
 
-        /// <summary>Same as <see cref="AddNewBG(string, string, string, int, int, (int head, int body, int legs), bool, (int type, int stack)[])"/>, but also has accessories.</summary>
-        /// <param name="accessories">Accessories the player will have. Must be less than <see cref="Player.InitialAccSlotCount"/> (5).</param>
-        private static void AddNewBG(string name, string tex, string desc, int maxLife, int startMana, (int head, int body, int legs) armor, int[] accessories, bool addInvToDesc = true, params (int type, int stack)[] inv)
+        private static void AddNewBG(string name, string tex, string desc, EquipData? equipData = null, params (int type, int stack)[] inv) => AddNewBG(name, tex, desc, equipData, null, inv);
+        private static void AddNewBG(string name, string tex, string desc, MiscData? miscData = null, params (int type, int stack)[] inv) => AddNewBG(name, tex, desc, null, miscData, inv);
+        private static void AddNewBG(string name, string tex, string desc, params (int type, int stack)[] inv) => AddNewBG(name, tex, desc, null, null, inv);
+
+        private static void AddNewBGItemlessDesc(string name, string tex, string desc, EquipData? equipData = null, MiscData? miscData = null, params (int type, int stack)[] inv)
         {
-            if (addInvToDesc)
-                ExpandDesc(inv, ref desc, accessories);
-
-            var data = new PlayerBackgroundData(name, tex, desc, maxLife, startMana, accessories, armor, inv);
-            playerBackgroundDatas.Add(data);
-        }
-
-        /// <summary>Same as <see cref="AddNewBG(string, string, string, int, int, (int head, int body, int legs), bool, (int type, int stack)[])"/>, but also has accessories.</summary>
-        /// <param name="accessories">Accessories the player will have. Must be less than <see cref="Player.InitialAccSlotCount"/> (5).</param>
-        private static void AddNewBG(string name, string tex, string desc, int maxLife, int startMana, (int head, int body, int legs) armor, int[] accessories, ExtraBackgroundData extraData, bool addInvToDesc = true, params (int type, int stack)[] inv)
-        {
-            if (addInvToDesc)
-                ExpandDesc(inv, ref desc, accessories);
-
-            var data = new PlayerBackgroundData(name, tex, desc, maxLife, startMana, accessories, armor, inv);
-            data.ExtraData = extraData;
+            var data = new PlayerBackgroundData(name, tex, desc, equipData, miscData, inv);
             playerBackgroundDatas.Add(data);
         }
 

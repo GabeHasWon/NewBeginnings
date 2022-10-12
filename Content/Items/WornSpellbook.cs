@@ -1,3 +1,4 @@
+using NewBeginnings.Common.UnlockabilitySystem;
 using NewBeginnings.Content.Projectiles;
 using Terraria;
 using Terraria.ID;
@@ -21,7 +22,7 @@ namespace NewBeginnings.Content.Items
 			Item.height = 46;
 			Item.useTime = Item.useAnimation = 1;
 			Item.useStyle = ItemUseStyleID.Shoot;
-			Item.shoot = ModContent.ProjectileType<FeintDagger>();
+			//Item.shoot = ModContent.ProjectileType<FeintDagger>();
 			Item.shootSpeed = 12f;
 			Item.mana = 12;
 			Item.knockBack = 1;
@@ -31,5 +32,10 @@ namespace NewBeginnings.Content.Items
 			Item.autoReuse = true;
 			Item.noMelee = true;
 		}
-	}
+
+        public override bool? UseItem(Player player)
+        {
+			return true;
+        }
+    }
 }
