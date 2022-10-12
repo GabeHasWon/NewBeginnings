@@ -15,6 +15,7 @@ namespace NewBeginnings.PlayerBackgrounds
         public (int head, int body, int legs) Armor = (0, 0, 0);
         public (int type, int stack)[] Inventory;
         public int[] Accessories;
+        public ExtraBackgroundData ExtraData;
 
         public PlayerBackgroundData(string name, string texName, string desc, int life = 100, int mana = 20, (int, int, int) armor = default, params (int, int)[] inv)
         {
@@ -25,7 +26,9 @@ namespace NewBeginnings.PlayerBackgrounds
             AdditionalMana = mana;
             Armor = armor;
             Inventory = inv;
+
             Accessories = Array.Empty<int>();
+            ExtraData = new ExtraBackgroundData(-1, -1, -1);
         }
 
         /// <summary>Constructor with an additional Accessories parameter, for...accessories.</summary>
