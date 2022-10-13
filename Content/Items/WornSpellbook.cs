@@ -37,10 +37,10 @@ namespace NewBeginnings.Content.Items
 			Item.noMelee = true;
 		}
 
-        public override bool? UseItem(Player player)
+        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-			return true;
+			position.Y -= 30;
+			velocity = Vector2.Normalize(Main.MouseWorld - position) * Item.shootSpeed;
         }
-
     }
 }

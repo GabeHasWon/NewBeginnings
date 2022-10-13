@@ -18,10 +18,7 @@ namespace NewBeginnings.Content.Projectiles
         private List<Vector2> points = new List<Vector2>();
         private Vector2 _originalSpeed = Vector2.Zero;
 
-        public override void SetStaticDefaults()
-        {
-            Main.projFrames[Type] = 1;
-        }
+        public override void SetStaticDefaults() => Main.projFrames[Type] = 1;
 
         public override void SetDefaults()
         {
@@ -38,13 +35,9 @@ namespace NewBeginnings.Content.Projectiles
         {
             DaggerID = Main.projectile.Take(Main.maxProjectiles).Where(x => x.active && x.owner == Projectile.owner && x.ai[0] < ShootAwayTimer).Count();
             _originalSpeed = Projectile.velocity;
- 
         }
 
-        public override Color? GetAlpha(Color lightColor)
-        {
-            return Color.White;
-        }
+        public override Color? GetAlpha(Color lightColor) => Color.White;
 
         public override void AI()
         {
