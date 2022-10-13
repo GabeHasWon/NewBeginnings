@@ -1,8 +1,11 @@
+using Microsoft.Xna.Framework;
 using NewBeginnings.Common.UnlockabilitySystem;
 using NewBeginnings.Content.Projectiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 
 namespace NewBeginnings.Content.Items
 {
@@ -20,16 +23,17 @@ namespace NewBeginnings.Content.Items
 			Item.damage = 12;
 			Item.width = 20;
 			Item.height = 46;
-			Item.useTime = Item.useAnimation = 1;
+			Item.useTime = 50;
+			Item.useAnimation = 50;
 			Item.useStyle = ItemUseStyleID.Shoot;
-			//Item.shoot = ModContent.ProjectileType<FeintDagger>();
+			Item.shoot = ModContent.ProjectileType<FeintDagger>();
 			Item.shootSpeed = 12f;
 			Item.mana = 12;
 			Item.knockBack = 1;
 			Item.value = Item.sellPrice(0, 0, 5, 0);
 			Item.rare = ItemRarityID.White;
-			Item.UseSound = SoundID.Item5;
-			Item.autoReuse = true;
+			Item.UseSound = SoundID.Item8;
+			Item.autoReuse = false;
 			Item.noMelee = true;
 		}
 
@@ -37,5 +41,6 @@ namespace NewBeginnings.Content.Items
         {
 			return true;
         }
+
     }
 }
