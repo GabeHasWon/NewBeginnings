@@ -1,14 +1,18 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using NewBeginnings.Common.UnlockabilitySystem;
 using NewBeginnings.Content.Items;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent.Generation;
 using Terraria.ID;
+using Terraria.IO;
 using Terraria.ModLoader;
+using Terraria.WorldBuilding;
 
-namespace NewBeginnings.PlayerBackgrounds
+namespace NewBeginnings.Common.PlayerBackgrounds
 {
     internal static class PlayerBackgroundDatabase
     {
@@ -39,6 +43,7 @@ namespace NewBeginnings.PlayerBackgrounds
             AddNewBG("Fisherman", "Fisherman", "Slimes want me, fish fear me...", EquipData.AccFirst(ItemID.HighTestFishingLine, ItemID.AnglerHat), (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
             AddNewBG("Boomer", "Boomer", "Back in my day...", new EquipData(ItemID.Sunglasses), (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
             AddNewBG("Zoomer", "Boomer", "Terreddit is popping off today, boutta frag some slimes fr fr", new EquipData(ItemID.Goggles), new MiscData(40), (ItemID.CellPhone, 1));
+            AddNewBG("Tiger", "Boomer", "Lightly more feral than other Terrarians, but not as much as you'd think", new EquipData(ItemID.CatEars, 0, ItemID.FoxTail, ItemID.TigerClimbingGear), null, (ItemID.BladedGlove, 1));
 
             AddNewBG("Trailblazer", "Trailblazer", "No time to explain. They have places to go, things to see", 
                 EquipData.AccFirst(new int[] { ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind })); //Needs the winged helmet vanity
@@ -59,7 +64,17 @@ namespace NewBeginnings.PlayerBackgrounds
             AddNewBG("Druid", "Boomer", "A herald of nature, engaged with keeping the world alive and healthy!", EquipData.SingleAcc(ItemID.CordageGuide),
                 (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
 
-            AddNewBG("Tiger", "Boomer", "Lightly more feral than other Terrarians, but not as much as you'd think", new EquipData(ItemID.CatEars, 0, ItemID.FoxTail, ItemID.TigerClimbingGear), null, (ItemID.BladedGlove, 1));
+            AddNewBG("Accursed", "Boomer", "Starts in Hardmode. Good luck!", new EquipData(ItemID.PearlwoodHelmet, ItemID.PearlwoodBreastplate, ItemID.PearlwoodGreaves), null, 
+                new DelegateData(() => UnlockSaveData.Unlocked("Accursed"), (list) =>
+                {
+                    list.Add(new PassLegacy("Early Hardmode", (GenerationProgress p, GameConfiguration config) =>
+                    {
+                        p.Message = "Generating hardmode";
+                        WorldGen.smCallBack(null);
+
+                        Main.hardMode = true;
+                    }));
+                }), (ItemID.GoldPickaxe, 1));
 
             AddNewBGItemlessDesc("Random", "Default", "Choose a random background.", null, null); //Keep this as the last bg for functionality reasons
         }
@@ -69,11 +84,17 @@ namespace NewBeginnings.PlayerBackgrounds
         /// </summary>
         private static void LoadBackgroundIcons()
         {
+            const string AssetPath = "Assets/Textures/BackgroundIcons/";
+
             var assets = ModContent.GetInstance<NewBeginnings>().Assets.GetLoadedAssets();
-            var realIcons = assets.Where(x => x is Asset<Texture2D> && x.Name.StartsWith("PlayerBackgrounds\\Textures\\")).ToList();
+
+            var mod = ModContent.GetInstance<NewBeginnings>();
+            var realIcons = mod.GetFileNames().Where(x => x.StartsWith(AssetPath) && x.EndsWith(".rawimg"));
 
             foreach (var item in realIcons)
-                backgroundIcons.Add(item.Name["PlayerBackgrounds\\Textures\\".Length..], item as Asset<Texture2D>);
+            {
+                backgroundIcons.Add(item[AssetPath.Length..].Replace(".rawimg", string.Empty), mod.Assets.Request<Texture2D>(item.Replace(".rawimg", string.Empty)));
+            }
         }
 
         /// <summary>Adds a new background with the given info.</summary>
@@ -86,6 +107,14 @@ namespace NewBeginnings.PlayerBackgrounds
         {
             ExpandDesc(inv, ref desc, equipData?.Accessories);
             var data = new PlayerBackgroundData(name, tex, desc, equipData, miscData, inv);
+            playerBackgroundDatas.Add(data);
+        }
+
+        private static void AddNewBG(string name, string tex, string desc, EquipData? equipData = null, MiscData? miscData = null, DelegateData? delegateData = null, params (int type, int stack)[] inv)
+        {
+            ExpandDesc(inv, ref desc, equipData?.Accessories);
+            var data = new PlayerBackgroundData(name, tex, desc, equipData, miscData, inv);
+            data.Delegates = delegateData ?? new DelegateData();
             playerBackgroundDatas.Add(data);
         }
 

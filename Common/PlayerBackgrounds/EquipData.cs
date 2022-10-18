@@ -1,4 +1,4 @@
-﻿namespace NewBeginnings.PlayerBackgrounds
+﻿namespace NewBeginnings.Common.PlayerBackgrounds
 {
     internal struct EquipData
     {

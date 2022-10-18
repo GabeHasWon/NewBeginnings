@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ID;
 
-namespace NewBeginnings.PlayerBackgrounds
+namespace NewBeginnings.Common.PlayerBackgrounds
 {
     /// <summary>Info struct for a given player background.</summary>
     internal struct PlayerBackgroundData
@@ -13,6 +13,7 @@ namespace NewBeginnings.PlayerBackgrounds
         public (int type, int stack)[] Inventory;
         public EquipData Equip;
         public MiscData Misc;
+        public DelegateData Delegates;
 
         public PlayerBackgroundData(string name, string texName, string desc, EquipData? equips, MiscData? misc, params (int, int)[] inv)
         {
@@ -23,6 +24,7 @@ namespace NewBeginnings.PlayerBackgrounds
 
             Equip = equips ?? new EquipData(0, 0, 0);
             Misc = misc ?? new MiscData(100, 20, -1, -1, -1);
+            Delegates = new();
         }
 
         public void ApplyToPlayer(Player player)

@@ -33,7 +33,7 @@ namespace NewBeginnings.Content.Items
 			Item.value = Item.sellPrice(0, 0, 5, 0);
 			Item.rare = ItemRarityID.White;
 			Item.UseSound = SoundID.Item8;
-			Item.autoReuse = false;
+			Item.autoReuse = true;
 			Item.noMelee = true;
 		}
 

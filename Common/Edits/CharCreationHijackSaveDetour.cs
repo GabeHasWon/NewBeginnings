@@ -1,6 +1,5 @@
-﻿using NewBeginnings.Common.Edits;
+﻿using NewBeginnings.Common.PlayerBackgrounds;
 using NewBeginnings.Common.UnlockabilitySystem;
-using NewBeginnings.PlayerBackgrounds;
 using Terraria;
 using Terraria.GameContent.UI.States;
 
@@ -23,7 +22,7 @@ namespace NewBeginnings.Common.Edits
             data.ApplyToPlayer(p);
 
             if (data.Name is not null)
-                UnlockSaveData.CompleteAchievement("Beginner");
+                UnlockSaveData.Complete("Beginner");
         }
     }
 }

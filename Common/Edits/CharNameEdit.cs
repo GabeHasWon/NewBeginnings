@@ -1,5 +1,6 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using NewBeginnings.Common.PlayerBackgrounds;
 using Terraria;
 
 namespace NewBeginnings.Common.Edits
@@ -25,7 +26,7 @@ namespace NewBeginnings.Common.Edits
 
             c.EmitDelegate((string input, Player player) =>
             {
-                string name = player.GetModPlayer<PlayerBackgrounds.PlayerBackgroundPlayer>().BackgroundData.Name;
+                string name = player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Name;
                 if (name is not null)
                     return input + $" [c/8B8B8B:the {name}]";
                 return input;

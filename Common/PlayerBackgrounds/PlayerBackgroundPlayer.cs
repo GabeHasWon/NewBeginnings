@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace NewBeginnings.PlayerBackgrounds
+namespace NewBeginnings.Common.PlayerBackgrounds
 {
     /// <summary>Handles player-related background functions (i.e. inventory).</summary>
     internal class PlayerBackgroundPlayer : ModPlayer
@@ -28,5 +28,7 @@ namespace NewBeginnings.PlayerBackgrounds
 
             BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Name == _bgName);
         }
+
+        public bool HasBG() => _bgName != "";
     }
 }

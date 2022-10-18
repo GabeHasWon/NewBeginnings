@@ -2,8 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using NewBeginnings.PlayerBackgrounds;
-using System;
+using NewBeginnings.Common.PlayerBackgrounds;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -107,7 +106,7 @@ namespace NewBeginnings.Common.Edits
         /// <summary>Adds the background icon button to the UI.</summary>
         private static void AddNewButton(UIElement parent)
         {
-            UIImageButton backgroundButton = new(ModContent.Request<Texture2D>("NewBeginnings/PlayerBackgrounds/BackgroundIcon"))
+            UIImageButton backgroundButton = new(ModContent.Request<Texture2D>("NewBeginnings/Assets/Textures/BackgroundIcon"))
             {
                 HAlign = 0.99f,
                 VAlign = 0.0f,
@@ -136,18 +135,18 @@ namespace NewBeginnings.Common.Edits
 
                 _difficultyContainer.RemoveAllChildren(); //kill original children
 
-                BuildBackgroundSelections();
-
-                var plr = InternalPlayerField.GetValue(_self) as Player; //Set background data if it's null
-                if (plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Name is null)
-                    plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(PlayerBackgroundDatabase.playerBackgroundDatas.First());
-
                 var uiText = _difficultyDescriptionContainer.Children.FirstOrDefault(x => x is UIText text); //And set the description
                 if (uiText is UIText tex)
                     _originalDifficultyDescription = tex;
 
-                _difficultyDescriptionContainer.RemoveChild(_originalDifficultyDescription);
+                var plr = InternalPlayerField.GetValue(_self) as Player;
+                if (plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Name is null) //Set background data if it's null
+                    plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(PlayerBackgroundDatabase.playerBackgroundDatas.First());
+
                 BuildDescriptionScrollbar(plr);
+                BuildBackgroundSelections();
+
+                _difficultyDescriptionContainer.RemoveChild(_originalDifficultyDescription);
             }
             else //If we're switching out of the bg section
             {
@@ -232,6 +231,9 @@ namespace NewBeginnings.Common.Edits
 
             foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas) //Adds every background into the list as a button
             {
+                if (!item.Delegates.ClearCondition())
+                    continue;
+
                 var asset = PlayerBackgroundDatabase.backgroundIcons[PlayerBackgroundDatabase.backgroundIcons.ContainsKey(item.Texture) ? item.Texture : "Default"];
                 UIColoredImageButton currentBGButton = new(asset)
                 {

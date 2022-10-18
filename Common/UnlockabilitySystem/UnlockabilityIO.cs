@@ -6,8 +6,9 @@ namespace NewBeginnings.Common.UnlockabilitySystem
     internal class UnlockabilityIO
     {
         public const string SaveName = "nb_unlocks";
-
         public const int EncryptionKey = 8;
+
+        private static readonly char[] Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ".ToCharArray();
 
         public static void LoadData()
         {
@@ -15,18 +16,19 @@ namespace NewBeginnings.Common.UnlockabilitySystem
 
             string filePath = SecureGetSavePath();
 
-            FileStream file = File.Open(filePath, FileMode.Create);
+            FileStream file = File.Open(filePath, FileMode.OpenOrCreate);
             using StreamReader reader = new(file);
 
-            if (reader.Equals(string.Empty))
+            string text = reader.ReadToEnd();
+
+            if (text == string.Empty)
                 return;
 
-            string text = reader.ReadToEnd();
-            string[] keys = text.Split(' ');
+            string[] keys = text.Split(',');
 
             foreach (var item in keys)
-            {
-            }
+                if (item != string.Empty)
+                    UnlockSaveData.Complete(Decrypt(item), true, true);
         }
 
         private static string SecureGetSavePath()
@@ -39,7 +41,7 @@ namespace NewBeginnings.Common.UnlockabilitySystem
 
             if (!File.Exists(filePath)) //If the file data doesn't exist, make an empty file and exit
                 File.Create($"{filePath}.txt");
-
+            
             return filePath;
         }
 
@@ -48,26 +50,29 @@ namespace NewBeginnings.Common.UnlockabilitySystem
             string save = string.Empty;
 
             if (UnlockSaveData.achievementsByName[key].Unlocked)
-                save += Encrypt(key) + " ";
+                save += Encrypt(key) + ",";
 
             string filePath = SecureGetSavePath();
+
+            FileStream file = File.Open(filePath, FileMode.OpenOrCreate);
+            using StreamWriter writer = new(file);
+
+            writer.Write(save);
         }
 
         private static string Encrypt(string orig)
         {
-            string compare = orig.ToLower();
-            char[] chars = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
             string str = "";
 
-            foreach (char c in compare)
+            foreach (char c in orig)
             {
-                int origIndex = Array.IndexOf(chars, c);
+                int origIndex = Array.IndexOf(Characters, c);
                 origIndex += EncryptionKey;
 
-                if (origIndex >= chars.Length)
-                    origIndex -= chars.Length;
+                if (origIndex >= Characters.Length)
+                    origIndex -= Characters.Length;
 
-                str += chars[origIndex];
+                str += Characters[origIndex];
             }
 
             return str;
@@ -75,19 +80,17 @@ namespace NewBeginnings.Common.UnlockabilitySystem
 
         private static string Decrypt(string orig)
         {
-            string compare = orig.ToLower();
-            char[] chars = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
             string str = "";
 
-            foreach (char c in compare)
+            foreach (char c in orig)
             {
-                int origIndex = Array.IndexOf(chars, c);
+                int origIndex = Array.IndexOf(Characters, c);
                 origIndex -= EncryptionKey;
 
                 if (origIndex < 0)
-                    origIndex += chars.Length;
+                    origIndex += Characters.Length;
 
-                str += chars[origIndex];
+                str += Characters[origIndex];
             }
 
             return str;
