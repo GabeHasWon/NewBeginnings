@@ -12,6 +12,7 @@ using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
+
 namespace NewBeginnings.Common.PlayerBackgrounds
 {
     internal static class PlayerBackgroundDatabase
@@ -43,6 +44,12 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Boomer", "Boomer", "Back in my day...", new EquipData(ItemID.Sunglasses), (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
             AddNewBG("Zoomer", "Boomer", "Terreddit post is popping off today\nboutta frag some slimes fr fr", new EquipData(ItemID.Goggles), new MiscData(40), (ItemID.CellPhone, 1));
             AddNewBG("Tiger", "Boomer", "Lightly more feral than other Terrarians, but not as much as you'd think!", new EquipData(ItemID.CatEars, 0, ItemID.FoxTail, ItemID.TigerClimbingGear), null, (ItemID.BladedGlove, 1));
+            AddNewBG("Builder", "Builder", "A renowned architect from the cities.", new EquipData(0, 0, 0, ItemID.PortableStool, ItemID.ArchitectGizmoPack), new MiscData(npcType : NPCID.Painter), (ItemID.Wood, 500), (ItemID.StoneBlock, 500));
+            AddNewBG("Lumberjack", "Lumberjack", "A humble lumberjack and his trusty axe", (ItemID.LucyTheAxe, 1), (ItemID.Sawmill, 1), (ItemID.Apple, 12), (ItemID.Wood, 300), (ItemID.BorealWood, 300), (ItemID.PalmWood, 300), (ItemID.Ebonwood, 300), (ItemID.Shadewood, 300), (ItemID.RichMahogany, 300), (ItemID.DynastyWood, 300));
+            AddNewBG("Thief", "Thief", "Petty thief with a penchant for pickpocketing and poisoning", new EquipData(0, 0, 0, ItemID.LuckyCoin), (ItemID.PlatinumShortsword, 1), (ItemID.PoisonedKnife, 300)); //replace plat shortsword with thief's dagger
+            AddNewBG("Firestarter", "Firestarter", "Some people just want to watch the world burn", new EquipData(0, 0, 0, ItemID.MagmaStone), (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
+            AddNewBG("Slayer", "Slayer", "Rip and tear until it is done", new MiscData(140, 20, -1, -1), (ItemID.Boomstick, 1), (ItemID.EndlessMusketPouch, 1)); // gabe pls set spawnpoint for slayer
+            AddNewBG("Pirate", "Pirate", "Later",  new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant, 1), (ModContent.ItemType<RustyCutlass>(), 1), (ItemID.Keg, 1), (ItemID.Sail, 200));
 
             AddNewBG("Fisherman", "Fisherman", "Slimes want me, fish fear me...", EquipData.AccFirst(ItemID.HighTestFishingLine, ItemID.AnglerHat), 
                 new MiscData(npcType: NPCID.Angler), (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
