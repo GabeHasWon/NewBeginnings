@@ -33,6 +33,19 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             ApplyAccessories(player);
             ApplyArmor(player);
             ApplyInventory(player);
+            ApplyItemReplacements(player);
+        }
+
+        private void ApplyItemReplacements(Player player)
+        {
+            if (Misc.CopperShortswordReplacement != -1)
+                player.inventory[0] = new Item(Misc.CopperShortswordReplacement);
+
+            if (Misc.CopperPickaxeReplacement != -1)
+                player.inventory[1] = new Item(Misc.CopperPickaxeReplacement);
+
+            if (Misc.CopperAxeReplacement != -1)
+                player.inventory[2] = new Item(Misc.CopperAxeReplacement);
         }
 
         public void ApplyStats(Player player)
@@ -68,10 +81,12 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             if (Inventory.Length > player.inventory.Length)
                 throw new Exception("Inventory is too big. Fix it.");
 
+            int offset = player.creativeGodMode ? 10 : 3;
+
             for (int i = 0; i < Inventory.Length; ++i)
             {
-                player.inventory[i + 3] = new Item(Inventory[i].type);
-                player.inventory[i + 3].stack = Inventory[i].stack;
+                player.inventory[i + offset] = new Item(Inventory[i].type);
+                player.inventory[i + offset].stack = Inventory[i].stack;
             }
         }
     }

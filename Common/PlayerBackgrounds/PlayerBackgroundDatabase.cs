@@ -40,10 +40,12 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Shinobi", "Shinobi", "A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency", EquipData.SingleAcc(ItemID.Tabi), new MiscData(80), (ItemID.Katana, 1));
             AddNewBG("Alchemist", "Alchemist", "Tentative", (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
             AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
-            AddNewBG("Fisherman", "Fisherman", "Slimes want me, fish fear me...", EquipData.AccFirst(ItemID.HighTestFishingLine, ItemID.AnglerHat), (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
             AddNewBG("Boomer", "Boomer", "Back in my day...", new EquipData(ItemID.Sunglasses), (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
-            AddNewBG("Zoomer", "Boomer", "Terreddit is popping off today, boutta frag some slimes fr fr", new EquipData(ItemID.Goggles), new MiscData(40), (ItemID.CellPhone, 1));
-            AddNewBG("Tiger", "Boomer", "Lightly more feral than other Terrarians, but not as much as you'd think", new EquipData(ItemID.CatEars, 0, ItemID.FoxTail, ItemID.TigerClimbingGear), null, (ItemID.BladedGlove, 1));
+            AddNewBG("Zoomer", "Boomer", "Terreddit post is popping off today\nboutta frag some slimes fr fr", new EquipData(ItemID.Goggles), new MiscData(40), (ItemID.CellPhone, 1));
+            AddNewBG("Tiger", "Boomer", "Lightly more feral than other Terrarians, but not as much as you'd think!", new EquipData(ItemID.CatEars, 0, ItemID.FoxTail, ItemID.TigerClimbingGear), null, (ItemID.BladedGlove, 1));
+
+            AddNewBG("Fisherman", "Fisherman", "Slimes want me, fish fear me...", EquipData.AccFirst(ItemID.HighTestFishingLine, ItemID.AnglerHat), 
+                new MiscData(npcType: NPCID.Angler), (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
 
             AddNewBG("Trailblazer", "Trailblazer", "No time to explain. They have places to go, things to see", 
                 EquipData.AccFirst(new int[] { ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind })); //Needs the winged helmet vanity
@@ -64,17 +66,21 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Druid", "Boomer", "A herald of nature, engaged with keeping the world alive and healthy!", EquipData.SingleAcc(ItemID.CordageGuide),
                 (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
 
-            AddNewBG("Accursed", "Boomer", "Starts in Hardmode. Good luck!", new EquipData(ItemID.PearlwoodHelmet, ItemID.PearlwoodBreastplate, ItemID.PearlwoodGreaves), null, 
-                new DelegateData(() => UnlockSaveData.Unlocked("Accursed"), (list) =>
-                {
-                    list.Add(new PassLegacy("Early Hardmode", (GenerationProgress p, GameConfiguration config) =>
+            AddNewBG("Accursed", "Accursed", "Starts with hardmode already enabled. Good luck!", new EquipData(ItemID.PearlwoodHelmet, ItemID.PearlwoodBreastplate, ItemID.PearlwoodGreaves),
+                new MiscData(swordReplace: ItemID.GoldBroadsword, pickReplace: ItemID.GoldPickaxe, axeReplace: ItemID.GoldAxe, npcType: NPCID.Dryad),
+                new DelegateData(
+                    () => UnlockSaveData.Unlocked("Accursed"), //Unlocked by having the Accursed unlock completed
+                    (list) => //Spawns hardmode in a new world
                     {
-                        p.Message = "Generating hardmode";
-                        WorldGen.smCallBack(null);
+                        list.Add(new PassLegacy("Early Hardmode", (GenerationProgress p, GameConfiguration config) =>
+                        {
+                            p.Message = "Generating hardmode";
+                            WorldGen.smCallBack(null);
 
-                        Main.hardMode = true;
-                    }));
-                }), (ItemID.GoldPickaxe, 1));
+                            Main.hardMode = true;
+                        }
+                    ));
+                }));
 
             AddNewBGItemlessDesc("Random", "Default", "Choose a random background.", null, null); //Keep this as the last bg for functionality reasons
         }
