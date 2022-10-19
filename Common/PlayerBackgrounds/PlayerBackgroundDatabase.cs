@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using NewBeginnings.Common.UnlockabilitySystem;
 using NewBeginnings.Content.Items;
 using ReLogic.Content;
@@ -48,7 +49,6 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Lumberjack", "Lumberjack", "A humble lumberjack and his trusty axe", (ItemID.LucyTheAxe, 1), (ItemID.Sawmill, 1), (ItemID.Apple, 12), (ItemID.Wood, 300), (ItemID.BorealWood, 300), (ItemID.PalmWood, 300), (ItemID.Ebonwood, 300), (ItemID.Shadewood, 300), (ItemID.RichMahogany, 300), (ItemID.DynastyWood, 300));
             AddNewBG("Thief", "Thief", "Petty thief with a penchant for pickpocketing and poisoning", new EquipData(0, 0, 0, ItemID.LuckyCoin), (ItemID.PlatinumShortsword, 1), (ItemID.PoisonedKnife, 300)); //replace plat shortsword with thief's dagger
             AddNewBG("Firestarter", "Firestarter", "Some people just want to watch the world burn", new EquipData(0, 0, 0, ItemID.MagmaStone), (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
-            AddNewBG("Slayer", "Slayer", "Rip and tear until it is done", new MiscData(140, 20, -1, -1), (ItemID.Boomstick, 1), (ItemID.EndlessMusketPouch, 1)); // gabe pls set spawnpoint for slayer
             AddNewBG("Pirate", "Pirate", "Later",  new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant, 1), (ModContent.ItemType<RustyCutlass>(), 1), (ItemID.Keg, 1), (ItemID.Sail, 200));
 
             AddNewBG("Fisherman", "Fisherman", "Slimes want me, fish fear me...", EquipData.AccFirst(ItemID.HighTestFishingLine, ItemID.AnglerHat), 
@@ -72,6 +72,38 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
             AddNewBG("Druid", "Boomer", "A herald of nature, engaged with keeping the world alive and healthy!", EquipData.SingleAcc(ItemID.CordageGuide),
                 (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
+
+            AddNewBG("Slayer", "Slayer", "Rip and tear until it is done", null, new MiscData(140, 20), new DelegateData(null, null, () => true, () =>
+            {
+                const int Offset = 400;
+
+                int x = WorldGen.genRand.NextBool() ? Offset : Main.maxTilesX - Offset;
+                int y = Main.maxTilesY - 160;
+                bool success = false;
+
+                while (!success)
+                {
+                    for (int i = y; i < Main.maxTilesY - 40; i++)
+                    {
+                        bool validOpening = true;
+                        for (int j = 0; j < 3; ++j)
+                            if (WorldGen.SolidTile(x, i - j - 1) || WorldGen.SolidTile(x + 1, i - j - 1))
+                                validOpening = false;
+
+                        if (validOpening && WorldGen.SolidTile(x, i) && !Collision.LavaCollision(new Vector2(x - 1, i - 3) * 16, 3 * 16, 3 * 16))
+                        {
+                            success = true;
+                            y = i - 3;
+                            break;
+                        }
+                    }
+
+                    if (!success)
+                        x += (x < Main.maxTilesX / 2) ? 2 : -2;
+                }
+
+                return new Terraria.DataStructures.Point16(x, y);
+            }), (ItemID.Boomstick, 1), (ItemID.EndlessMusketPouch, 1));
 
             AddNewBG("Accursed", "Accursed", "Starts with hardmode already enabled. Good luck!", new EquipData(ItemID.PearlwoodHelmet, ItemID.PearlwoodBreastplate, ItemID.PearlwoodGreaves),
                 new MiscData(swordReplace: ItemID.GoldBroadsword, pickReplace: ItemID.GoldPickaxe, axeReplace: ItemID.GoldAxe, npcType: NPCID.Dryad),

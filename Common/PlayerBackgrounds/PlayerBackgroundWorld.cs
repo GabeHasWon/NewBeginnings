@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent.Generation;
 using Terraria.ID;
+using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
@@ -11,7 +15,22 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
         {
             if (Main.LocalPlayer.GetModPlayer<PlayerBackgroundPlayer>().HasBG()) //Adds an origin's specific worldgen info
-                Main.LocalPlayer.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Delegates.ModifyWorldGenTasks(tasks);
+            {
+                var data = Main.LocalPlayer.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
+                data.Delegates.ModifyWorldGenTasks(tasks);
+
+                if (data.Delegates.HasSpecialSpawn())
+                    tasks.Add(new PassLegacy("Special Spawn", SetSpawnOrigin, 0.05f));
+            }
+        }
+
+        private void SetSpawnOrigin(GenerationProgress progress, GameConfiguration configuration)
+        {
+            var data = Main.LocalPlayer.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
+            Point16 newSpawn = data.Delegates.GetSpawnPosition();
+
+            Main.spawnTileX = newSpawn.X;
+            Main.spawnTileY = newSpawn.Y;
         }
 
         public override void PostWorldGen()
