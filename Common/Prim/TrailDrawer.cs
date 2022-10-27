@@ -9,7 +9,7 @@ namespace NewBeginnings.Common.Prim
 {
     internal class TrailDrawer
     {
-        public static void Draw(List<Vector2> points, float originalWidth)
+        public static void Draw(List<Vector2> points, float originalWidth, Color startColor, Color fadeColor)
         {
 			if (points.Count <= 1)
 				return;
@@ -22,9 +22,7 @@ namespace NewBeginnings.Common.Prim
 			//calculate trail's length
 			float trailLength = 0f;
 			for (int i = 1; i < _points.Count; i++)
-			{
 				trailLength += Vector2.Distance(_points[i - 1], _points[i]);
-			}
 
 			//Create vertice array, needs to be equal to the number of quads * 6 (each quad has two tris, which are 3 vertices)
 			int currentIndex = 0;
@@ -55,7 +53,7 @@ namespace NewBeginnings.Common.Prim
 				Vector2 normal = CurveNormal(_points, i);
 				Vector2 clockwise = _points[i] + normal * thisPointsWidth;
 				Vector2 cclockwise = _points[i] - normal * thisPointsWidth;
-				Color color = Color.Lerp(Color.Aqua * 0.9f, Color.White * 0.1f, currentDistance / trailLength);// _trailColor.GetColourAt(currentDistance, trailLength, _points);
+				Color color = Color.Lerp(startColor, fadeColor, currentDistance / trailLength);// _trailColor.GetColourAt(currentDistance, trailLength, _points);
 
 				AddVertex(clockwise, color, Vector2.UnitX * i);
 				AddVertex(prevClockwise, previousColor, Vector2.UnitX * (i - 1));

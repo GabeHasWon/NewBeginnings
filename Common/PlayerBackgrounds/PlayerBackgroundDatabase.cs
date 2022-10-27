@@ -179,6 +179,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         /// <param name="accessories"></param>
         private static void ExpandDesc((int type, int stack)[] inv, ref string desc, int[] accessories = null)
         {
+            return;
             if (inv.Length > 0)
                 desc += Environment.NewLine;
 

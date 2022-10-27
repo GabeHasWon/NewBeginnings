@@ -77,7 +77,7 @@ namespace NewBeginnings.Content.Projectiles
         {
             const int _widthStart = 10;
 
-            TrailDrawer.Draw(points, _widthStart);
+            TrailDrawer.Draw(points, _widthStart, Color.Aqua * 0.9f, Color.White * 0.1f);
             return true;
         }
     }
