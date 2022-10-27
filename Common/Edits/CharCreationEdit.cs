@@ -143,7 +143,7 @@ namespace NewBeginnings.Common.Edits
                     _originalDifficultyDescription = tex;
 
                 var plr = InternalPlayerField.GetValue(_self) as Player;
-                if (plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Name is null) //Set background data if it's null
+                if (!plr.GetModPlayer<PlayerBackgroundPlayer>().HasBG()) //Set background data if it's null
                     plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(PlayerBackgroundDatabase.playerBackgroundDatas.First());
 
                 BuildDescriptionScrollbar(plr);
@@ -206,25 +206,32 @@ namespace NewBeginnings.Common.Edits
             {
                 Top = StyleDimension.FromPercent(0.1f),
                 Width = StyleDimension.FromPixelsAndPercent(-8, 1f),
+                Height = StyleDimension.FromPixels(10),
                 IsWrapped = true,
                 MarginTop = 8
             };
+            _backgroundDescription.Recalculate();
             _descriptionList.Add(_backgroundDescription);
 
             SetItemList(bgData, true);
             _descriptionList.Add(_descItemContainer);
         }
 
-        private static void SetItemList(PlayerBackgroundData data, bool setItemContainer = false)
+        private static void SetItemList(PlayerBackgroundData data, bool resetItemContainer = false)
         {
-            if (setItemContainer)
+            if (resetItemContainer) //Creates a new item container
             {
                 _descItemContainer = new UIElement()
                 {
                     Width = StyleDimension.FromPercent(1),
-                    Height = StyleDimension.FromPixels(200),
+                    Height = StyleDimension.FromPixels(38 * (data.Inventory.Length / 6f)),
                     Top = StyleDimension.FromPixels(-20)
                 };
+            }
+            else //Adjusts container to fit new height
+            {
+                _descItemContainer.Height = StyleDimension.FromPixels(data.Inventory.Length == 0 ? 0 : 40 + 38 * (data.Inventory.Length / 6f));
+                _descItemContainer.Recalculate();
             }
 
             int offset = 0;
@@ -264,7 +271,7 @@ namespace NewBeginnings.Common.Edits
                     name.HAlign = 1f;
                 }
 
-                name.DynamicallyScaleDownToWidth = true;// FontAssets.ItemStack.Value.MeasureString(item.HoverName).X;
+                name.DynamicallyScaleDownToWidth = true;
 
                 icon.OnMouseOver += (UIMouseEvent evt, UIElement listeningElement) => icon.Append(name);
                 icon.OnMouseOut += (UIMouseEvent evt, UIElement listeningElement) => icon.RemoveChild(name);
@@ -325,7 +332,10 @@ namespace NewBeginnings.Common.Edits
                     _descItemContainer.RemoveAllChildren();
 
                     Player plr = InternalPlayerField.GetValue(_self) as Player; //Applies the visuals for the background...
-                    SetItemList(useData);
+
+                    if (item.Name != "Random")
+                        SetItemList(useData);
+
                     item.ApplyArmor(plr);
                     item.ApplyAccessories(plr);
                     plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(useData); //...and sets it.
@@ -334,6 +344,32 @@ namespace NewBeginnings.Common.Edits
                         (item as UIColoredImageButton).SetColor(Color.Gray);
                         
                     currentBGButton.SetColor(Color.White); //"Selects" the button visually.
+                };
+
+                currentBGButton.OnMouseOver += (UIMouseEvent evt, UIElement listeningElement) =>
+                {
+                    Player plr = InternalPlayerField.GetValue(_self) as Player;
+                    item.ApplyArmor(plr);
+                    item.ApplyAccessories(plr);
+
+                    currentBGButton.SetColor(new Color(220, 220, 220));
+                };
+
+                currentBGButton.OnMouseOut += (UIMouseEvent evt, UIElement listeningElement) =>
+                {
+                    Player plr = InternalPlayerField.GetValue(_self) as Player;
+                    var bgData = plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
+
+                    if (!plr.GetModPlayer<PlayerBackgroundPlayer>().HasBG() || bgData.Name != item.Name)
+                    {
+                        bgData.ApplyArmor(plr);
+                        bgData.ApplyAccessories(plr);
+                        plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(bgData); //...and sets it.
+
+                        currentBGButton.SetColor(Color.Gray);
+                    }
+                    else
+                        currentBGButton.SetColor(Color.White);
                 };
 
                 UIText bgName = new(item.Name, 1.2f) //Background's name
