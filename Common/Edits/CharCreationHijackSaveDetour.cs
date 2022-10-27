@@ -20,9 +20,7 @@ namespace NewBeginnings.Common.Edits
             PlayerBackgroundData data = p.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
 
             data.ApplyToPlayer(p);
-
-            if (data.Name is not null)
-                UnlockSaveData.Complete("Beginner");
+            data.Delegates.ModifyPlayerCreation(p);            
         }
     }
 }

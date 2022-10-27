@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.WorldBuilding;
 
@@ -11,6 +12,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         public Action<List<GenPass>> ModifyWorldGenTasks;
         public Func<bool> HasSpecialSpawn;
         public Func<Point16> GetSpawnPosition;
+        public Action<Player> ModifyPlayerCreation;
 
         /// <summary>
         /// Default delegates ("do nothing").
@@ -21,6 +23,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             ModifyWorldGenTasks = (_) => { };
             HasSpecialSpawn = () => false;
             GetSpawnPosition = () => Point16.Zero;
+            ModifyPlayerCreation = (_) => { };
         }
 
         /// <summary>Allows the use of conditions for an origin and a hook-like additional worldgen delegate for ease-of-use.</summary>
@@ -28,12 +31,13 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         /// <param name="modify">Allows you to modify the genpass list of an incoming world, allowing you to add or remove passes as you please.</param>
         /// <param name="hasSpawn">Checks if the origin has a special spawn point. Useful for variable spawns.</param>
         /// <param name="spawn">Allows you to dynamically modify the spawn point, such as choosing a random beach to spawn on.</param>
-        public DelegateData(Func<bool> clear = null, Action<List<GenPass>> modify = null, Func<bool> hasSpawn = null, Func<Point16> spawn = null)
+        public DelegateData(Func<bool> clear = null, Action<List<GenPass>> modify = null, Func<bool> hasSpawn = null, Func<Point16> spawn = null, Action<Player> modCreation = null)
         {
             ClearCondition = clear ?? (() => true);
             ModifyWorldGenTasks = modify ?? ((_) => { });
             HasSpecialSpawn = hasSpawn ?? (() => false);
             GetSpawnPosition = spawn ?? (() => Point16.Zero);
+            ModifyPlayerCreation = modCreation ?? ((_) => { });
         }
     }
 }
