@@ -54,7 +54,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
             AddNewBG("Nobleman", "Default", "A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.",  EquipData.AccFirst(new int[] { ItemID.DiamondRing, ItemID.GoldWatch }), new MiscData(20), new DelegateData(modCreation: (plr) =>
             {
-                if (plr.difficulty == PlayerDifficultyID.SoftCore)
+                if (plr.difficulty == PlayerDifficultyID.SoftCore || plr.difficulty == PlayerDifficultyID.Creative)
                     plr.difficulty = PlayerDifficultyID.MediumCore;
             }), (ItemID.PlatinumCoin, 1));
 
