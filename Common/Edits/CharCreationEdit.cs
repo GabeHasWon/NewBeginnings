@@ -188,6 +188,7 @@ namespace NewBeginnings.Common.Edits
                 Height = StyleDimension.FromPixels(200),
                 PaddingLeft = 8,
                 PaddingRight = 8,
+                ListPadding = -20
             };
             _difficultyDescriptionContainer.Append(_descriptionList);
 
@@ -210,7 +211,6 @@ namespace NewBeginnings.Common.Edits
                 IsWrapped = true,
                 MarginTop = 8
             };
-            _backgroundDescription.Recalculate();
             _descriptionList.Add(_backgroundDescription);
 
             SetItemList(bgData, true);
@@ -219,18 +219,20 @@ namespace NewBeginnings.Common.Edits
 
         private static void SetItemList(PlayerBackgroundData data, bool resetItemContainer = false)
         {
+            var descItemHeight = StyleDimension.FromPixels(data.Inventory.Length == 0 ? 0 : 48 + 38 * (data.Inventory.Length / 6f));
+
             if (resetItemContainer) //Creates a new item container
             {
                 _descItemContainer = new UIElement()
                 {
                     Width = StyleDimension.FromPercent(1),
-                    Height = StyleDimension.FromPixels(38 * (data.Inventory.Length / 6f)),
+                    Height = descItemHeight,
                     Top = StyleDimension.FromPixels(-20)
                 };
             }
             else //Adjusts container to fit new height
             {
-                _descItemContainer.Height = StyleDimension.FromPixels(data.Inventory.Length == 0 ? 0 : 40 + 38 * (data.Inventory.Length / 6f));
+                _descItemContainer.Height = descItemHeight;
                 _descItemContainer.Recalculate();
             }
 
