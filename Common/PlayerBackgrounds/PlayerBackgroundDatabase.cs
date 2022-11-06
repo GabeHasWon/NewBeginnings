@@ -51,6 +51,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Thief", "Thief", "Petty thief with a penchant for pickpocketing and poisoning", new EquipData(0, 0, 0, ItemID.LuckyCoin), (ItemID.PlatinumShortsword, 1), (ItemID.PoisonedKnife, 300)); //replace plat shortsword with thief's dagger
             AddNewBG("Firestarter", "Firestarter", "Some people just want to watch the world burn", new EquipData(0, 0, 0, ItemID.MagmaStone), (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
             AddNewBG("Pirate", "Pirate", "Aye. A real pirate knows when land can be plundered, and plunder they shall!",  new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant, 1), (ModContent.ItemType<RustyCutlass>(), 1), (ItemID.Keg, 1), (ItemID.Sail, 200));
+            AddNewBG("Deprived", "Default", "Tentative", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>()), (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
 
             AddNewBG("Nobleman", "Default", "A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.",  EquipData.AccFirst(new int[] { ItemID.DiamondRing, ItemID.GoldWatch }), new MiscData(20), new DelegateData(modCreation: (plr) =>
             {
