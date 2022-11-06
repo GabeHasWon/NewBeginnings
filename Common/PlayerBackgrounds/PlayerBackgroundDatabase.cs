@@ -53,7 +53,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Pirate", "Pirate", "Aye. A real pirate knows when land can be plundered, and plunder they shall!",  new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant, 1), (ModContent.ItemType<RustyCutlass>(), 1), (ItemID.Keg, 1), (ItemID.Sail, 200));
             AddNewBG("Deprived", "Default", "Tentative", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>()), (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
 
-            AddNewBG("Nobleman", "Default", "A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.",  EquipData.AccFirst(new int[] { ItemID.DiamondRing, ItemID.GoldWatch }), new MiscData(20), new DelegateData(modCreation: (plr) =>
+            AddNewBG("Nobleman", "Default", "A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.",  EquipData.AccFirst(new int[] { ItemID.DiamondRing, ItemID.GoldWatch }), new MiscData(20), new DelegateData(modifyCreation: (plr) =>
             {
                 if (plr.difficulty == PlayerDifficultyID.SoftCore || plr.difficulty == PlayerDifficultyID.Creative)
                     plr.difficulty = PlayerDifficultyID.MediumCore;

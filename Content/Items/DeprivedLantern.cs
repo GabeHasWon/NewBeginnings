@@ -4,6 +4,7 @@ using Terraria;
 
 namespace NewBeginnings.Content.Items
 {
+    [AutoloadEquip(EquipType.Waist)]
     internal class DeprivedLantern : ModItem
     {
         public override void SetStaticDefaults() => Tooltip.SetDefault("Lights up when placed in inventory\nInfinite duration");
@@ -16,6 +17,10 @@ namespace NewBeginnings.Content.Items
             Item.value = Item.buyPrice(gold: 2);
         }
 
-        public override void UpdateInventory(Player player) => Lighting.AddLight(player.Center + new Vector2(0, 8), new Vector3(0.4f, 0.48f, 0.48f));
+        public override void UpdateInventory(Player player)
+        {
+            Lighting.AddLight(player.Center + new Vector2(0, 8), new Vector3(0.4f, 0.48f, 0.48f));
+            player.waist = (sbyte)EquipLoader.GetEquipSlot(Mod, nameof(DeprivedLantern), EquipType.Waist);
+        }
     }
 }
