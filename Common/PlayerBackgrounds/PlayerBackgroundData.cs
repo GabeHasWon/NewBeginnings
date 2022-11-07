@@ -89,5 +89,21 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 player.inventory[i + offset].stack = Inventory[i].stack;
             }
         }
+
+        public int DisplayItemCount()
+        {
+            int total = Inventory.Length + Equip.Accessories.Length;
+
+            if (Misc.CopperShortswordReplacement != -1) 
+                total++;
+
+            if (Misc.CopperPickaxeReplacement != -1)
+                total++;
+
+            if (Misc.CopperAxeReplacement != -1)
+                total++;
+
+            return total;
+        }
     }
 }

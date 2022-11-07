@@ -1,5 +1,4 @@
 ﻿using NewBeginnings.Common.PlayerBackgrounds;
-using NewBeginnings.Common.UnlockabilitySystem;
 using Terraria;
 using Terraria.GameContent.UI.States;
 

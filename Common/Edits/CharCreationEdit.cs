@@ -219,7 +219,7 @@ namespace NewBeginnings.Common.Edits
 
         private static void SetItemList(PlayerBackgroundData data, bool resetItemContainer = false)
         {
-            var descItemHeight = StyleDimension.FromPixels(data.Inventory.Length == 0 ? 0 : 48 + 38 * (data.Inventory.Length / 6f));
+            var descItemHeight = StyleDimension.FromPixels(data.DisplayItemCount() == 0 ? 0 : 48 + 38 * (data.DisplayItemCount() / 6f));
 
             if (resetItemContainer) //Creates a new item container
             {
@@ -239,8 +239,24 @@ namespace NewBeginnings.Common.Edits
             int offset = 0;
             float yOffset = 0;
             int id = 0;
+            List<(int type, int stack)> items = new();
+            (int sword, int pick, int axe) = (data.Misc.CopperShortswordReplacement, data.Misc.CopperPickaxeReplacement, data.Misc.CopperAxeReplacement);
 
-            foreach (var (type, stack) in data.Inventory)
+            if (sword != -1)
+                items.Add((sword, 1));
+
+            if (pick != -1)
+                items.Add((pick, 1));
+
+            if (axe != -1)
+                items.Add((axe, 1));
+
+            foreach (var item in data.Equip.Accessories)
+                items.Add((item, 1));
+
+            items.AddRange(data.Inventory.ToList());
+
+            foreach (var (type, stack) in items)
             {
                 Item item = new Item(type);
                 item.stack = stack;

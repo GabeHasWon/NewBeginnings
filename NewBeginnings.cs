@@ -17,5 +17,14 @@ namespace NewBeginnings
             CharCreationEdit.Load();
             PlayerBackgroundDatabase.Populate();
         }
+
+        internal static void PrintBGDescriptions()
+        {
+            string log = "";
+            foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas)
+                log += item.Name + ": " + item.Description + "\n";
+
+            ModLoader.GetMod("NewBeginnings").Logger.Debug(log);
+        }
     }
 }
