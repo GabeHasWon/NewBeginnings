@@ -1,19 +1,12 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using NewBeginnings.Common.PlayerBackgrounds.Containers;
-using NewBeginnings.Common.UnlockabilitySystem;
 using NewBeginnings.Content.Items;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Terraria;
-using Terraria.GameContent.Generation;
 using Terraria.ID;
-using Terraria.IO;
 using Terraria.ModLoader;
-using Terraria.WorldBuilding;
-
 
 namespace NewBeginnings.Common.PlayerBackgrounds
 {
@@ -28,6 +21,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
             playerBackgroundDatas.Clear();
             LoadAllBackgrounds();
+            SortBGDatas();
         }
 
         private static void LoadAllBackgrounds()
@@ -35,11 +29,11 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             //FORMATTING: Try keeping single line backgrounds clumped together
             //Add new lines to make sure all very long backgrounds fit visibly on the screen at once, and keep them seperated
 
-            AddNewBGItemlessDesc("Purist", "Purist", "The normal Terraria experience.", null, null);
-            AddNewBG("Knight", "Knight", "A noble warrior, clad in iron.", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), null, (ItemID.SilverBroadsword, 1));
-            AddNewBG("Huntsman", "Huntsman", "Steady hands and keen eyes, a master of the hunt.", EquipData.SingleAcc(ItemID.HunterCloak), (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
-            AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", new EquipData(ItemID.WizardHat, ItemID.SapphireRobe, 0), new MiscData(80, 60), (ItemID.SapphireStaff, 1));
-            AddNewBG("Beastmaster", "Beastmaster", "Raised in the woodlands, they summon beasts to aid their journey.", new MiscData(60), (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
+            AddNewBGItemlessDesc("Purist", "Purist", "The normal Terraria experience.", null, new MiscData(sortPriority: 11));
+            AddNewBG("Knight", "Knight", "A noble warrior, clad in iron.", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), new MiscData(sortPriority: 11), (ItemID.SilverBroadsword, 1));
+            AddNewBG("Huntsman", "Huntsman", "Steady hands and keen eyes, a master of the hunt.", EquipData.SingleAcc(ItemID.HunterCloak), new MiscData(sortPriority: 11), (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
+            AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", new EquipData(ItemID.WizardHat, ItemID.SapphireRobe, 0), new MiscData(80, 60, sortPriority: 11), (ItemID.SapphireStaff, 1));
+            AddNewBG("Beastmaster", "Beastmaster", "Raised in the woodlands, they summon beasts to aid their journey.", new MiscData(60, sortPriority: 11), (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
             AddNewBG("Shinobi", "Shinobi", "A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency.", EquipData.SingleAcc(ItemID.Tabi), new MiscData(80), (ItemID.Katana, 1));
             AddNewBG("Alchemist", "Alchemist", "Tentative", (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
             AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
@@ -84,7 +78,32 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             playerBackgroundDatas.Add(new Slayer());
             playerBackgroundDatas.Add(new Accursed());
 
-            AddNewBGItemlessDesc("Random", "Default", "Choose a random background.", null, null); //Keep this as the last bg for functionality reasons
+            AddNewBGItemlessDesc("Random", "Default", "Choose a random background.", null, null);
+        }
+
+        private static void SortBGDatas()
+        {
+            Dictionary<int, List<PlayerBackgroundData>> tempData = new();
+
+            foreach (var item in playerBackgroundDatas)
+            {
+                if (!tempData.ContainsKey(item.Misc.SortPriority))
+                    tempData.Add(item.Misc.SortPriority, new List<PlayerBackgroundData>() { item });
+                else
+                    tempData[item.Misc.SortPriority].Add(item);
+            }
+
+            var keys = tempData.Keys.ToList();
+            List<PlayerBackgroundData> newDatas = new();
+
+            while (keys.Count > 0)
+            {
+                int key = keys.Max();
+                newDatas.AddRange(tempData[key]);
+                keys.Remove(key);
+            }
+
+            playerBackgroundDatas = newDatas;
         }
 
         /// <summary>
@@ -94,15 +113,12 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         {
             const string AssetPath = "Assets/Textures/BackgroundIcons/";
 
-            var assets = ModContent.GetInstance<NewBeginnings>().Assets.GetLoadedAssets();
-
             var mod = ModContent.GetInstance<NewBeginnings>();
+            var assets = mod.Assets.GetLoadedAssets();
             var realIcons = mod.GetFileNames().Where(x => x.StartsWith(AssetPath) && x.EndsWith(".rawimg"));
 
             foreach (var item in realIcons)
-            {
                 backgroundIcons.Add(item[AssetPath.Length..].Replace(".rawimg", string.Empty), mod.Assets.Request<Texture2D>(item.Replace(".rawimg", string.Empty)));
-            }
         }
 
         /// <summary>Adds a new background with the given info.</summary>

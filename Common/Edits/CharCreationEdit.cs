@@ -328,6 +328,8 @@ namespace NewBeginnings.Common.Edits
             allBGButtons.SetScrollbar(scroll);
             _difficultyContainer.Append(scroll);
 
+            List<(int, UIColoredImageButton)> buttons = new();
+
             foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas) //Adds every background into the list as a button
             {
                 if (!item.Delegates.ClearCondition())
@@ -360,7 +362,7 @@ namespace NewBeginnings.Common.Edits
 
                     foreach (var item in allBGButtons.Where(x => x is UIColoredImageButton))
                         (item as UIColoredImageButton).SetColor(Color.Gray);
-                        
+
                     currentBGButton.SetColor(Color.White); //"Selects" the button visually.
                 };
 
@@ -398,8 +400,27 @@ namespace NewBeginnings.Common.Edits
                 };
 
                 currentBGButton.Append(bgName);
-                allBGButtons.Add(currentBGButton);
+                buttons.Add((item.Misc.SortPriority, currentBGButton));
             }
+
+            foreach (var item in buttons)
+                allBGButtons.Add(item.Item2);
+
+            SetSort(allBGButtons, buttons);
+        }
+
+        private static void SetSort(UIList allBGButtons, List<(int, UIColoredImageButton)> buttons)
+        {
+            //This is some of the ugliest nonsense I've ever written
+            allBGButtons.ManualSortMethod = (list) => list.Sort((self, other) =>
+            {
+                int mySortPriority = buttons.Find(x => x.Item2 == self).Item1;
+                int otherSortPriority = buttons.Find(x => x.Item2 == other).Item1;
+
+                return otherSortPriority.CompareTo(mySortPriority);
+            });
+
+            allBGButtons.UpdateOrder();
         }
     }
 }
