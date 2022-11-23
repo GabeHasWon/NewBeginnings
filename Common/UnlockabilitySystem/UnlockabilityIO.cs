@@ -3,6 +3,9 @@ using System.IO;
 
 namespace NewBeginnings.Common.UnlockabilitySystem
 {
+    /// <summary>
+    /// Class used to save/load data regarding unlocks.
+    /// </summary>
     internal class UnlockabilityIO
     {
         public const string SaveName = "nb_unlocks";

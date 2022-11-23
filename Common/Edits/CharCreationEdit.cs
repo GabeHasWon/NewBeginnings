@@ -17,7 +17,10 @@ using Terraria.UI;
 
 namespace NewBeginnings.Common.Edits
 {
-    /// <summary>Handles most of the mod's UI modifications and detours.</summary>
+    /// <summary>
+    /// Handles most of the mod's UI modifications and detours.<br/>
+    /// This is an incredibly intricate class and is unlikely to be useful in any situation but its own.
+    /// </summary>
     internal class CharCreationEdit
     {
         public static bool _bgToggled = false;
@@ -384,7 +387,7 @@ namespace NewBeginnings.Common.Edits
                     {
                         bgData.ApplyArmor(plr);
                         bgData.ApplyAccessories(plr);
-                        plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(bgData); //...and sets it.
+                        plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(bgData); //Sets the player's background.
 
                         currentBGButton.SetColor(Color.Gray);
                     }
@@ -414,13 +417,13 @@ namespace NewBeginnings.Common.Edits
             //This is some of the ugliest nonsense I've ever written
             allBGButtons.ManualSortMethod = (list) => list.Sort((self, other) =>
             {
-                int mySortPriority = buttons.Find(x => x.Item2 == self).Item1;
-                int otherSortPriority = buttons.Find(x => x.Item2 == other).Item1;
+                int mySortPriority = buttons.Find(x => x.Item2 == self).Item1; //Find priority by finding the value that has the given button as Item2
+                int otherSortPriority = buttons.Find(x => x.Item2 == other).Item1; //for both the current and next button
 
                 return otherSortPriority.CompareTo(mySortPriority);
             });
 
-            allBGButtons.UpdateOrder();
+            allBGButtons.UpdateOrder(); //Reorder the list according to the above manual sort method
         }
     }
 }

@@ -4,15 +4,31 @@ using Terraria.ID;
 
 namespace NewBeginnings.Common.PlayerBackgrounds
 {
-    /// <summary>Info struct for a given player background.</summary>
+    /// <summary>
+    /// Info struct for a given player background. Contains all necessary information as direct values;<br/>
+    /// All non-required values are in the <see cref="EquipData"/>, <see cref="MiscData"/> and <see cref="DelegateData"/> structs.
+    /// </summary>
     internal struct PlayerBackgroundData
     {
+        /// <summary>Name of the background, for use in UI and for internal keys.</summary>
         public string Name;
+
+        /// <summary>Key used to get the given asset from <see cref="PlayerBackgroundDatabase.backgroundIcons"/>. Defaults to "Default".</summary>
         public string Texture;
+
+        /// <summary>Description of the background for use in the character creation UI.</summary>
         public string Description;
+
+        /// <summary>Ordered list of every item type and stack size in the inventory. Is ADDED to, rather than REPLACING, the inventory.</summary>
         public (int type, int stack)[] Inventory;
+
+        /// <summary>Contains all equipment related info, like armor and accessories.</summary>
         public EquipData Equip;
+
+        /// <summary>Contains miscellaneous info, such as starting stats, background UI priority, and base copper set replacements.</summary>
         public MiscData Misc;
+
+        /// <summary>Contains what are functionally hooks, such as modifying worldgen and modifying the player right before they're saved after player creation.</summary>
         public DelegateData Delegates;
 
         public PlayerBackgroundData(string name, string texName, string desc, EquipData? equips, MiscData? misc, params (int, int)[] inv)
@@ -90,6 +106,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             }
         }
 
+        /// <summary>Counts the number of items that will be displayed in the character creation UI.</summary>
         public int DisplayItemCount()
         {
             int total = Inventory.Length + Equip.Accessories.Length;
