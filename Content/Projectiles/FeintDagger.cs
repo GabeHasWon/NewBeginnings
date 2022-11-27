@@ -63,7 +63,10 @@ namespace NewBeginnings.Content.Projectiles
                 Projectile.rotation = MathHelper.Lerp(Projectile.rotation, _originalSpeed.ToRotation() + MathHelper.PiOver2, 0.1f);
             }
             else if (Timer == ShootAwayTimer)
+            {
                 Projectile.velocity = _originalSpeed;
+                Projectile.netUpdate = true;
+            }
             else
                 Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
