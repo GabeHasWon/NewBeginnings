@@ -24,7 +24,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers
                 WorldGen.smCallBack(null);
 
                 Main.hardMode = true;
-            };
+            }));
         }
     }
 }

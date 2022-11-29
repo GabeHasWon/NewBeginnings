@@ -17,7 +17,10 @@ using Terraria.UI;
 
 namespace NewBeginnings.Common.Edits
 {
-    /// <summary>Handles most of the mod's UI modifications and detours.</summary>
+    /// <summary>
+    /// Handles most of the mod's UI modifications and detours.<br/>
+    /// This is an incredibly intricate class and is unlikely to be useful in any situation but its own.
+    /// </summary>
     internal class CharCreationEdit
     {
         public static bool _bgToggled = false;
@@ -188,6 +191,7 @@ namespace NewBeginnings.Common.Edits
                 Height = StyleDimension.FromPixels(200),
                 PaddingLeft = 8,
                 PaddingRight = 8,
+                ListPadding = -20
             };
             _difficultyDescriptionContainer.Append(_descriptionList);
 
@@ -210,7 +214,6 @@ namespace NewBeginnings.Common.Edits
                 IsWrapped = true,
                 MarginTop = 8
             };
-            _backgroundDescription.Recalculate();
             _descriptionList.Add(_backgroundDescription);
 
             SetItemList(bgData, true);
@@ -219,26 +222,44 @@ namespace NewBeginnings.Common.Edits
 
         private static void SetItemList(PlayerBackgroundData data, bool resetItemContainer = false)
         {
+            var descItemHeight = StyleDimension.FromPixels(data.DisplayItemCount() == 0 ? 0 : 48 + 38 * (data.DisplayItemCount() / 6f));
+
             if (resetItemContainer) //Creates a new item container
             {
                 _descItemContainer = new UIElement()
                 {
                     Width = StyleDimension.FromPercent(1),
-                    Height = StyleDimension.FromPixels(38 * (data.Inventory.Length / 6f)),
+                    Height = descItemHeight,
                     Top = StyleDimension.FromPixels(-20)
                 };
             }
             else //Adjusts container to fit new height
             {
-                _descItemContainer.Height = StyleDimension.FromPixels(data.Inventory.Length == 0 ? 0 : 40 + 38 * (data.Inventory.Length / 6f));
+                _descItemContainer.Height = descItemHeight;
                 _descItemContainer.Recalculate();
             }
 
             int offset = 0;
             float yOffset = 0;
             int id = 0;
+            List<(int type, int stack)> items = new();
+            (int sword, int pick, int axe) = (data.Misc.CopperShortswordReplacement, data.Misc.CopperPickaxeReplacement, data.Misc.CopperAxeReplacement);
 
-            foreach (var (type, stack) in data.Inventory)
+            if (sword != -1)
+                items.Add((sword, 1));
+
+            if (pick != -1)
+                items.Add((pick, 1));
+
+            if (axe != -1)
+                items.Add((axe, 1));
+
+            foreach (var item in data.Equip.Accessories)
+                items.Add((item, 1));
+
+            items.AddRange(data.Inventory.ToList());
+
+            foreach (var (type, stack) in items)
             {
                 Item item = new Item(type);
                 item.stack = stack;
@@ -310,6 +331,8 @@ namespace NewBeginnings.Common.Edits
             allBGButtons.SetScrollbar(scroll);
             _difficultyContainer.Append(scroll);
 
+            List<(int, UIColoredImageButton)> buttons = new();
+
             foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas) //Adds every background into the list as a button
             {
                 if (!item.Delegates.ClearCondition())
@@ -342,7 +365,7 @@ namespace NewBeginnings.Common.Edits
 
                     foreach (var item in allBGButtons.Where(x => x is UIColoredImageButton))
                         (item as UIColoredImageButton).SetColor(Color.Gray);
-                        
+
                     currentBGButton.SetColor(Color.White); //"Selects" the button visually.
                 };
 
@@ -364,7 +387,7 @@ namespace NewBeginnings.Common.Edits
                     {
                         bgData.ApplyArmor(plr);
                         bgData.ApplyAccessories(plr);
-                        plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(bgData); //...and sets it.
+                        plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(bgData); //Sets the player's background.
 
                         currentBGButton.SetColor(Color.Gray);
                     }
@@ -380,8 +403,27 @@ namespace NewBeginnings.Common.Edits
                 };
 
                 currentBGButton.Append(bgName);
-                allBGButtons.Add(currentBGButton);
+                buttons.Add((item.Misc.SortPriority, currentBGButton));
             }
+
+            foreach (var item in buttons)
+                allBGButtons.Add(item.Item2);
+
+            SetSort(allBGButtons, buttons);
+        }
+
+        private static void SetSort(UIList allBGButtons, List<(int, UIColoredImageButton)> buttons)
+        {
+            //This is some of the ugliest nonsense I've ever written
+            allBGButtons.ManualSortMethod = (list) => list.Sort((self, other) =>
+            {
+                int mySortPriority = buttons.Find(x => x.Item2 == self).Item1; //Find priority by finding the value that has the given button as Item2
+                int otherSortPriority = buttons.Find(x => x.Item2 == other).Item1; //for both the current and next button
+
+                return otherSortPriority.CompareTo(mySortPriority);
+            });
+
+            allBGButtons.UpdateOrder(); //Reorder the list according to the above manual sort method
         }
     }
 }
