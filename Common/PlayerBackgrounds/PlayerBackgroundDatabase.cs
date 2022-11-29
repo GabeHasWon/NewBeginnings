@@ -37,18 +37,18 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Alchemist", "Alchemist", "Tentative", (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
             AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
             AddNewBG("Boomer", "Boomer", "Back in my day...", new EquipData(ItemID.Sunglasses), (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
-            AddNewBG("Zoomer", "Default", "Terreddit post is popping off today boutta frag some slimes fr fr", new EquipData(ItemID.Goggles), new MiscData(40), (ItemID.CellPhone, 1));
-            AddNewBG("Tiger", "Default", "Lightly more feral than other Terrarians, but not as much as you'd think!", new EquipData(ItemID.CatEars, 0, ItemID.FoxTail, ItemID.TigerClimbingGear), null, (ItemID.BladedGlove, 1));
+            AddNewBG("Zoomer", "Zoomer", "Terreddit post is popping off today boutta frag some slimes fr fr", new EquipData(ItemID.Goggles), new MiscData(40), (ItemID.CellPhone, 1));
+            AddNewBG("Tiger", "Tiger", "Lightly more feral than other Terrarians, but not as much as you'd think!", new EquipData(ItemID.CatEars, 0, ItemID.FoxTail, ItemID.TigerClimbingGear), null, (ItemID.BladedGlove, 1));
             AddNewBG("Builder", "Builder", "A renowned architect from the cities.", new EquipData(0, 0, 0, ItemID.PortableStool, ItemID.ArchitectGizmoPack), new MiscData(npcType : NPCID.Painter), (ItemID.Wood, 500), (ItemID.StoneBlock, 500));
-            AddNewBG("Thief", "Thief", "Petty thief with a penchant for pickpocketing and poisoning.", new EquipData(0, 0, 0, ItemID.LuckyCoin), (ItemID.PlatinumShortsword, 1), (ItemID.PoisonedKnife, 300)); //replace plat shortsword with thief's dagger
+            AddNewBG("Thief", "Thief", "Petty thief with a penchant for pickpocketing.", new EquipData(0, 0, 0, ItemID.LuckyCoin), (ItemID.PlatinumShortsword, 1), (ItemID.PoisonedKnife, 300)); //replace plat shortsword with thief's dagger
             AddNewBG("Firestarter", "Firestarter", "Some people just want to watch the world burn.", new EquipData(0, 0, 0, ItemID.MagmaStone), (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
             AddNewBG("Pirate", "Pirate", "Aye. A real pirate knows when land can be plundered, and plunder they shall!",  new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant, 1), (ModContent.ItemType<RustyCutlass>(), 1), (ItemID.Keg, 1), (ItemID.Sail, 200));
-            AddNewBG("Deprived", "Default", "Tentative", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>()), (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
+            AddNewBG("Deprived", "Deprived", "Tentative", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>()), (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
 
             AddNewBG("Lumberjack", "Lumberjack", "A humble lumberjack and his trusty axe.", (ItemID.LucyTheAxe, 1), (ItemID.Sawmill, 1), (ItemID.Apple, 12), (ItemID.Wood, 300), (ItemID.BorealWood, 300), 
                 (ItemID.PalmWood, 300), (ItemID.Ebonwood, 300), (ItemID.Shadewood, 300), (ItemID.RichMahogany, 300), (ItemID.DynastyWood, 300));
 
-            AddNewBG("Nobleman", "Default", "A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.",  EquipData.AccFirst(new int[] { ItemID.DiamondRing, ItemID.GoldWatch }), new MiscData(20), new DelegateData(modifyCreation: (plr) =>
+            AddNewBG("Nobleman", "Nobleman", "A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.",  EquipData.AccFirst(new int[] { ItemID.DiamondRing, ItemID.GoldWatch }), new MiscData(20), new DelegateData(modifyCreation: (plr) =>
             {
                 if (plr.difficulty == PlayerDifficultyID.SoftCore || plr.difficulty == PlayerDifficultyID.Creative)
                     plr.difficulty = PlayerDifficultyID.MediumCore;
@@ -73,7 +73,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Bookworm", "Bookworm", "Mind over matter. The best way to fight is with a sharpened mind!", 
                 (ModContent.ItemType<WornSpellbook>(), 1), (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
 
-            AddNewBG("Druid", "Boomer", "A herald of nature, engaged with keeping the world alive and healthy!", EquipData.SingleAcc(ItemID.CordageGuide),
+            AddNewBG("Druid", "Druid", "A herald of nature, engaged with keeping the world alive and healthy!", EquipData.SingleAcc(ItemID.CordageGuide),
                 (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
 
             playerBackgroundDatas.Add(new Slayer());
