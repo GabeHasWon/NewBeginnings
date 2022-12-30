@@ -60,8 +60,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Trailblazer", "Trailblazer", "No time to explain. They have places to go, things to see!", 
                 EquipData.AccFirst(new int[] { ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind })); //Needs the winged helmet vanity
 
-            AddNewBG("Adventurer", "Adventurer", "Comes with a thirst for exploration and a penchant for boulder traps!", new EquipData(ItemID.ArchaeologistsHat, ItemID.ArchaeologistsJacket, ItemID.ArchaeologistsPants),
-                (ItemID.GrapplingHook, 1), (ItemID.Torch, 100), (ItemID.TrapsightPotion, 5), (ItemID.SpelunkerPotion, 5));
+            playerBackgroundDatas.Add(new Adventurer());
 
             AddNewBG("Farmer", "Farmer", "It ain't much, but it's honest work.", new EquipData(ItemID.SummerHat), 
                 (ItemID.Sickle, 1), (ItemID.Hay, 200), (ItemID.DaybloomSeeds, 12), (ItemID.BlinkrootSeeds, 12), (ItemID.MoonglowSeeds, 12), (ItemID.WaterleafSeeds, 12), 
@@ -77,6 +76,10 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
 
             playerBackgroundDatas.Add(new Slayer());
+
+            AddNewBG("Alternate", "Alternate", "Perhaps, if things had been a little different, this'd be a purist.\nUnlocked by using your first origin.", null, 
+                new MiscData(swordReplace: ItemID.TinShortsword, pickReplace: ItemID.TinPickaxe, axeReplace: ItemID.TinAxe), new DelegateData(() => UnlockabilitySystem.UnlockSaveData.Unlocked("Beginner")));
+
             playerBackgroundDatas.Add(new Accursed());
 
             AddNewBGItemlessDesc("Random", "Default", "Choose a random background.", null, null);

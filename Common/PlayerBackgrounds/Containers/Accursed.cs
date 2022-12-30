@@ -9,7 +9,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers
 {
     internal class Accursed : PlayerBackgroundContainer
     {
-        public override string Description => "Starts with hardmode already enabled. Good luck!";
+        public override string Description => "Starts with hardmode already enabled. Good luck!\nUnlocked by beating the Wall of Flesh with an origin character.";
 
         public override EquipData Equip => new(ItemID.PearlwoodHelmet, ItemID.PearlwoodBreastplate, ItemID.PearlwoodGreaves);
         public override MiscData Misc => new(swordReplace: ItemID.GoldBroadsword, pickReplace: ItemID.GoldPickaxe, axeReplace: ItemID.GoldAxe, npcType: NPCID.Dryad);

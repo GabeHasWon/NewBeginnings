@@ -56,9 +56,7 @@ namespace NewBeginnings.Common.UnlockabilitySystem
                 save += Encrypt(key) + ",";
 
             string filePath = SecureGetSavePath();
-
-            FileStream file = File.Open(filePath, FileMode.OpenOrCreate);
-            using StreamWriter writer = new(file);
+            using StreamWriter writer = new(filePath, append: true);
 
             writer.Write(save);
         }

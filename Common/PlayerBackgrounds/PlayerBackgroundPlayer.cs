@@ -13,6 +13,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
         private string _bgName = "";
 
+        //BG specific stuff
         public void SetBackground(PlayerBackgroundData data)
         {
             BackgroundData = data;
@@ -30,5 +31,12 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         }
 
         public bool HasBG() => _bgName != "";
+
+        //Misc tMod Hooks
+        public override void OnEnterWorld(Player player)
+        {
+            if (BackgroundData.Name != "Purist")
+                UnlockabilitySystem.UnlockSaveData.Complete("Beginner");
+        }
     }
 }

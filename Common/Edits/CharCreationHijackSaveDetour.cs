@@ -19,7 +19,7 @@ namespace NewBeginnings.Common.Edits
             PlayerBackgroundData data = p.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
 
             data.ApplyToPlayer(p);
-            data.Delegates.ModifyPlayerCreation(p);            
+            data.Delegates.ModifyPlayerCreation(p);
         }
     }
 }
