@@ -35,7 +35,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         //Misc tMod Hooks
         public override void OnEnterWorld(Player player)
         {
-            if (BackgroundData.Name != "Purist")
+            if (BackgroundData.Name != "Purist") //Unlock Beginner/Alternate if the player has an origin
                 UnlockabilitySystem.UnlockSaveData.Complete("Beginner");
         }
     }

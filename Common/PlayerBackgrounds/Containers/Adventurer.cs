@@ -41,6 +41,9 @@ internal class Adventurer : PlayerBackgroundContainer
 		}
 	}
 
+	/// <summary>
+	/// Copied from vanilla source; ripped out of WorlGen.placeTrap(int, int).
+	/// </summary>
     private bool BoulderTrap(int x, int y)
     {
 		int adjY = y;
