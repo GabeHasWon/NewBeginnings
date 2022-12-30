@@ -34,7 +34,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", new EquipData(ItemID.WizardHat, ItemID.SapphireRobe, 0), new MiscData(80, 60, sortPriority: 11), (ItemID.SapphireStaff, 1));
             AddNewBG("Beastmaster", "Beastmaster", "Raised in the woodlands, they summon beasts to aid their journey.", new MiscData(60, sortPriority: 11), (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
             AddNewBG("Shinobi", "Shinobi", "A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency.", EquipData.SingleAcc(ItemID.Tabi), new MiscData(80), (ItemID.Katana, 1));
-            AddNewBG("Alchemist", "Alchemist", "Tentative", (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
+            AddNewBG("Alchemist", "Alchemist", "A wizard of chemistry; chemicals are their realm.", (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
             AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
             AddNewBG("Boomer", "Boomer", "Back in my day...", new EquipData(ItemID.Sunglasses), (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
             AddNewBG("Zoomer", "Default", "Terreddit post is popping off today boutta frag some slimes fr fr", new EquipData(ItemID.Goggles), new MiscData(40), (ItemID.CellPhone, 1));
@@ -43,7 +43,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Thief", "Thief", "Petty thief with a penchant for pickpocketing and poisoning.", new EquipData(0, 0, 0, ItemID.LuckyCoin), (ItemID.PlatinumShortsword, 1), (ItemID.PoisonedKnife, 300)); //replace plat shortsword with thief's dagger
             AddNewBG("Firestarter", "Firestarter", "Some people just want to watch the world burn.", new EquipData(0, 0, 0, ItemID.MagmaStone), (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
             AddNewBG("Pirate", "Pirate", "Aye. A real pirate knows when land can be plundered, and plunder they shall!",  new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant, 1), (ModContent.ItemType<RustyCutlass>(), 1), (ItemID.Keg, 1), (ItemID.Sail, 200));
-            AddNewBG("Deprived", "Default", "Tentative", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>()), (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
+            AddNewBG("Deprived", "Default", "A forgotten fighter, holding long-lost tools.", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>()), (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
 
             AddNewBG("Lumberjack", "Lumberjack", "A humble lumberjack and his trusty axe.", (ItemID.LucyTheAxe, 1), (ItemID.Sawmill, 1), (ItemID.Apple, 12), (ItemID.Wood, 300), (ItemID.BorealWood, 300), 
                 (ItemID.PalmWood, 300), (ItemID.Ebonwood, 300), (ItemID.Shadewood, 300), (ItemID.RichMahogany, 300), (ItemID.DynastyWood, 300));
@@ -60,7 +60,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Trailblazer", "Trailblazer", "No time to explain. They have places to go, things to see!", 
                 EquipData.AccFirst(new int[] { ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind })); //Needs the winged helmet vanity
 
-            AddNewBG("Adventurer", "Adventurer", "Tentative", new EquipData(ItemID.ArchaeologistsHat, ItemID.ArchaeologistsJacket, ItemID.ArchaeologistsPants),
+            AddNewBG("Adventurer", "Adventurer", "One with a deep thirst for exploration and a penchant for boulder traps.", new EquipData(ItemID.ArchaeologistsHat, ItemID.ArchaeologistsJacket, ItemID.ArchaeologistsPants),
                 (ItemID.GrapplingHook, 1), (ItemID.Torch, 100), (ItemID.TrapsightPotion, 5), (ItemID.SpelunkerPotion, 5));
 
             AddNewBG("Farmer", "Farmer", "It ain't much, but it's honest work.", new EquipData(ItemID.SummerHat), 
