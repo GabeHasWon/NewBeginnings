@@ -267,7 +267,7 @@ namespace NewBeginnings.Common.Edits
                 UIItemSlot icon = new UIItemSlot(new[] { item }, 0, 1)
                 {
                     Left = StyleDimension.FromPixels(-4 + (offset * 42)),
-                    Top = StyleDimension.FromPixels(4 + (yOffset * 38)),
+                    Top = StyleDimension.FromPixels(-2 + (yOffset * 38)),
                 };
 
                 float width = FontAssets.ItemStack.Value.MeasureString(item.HoverName).X * 0.8f;
