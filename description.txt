@@ -4,6 +4,8 @@ This mod adds in player origins (or backgrounds), which allow you to start a new
 These are all accessible by default through the character creation screen; a little button next to the player name switches the menu to player origin mode.
 From then on, choose whichever background you like and enjoy!
 
+There are also a couple of unlockable origins - play more to discover how to unlock these.
+
 - Developers -
 
 GabeHasWon: programming, art
