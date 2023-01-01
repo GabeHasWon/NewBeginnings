@@ -11,6 +11,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameContent.UI.States;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -32,6 +33,7 @@ internal class CharCreationEdit
     //All of these are for the description changes
     public static UIText _originalDifficultyDescription;
     public static UIText _backgroundDescription;
+    public static UIText _backgroundStats;
     public static UIList _descriptionList;
     public static UIScrollbar _descScrollBar;
     public static UIElement _descItemContainer;
@@ -206,6 +208,16 @@ internal class CharCreationEdit
         _difficultyDescriptionContainer.Append(_descScrollBar);
 
         var bgData = plr.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
+        _backgroundStats = new UIText(GetStatsText(bgData))
+        {
+            Top = StyleDimension.FromPercent(0.1f),
+            Width = StyleDimension.FromPixelsAndPercent(-8, 1f),
+            Height = StyleDimension.FromPixels(44),
+            IsWrapped = false,
+            MarginTop = 8
+        };
+        _descriptionList.Add(_backgroundStats);
+
         _backgroundDescription = new UIText(bgData.Description)
         {
             Top = StyleDimension.FromPercent(0.1f),
@@ -222,7 +234,7 @@ internal class CharCreationEdit
 
     private static void SetItemList(PlayerBackgroundData data, bool resetItemContainer = false)
     {
-        var descItemHeight = StyleDimension.FromPixels(data.DisplayItemCount() == 0 ? 0 : 48 + 38 * (data.DisplayItemCount() / 6f));
+        var descItemHeight = StyleDimension.FromPixels(data.DisplayItemCount() == 0 ? 0 : 58 + 38 * (data.DisplayItemCount() / 6f));
 
         if (resetItemContainer) //Creates a new item container
         {
@@ -365,10 +377,15 @@ internal class CharCreationEdit
             };
             currentBGButton.SetColor(Color.Gray);
 
-            currentBGButton.OnMouseDown += (UIMouseEvent evt, UIElement listeningElement) =>
+            currentBGButton.OnMouseDown += (UIMouseEvent evt, UIElement listeningElement) => //Click event
             {
                 PlayerBackgroundData useData = item.Name == "Random" ? Main.rand.Next(PlayerBackgroundDatabase.playerBackgroundDatas.SkipLast(1).ToList()) : item; //Hardcoding for random, sucks but eh
                 _backgroundDescription.SetText(item.Name != "Random" ? useData.Description : item.Description); //Changes the UIText's value to use the bg's description
+
+                if (item.Name != "Random")
+                    _backgroundStats.SetText(GetStatsText(useData));
+                else
+                    _backgroundStats.SetText($"[i:{ItemID.Heart}]??? [i:{ItemID.Star}]???");
 
                 _descItemContainer.RemoveAllChildren();
 
@@ -428,6 +445,17 @@ internal class CharCreationEdit
             allBGButtons.Add(item.Item2);
 
         SetSort(allBGButtons, buttons);
+    }
+
+    private static string GetStatsText(PlayerBackgroundData bgData)
+    {
+        string stats = $"[i:{ItemID.Heart}]{bgData.Misc.MaxLife} [i:{ItemID.Star}]{bgData.Misc.AdditionalMana}";
+        string stars = "";
+
+        for (int i = 0; i < 5; ++i)
+            stars += bgData.Misc.Stars > i ? $"[i:{ItemID.FallenStar}]" : "   ";
+
+        return stars + "    " + stats;
     }
 
     private static void SetSort(UIList allBGButtons, List<(int, UIColoredImageButton)> buttons)

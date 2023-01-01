@@ -12,7 +12,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers
         public override string Description => "Starts with hardmode already enabled. Good luck!\nUnlocked by beating the Wall of Flesh with an origin character.";
 
         public override EquipData Equip => new(ItemID.PearlwoodHelmet, ItemID.PearlwoodBreastplate, ItemID.PearlwoodGreaves);
-        public override MiscData Misc => new(swordReplace: ItemID.GoldBroadsword, pickReplace: ItemID.GoldPickaxe, axeReplace: ItemID.GoldAxe, npcType: NPCID.Dryad);
+        public override MiscData Misc => new(swordReplace: ItemID.GoldBroadsword, pickReplace: ItemID.GoldPickaxe, axeReplace: ItemID.GoldAxe, npcType: NPCID.Dryad, stars: 5);
 
         public override bool ClearCondition() => UnlockSaveData.Unlocked("Accursed");
 

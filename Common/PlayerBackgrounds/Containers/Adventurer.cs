@@ -11,7 +11,8 @@ internal class Adventurer : PlayerBackgroundContainer
     public override string Description => "Comes with a thirst for exploration and a penchant for boulder traps!";
     public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.GrapplingHook, 1), (ItemID.Torch, 100), (ItemID.TrapsightPotion, 5), (ItemID.SpelunkerPotion, 5) };
 
-    public override EquipData Equip => new EquipData(ItemID.ArchaeologistsHat, ItemID.ArchaeologistsJacket, ItemID.ArchaeologistsPants);
+    public override EquipData Equip => new(ItemID.ArchaeologistsHat, ItemID.ArchaeologistsJacket, ItemID.ArchaeologistsPants);
+	public override MiscData Misc => new(stars: 1);
 
     public override void ModifyWorldGenTasks(List<GenPass> list)
     {
