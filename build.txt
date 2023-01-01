@@ -1,3 +1,4 @@
 displayName = New Beginnings
 author = Team Spirit
 version = 1.0.0.1
+homepage = discord.gg/uBNnznSfur
