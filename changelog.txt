@@ -1,3 +1,4 @@
 - Added Armor to origin's item lists
 - Added a description for every origin, describes the origin directly and objectively and clears up nuance
 - Adjusted description to include Team Spirit
+- Added link to GitHub wiki

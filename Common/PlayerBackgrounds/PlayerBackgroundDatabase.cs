@@ -52,7 +52,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Pirate", "Pirate", "Aye. A real pirate knows when land can be plundered, and plunder they shall!", "Starts with an eye patch, a gold ring, a sextant, a rusty cutlass, a keg and 200 sails.", 
                 new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant, 1), new MiscData(stars: 2), (ModContent.ItemType<RustyCutlass>(), 1), (ItemID.Keg, 1), (ItemID.Sail, 200));
             
-            AddNewBG("Deprived", "Deprived", "A forgotten warrior carrying long-lost tools.", "Starts with 80 max health, a deprived blade, a deprived lantern and a healing potion.", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>(), stars: 2), 
+            AddNewBG("Deprived", "Deprived", "A forgotten warrior carrying long-lost tools.", "Starts with 80 max health, a deprived blade, a deprived lantern and 3 healing potions.", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>(), stars: 2), 
                 (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
 
             AddNewBG("Lumberjack", "Lumberjack", "A humble lumberjack and his trusty axe.", "Starts with Lucy the Axe, a sawmill, 12 apples, and 300 of normal, boreal, palm, ebon, shade, rich mahogany, and dynasty wood.", 
