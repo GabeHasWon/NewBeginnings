@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using NewBeginnings.Common.PlayerBackgrounds;
+using NewBeginnings.Content.Items.Icons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,7 @@ internal class CharCreationEdit
 
     //All of these are for the description changes
     public static UIText _originalDifficultyDescription;
+    public static UIText _backgroundFlavour;
     public static UIText _backgroundDescription;
     public static UIText _backgroundStats;
     public static UIList _descriptionList;
@@ -218,7 +220,7 @@ internal class CharCreationEdit
         };
         _descriptionList.Add(_backgroundStats);
 
-        _backgroundDescription = new UIText(bgData.Description)
+        _backgroundFlavour = new UIText(bgData.Flavour)
         {
             Top = StyleDimension.FromPercent(0.1f),
             Width = StyleDimension.FromPixelsAndPercent(-8, 1f),
@@ -226,10 +228,21 @@ internal class CharCreationEdit
             IsWrapped = true,
             MarginTop = 8
         };
-        _descriptionList.Add(_backgroundDescription);
+        _descriptionList.Add(_backgroundFlavour);
 
         SetItemList(bgData, true);
         _descriptionList.Add(_descItemContainer);
+
+        _backgroundDescription = new UIText(bgData.Description, 0.9f)
+        {
+            TextColor = Color.Gray,
+            Top = StyleDimension.FromPercent(0.1f),
+            Width = StyleDimension.FromPixelsAndPercent(-8, 1f),
+            Height = StyleDimension.FromPixels(10),
+            IsWrapped = true,
+            MarginTop = 8
+        };
+        _descriptionList.Add(_backgroundDescription);
     }
 
     private static void SetItemList(PlayerBackgroundData data, bool resetItemContainer = false)
@@ -265,6 +278,17 @@ internal class CharCreationEdit
 
         if (axe != -1)
             items.Add((axe, 1));
+
+        (int head, int body, int legs) = (data.Equip.Head, data.Equip.Body, data.Equip.Legs);
+
+        if (head > ItemID.None)
+            items.Add((head, 1));
+
+        if (body > ItemID.None)
+            items.Add((body, 1));
+
+        if (legs > ItemID.None)
+            items.Add((legs, 1));
 
         foreach (var item in data.Equip.Accessories)
             items.Add((item, 1));
@@ -380,6 +404,7 @@ internal class CharCreationEdit
             currentBGButton.OnMouseDown += (UIMouseEvent evt, UIElement listeningElement) => //Click event
             {
                 PlayerBackgroundData useData = item.Name == "Random" ? Main.rand.Next(PlayerBackgroundDatabase.playerBackgroundDatas.SkipLast(1).ToList()) : item; //Hardcoding for random, sucks but eh
+                _backgroundFlavour.SetText(item.Name != "Random" ? useData.Flavour : item.Flavour); //Changes the UIText's value to use the bg's description
                 _backgroundDescription.SetText(item.Name != "Random" ? useData.Description : item.Description); //Changes the UIText's value to use the bg's description
 
                 if (item.Name != "Random")
@@ -450,12 +475,12 @@ internal class CharCreationEdit
     private static string GetStatsText(PlayerBackgroundData bgData)
     {
         string stats = $"[i:{ItemID.Heart}]{bgData.Misc.MaxLife} [i:{ItemID.Star}]{bgData.Misc.AdditionalMana}";
-        string stars = "";
+        string stars = string.Empty;
 
         for (int i = 0; i < 5; ++i)
-            stars += bgData.Misc.Stars > i ? $"[i:{ItemID.FallenStar}]" : "   ";
+            stars += bgData.Misc.Stars > i ? $"[i:{ModContent.ItemType<LightStar>()}]" : $"[i:{ModContent.ItemType<DimStar>()}]";
 
-        return stars + "    " + stats;
+        return stars + "   " + stats;
     }
 
     private static void SetSort(UIList allBGButtons, List<(int, UIColoredImageButton)> buttons)

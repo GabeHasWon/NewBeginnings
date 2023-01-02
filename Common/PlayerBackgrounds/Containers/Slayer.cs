@@ -7,7 +7,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers
 {
     internal class Slayer : PlayerBackgroundContainer
     {
-        public override string Description => "Rip and tear until it is done.";
+        public override string Flavour => "Rip and tear until it is done.";
+        public override string Description => "Spawns with a boomstick, 140 max health and infinite musket balls in Hell.";
         public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.EndlessMusketPouch, 1) };
         public override MiscData Misc => new(140, 20, swordReplace: ItemID.Boomstick, stars: 4);
 

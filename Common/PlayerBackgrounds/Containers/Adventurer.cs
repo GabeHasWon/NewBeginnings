@@ -8,7 +8,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers;
 
 internal class Adventurer : PlayerBackgroundContainer
 {
-    public override string Description => "Comes with a thirst for exploration and a penchant for boulder traps!";
+    public override string Flavour => "Comes with a thirst for exploration and a penchant for boulder traps!";
+	public override string Description => "Starts with a grappling hook, 100 torches, a full archeologist vanity set and 5 dangersense and spelunker potions.";
     public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.GrapplingHook, 1), (ItemID.Torch, 100), (ItemID.TrapsightPotion, 5), (ItemID.SpelunkerPotion, 5) };
 
     public override EquipData Equip => new(ItemID.ArchaeologistsHat, ItemID.ArchaeologistsJacket, ItemID.ArchaeologistsPants);

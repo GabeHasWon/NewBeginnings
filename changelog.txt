@@ -1,4 +1,3 @@
-- Added Stars to origin descriptions
-	The stars work on a 1-5 scale, 3 being a normal vanilla start (neutral), 1 being significantly easier, 5 being significantly harder.
-- Added base health and mana to origin description
-- Added changelogs (Whoops!)
+- Added Armor to origin's item lists
+- Added a description for every origin, describes the origin directly and objectively and clears up nuance
+- Adjusted description to include Team Spirit

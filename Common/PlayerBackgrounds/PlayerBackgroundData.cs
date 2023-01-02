@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 
@@ -16,7 +17,10 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         /// <summary>Key used to get the given asset from <see cref="PlayerBackgroundDatabase.backgroundIcons"/>. Defaults to "Default".</summary>
         public string Texture;
 
-        /// <summary>Description of the background for use in the character creation UI.</summary>
+        /// <summary>Flavour text of the background in the character creation UI.</summary>
+        public string Flavour;
+
+        /// <summary>Description of the background in the character creation UI.</summary>
         public string Description;
 
         /// <summary>Ordered list of every item type and stack size in the inventory. Is ADDED to, rather than REPLACING, the inventory.</summary>
@@ -31,10 +35,11 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         /// <summary>Contains what are functionally hooks, such as modifying worldgen and modifying the player right before they're saved after player creation.</summary>
         public DelegateData Delegates;
 
-        public PlayerBackgroundData(string name, string texName, string desc, EquipData? equips, MiscData? misc, params (int, int)[] inv)
+        public PlayerBackgroundData(string name, string texName, string flavour, string desc, EquipData? equips, MiscData? misc, params (int, int)[] inv)
         {
             Name = name;
             Texture = texName;
+            Flavour = flavour;
             Description = desc;
             Inventory = inv;
 

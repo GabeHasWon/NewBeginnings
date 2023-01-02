@@ -18,6 +18,9 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         /// <inheritdoc cref="PlayerBackgroundData.Texture"/>
         public virtual string Texture => GetType().Name;
 
+        /// <inheritdoc cref="PlayerBackgroundData.Flavour"/>
+        public virtual string Flavour => "TBD";
+
         /// <inheritdoc cref="PlayerBackgroundData.Description"/>
         public virtual string Description => "TBD";
 
@@ -40,7 +43,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         /// <summary>Automatically converts a given PlayerBackgroundContainer into a PlayerBackgroundData for ease of use.</summary>
         public static implicit operator PlayerBackgroundData(PlayerBackgroundContainer container)
         {
-            var data = new PlayerBackgroundData(container.Name, container.Texture, container.Description, container.Equip, container.Misc, container.Inventory)
+            var data = new PlayerBackgroundData(container.Name, container.Texture, container.Flavour, container.Description, container.Equip, container.Misc, container.Inventory)
             {
                 Delegates = new DelegateData(container.ClearCondition, container.ModifyWorldGenTasks, container.HasSpecialSpawn, container.GetSpawnPosition)
             };
