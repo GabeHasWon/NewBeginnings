@@ -71,11 +71,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
         public void ApplyStats(Player player)
         {
-            if (Misc.MaxLife > 20)
-                player.statLifeMax = Misc.MaxLife;
-
-            if (Misc.AdditionalMana >= 0)
-                player.statManaMax = Misc.AdditionalMana;
+            player.statLifeMax = Misc.MaxLife > 20 ? Misc.MaxLife : 20;
+            player.statManaMax = Misc.AdditionalMana >= 0 ? Misc.AdditionalMana : 0;
         }
 
         public void ApplyAccessories(Player player)

@@ -33,7 +33,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Huntsman", "Huntsman", "Steady hands and keen eyes, a master of the hunt.", "Starts with a bow, an endless quiver and a hunter cloak.", EquipData.SingleAcc(ItemID.HunterCloak), new MiscData(sortPriority: 11, stars: 1), (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
             AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", "Starts with a wizard hat, a sapphire staff and a sapphire robe, with additional mana but lower max health.", new EquipData(ItemID.WizardHat, ItemID.SapphireRobe, 0), new MiscData(80, 60, sortPriority: 11, stars: 1), (ItemID.SapphireStaff, 1));
             AddNewBG("Beastmaster", "Beastmaster", "Raised in the woodlands, they summon beasts to aid their journey.", "Lower max health but an immediate slime staff and leather whip.", new MiscData(80, sortPriority: 11, stars: 2), (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
-            AddNewBG("Shinobi", "Shinobi", "A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency.", "Start with a tabi and a katana.", EquipData.SingleAcc(ItemID.Tabi), new MiscData(80, stars: 1), (ItemID.Katana, 1));
+            AddNewBG("Shinobi", "Shinobi", "A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency.", "Start with a tabi and a katana but 80 max health.", EquipData.SingleAcc(ItemID.Tabi), new MiscData(80, stars: 1), (ItemID.Katana, 1));
             AddNewBG("Alchemist", "Alchemist", "A master of nature and chemicals; prepared for anything.", "Start with an alchemy table, 50 bottled water and 12 herb bags.", (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
             AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", "Starts with 1 dynamite, 5 bombs, and 10 grenades.", (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
             AddNewBG("Boomer", "Boomer", "Back in my day...", "Starts with a lawn mower, sunglasses, BBQ ribs and a grilled squirrel.", new EquipData(ItemID.Sunglasses), (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
@@ -86,7 +86,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 new MiscData(stars: 2), (ModContent.ItemType<WornSpellbook>(), 1), (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
 
             AddNewBG("Druid", "Druid", "A herald of nature, engaged with keeping the world alive and healthy!", "Starts with a guide to plant fiber cordage, a vilethorn, a staff of regrowth, 3 herb bags, and 10 clay pots.", 
-                EquipData.SingleAcc(ItemID.CordageGuide), new MiscData(2), (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
+                EquipData.SingleAcc(ItemID.CordageGuide), (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
 
             playerBackgroundDatas.Add(new Slayer());
 
