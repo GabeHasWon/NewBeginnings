@@ -1,4 +1,6 @@
-- Added Armor to origin's item lists
-- Added a description for every origin, describes the origin directly and objectively and clears up nuance
-- Adjusted description to include Team Spirit
-- Added link to GitHub wiki
+- Demoman now spawns with 2 dynamite, 10 bombs, and 15 grenades instead of 1, 5 and 10 respectively
+- Spelunker now spawns with less bombs (10 -> 15), and spawns with an iron minecart
+- Lumberjack spawns with a Timber Axe instead of Lucy the Axe now
+- Removed Magma Stone from Firestarter, replaced with Wand of Sparking
+- Wizard now has Topaz tools instead of Sapphire
+- Beastmaster is now 1 star instead of 2

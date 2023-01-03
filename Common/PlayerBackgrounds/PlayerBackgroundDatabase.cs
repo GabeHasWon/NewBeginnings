@@ -80,7 +80,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 new EquipData(ItemID.SummerHat), new MiscData(stars: 2), (ItemID.Sickle, 1), (ItemID.Hay, 200), (ItemID.DaybloomSeeds, 12), (ItemID.BlinkrootSeeds, 12), (ItemID.MoonglowSeeds, 12), (ItemID.WaterleafSeeds, 12), 
                 (ItemID.ShiverthornSeeds, 12), (ItemID.DeathweedSeeds, 12), (ItemID.FireblossomSeeds, 12)); //Gonna need a custom straw hat vanity item to replace the summer hat. 
 
-            AddNewBG("Spelunker", "Spelunker", "The caves call and they answer. Those ores aren't gonna mine themselves!", "Starts with an ancient chisel, mining helmet, a gold pickaxe, an iron minecart, 15 bombs and 10 spelunker potions.", 
+            AddNewBG("Spelunker", "Spelunker", "The caves call and they answer. Those ores aren't gonna mine themselves!", "Starts with an ancient chisel, mining helmet, a gold pickaxe, an iron minecart, 10 bombs and 10 spelunker potions.", 
                 EquipData.AccFirst(ItemID.AncientChisel, ItemID.MiningHelmet), new MiscData(stars: 2), (ItemID.GoldPickaxe, 1), (ItemID.Bomb, 10), (ItemID.SpelunkerPotion, 10), (ItemID.Minecart, 1));
 
             AddNewBG("Bookworm", "Bookworm", "Mind over matter. The best way to fight is with a sharpened mind!", "Starts with a worn spellbook, a guide to plant fiber cordage, 8 books and a guide to critter companionship.", 
@@ -96,7 +96,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
             playerBackgroundDatas.Add(new Accursed());
 
-            AddNewBGItemlessDesc("Random", "Default", "Choose a random background.", null, null);
+            AddNewBGItemlessDesc("Random", "Default", "Choose a random background.", "", null, null);
         }
 
         private static void SortBGDatas()

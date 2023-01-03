@@ -43,7 +43,7 @@ namespace NewBeginnings.Common.UnlockabilitySystem
             string filePath = Path.Combine(path, $"{SaveName}.txt");
 
             if (!File.Exists(filePath)) //If the file data doesn't exist, make an empty file and exit
-                File.Create($"{filePath}.txt");
+                File.Create($"{filePath}");
             
             return filePath;
         }
