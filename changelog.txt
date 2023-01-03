@@ -4,3 +4,5 @@
 - Removed Magma Stone from Firestarter, replaced with Wand of Sparking
 - Wizard now has Topaz tools instead of Sapphire
 - Beastmaster is now 1 star instead of 2
+- Fixed Random crash error
+- Cleanup
