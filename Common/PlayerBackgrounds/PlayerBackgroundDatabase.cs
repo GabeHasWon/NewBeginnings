@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using NewBeginnings.Common.PlayerBackgrounds.Containers;
 using NewBeginnings.Content.Items;
+using NewBeginnings.Content.Items.Tools;
 using ReLogic.Content;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,11 +32,11 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBGItemlessDesc("Purist", "Purist", "The normal Terraria experience.", "", null, new MiscData(sortPriority: 11));
             AddNewBG("Knight", "Knight", "A noble warrior, clad in iron.", "Starts with a full set of iron armor and a silver broadsword.", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), new MiscData(sortPriority: 11, stars: 1), (ItemID.SilverBroadsword, 1));
             AddNewBG("Huntsman", "Huntsman", "Steady hands and keen eyes, a master of the hunt.", "Starts with a bow, an endless quiver and a hunter cloak.", EquipData.SingleAcc(ItemID.HunterCloak), new MiscData(sortPriority: 11, stars: 1), (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
-            AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", "Starts with a wizard hat, a sapphire staff and a sapphire robe, with additional mana but lower max health.", new EquipData(ItemID.WizardHat, ItemID.SapphireRobe, 0), new MiscData(80, 60, sortPriority: 11, stars: 1), (ItemID.SapphireStaff, 1));
-            AddNewBG("Beastmaster", "Beastmaster", "Raised in the woodlands, they summon beasts to aid their journey.", "Lower max health but an immediate slime staff and leather whip.", new MiscData(80, sortPriority: 11, stars: 2), (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
+            AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", "Starts with a wizard hat, a sapphire staff and a sapphire robe, with additional mana but lower max health.", new EquipData(ItemID.WizardHat, ItemID.TopazRobe, 0), new MiscData(80, 60, sortPriority: 11, stars: 1), (ItemID.TopazStaff, 1));
+            AddNewBG("Beastmaster", "Beastmaster", "Raised in the woodlands, they summon beasts to aid their journey.", "Lower max health but an immediate slime staff and leather whip.", new MiscData(80, sortPriority: 11, stars: 1), (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
             AddNewBG("Shinobi", "Shinobi", "A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency.", "Start with a tabi and a katana but 80 max health.", EquipData.SingleAcc(ItemID.Tabi), new MiscData(80, stars: 1), (ItemID.Katana, 1));
             AddNewBG("Alchemist", "Alchemist", "A master of nature and chemicals; prepared for anything.", "Start with an alchemy table, 50 bottled water and 12 herb bags.", (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
-            AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", "Starts with 1 dynamite, 5 bombs, and 10 grenades.", new MiscData(npcType: NPCID.Demolitionist), (ItemID.Dynamite, 1), (ItemID.Bomb, 5), (ItemID.Grenade, 10));
+            AddNewBG("Demoman", "Demolitionist", "Hurl explosives at ore, enemies, or yourself!", "Starts with 2 dynamite, 10 bombs, and 15 grenades.", new MiscData(npcType: NPCID.Demolitionist), (ItemID.Dynamite, 2), (ItemID.Bomb, 10), (ItemID.Grenade, 15));
             AddNewBG("Boomer", "Boomer", "Back in my day...", "Starts with a lawn mower, sunglasses, BBQ ribs and a grilled squirrel.", new EquipData(ItemID.Sunglasses), (ItemID.LawnMower, 1), (ItemID.BBQRibs, 2), (ItemID.GrilledSquirrel, 1));
             AddNewBG("Zoomer", "Zoomer", "Terreddit post is popping off today boutta frag some slimes fr fr", "Starts with goggles, a cell phone and 40 max health.", new EquipData(ItemID.Goggles), new MiscData(40, stars: 4), (ItemID.CellPhone, 1));
             AddNewBG("Tiger", "Tiger", "Lightly more feral than other Terrarians, but not as much as you'd think!", "Starts with cat ears, a fox tail, tiger climbing gear, and a bladed glove.", new EquipData(ItemID.CatEars, 0, ItemID.FoxTail, ItemID.TigerClimbingGear), new MiscData(stars: 1), (ItemID.BladedGlove, 1));
@@ -46,8 +47,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Thief", "Thief", "Petty thief with a penchant for pickpocketing.", "Starts with a lucky coin, platinum shortsword and 300 poisoned knives.", new EquipData(0, 0, 0, ItemID.LuckyCoin), new MiscData(stars: 2), 
                 (ItemID.PlatinumShortsword, 1), (ItemID.PoisonedKnife, 300)); //replace plat shortsword with thief's dagger
             
-            AddNewBG("Firestarter", "Firestarter", "Some people just want to watch the world burn.", "Starts with a magma stone, 300 molotov cocktails, a flare gun with 50 flares, and 100 torches.", new EquipData(0, 0, 0, ItemID.MagmaStone), new MiscData(stars: 2), 
-                (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
+            AddNewBG("Firestarter", "Firestarter", "Some people just want to watch the world burn.", "Starts with a magma stone, 300 molotov cocktails, a flare gun with 50 flares, and 100 torches.", new MiscData(stars: 2), 
+                (ItemID.WandofSparking, 1), (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
             
             AddNewBG("Pirate", "Pirate", "Aye. A real pirate knows when land can be plundered, and plunder they shall!", "Starts with an eye patch, a gold ring, a sextant, a rusty cutlass, a keg and 200 sails.", 
                 new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant, 1), new MiscData(stars: 2), (ModContent.ItemType<RustyCutlass>(), 1), (ItemID.Keg, 1), (ItemID.Sail, 200));
@@ -55,8 +56,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Deprived", "Deprived", "A forgotten warrior carrying long-lost tools.", "Starts with 80 max health, a deprived blade, a deprived lantern and 3 healing potions.", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>(), stars: 2), 
                 (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
 
-            AddNewBG("Lumberjack", "Lumberjack", "A humble lumberjack and his trusty axe.", "Starts with Lucy the Axe, a sawmill, 12 apples, and 300 of normal, boreal, palm, ebon, shade, rich mahogany, and dynasty wood.", 
-                new MiscData(stars: 1), (ItemID.LucyTheAxe, 1), (ItemID.Sawmill, 1), (ItemID.Apple, 12), (ItemID.Wood, 300), (ItemID.BorealWood, 300), 
+            AddNewBG("Lumberjack", "Lumberjack", "A humble lumberjack and his trusty axe.", "Starts with a lumber axe, a sawmill, 12 apples, and 300 of normal, boreal, palm, ebon, shade, rich mahogany, and dynasty wood.", 
+                new MiscData(stars: 1), (ModContent.ItemType<LumberjackAxe>(), 1), (ItemID.Sawmill, 1), (ItemID.Apple, 12), (ItemID.Wood, 300), (ItemID.BorealWood, 300), 
                 (ItemID.PalmWood, 300), (ItemID.Ebonwood, 300), (ItemID.Shadewood, 300), (ItemID.RichMahogany, 300), (ItemID.DynastyWood, 300));
 
             AddNewBG("Nobleman", "Nobleman", "A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.", 
@@ -79,8 +80,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 new EquipData(ItemID.SummerHat), new MiscData(stars: 2), (ItemID.Sickle, 1), (ItemID.Hay, 200), (ItemID.DaybloomSeeds, 12), (ItemID.BlinkrootSeeds, 12), (ItemID.MoonglowSeeds, 12), (ItemID.WaterleafSeeds, 12), 
                 (ItemID.ShiverthornSeeds, 12), (ItemID.DeathweedSeeds, 12), (ItemID.FireblossomSeeds, 12)); //Gonna need a custom straw hat vanity item to replace the summer hat. 
 
-            AddNewBG("Spelunker", "Spelunker", "The caves call and they answer. Those ores aren't gonna mine themselves!", "Starts with an ancient chisel, mining helmet, a gold pickaxe, 15 bombs and 10 spelunker potions.", 
-                EquipData.AccFirst(ItemID.AncientChisel, ItemID.MiningHelmet), new MiscData(stars: 2), (ItemID.GoldPickaxe, 1), (ItemID.Bomb, 15), (ItemID.SpelunkerPotion, 10));
+            AddNewBG("Spelunker", "Spelunker", "The caves call and they answer. Those ores aren't gonna mine themselves!", "Starts with an ancient chisel, mining helmet, a gold pickaxe, an iron minecart, 15 bombs and 10 spelunker potions.", 
+                EquipData.AccFirst(ItemID.AncientChisel, ItemID.MiningHelmet), new MiscData(stars: 2), (ItemID.GoldPickaxe, 1), (ItemID.Bomb, 10), (ItemID.SpelunkerPotion, 10), (ItemID.Minecart, 1));
 
             AddNewBG("Bookworm", "Bookworm", "Mind over matter. The best way to fight is with a sharpened mind!", "Starts with a worn spellbook, a guide to plant fiber cordage, 8 books and a guide to critter companionship.", 
                 new MiscData(stars: 2), (ModContent.ItemType<WornSpellbook>(), 1), (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
