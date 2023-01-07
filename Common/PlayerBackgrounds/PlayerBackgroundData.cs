@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace NewBeginnings.Common.PlayerBackgrounds
 {
@@ -103,8 +104,17 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
             for (int i = 0; i < Inventory.Length; ++i)
             {
-                player.inventory[i + offset] = new Item(Inventory[i].type);
-                player.inventory[i + offset].stack = Inventory[i].stack;
+                if (!player.inventory[i + offset].IsAir) //Skip current item if it's occupied by (presumably) another mod's items beforehand
+                {
+                    i--;
+                    offset++;
+                    continue;
+                }
+
+                player.inventory[i + offset] = new Item(Inventory[i].type)
+                {
+                    stack = Inventory[i].stack
+                };
             }
         }
 
@@ -120,6 +130,15 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 total++;
 
             if (Misc.CopperAxeReplacement != -1)
+                total++;
+
+            if (Equip.Head != ItemID.None)
+                total++;
+
+            if (Equip.Body != ItemID.None)
+                total++;
+
+            if (Equip.Legs != ItemID.None)
                 total++;
 
             return total;

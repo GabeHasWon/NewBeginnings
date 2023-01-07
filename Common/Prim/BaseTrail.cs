@@ -15,9 +15,6 @@ namespace NewBeginnings.Common.Prim
 
         internal List<Vector2> vertices = new List<Vector2>();
 
-        private ITrailPosition _position;
-        private bool _dying = false;
-
         public BaseTrail(Entity parent, float maxLength)
         {
             Parent = parent;
@@ -26,15 +23,12 @@ namespace NewBeginnings.Common.Prim
 
         public void Update()
         {
-            _position.InsertNextPosition(this);
-
             if (!Parent.active)
                 Kill();
         }
 
         public virtual void Kill()
         {
-            _dying = true;
         }
 
         public abstract void Draw(Effect effect, BasicEffect basicEffect, GraphicsDevice device);
