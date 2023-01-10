@@ -73,15 +73,22 @@ internal class CharCreationEdit
     {
         ILCursor c = new(il);
 
-        c.TryGotoNext(x => x.MatchLdarg(1));
+        if (!c.TryGotoNext(x => x.MatchLdarg(1)))
+            return;
+
         c.Index += 3;
 
         c.Emit(OpCodes.Ldloc_0);
         c.EmitDelegate(AddNewButton); //Add player bg button
 
-        c.TryGotoNext(x => x.MatchLdstr("UI.PlayerEmptyName"));
-        c.TryGotoNext(x => x.MatchLdcR4(0.5f));
-        c.TryGotoNext(x => x.MatchLdloc(0));
+        if (!c.TryGotoNext(x => x.MatchLdstr("UI.PlayerEmptyName")))
+            return;
+
+        if (!c.TryGotoNext(x => x.MatchLdcR4(0.5f)))
+            return;
+
+        if (!c.TryGotoNext(x => x.MatchLdloc(0)))
+            return;
 
         c.Emit(OpCodes.Ldarg_0);
         c.EmitDelegate((UICharacterCreation self) =>
@@ -96,7 +103,8 @@ internal class CharCreationEdit
             characterNameButton.Width = StyleDimension.FromPixelsAndPercent(0f, 0.9f);
         });
 
-        c.TryGotoNext(MoveType.After, x => x.MatchStloc(5));
+        if (!c.TryGotoNext(MoveType.After, x => x.MatchStloc(5)))
+            return;
 
         c.Emit(OpCodes.Ldloc_S, (byte)5);
         c.EmitDelegate((UIElement elem) => //Store uiElement2 / _difficultyContainer
@@ -104,7 +112,8 @@ internal class CharCreationEdit
             _difficultyContainer = elem;
         });
 
-        c.TryGotoNext(MoveType.After, x => x.MatchStloc(6));
+        if (!c.TryGotoNext(MoveType.After, x => x.MatchStloc(6)))
+            return;
 
         c.Emit(OpCodes.Ldloc_S, (byte)6);
         c.EmitDelegate((UISlicedImage elem) => //Store uiText
@@ -123,11 +132,19 @@ internal class CharCreationEdit
             Width = StyleDimension.FromPixels(40f),
             Height = StyleDimension.FromPixels(40f)
         };
+
         backgroundButton.SetPadding(0f);
         backgroundButton.OnMouseDown += BackgroundButton_OnMouseDown;
+        //backgroundButton.OnUpdate += BackgroundButton_OnUpdate;
 
         parent.Append(backgroundButton);
     }
+
+    //private static void BackgroundButton_OnUpdate(UIElement affectedElement)
+    //{
+    //    int i = 0;
+    //    i++;
+    //}
 
     /// <summary>OnMouseDown event for the background icon button. Sets the background list, changes the description and sets defaults where necessary.</summary>
     /// <param name="evt"></param>
@@ -203,7 +220,7 @@ internal class CharCreationEdit
         {
             HAlign = 1f,
             Height = StyleDimension.FromPixelsAndPercent(-8, 1f),
-            Top = StyleDimension.FromPixels(4)
+            Top = StyleDimension.FromPixels(4),
         };
 
         _descriptionList.SetScrollbar(_descScrollBar);
