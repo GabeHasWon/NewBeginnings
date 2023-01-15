@@ -94,6 +94,10 @@ internal class CharCreationEdit
         c.EmitDelegate((UICharacterCreation self) =>
         {
             _self = self;
+
+            var plr = InternalPlayerField.GetValue(_self) as Player;
+            if (!plr.GetModPlayer<PlayerBackgroundPlayer>().HasBG()) //Set background data if it's null
+                plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(PlayerBackgroundDatabase.playerBackgroundDatas.First());
         });
 
         c.Emit(OpCodes.Ldloc_1);
@@ -167,9 +171,6 @@ internal class CharCreationEdit
                 _originalDifficultyDescription = tex;
 
             var plr = InternalPlayerField.GetValue(_self) as Player;
-            if (!plr.GetModPlayer<PlayerBackgroundPlayer>().HasBG()) //Set background data if it's null
-                plr.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(PlayerBackgroundDatabase.playerBackgroundDatas.First());
-
             BuildDescriptionScrollbar(plr);
             BuildBackgroundSelections();
 
