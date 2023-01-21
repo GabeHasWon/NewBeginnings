@@ -1,6 +1,2 @@
-- Made this mod not replace items added to the starting inventory by other mods
-- Updated description to include MrPlagues Authentic Races non-compat
-- Added proper exiting on invalid IL edit
-- Fixed backgrounds not being set properly if you don't open the origin menu
-- Fixed incorrect Wizard description
-- Cleanup
+- Optimized code to check Journey (apparently this didn't work before!)
+- 

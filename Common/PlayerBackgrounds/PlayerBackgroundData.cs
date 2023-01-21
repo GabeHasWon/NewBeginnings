@@ -78,11 +78,21 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
         public void ApplyAccessories(Player player)
         {
+            if (Equip.Accessories is null || Equip.Accessories.Length == 0)
+                return;
+
             if (Equip.Accessories.Length > Player.InitialAccSlotCount)
                 throw new Exception("Inventory is too big. Fix it.");
 
+            int offset = player.difficulty == PlayerDifficultyID.Creative ? 1 : 0;
+
             for (int i = 0; i < Player.InitialAccSlotCount; ++i)
-                player.armor[3 + i] = new Item(i < Equip.Accessories.Length ? Equip.Accessories[i] : 0);
+            {
+                if (i >= Equip.Accessories.Length || i + 3 >= 8)
+                    break;
+
+                player.armor[3 + i + offset] = new Item(Equip.Accessories[i]);
+            }
         }
 
         public void ApplyArmor(Player player)
@@ -100,7 +110,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             if (Inventory.Length > player.inventory.Length)
                 throw new Exception("Inventory is too big. Fix it.");
 
-            int offset = player.creativeGodMode ? 10 : 3;
+            int offset = player.difficulty == PlayerDifficultyID.Creative ? 10 : 3;
 
             for (int i = 0; i < Inventory.Length; ++i)
             {

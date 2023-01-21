@@ -51,7 +51,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 (ItemID.WandofSparking, 1), (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
             
             AddNewBG("Pirate", "Pirate", "Aye. A real pirate knows when land can be plundered, and plunder they shall!", "Starts with an eye patch, a gold ring, a sextant, a rusty cutlass, a keg and 200 sails.", 
-                new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant, 1), new MiscData(stars: 2), (ModContent.ItemType<RustyCutlass>(), 1), (ItemID.Keg, 1), (ItemID.Sail, 200));
+                new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant), new MiscData(swordReplace: ModContent.ItemType<RustyCutlass>(), stars: 2), (ItemID.Keg, 1), (ItemID.Sail, 200));
             
             AddNewBG("Deprived", "Deprived", "A forgotten warrior carrying long-lost tools.", "Starts with 80 max health, a deprived blade, a deprived lantern and 3 healing potions.", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>(), stars: 2), 
                 (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));

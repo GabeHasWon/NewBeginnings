@@ -26,6 +26,8 @@ namespace NewBeginnings.Common.Edits;
 internal class CharCreationEdit
 {
     public static bool _bgToggled = false;
+    //public static bool _needsReset = false;
+
     public static UICharacterCreation _self;
     public static UIElement _difficultyContainer;
     public static UISlicedImage _difficultyDescriptionContainer;
@@ -49,9 +51,18 @@ internal class CharCreationEdit
         IL.Terraria.GameContent.UI.States.UICharacterCreation.MakeInfoMenu += UICharacterCreation_MakeInfoMenu;
         On.Terraria.GameContent.UI.States.UICharacterCreation.Click_GoBack += UICharacterCreation_Click_GoBack;
         On.Terraria.GameContent.UI.States.UICharacterCreation.Click_NamingAndCreating += UICharacterCreation_Click_NamingAndCreating;
+        On.Terraria.GameContent.UI.States.UICharacterCreation.CreateColorPicker += UICharacterCreation_CreateColorPicker;
 
         CharCreationHijackSaveDetour.Load();
         CharNameEdit.Load();
+    }
+
+    private static UIColoredImageButton UICharacterCreation_CreateColorPicker(On.Terraria.GameContent.UI.States.UICharacterCreation.orig_CreateColorPicker orig, UICharacterCreation self, int id, string texturePath, float xPositionStart, float xPositionPerId)
+    {
+        UIColoredImageButton button = orig(self, id, texturePath, xPositionStart, xPositionPerId);
+        button.OnClick += static (UIMouseEvent evt, UIElement listeningElement) => ExitBG(_bgToggled);
+        button.Recalculate();
+        return button;
     }
 
     /// <summary>Just used to reset origin toggle if the player goes to a different screen.</summary>
@@ -139,16 +150,11 @@ internal class CharCreationEdit
 
         backgroundButton.SetPadding(0f);
         backgroundButton.OnMouseDown += BackgroundButton_OnMouseDown;
-        //backgroundButton.OnUpdate += BackgroundButton_OnUpdate;
 
         parent.Append(backgroundButton);
-    }
 
-    //private static void BackgroundButton_OnUpdate(UIElement affectedElement)
-    //{
-    //    int i = 0;
-    //    i++;
-    //}
+        _originalChildren = new List<UIElement>();
+    }
 
     /// <summary>OnMouseDown event for the background icon button. Sets the background list, changes the description and sets defaults where necessary.</summary>
     /// <param name="evt"></param>
@@ -166,6 +172,8 @@ internal class CharCreationEdit
 
             _difficultyContainer.RemoveAllChildren(); //kill original children
 
+            PoorlyUpscaleMenu(600, false);
+
             var uiText = _difficultyDescriptionContainer.Children.FirstOrDefault(x => x is UIText text); //And set the description
             if (uiText is UIText tex)
                 _originalDifficultyDescription = tex;
@@ -177,32 +185,83 @@ internal class CharCreationEdit
             _difficultyDescriptionContainer.RemoveChild(_originalDifficultyDescription);
         }
         else //If we're switching out of the bg section
+            ExitBG(true);
+    }
+
+    private static void ExitBG(bool reset)
+    {
+        if (_bgToggled)
         {
-            _bgToggled = false;
-
+            PoorlyUpscaleMenu(377, reset);
             _difficultyContainer.RemoveAllChildren();
+        }
 
+        if (_originalChildren is not null)
+        {
             foreach (var item in _originalChildren) //replace children with clones
                 _difficultyContainer.Append(item);
 
             _originalChildren = new List<UIElement>();
+        }
 
-            int dif = (InternalPlayerField.GetValue(_self) as Player).difficulty;
-            string text = Lang.menu[31].Value;
+        int dif = (InternalPlayerField.GetValue(_self) as Player).difficulty;
+        string text = Lang.menu[31].Value;
 
-            if (dif == 1)
-                text = Lang.menu[30].Value;
-            else if (dif == 2)
-                text = Lang.menu[29].Value;
-            else if (dif == 3)
-                text = Language.GetText("UI.CreativeDescriptionPlayer").Value;
+        if (dif == 1)
+            text = Lang.menu[30].Value;
+        else if (dif == 2)
+            text = Lang.menu[29].Value;
+        else if (dif == 3)
+            text = Language.GetText("UI.CreativeDescriptionPlayer").Value;
 
+        if (_bgToggled)
+        {
             _difficultyDescriptionContainer.RemoveChild(_descScrollBar);
             _difficultyDescriptionContainer.RemoveChild(_descriptionList);
             _difficultyDescriptionContainer.RemoveChild(_descItemContainer);
             _originalDifficultyDescription.SetText(text);
             _difficultyDescriptionContainer.Append(_originalDifficultyDescription);
         }
+
+        _bgToggled = false;
+    }
+
+    private static void PoorlyUpscaleMenu(int size, bool reset)
+    {
+        var actualPanel = _self.Children.First(); //BuildPage()::uIElement
+        var backPanel = actualPanel.Children.First(); //BuildPage()::uIPanel
+        var infoPanel = backPanel.Children.Last(); //BuildPage()::uIElement3    MakeClothStylesMenu()::middleInnerPanel
+
+        if (!reset)
+        {
+            actualPanel.Height.Set(size, 0);
+            backPanel.Height.Set(-150, 1);
+        }
+
+        var back = actualPanel.Children.FirstOrDefault(x => x is UITextPanel<LocalizedText> text && text.Text == Language.GetText("UI.Back").Value);
+        var create = actualPanel.Children.FirstOrDefault(x => x is UITextPanel<LocalizedText> text && text.Text == Language.GetText("UI.Create").Value);
+
+        back.Top = StyleDimension.FromPixelsAndPercent(-42, 0f);
+        create.Top = StyleDimension.FromPixelsAndPercent(-42, 0f);
+
+        if (!reset)
+            infoPanel.Height = new StyleDimension(-130, 1f);
+        else
+        {
+            actualPanel.Height = StyleDimension.FromPixels(384f);
+            backPanel.Height = StyleDimension.FromPixels(size - 144f);
+        }
+
+        const int ContainersTop = 50;
+
+        _difficultyContainer.Height = new StyleDimension(0, 1f);
+        _difficultyContainer.Top = new StyleDimension(ContainersTop, 0);
+
+        _difficultyDescriptionContainer.Height = new StyleDimension(0, 1f);
+        _difficultyDescriptionContainer.Top = new StyleDimension(ContainersTop, 0);
+        //_difficultyDescriptionContainer.VAlign = 0.75f;
+
+        _self.Recalculate();
     }
 
     private static void BuildDescriptionScrollbar(Player plr)
@@ -210,7 +269,7 @@ internal class CharCreationEdit
         _descriptionList = new UIList() //List for use in the description
         {
             Width = StyleDimension.FromPixels(270),
-            Height = StyleDimension.FromPixels(200),
+            Height = StyleDimension.FromPixelsAndPercent(0, 1f),
             PaddingLeft = 8,
             PaddingRight = 8,
             ListPadding = -20
@@ -387,7 +446,7 @@ internal class CharCreationEdit
         UIList allBGButtons = new UIList() //List of all background buttons
         {
             Width = StyleDimension.FromPixels(180),
-            Height = StyleDimension.FromPixels(120),
+            Height = StyleDimension.FromPixelsAndPercent(0, 1f),
             ListPadding = 4,
         };
 
