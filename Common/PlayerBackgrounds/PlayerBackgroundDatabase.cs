@@ -2,6 +2,8 @@
 using NewBeginnings.Common.PlayerBackgrounds.Containers;
 using NewBeginnings.Content.Items;
 using NewBeginnings.Content.Items.Tools;
+using NewBeginnings.Content.Items.Vanity;
+using NewBeginnings.Content.Items.Weapon;
 using ReLogic.Content;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +32,9 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             //Add new lines to make sure all very long backgrounds fit visibly on the screen at once, and keep them seperated
 
             AddNewBGItemlessDesc("Purist", "Purist", "The normal Terraria experience.", "", null, new MiscData(sortPriority: 11));
-            AddNewBG("Knight", "Knight", "A noble warrior, clad in iron.", "Starts with a full set of iron armor and a silver broadsword.", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), new MiscData(sortPriority: 11, stars: 1), (ItemID.SilverBroadsword, 1));
+            AddNewBG("Knight", "Knight", "A noble warrior, clad in iron.", "Starts with a full set of iron armor and a silver broadsword.", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), new MiscData(swordReplace: ItemID.SilverBroadsword, sortPriority: 11, stars: 1));
             AddNewBG("Huntsman", "Huntsman", "Steady hands and keen eyes, a master of the hunt.", "Starts with a bow, an endless quiver and a hunter cloak.", EquipData.SingleAcc(ItemID.HunterCloak), new MiscData(sortPriority: 11, stars: 1), (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
-            AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", "Starts with a wizard hat, a topaz staff and a topaz robe, with additional mana but lower max health.", new EquipData(ItemID.WizardHat, ItemID.TopazRobe, 0), new MiscData(80, 60, sortPriority: 11, stars: 1), (ItemID.TopazStaff, 1));
+            AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", "Starts with a wizard hat, a topaz staff and a topaz robe, with additional mana but lower max health.", new EquipData(ItemID.WizardHat, ItemID.TopazRobe, 0), new MiscData(80, 60, swordReplace: ItemID.TopazStaff, sortPriority: 11, stars: 1));
             AddNewBG("Beastmaster", "Beastmaster", "Raised in the woodlands, they summon beasts to aid their journey.", "Lower max health but an immediate slime staff and leather whip.", new MiscData(80, sortPriority: 11, stars: 1), (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
             AddNewBG("Shinobi", "Shinobi", "A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency.", "Start with a tabi and a katana but 80 max health.", EquipData.SingleAcc(ItemID.Tabi), new MiscData(80, stars: 1), (ItemID.Katana, 1));
             AddNewBG("Alchemist", "Alchemist", "A master of nature and chemicals; prepared for anything.", "Start with an alchemy table, 50 bottled water and 12 herb bags.", (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
@@ -56,8 +58,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Deprived", "Deprived", "A forgotten warrior carrying long-lost tools.", "Starts with 80 max health, a deprived blade, a deprived lantern and 3 healing potions.", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>(), stars: 2), 
                 (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
 
-            AddNewBG("Lumberjack", "Lumberjack", "A humble lumberjack and his trusty axe.", "Starts with a lumber axe, a sawmill, 12 apples, and 300 of normal, boreal, palm, ebon, shade, rich mahogany, and dynasty wood.", 
-                new MiscData(stars: 1), (ModContent.ItemType<LumberjackAxe>(), 1), (ItemID.Sawmill, 1), (ItemID.Apple, 12), (ItemID.Wood, 300), (ItemID.BorealWood, 300), 
+            AddNewBG("Lumberjack", "Lumberjack", "A humble lumberjack, his flannel and his trusty axe.", "Starts with a flannel shirt, lumber axe, a sawmill, 12 apples, and 300 of normal, boreal, palm, ebon, shade, rich mahogany, and dynasty wood.", 
+                new EquipData(0, ModContent.ItemType<LumberjackFlannel>()), new MiscData(axeReplace: ModContent.ItemType<LumberjackAxe>(), stars: 1), (ItemID.Sawmill, 1), (ItemID.Apple, 12), (ItemID.Wood, 300), (ItemID.BorealWood, 300), 
                 (ItemID.PalmWood, 300), (ItemID.Ebonwood, 300), (ItemID.Shadewood, 300), (ItemID.RichMahogany, 300), (ItemID.DynastyWood, 300));
 
             AddNewBG("Nobleman", "Nobleman", "A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.", 

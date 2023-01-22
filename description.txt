@@ -23,4 +23,4 @@ Read the README if you want to use any code!
 
 - FAQ -
 Q: Does this work with (any other mod)?
-A: Every mod except for MrPlague's Authentic Races. Working on compatibility with Races, though it may take a while.
+A: Every mod should work! Report bugs to the discord.

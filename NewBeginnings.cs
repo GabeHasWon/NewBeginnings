@@ -18,6 +18,9 @@ namespace NewBeginnings
             PlayerBackgroundDatabase.Populate();
         }
 
+        public override void PostSetupContent() => MrPlaguesCompat.PostSetupContent();
+        public override void Unload() => MrPlaguesCompat.Unload();
+
         internal static void PrintBGDescriptions()
         {
             string log = "";

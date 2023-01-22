@@ -1,2 +1,7 @@
-- Optimized code to check Journey (apparently this didn't work before!)
-- 
+- Completely reworked UI, is much better now
+- Added splash text
+- Added Lumberjack Flannel, which the Lumberjack now starts with
+- Made the Topaz Staff replace the shortsword for Wizard
+- Made the Silver Broadsword replace the shortsword for Knight
+- Made the Lumber Axe replace the default axe for Lumberjack
+- Added compatibility with MrPlague's Authentic Races

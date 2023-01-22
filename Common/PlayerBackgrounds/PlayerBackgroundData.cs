@@ -76,23 +76,32 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             player.statManaMax = Misc.AdditionalMana >= 0 ? Misc.AdditionalMana : 0;
         }
 
-        public void ApplyAccessories(Player player)
+        public void ApplyAccessories(Player player, bool forced = false)
         {
-            if (Equip.Accessories is null || Equip.Accessories.Length == 0)
+            if (Equip.Accessories is null)
                 return;
 
             if (Equip.Accessories.Length > Player.InitialAccSlotCount)
                 throw new Exception("Inventory is too big. Fix it.");
 
-            int offset = player.difficulty == PlayerDifficultyID.Creative ? 1 : 0;
-
-            for (int i = 0; i < Player.InitialAccSlotCount; ++i)
+            if (!forced)
             {
-                if (i >= Equip.Accessories.Length || i + 3 >= 8)
-                    break;
+                if (Equip.Accessories.Length == 0)
+                    return;
 
-                player.armor[3 + i + offset] = new Item(Equip.Accessories[i]);
+                int offset = player.difficulty == PlayerDifficultyID.Creative ? 1 : 0;
+
+                for (int i = 0; i < Player.InitialAccSlotCount; ++i)
+                {
+                    if (i >= Equip.Accessories.Length || i + 3 >= 8)
+                        break;
+
+                    player.armor[3 + i + offset] = new Item(Equip.Accessories[i]);
+                }
             }
+            else
+                for (int i = 0; i < Player.InitialAccSlotCount; ++i)
+                    player.armor[3 + i] = new Item(i < Equip.Accessories.Length ? Equip.Accessories[i] : 0);
         }
 
         public void ApplyArmor(Player player)

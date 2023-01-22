@@ -2,24 +2,20 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace NewBeginnings.Content.Items
+namespace NewBeginnings.Content.Items.Weapon
 {
-    public class RustyCutlass : ModItem
+    public class DeprivedBlade : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Rusty Cutlass");
-            Tooltip.SetDefault("It has seen better days");
-        }
+        public override void SetStaticDefaults() => Tooltip.SetDefault("Not the blade it used to be");
 
         public override void SetDefaults()
         {
             Item.DamageType = DamageClass.Melee;
-            Item.damage = 22;
+            Item.damage = 15;
             Item.width = 36;
-            Item.height = 44;
-            Item.useTime = 30;
-            Item.useAnimation = 30;
+            Item.height = 34;
+            Item.useTime = 19;
+            Item.useAnimation = 19;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 2;
             Item.value = Item.sellPrice(0, 0, 1, 0);
