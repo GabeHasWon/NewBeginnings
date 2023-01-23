@@ -27,7 +27,7 @@ namespace NewBeginnings.Common.UI
         private UIText _descText;
         private UIElement _itemContainer;
 
-        private float BaseHeight => 1080f / 554f * Main.screenHeight;
+        private float BaseHeight => 554f / 1017 * Main.screenHeight;
 
         public UIOriginSelection(Player player, MouseEvent returnAction)
         {
@@ -117,7 +117,7 @@ namespace NewBeginnings.Common.UI
             return random switch
             {
                 0 => "Now with more space!",
-                1 => "By the same people who gave you Overseer!",
+                1 => "By the people who brought you Overseer!",
                 2 => "Not to be confused with MrPlague's Authentic Races!",
                 3 => "15% less sodium, 15% less sugar, 100% better characters!",
                 4 => "Contains a dangerous amount of awful code!",

@@ -51,9 +51,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             
             AddNewBG("Firestarter", "Firestarter", "Some people just want to watch the world burn.", "Starts with a magma stone, 300 molotov cocktails, a flare gun with 50 flares, and 100 torches.", new MiscData(stars: 2), 
                 (ItemID.WandofSparking, 1), (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
-            
-            AddNewBG("Pirate", "Pirate", "Aye. A real pirate knows when land can be plundered, and plunder they shall!", "Starts with an eye patch, a gold ring, a sextant, a rusty cutlass, a keg and 200 sails.", 
-                new EquipData(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant), new MiscData(swordReplace: ModContent.ItemType<RustyCutlass>(), stars: 2), (ItemID.Keg, 1), (ItemID.Sail, 200));
+
+            playerBackgroundDatas.Add(new Pirate());
             
             AddNewBG("Deprived", "Deprived", "A forgotten warrior carrying long-lost tools.", "Starts with 80 max health, a deprived blade, a deprived lantern and 3 healing potions.", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>(), stars: 2), 
                 (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
@@ -91,6 +90,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Druid", "Druid", "A herald of nature, engaged with keeping the world alive and healthy!", "Starts with a guide to plant fiber cordage, a vilethorn, a staff of regrowth, 3 herb bags, and 10 clay pots.", 
                 EquipData.SingleAcc(ItemID.CordageGuide), (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
 
+            playerBackgroundDatas.Add(new Bereaved());
             playerBackgroundDatas.Add(new Slayer());
 
             AddNewBG("Alternate", "Alternate", "Perhaps, if things had been a little different, this'd be a purist.", "Starts with tin tools instead of copper\nUnlocked by using your first origin.", null, 

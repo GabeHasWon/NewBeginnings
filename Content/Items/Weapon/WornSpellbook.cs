@@ -41,6 +41,8 @@ namespace NewBeginnings.Content.Items.Weapon
         {
             position.Y -= 30;
             velocity = Vector2.Normalize(Main.MouseWorld - position) * Item.shootSpeed;
+
+            Common.PlayerBackgrounds.Containers.Bereaved.Graveyard(null, null);
         }
     }
 }
