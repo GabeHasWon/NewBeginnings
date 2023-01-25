@@ -64,7 +64,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers
                 2 => "The Guide Again\nConstantly\n'I'm telling you officer, it was necessary!'",
                 3 => "Quality Code\n(The date is scratched off)\n'Fear is all I know'",
                 4 => "James \"The\" Clothier\nJune 11th, 2019\n'He got better after'",
-                5 => "",
+                5 => "Ocram\nAugust 27, 2019\n'Fun fact: Same AI as the Eye of Cthulhu!'",
                 _ => "Overseer\nApril 2nd, 2021\n'A necessary final boss until the end'"
             };
         }

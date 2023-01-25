@@ -29,7 +29,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Name == _bgName);
         }
 
-        public bool HasBG() => _bgName != "";
+        public bool HasBG() => _bgName != "" && _bgName != null;
+        public bool HasBG(string name) => HasBG() && _bgName == name;
 
         //Misc tMod Hooks
         public override void OnEnterWorld(Player player)

@@ -81,7 +81,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 new EquipData(ItemID.SummerHat), new MiscData(stars: 2), (ItemID.Sickle, 1), (ItemID.Hay, 200), (ItemID.DaybloomSeeds, 12), (ItemID.BlinkrootSeeds, 12), (ItemID.MoonglowSeeds, 12), (ItemID.WaterleafSeeds, 12), 
                 (ItemID.ShiverthornSeeds, 12), (ItemID.DeathweedSeeds, 12), (ItemID.FireblossomSeeds, 12)); //Gonna need a custom straw hat vanity item to replace the summer hat. 
 
-            AddNewBG("Spelunker", "Spelunker", "The caves call and they answer. Those ores aren't gonna mine themselves!", "Starts with an ancient chisel, mining helmet, a gold pickaxe, an iron minecart, 10 bombs and 10 spelunker potions.", 
+            AddNewBG("Spelunker", "Spelunker", "The caves call and they answer. Those ores aren't gonna mine themselves!", 
+                "Starts with an ancient chisel, mining helmet, a gold pickaxe, an iron minecart, 10 bombs and 10 spelunker potions.", 
                 EquipData.AccFirst(ItemID.AncientChisel, ItemID.MiningHelmet), new MiscData(stars: 2), (ItemID.GoldPickaxe, 1), (ItemID.Bomb, 10), (ItemID.SpelunkerPotion, 10), (ItemID.Minecart, 1));
 
             AddNewBG("Bookworm", "Bookworm", "Mind over matter. The best way to fight is with a sharpened mind!", "Starts with a worn spellbook, a guide to plant fiber cordage, 8 books and a guide to critter companionship.", 
@@ -89,6 +90,10 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
             AddNewBG("Druid", "Druid", "A herald of nature, engaged with keeping the world alive and healthy!", "Starts with a guide to plant fiber cordage, a vilethorn, a staff of regrowth, 3 herb bags, and 10 clay pots.", 
                 EquipData.SingleAcc(ItemID.CordageGuide), (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
+
+            AddNewBG("Painter", "Painter", "Art is a form of expression; a way to exist; and a powerful tool - and EXPENSIVE.", 
+                "Starts with a paintball gun, paint scraper, paint sprayer, paintbrush, paint roller, the Painter instead of the Guide and a 25% sale on all Painter stock.",
+                null, new MiscData(swordReplace: ItemID.PainterPaintballGun, npcType: NPCID.Painter), (ItemID.PaintScraper, 1), (ItemID.PaintSprayer, 1), (ItemID.Paintbrush, 1), (ItemID.PaintRoller, 1));
 
             playerBackgroundDatas.Add(new Bereaved());
             playerBackgroundDatas.Add(new Slayer());
