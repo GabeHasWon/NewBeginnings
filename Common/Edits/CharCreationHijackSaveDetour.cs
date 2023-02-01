@@ -10,8 +10,15 @@ namespace NewBeginnings.Common.Edits
 
         public static void Load()
         {
-            On.Terraria.GameContent.UI.States.UICharacterCreation.SetupPlayerStatsAndInventoryBasedOnDifficulty += HijackPlayerCreationDefaults;
+            On.Terraria.GameContent.UI.States.UICharacterCreation.FinishCreatingCharacter += UICharacterCreation_FinishCreatingCharacter;
             On.Terraria.IO.PlayerFileData.CreateAndSave += PlayerFileData_CreateAndSave;
+        }
+
+        private static void UICharacterCreation_FinishCreatingCharacter(On.Terraria.GameContent.UI.States.UICharacterCreation.orig_FinishCreatingCharacter orig, UICharacterCreation self)
+        {
+            FirstSave = true;
+            orig(self);
+            FirstSave = false;
         }
 
         private static Terraria.IO.PlayerFileData PlayerFileData_CreateAndSave(On.Terraria.IO.PlayerFileData.orig_CreateAndSave orig, Player player)
@@ -25,13 +32,6 @@ namespace NewBeginnings.Common.Edits
             }
 
             return orig(player);
-        }
-
-        private static void HijackPlayerCreationDefaults(On.Terraria.GameContent.UI.States.UICharacterCreation.orig_SetupPlayerStatsAndInventoryBasedOnDifficulty orig, UICharacterCreation self)
-        {
-            FirstSave = true;
-            orig(self);
-            FirstSave = false;
         }
     }
 }

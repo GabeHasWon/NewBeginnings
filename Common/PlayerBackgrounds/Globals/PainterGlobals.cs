@@ -17,7 +17,7 @@ internal class PainterNPC : GlobalNPC
 
         if (npc.type == NPCID.Painter && player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Painter"))
         {
-            settings.PriceAdjustment *= 0.75f;
+            settings.PriceAdjustment *= 0.8f;
             settings.HappinessReport += "I'm always happy to help a fellow painter!";
         }
 

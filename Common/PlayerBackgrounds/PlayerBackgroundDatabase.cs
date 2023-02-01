@@ -96,6 +96,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 null, new MiscData(swordReplace: ItemID.PainterPaintballGun, npcType: NPCID.Painter), (ItemID.PaintScraper, 1), (ItemID.PaintSprayer, 1), (ItemID.Paintbrush, 1), (ItemID.PaintRoller, 1));
 
             playerBackgroundDatas.Add(new Bereaved());
+            playerBackgroundDatas.Add(new Frozen());
             playerBackgroundDatas.Add(new Slayer());
 
             AddNewBG("Alternate", "Alternate", "Perhaps, if things had been a little different, this'd be a purist.", "Starts with tin tools instead of copper\nUnlocked by using your first origin.", null, 

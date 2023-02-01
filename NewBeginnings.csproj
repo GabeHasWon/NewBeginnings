@@ -13,4 +13,9 @@
   <ItemGroup>
     <Folder Include="Assets\Textures\UnlockTextures\" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="StructureHelper">
+      <HintPath>lib\StructureHelper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

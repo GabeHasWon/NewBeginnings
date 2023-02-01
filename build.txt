@@ -2,3 +2,4 @@ displayName = New Beginnings
 author = Team Spirit
 version = 1.0.1.0
 homepage = discord.gg/uBNnznSfur
+dllReferences = StructureHelper
