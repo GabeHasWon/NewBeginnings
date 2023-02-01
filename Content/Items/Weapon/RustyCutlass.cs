@@ -10,6 +10,8 @@ namespace NewBeginnings.Content.Items.Weapon
         {
             DisplayName.SetDefault("Rusty Cutlass");
             Tooltip.SetDefault("It has seen better days");
+
+            Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

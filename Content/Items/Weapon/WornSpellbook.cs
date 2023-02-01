@@ -15,6 +15,8 @@ namespace NewBeginnings.Content.Items.Weapon
         {
             DisplayName.SetDefault("Worn Spellbook");
             Tooltip.SetDefault("Trusty, albeit rather weak");
+
+            Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

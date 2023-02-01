@@ -7,7 +7,12 @@ namespace NewBeginnings.Content.Items.Vanity;
 [AutoloadEquip(EquipType.Body)]
 public class LumberjackFlannel : ModItem
 {
-	public override void SetStaticDefaults() => Tooltip.SetDefault("'Incredibly comfortable'");
+	public override void SetStaticDefaults()
+	{
+		Tooltip.SetDefault("'Incredibly comfortable'");
+
+		Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+	}
 
 	public override void SetDefaults()
 	{

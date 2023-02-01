@@ -10,6 +10,8 @@ internal class LumberjackAxe : ModItem
 	{ 
 		DisplayName.SetDefault("Lumber Axe");
 		Tooltip.SetDefault("'Not to be confused with Lucy'");
+
+		Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 	}
 
 	public override void SetDefaults()
