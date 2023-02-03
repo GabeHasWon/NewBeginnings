@@ -86,13 +86,15 @@ namespace NewBeginnings.Common.UI
                 Width = StyleDimension.FromPixels(32),
                 Height = StyleDimension.FromPixels(32),
                 Left = StyleDimension.FromPixels(BackgroundListWidth + 10),
-                Top = StyleDimension.FromPixelsAndPercent(0, 0)
             };
 
             _sortButton.Append(new UIText($"Sort by {(_sortByPriority ? "default" : "difficulty")}", 0.8f)
             {
-                VAlign = 0.5f, 
-                Left = StyleDimension.FromPixels(32)
+                VAlign = 0.5f,
+                Width = StyleDimension.FromPercent(1f),
+                Height = StyleDimension.FromPercent(1f),
+                Left = StyleDimension.FromPixels(32),
+                Top = StyleDimension.FromPixels(6),
             });
 
             panel.Append(_sortButton);
@@ -486,9 +488,12 @@ namespace NewBeginnings.Common.UI
                 _sortByPriority = !_sortByPriority;
                 (sortButton.Children.First() as UIText).SetText($"Sort by {(_sortByPriority ? "default" : "difficulty")}");
                 sortButton.SetImage(ModContent.Request<Texture2D>(_sortByPriority ? "NewBeginnings/Assets/Textures/UI/OriginSort" : "NewBeginnings/Assets/Textures/UI/OriginSortStar"));
-                sortButton.Recalculate();
+                sortButton.Width = StyleDimension.FromPixels(32);
+                sortButton.Height = StyleDimension.FromPixels(32);
 
                 ResortBGButtons(allBGButtons, buttons);
+
+                sortButton.Recalculate();
             };
         }
 
