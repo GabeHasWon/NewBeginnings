@@ -14,6 +14,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers
         public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.TragicUmbrella, 1) };
 
         public override EquipData Equip => new(ItemID.FuneralHat, ItemID.FuneralCoat, ItemID.FuneralPants);
+        public override MiscData Misc => new(80, 40);
 
         public override void ModifyWorldGenTasks(List<GenPass> list)
         {

@@ -19,6 +19,8 @@ namespace NewBeginnings.Common.UI
         private const int TotalWidth = 800;
         private const int BackgroundListWidth = 220;
 
+        private static bool _sortByPriority = true;
+
         private readonly Player _player;
         private readonly MouseEvent _return;
 
@@ -26,6 +28,8 @@ namespace NewBeginnings.Common.UI
         private UIText _descFlavour;
         private UIText _descText;
         private UIElement _itemContainer;
+        private UIImageButton _sortButton;
+
 
         private float BaseHeight => 554f / 1017 * Main.screenHeight;
 
@@ -39,6 +43,8 @@ namespace NewBeginnings.Common.UI
 
         private void Setup()
         {
+            _sortByPriority = true;
+
             RemoveAllChildren();
 
             UIElement mainElement = new UIElement
@@ -75,6 +81,22 @@ namespace NewBeginnings.Common.UI
             closeButton.OnClick += _return;
             panel.Append(closeButton);
 
+            _sortButton = new UIImageButton(ModContent.Request<Texture2D>("NewBeginnings/Assets/Textures/UI/OriginSort"))
+            {
+                Width = StyleDimension.FromPixels(32),
+                Height = StyleDimension.FromPixels(32),
+                Left = StyleDimension.FromPixels(BackgroundListWidth + 10),
+                Top = StyleDimension.FromPixelsAndPercent(0, 0)
+            };
+
+            _sortButton.Append(new UIText($"Sort by {(_sortByPriority ? "default" : "difficulty")}", 0.8f)
+            {
+                VAlign = 0.5f, 
+                Left = StyleDimension.FromPixels(32)
+            });
+
+            panel.Append(_sortButton);
+
             AddCharacterPreview(panel);
 
             UIPanel descriptionPanel = new UIPanel
@@ -99,13 +121,15 @@ namespace NewBeginnings.Common.UI
             };
             panel.Append(originsListPanel);
 
-            BuildBackgroundSelections(originsListPanel, descriptionPanel);
+            BuildBackgroundSelections(originsListPanel);
 
-            UIText text = new UIText(GetSplashText(), 0.8f)
+            string str = GetSplashText();
+            UIText text = new UIText(str, 1 - (str.Length / 200f))
             {
-                HAlign = 0.68f,
-                Top = StyleDimension.FromPixels(4),
+                HAlign = 0.88f,
+                Top = StyleDimension.FromPixels(10),
             };
+
             text.OnUpdate += (UIElement affectedElement) => { text.TextColor = Main.MouseTextColorReal; };
             panel.Append(text);
         }
@@ -140,6 +164,11 @@ namespace NewBeginnings.Common.UI
                 Top = StyleDimension.FromPixelsAndPercent(-80, 0f),
                 VAlign = 0f,
                 HAlign = 0.5f
+            };
+
+            element.OnUpdate += (UIElement uiChar) =>
+            {
+                _player.gravDir = _player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Australian") ? -1 : 1;
             };
             panel.Append(element);
         }
@@ -335,7 +364,7 @@ namespace NewBeginnings.Common.UI
         }
 
         /// <summary>Builds the origin list and buttons.</summary>
-        private void BuildBackgroundSelections(UIPanel container, UIPanel descriptionContainer)
+        private void BuildBackgroundSelections(UIPanel container)
         {
             UIList allBGButtons = new UIList() //List of all background buttons
             {
@@ -356,7 +385,7 @@ namespace NewBeginnings.Common.UI
             allBGButtons.SetScrollbar(scroll);
             container.Append(scroll);
 
-            List<(int, UIColoredImageButton)> buttons = new();
+            List<(int priority, int stars, UIColoredImageButton button)> buttons = new();
 
             foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas) //Adds every background into the list as a button
             {
@@ -408,17 +437,17 @@ namespace NewBeginnings.Common.UI
                 {
                     HAlign = 0f,
                     VAlign = 0.5f,
-                    Left = StyleDimension.FromPixels(108)
+                    Left = StyleDimension.FromPixels(114)
                 };
 
                 currentBGButton.Append(bgName);
-                buttons.Add((item.Misc.SortPriority, currentBGButton));
+                buttons.Add((item.Misc.SortPriority, item.Misc.Stars, currentBGButton));
             }
 
             foreach (var item in buttons)
-                allBGButtons.Add(item.Item2);
+                allBGButtons.Add(item.button);
 
-            SetSort(allBGButtons, buttons);
+            SetSort(allBGButtons, buttons, _sortButton);
         }
 
         private PlayerBackgroundData BackgroundButtonClick(UIList allBGButtons, PlayerBackgroundData item, UIColoredImageButton currentBGButton)
@@ -448,15 +477,40 @@ namespace NewBeginnings.Common.UI
             return item;
         }
 
-        private static void SetSort(UIList allBGButtons, List<(int, UIColoredImageButton)> buttons)
+        private static void SetSort(UIList allBGButtons, List<(int priority, int stars, UIColoredImageButton button)> buttons, UIImageButton sortButton)
+        {
+            ResortBGButtons(allBGButtons, buttons);
+
+            sortButton.OnClick += (UIMouseEvent evt, UIElement listeningElement) =>
+            {
+                _sortByPriority = !_sortByPriority;
+                (sortButton.Children.First() as UIText).SetText($"Sort by {(_sortByPriority ? "default" : "difficulty")}");
+                sortButton.SetImage(ModContent.Request<Texture2D>(_sortByPriority ? "NewBeginnings/Assets/Textures/UI/OriginSort" : "NewBeginnings/Assets/Textures/UI/OriginSortStar"));
+                sortButton.Recalculate();
+
+                ResortBGButtons(allBGButtons, buttons);
+            };
+        }
+
+        private static void ResortBGButtons(UIList allBGButtons, List<(int priority, int stars, UIColoredImageButton button)> buttons)
         {
             //This is some of the ugliest nonsense I've ever written
             allBGButtons.ManualSortMethod = (list) => list.Sort((self, other) =>
             {
-                int mySortPriority = buttons.Find(x => x.Item2 == self).Item1; //Find priority by finding the value that has the given button as Item2
-                int otherSortPriority = buttons.Find(x => x.Item2 == other).Item1; //for both the current and next button
+                if (_sortByPriority)
+                {
+                    int mySortPriority = buttons.Find(x => x.button == self).priority; //Find priority by finding the value that has the given button as Item2
+                    int otherSortPriority = buttons.Find(x => x.button == other).priority; //for both the current and next button
 
-                return otherSortPriority.CompareTo(mySortPriority);
+                    return otherSortPriority.CompareTo(mySortPriority);
+                }
+                else
+                {
+                    int mySortPriority = buttons.Find(x => x.button  == self).stars; //Find priority by finding the value that has the given button as Item2
+                    int otherSortPriority = buttons.Find(x => x.button == other).stars; //for both the current and next button
+
+                    return mySortPriority.CompareTo(otherSortPriority);
+                }
             });
 
             allBGButtons.UpdateOrder(); //Reorder the list according to the above manual sort method

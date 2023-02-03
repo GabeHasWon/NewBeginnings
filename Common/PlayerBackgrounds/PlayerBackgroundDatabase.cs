@@ -31,7 +31,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             //FORMATTING: Try keeping single line backgrounds clumped together
             //Add new lines to make sure all very long backgrounds fit visibly on the screen at once, and keep them seperated
 
-            AddNewBGItemlessDesc("Purist", "Purist", "The normal Terraria experience.", "", null, new MiscData(sortPriority: 11));
+            AddNewBGItemlessDesc("Purist", "Purist", "The normal Terraria experience.", "", null, new MiscData(sortPriority: 12));
             AddNewBG("Knight", "Knight", "A noble warrior, clad in iron.", "Starts with a full set of iron armor and a silver broadsword.", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), new MiscData(swordReplace: ItemID.SilverBroadsword, sortPriority: 11, stars: 1));
             AddNewBG("Huntsman", "Huntsman", "Steady hands and keen eyes, a master of the hunt.", "Starts with a bow, an endless quiver and a hunter cloak.", EquipData.SingleAcc(ItemID.HunterCloak), new MiscData(sortPriority: 11, stars: 1), (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
             AddNewBG("Wizard", "Wizard", "An apprentice wizard with an affinity for the arcane.", "Starts with a wizard hat, a topaz staff and a topaz robe, with additional mana but lower max health.", new EquipData(ItemID.WizardHat, ItemID.TopazRobe, 0), new MiscData(80, 60, swordReplace: ItemID.TopazStaff, sortPriority: 11, stars: 1));
@@ -63,7 +63,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
             AddNewBG("Nobleman", "Nobleman", "A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.", 
                 "Starts with a diamond ring, a gold watch, 20 max health, and a platinum coin - in mediumcore or hardcore only.",
-                EquipData.AccFirst(new int[] { ItemID.DiamondRing, ItemID.GoldWatch }), new MiscData(20, stars: 5), new DelegateData(modifyCreation: (plr) =>
+                EquipData.AccFirst(new int[] { ItemID.DiamondRing, ItemID.GoldWatch }), new MiscData(20, stars: 5, npcType: NPCID.TaxCollector), new DelegateData(modifyCreation: (plr) =>
             {
                 if (plr.difficulty == PlayerDifficultyID.SoftCore || plr.difficulty == PlayerDifficultyID.Creative)
                     plr.difficulty = PlayerDifficultyID.MediumCore;
@@ -94,6 +94,10 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Painter", "Painter", "Art is a form of expression; a way to exist; and a powerful tool - and EXPENSIVE.", 
                 "Starts with a paintball gun, paint scraper, paint sprayer, paintbrush, paint roller, the Painter instead of the Guide and a 25% sale on all Painter stock.",
                 null, new MiscData(swordReplace: ItemID.PainterPaintballGun, npcType: NPCID.Painter), (ItemID.PaintScraper, 1), (ItemID.PaintSprayer, 1), (ItemID.Paintbrush, 1), (ItemID.PaintRoller, 1));
+
+            AddNewBG("Australian", "Default", "Just a normal bloke, nothin' special. World's just a little bonkers over here, ain't it.", 
+                "Starts with a cowboy set, a flintlock pistol, 999 musket balls, and is always flipped around.",
+                new EquipData(ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants), new MiscData(swordReplace: ItemID.FlintlockPistol), (ItemID.MusketBall, 200));
 
             playerBackgroundDatas.Add(new Bereaved());
             playerBackgroundDatas.Add(new Frozen());
