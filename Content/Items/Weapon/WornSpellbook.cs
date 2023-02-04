@@ -43,10 +43,6 @@ namespace NewBeginnings.Content.Items.Weapon
         {
             position.Y -= 30;
             velocity = Vector2.Normalize(Main.MouseWorld - position) * Item.shootSpeed;
-
-            Point16 size = new();
-            StructureHelper.Generator.GetDimensions("Assets/Structures/FrozenIgloo" + Main.rand.Next(2), Mod, ref size, false);
-            StructureHelper.Generator.GenerateStructure("Assets/Structures/FrozenIgloo" + Main.rand.Next(2), new Point16(Main.spawnTileX - (size.X / 2), Main.spawnTileY - size.Y - 1), Mod);
         }
     }
 }

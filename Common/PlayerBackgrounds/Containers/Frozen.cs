@@ -16,7 +16,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers
 
         public override string Name => "Frozen";
         public override string Flavour => "After a thousands years frozen (and a couple days making the igloo), they're ready for action.";
-        public override string Description => "Epic";
+        public override string Description => "Starts with a snowball cannon, a pink snow set and 999 snowballs in an igloo.";
         public override (int type, int stack)[] Inventory => new (int type, int stack)[] { (ItemID.Snowball, 999) };
 
         public override EquipData Equip => new(ItemID.PinkEskimoHood, ItemID.PinkEskimoCoat, ItemID.PinkEskimoPants);

@@ -1,4 +1,6 @@
-﻿using NewBeginnings.Common.PlayerBackgrounds;
+﻿using MonoMod.RuntimeDetour.HookGen;
+using NewBeginnings.Common.PlayerBackgrounds;
+using System;
 using Terraria;
 using Terraria.GameContent.UI.States;
 
@@ -12,6 +14,15 @@ namespace NewBeginnings.Common.Edits
         {
             On.Terraria.GameContent.UI.States.UICharacterCreation.FinishCreatingCharacter += UICharacterCreation_FinishCreatingCharacter;
             On.Terraria.IO.PlayerFileData.CreateAndSave += PlayerFileData_CreateAndSave;
+
+            MrPlaguesCompat.AddCharCreationDetour();
+        }
+
+        internal static void MrPlaguesHookFinishCharacter(Action<object> orig, object self) //Thanks mrplagues
+        {
+            FirstSave = true;
+            orig(self);
+            FirstSave = false;
         }
 
         private static void UICharacterCreation_FinishCreatingCharacter(On.Terraria.GameContent.UI.States.UICharacterCreation.orig_FinishCreatingCharacter orig, UICharacterCreation self)

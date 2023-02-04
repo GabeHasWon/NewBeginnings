@@ -1,11 +1,7 @@
-ADDITIONS
-- Completely reworked UI, is much better now
-- Added splash text
-- Added Lumberjack Flannel, which the Lumberjack now starts with
-- Added compatibility with MrPlague's Authentic Races
-
-CHANGES
-- Made the Topaz Staff replace the shortsword for Wizard
-- Made the Silver Broadsword replace the shortsword for Knight
-- Made the Lumber Axe replace the default axe for Lumberjack
-- Pirate now spawns on either ocean instead of default
+1.0.1.1
+- Fixed Worn Spellbook placing debug structure (whoops)
+- Fixed Australian using default origin icon
+1.0.1.2
+- Fixed error in Firestarter's description
+- Fixed MrPlagues not working properly with this mod
+- Made Frozen's description not just [sic] "Epic"

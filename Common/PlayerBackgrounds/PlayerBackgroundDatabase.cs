@@ -49,7 +49,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             AddNewBG("Thief", "Thief", "Petty thief with a penchant for pickpocketing.", "Starts with a lucky coin, platinum shortsword and 300 poisoned knives.", new EquipData(0, 0, 0, ItemID.LuckyCoin), new MiscData(stars: 2), 
                 (ItemID.PlatinumShortsword, 1), (ItemID.PoisonedKnife, 300)); //replace plat shortsword with thief's dagger
             
-            AddNewBG("Firestarter", "Firestarter", "Some people just want to watch the world burn.", "Starts with a magma stone, 300 molotov cocktails, a flare gun with 50 flares, and 100 torches.", new MiscData(stars: 2), 
+            AddNewBG("Firestarter", "Firestarter", "Some people just want to watch the world burn.", "Starts with a wand of sparking, 300 molotov cocktails, a flare gun with 50 flares, and 100 torches.", new MiscData(stars: 2), 
                 (ItemID.WandofSparking, 1), (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
 
             playerBackgroundDatas.Add(new Pirate());
@@ -95,7 +95,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 "Starts with a paintball gun, paint scraper, paint sprayer, paintbrush, paint roller, the Painter instead of the Guide and a 25% sale on all Painter stock.",
                 null, new MiscData(swordReplace: ItemID.PainterPaintballGun, npcType: NPCID.Painter), (ItemID.PaintScraper, 1), (ItemID.PaintSprayer, 1), (ItemID.Paintbrush, 1), (ItemID.PaintRoller, 1));
 
-            AddNewBG("Australian", "Default", "Just a normal bloke, nothin' special. World's just a little bonkers over here, ain't it.", 
+            AddNewBG("Australian", "Australian", "Just a normal bloke, nothin' special. World's just a little bonkers over here, ain't it.", 
                 "Starts with a cowboy set, a flintlock pistol, 999 musket balls, and is always flipped around.",
                 new EquipData(ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants), new MiscData(swordReplace: ItemID.FlintlockPistol), (ItemID.MusketBall, 200));
 

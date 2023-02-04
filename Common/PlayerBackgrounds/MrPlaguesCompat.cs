@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MonoMod.RuntimeDetour.HookGen;
+using NewBeginnings.Common.Edits;
 using NewBeginnings.Common.UI;
 using System.Linq;
 using System.Reflection;
@@ -21,6 +23,16 @@ internal class MrPlaguesCompat
     static bool hover = false;
 
     static Vector2 OpenTextPosition => new(Main.screenWidth / 2f, (Main.screenHeight / 2f) + 160);
+
+    internal static void AddCharCreationDetour()
+    {
+        if (ModLoader.TryGetMod("MrPlagueRaces", out Mod mod))
+        {
+            var charUI = mod.Code.GetType("MrPlagueRaces.Common.UI.States.MrPlagueUICharacterCreation");
+
+            HookEndpointManager.Add(charUI.GetMethod("FinishCreatingCharacter", BindingFlags.Instance | BindingFlags.NonPublic), CharCreationHijackSaveDetour.MrPlaguesHookFinishCharacter);
+        }
+    }
 
     internal static void PostSetupContent()
     {
