@@ -1,3 +1,4 @@
+using NewBeginnings.Common.Crossmod;
 using NewBeginnings.Common.Edits;
 using NewBeginnings.Common.PlayerBackgrounds;
 using NewBeginnings.Common.UnlockabilitySystem;
@@ -13,12 +14,15 @@ namespace NewBeginnings
         public override void Load()
         {
             UnlockabilityIO.LoadData();
-
             CharCreationEdit.Load();
+        }
+
+        public override void PostSetupContent()
+        {
+            MrPlaguesCompat.PostSetupContent();
             PlayerBackgroundDatabase.Populate();
         }
 
-        public override void PostSetupContent() => MrPlaguesCompat.PostSetupContent();
         public override void Unload() => MrPlaguesCompat.Unload();
 
         internal static void PrintBGDescriptions()
@@ -29,5 +33,7 @@ namespace NewBeginnings
 
             ModLoader.GetMod("NewBeginnings").Logger.Debug(log);
         }
+
+        public override object Call(params object[] args) => OriginCalls.Call(args);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using NewBeginnings.Common.Crossmod;
 using NewBeginnings.Common.PlayerBackgrounds.Containers;
 using NewBeginnings.Content.Items;
 using NewBeginnings.Content.Items.Tools;
@@ -14,8 +15,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 {
     internal static class PlayerBackgroundDatabase
     {
-        public static List<PlayerBackgroundData> playerBackgroundDatas = new();
-        public static Dictionary<string, Asset<Texture2D>> backgroundIcons = new();
+        internal static List<PlayerBackgroundData> playerBackgroundDatas = new();
+        internal static Dictionary<string, Asset<Texture2D>> backgroundIcons = new();
 
         public static void Populate()
         {
@@ -95,9 +96,9 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 "Starts with a paintball gun, paint scraper, paint sprayer, paintbrush, paint roller, the Painter instead of the Guide and a 25% sale on all Painter stock.",
                 null, new MiscData(swordReplace: ItemID.PainterPaintballGun, npcType: NPCID.Painter), (ItemID.PaintScraper, 1), (ItemID.PaintSprayer, 1), (ItemID.Paintbrush, 1), (ItemID.PaintRoller, 1));
 
-            AddNewBG("Australian", "Australian", "Just a normal bloke, nothin' special. World's just a little bonkers over here, ain't it.", 
-                "Starts with a cowboy set, a flintlock pistol, 999 musket balls, and is always flipped around.",
-                new EquipData(ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants), new MiscData(swordReplace: ItemID.FlintlockPistol), (ItemID.MusketBall, 200));
+            AddNewBG("Australian", "Australian", "Just a normal bloke, nothin' special. World's just a little upside down over here.", 
+                "Starts with a cowboy set, a wooden boomerang and is always upside down.",
+                new EquipData(ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants), new MiscData(swordReplace: ItemID.WoodenBoomerang));
 
             playerBackgroundDatas.Add(new Bereaved());
             playerBackgroundDatas.Add(new Frozen());
@@ -108,7 +109,9 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
             playerBackgroundDatas.Add(new Accursed());
 
-            AddNewBGItemlessDesc("Random", "Default", "Choose a random background.", "", null, null);
+            playerBackgroundDatas.AddRange(OriginCalls._crossModDatas);
+
+            AddNewBGItemlessDesc("Random", "Default", "Choose a random background.", "", null, new MiscData(sortPriority: 0, stars: 0));
         }
 
         private static void SortBGDatas()

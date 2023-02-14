@@ -30,7 +30,6 @@ namespace NewBeginnings.Common.UI
         private UIElement _itemContainer;
         private UIImageButton _sortButton;
 
-
         private float BaseHeight => 554f / 1017 * Main.screenHeight;
 
         public UIOriginSelection(Player player, MouseEvent returnAction)
@@ -99,7 +98,7 @@ namespace NewBeginnings.Common.UI
 
             panel.Append(_sortButton);
 
-            AddCharacterPreview(panel);
+            AddCharacterPreview(panel, _player);
 
             UIPanel descriptionPanel = new UIPanel
             {
@@ -157,9 +156,9 @@ namespace NewBeginnings.Common.UI
             };
         }
 
-        private void AddCharacterPreview(UIPanel panel)
+        internal static void AddCharacterPreview(UIPanel panel, Player player)
         {
-            UICharacter element = new UICharacter(_player, animated: true, hasBackPanel: false, 1.5f)
+            UICharacter element = new UICharacter(player, animated: true, hasBackPanel: false, 1.5f)
             {
                 Width = StyleDimension.FromPixels(80f),
                 Height = StyleDimension.FromPixelsAndPercent(80f, 0f),
@@ -170,7 +169,7 @@ namespace NewBeginnings.Common.UI
 
             element.OnUpdate += (UIElement uiChar) =>
             {
-                _player.gravDir = _player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Australian") ? -1 : 1;
+                player.gravDir = player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Australian") ? -1 : 1;
             };
             panel.Append(element);
         }
@@ -449,7 +448,41 @@ namespace NewBeginnings.Common.UI
             foreach (var item in buttons)
                 allBGButtons.Add(item.button);
 
+            //AddCustomBGButton(allBGButtons, buttons);
+
             SetSort(allBGButtons, buttons, _sortButton);
+        }
+
+        private void AddCustomBGButton(UIList allBGButtons, List<(int priority, int stars, UIColoredImageButton button)> buttons)
+        {
+            var asset = PlayerBackgroundDatabase.backgroundIcons["Default"];
+            UIColoredImageButton customBGButton = new(asset)
+            {
+                Width = StyleDimension.FromPercent(0.9f),
+                Height = StyleDimension.FromPixels(36),
+                Left = StyleDimension.FromPixels(-64),
+                Top = StyleDimension.FromPixels(8),
+                MarginRight = 4f,
+                MarginTop = 4f,
+            };
+            customBGButton.SetColor(Color.Gray);
+            customBGButton.OnClick += CurrentBGButton_OnClick;
+            allBGButtons.Add(customBGButton);
+
+            UIText bgName = new("Custom", 1.2f) //Background's name
+            {
+                HAlign = 0f,
+                VAlign = 0.5f,
+                Left = StyleDimension.FromPixels(114)
+            };
+            customBGButton.Append(bgName);
+
+            buttons.Add((-500, 500, customBGButton));
+        }
+
+        private void CurrentBGButton_OnClick(UIMouseEvent evt, UIElement listeningElement)
+        {
+            Main.MenuUI.SetState(new UICustomOrigin(_player, (UIMouseEvent evt, UIElement listeningElement) => Main.MenuUI.SetState(this)));
         }
 
         private PlayerBackgroundData BackgroundButtonClick(UIList allBGButtons, PlayerBackgroundData item, UIColoredImageButton currentBGButton)

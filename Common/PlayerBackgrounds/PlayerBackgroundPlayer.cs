@@ -26,7 +26,10 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         {
             _bgName = tag.GetString("bgName");
 
-            BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Name == _bgName);
+            if (PlayerBackgroundDatabase.playerBackgroundDatas.Any(x => x.Name == _bgName))
+                BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Name == _bgName);
+            else
+                BackgroundData = new PlayerBackgroundData(_bgName, "PLACEHOLDER", "PLACEHOLDER", "PLACEHOLDER", null, null);
         }
 
         public bool HasBG() => _bgName != "" && _bgName != null;

@@ -7,8 +7,12 @@ namespace NewBeginnings.Content.Items
     [AutoloadEquip(EquipType.Waist)]
     internal class DeprivedLantern : ModItem
     {
-        public override void SetStaticDefaults() => Tooltip.SetDefault("Lights up when placed in inventory\nInfinite duration");
-
+        public override void SetStaticDefaults()
+        {
+            Tooltip.SetDefault("Lights up when placed in inventory\nInfinite duration");
+            Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+        }
+        
         public override void SetDefaults()
         {
             Item.Size = new Vector2(18, 36);
