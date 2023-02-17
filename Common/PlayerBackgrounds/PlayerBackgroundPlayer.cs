@@ -28,8 +28,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
             if (PlayerBackgroundDatabase.playerBackgroundDatas.Any(x => x.Name == _bgName))
                 BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Name == _bgName);
-            else
-                BackgroundData = new PlayerBackgroundData(_bgName, "PLACEHOLDER", "PLACEHOLDER", "PLACEHOLDER", null, null);
+            else if (_bgName is not null && _bgName != string.Empty)
+                BackgroundData = new PlayerBackgroundData(_bgName, "PLACEHOLDER", "PLACEHOLDER", "This is a placeholder generated background for an unloaded cross-mod background.", null, null);
         }
 
         public bool HasBG() => _bgName != "" && _bgName != null;

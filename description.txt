@@ -20,6 +20,7 @@ Nao: art
 
 GitHub: https://github.com/GabeHasWon/NewBeginnings
 Read the README if you want to use any code!
+The GitHub also has cross mod info for those who want to add their own origins.
 
 - FAQ -
 Q: Does this work with (any other mod)?
