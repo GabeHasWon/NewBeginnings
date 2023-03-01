@@ -1,11 +1,11 @@
 using Microsoft.Xna.Framework;
 using NewBeginnings.Common.UnlockabilitySystem;
-using NewBeginnings.Content.Projectiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
+using NewBeginnings.Content.Projectiles.Weapon;
 
 namespace NewBeginnings.Content.Items.Weapon
 {

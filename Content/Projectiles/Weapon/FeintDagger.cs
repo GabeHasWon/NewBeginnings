@@ -8,7 +8,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace NewBeginnings.Content.Projectiles;
+namespace NewBeginnings.Content.Projectiles.Weapon;
 
 public class FeintDagger : ModProjectile
 {

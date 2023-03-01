@@ -98,7 +98,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
             AddNewBG("Australian", "Australian", "Just a normal bloke, nothin' special. World's just a little upside down over here.", 
                 "Starts with a cowboy set, a wooden boomerang and is always upside down.",
-                new EquipData(ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants), new MiscData(swordReplace: ItemID.WoodenBoomerang));
+                new EquipData(ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants), new MiscData(swordReplace: ModContent.ItemType<KylieBoomerang>()));
 
             playerBackgroundDatas.Add(new Bereaved());
             playerBackgroundDatas.Add(new Frozen());
