@@ -45,7 +45,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         {
             var data = new PlayerBackgroundData(container.Name, container.Texture, container.Flavour, container.Description, container.Equip, container.Misc, container.Inventory)
             {
-                Delegates = new DelegateData(container.ClearCondition, container.ModifyWorldGenTasks, container.HasSpecialSpawn, container.GetSpawnPosition)
+                Delegates = new DelegateData(container.ClearCondition, container.ModifyWorldGenTasks, container.HasSpecialSpawn, container.GetSpawnPosition, container.ModifyPlayerCreation)
             };
             return data;
         }

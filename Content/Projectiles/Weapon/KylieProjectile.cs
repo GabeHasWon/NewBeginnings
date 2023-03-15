@@ -22,16 +22,21 @@ public class KylieProjectile : ModProjectile
         Projectile.friendly = true;
         Projectile.timeLeft = 4;
         Projectile.tileCollide = true;
+
+        DrawOriginOffsetY = -10;
     }
 
     public override void AI()
     {
-        const int Cutoff = 25;
-        const float MaxSpeed = 10;
+        const int Cutoff = 16;
+        const float MaxSpeed = 14;
+
+        if (Projectile.position.HasNaNs())
+            Projectile.Kill();
 
         Timer++;
         Projectile.timeLeft++;
-        Projectile.rotation += 0.12f;
+        Projectile.rotation += 0.16f;
         Projectile.tileCollide = Collision.CanHit(Projectile, Owner);
 
         if (Timer > Cutoff)
@@ -50,7 +55,7 @@ public class KylieProjectile : ModProjectile
 
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
-        Projectile.velocity = Projectile.DirectionTo(Owner.Center) * 8;
+        Projectile.velocity = Projectile.DirectionTo(Owner.Center) * 14;
         return false;
     }
 }

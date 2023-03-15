@@ -21,12 +21,12 @@ namespace NewBeginnings.Content.Items.Weapon
             Item.damage = 16;
             Item.width = 20;
             Item.height = 46;
-            Item.useTime = 22;
-            Item.useAnimation = 22;
+            Item.useTime = 40;
+            Item.useAnimation = 40;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.shoot = ModContent.ProjectileType<KylieProjectile>();
-            Item.shootSpeed = 10f;
-            Item.knockBack = 1;
+            Item.shootSpeed = 14;
+            Item.knockBack = 6;
             Item.value = Item.sellPrice(0, 0, 5, 0);
             Item.rare = ItemRarityID.White;
             Item.UseSound = SoundID.Item8;
@@ -36,5 +36,6 @@ namespace NewBeginnings.Content.Items.Weapon
         }
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) => velocity = velocity.RotatedByRandom(0);
+        public override bool CanUseItem(Player player) => player.ownedProjectileCounts[Item.shoot] == 0;
     }
 }

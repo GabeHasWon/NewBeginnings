@@ -42,7 +42,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             Texture = texName;
             Flavour = flavour;
             Description = desc;
-            Inventory = inv;
+            Inventory = inv ?? Array.Empty<(int, int)>();
 
             Equip = equips ?? new EquipData(0, 0, 0);
             Misc = misc ?? new MiscData(100, 20, -1, -1, -1);
@@ -116,6 +116,9 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 
         private void ApplyInventory(Player player)
         {
+            if (Inventory is null || Inventory.Length == 0)
+                return;
+
             if (Inventory.Length > player.inventory.Length)
                 throw new Exception("Inventory is too big. Fix it.");
 

@@ -1,7 +1,4 @@
-1.0.1.1
-- Fixed Worn Spellbook placing debug structure (whoops)
-- Fixed Australian using default origin icon
-1.0.1.2
-- Fixed error in Firestarter's description
-- Fixed MrPlagues not working properly with this mod
-- Made Frozen's description not just [sic] "Epic"
+- Fixed MrPlagues issue
+- Removed Hay from Farmer, added planter boxes for every herb type
+- Fixed invalid or unloaded origin names crashing
+- Minor Kylie boomerang changes

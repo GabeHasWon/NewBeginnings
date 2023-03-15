@@ -3,6 +3,7 @@ using NewBeginnings.Common.PlayerBackgrounds;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
+using Terraria;
 
 namespace NewBeginnings.Common.Crossmod;
 
@@ -29,8 +30,21 @@ internal static class OriginCalls
             return StructBuilders.MakeDelegateData(args[1..]);
         else if (type == "shortaddorigin")
             return AddShortOrigin(args[1..]);
+        else if (type == "playerhasorigin")
+            return PlayerHasOrigin(args[1..]);
 
         return null;
+    }
+
+    private static bool PlayerHasOrigin(object[] objects)
+    {
+        if (objects[0] is not Player player)
+            return ThrowOrReturn("objects[0] is not Player!");
+
+        if (objects[1] is not string bgName)
+            return ThrowOrReturn("objects[1] is not string!");
+
+        return player.GetModPlayer<PlayerBackgroundPlayer>().HasBG(bgName);
     }
 
     private static object AddShortOrigin(object[] objects)
@@ -96,7 +110,7 @@ internal static class OriginCalls
     /// AddOrigin(Asset[Texture2D] asset, string texName, string name, string flavour, string description, (int, int)[] inventory, int head, int chest, int legs)<br/><br/>
     /// AddOrigin(Asset[Texture2D] asset, string texName, string name, string flavour, string description, (int, int)[] inventory, int head, int chest, int legs, int[] accessories)<br/><br/>
     /// AddOrigin(Asset[Texture2D] asset, string texName, string name, string flavour, string description, (int, int)[] inventory, int head, int chest, int legs, int[] accessories,
-    /// int life, [optional] int mana, [optional] int npcType, [optional] int swordType, [optional] int pickType, [optional] int axeType, [optional] int sortPriority, [optional] int stars)<br/><br/>
+    /// int life, int mana = 20, int npcType = -1, int swordType = -1, int pickType = -1, int axeType = -1, int sortPriority = 10, int stars = 3)<br/><br/>
     /// </summary>
     private static bool AddOrigin(object[] objects)
     {
@@ -112,7 +126,7 @@ internal static class OriginCalls
             return true;
         }
 
-        AddBasicOrigin(objects, out var asset, out var texName, out var name, out var flavour, out var description, out var inventory);
+        AddBasicOrigin(objects, out var _, out var texName, out var name, out var flavour, out var description, out var inventory);
 
         if (!CastInt(objects[6], out int head))
             return ThrowOrReturn("objects[6] (head) is not an int!");
@@ -130,7 +144,7 @@ internal static class OriginCalls
         }
 
         if (objects[9] is not int[] accessories)
-            return ThrowOrReturn("objects[9] (accessories) is not an int!");
+            return ThrowOrReturn("objects[9] (accessories) is not an int[]!");
 
         if (objects.Length == 10)
         {
@@ -261,10 +275,7 @@ internal static class OriginCalls
 
     internal static bool ThrowOrReturn(string message)
     {
-#if DEBUG
         throw new Exception(message);
-#endif
-        return false;
     }
 
     internal static bool CastInt(object val, out int value)
