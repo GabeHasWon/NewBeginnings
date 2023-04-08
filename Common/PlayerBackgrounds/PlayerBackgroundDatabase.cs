@@ -98,7 +98,7 @@ internal static class PlayerBackgroundDatabase
             null, new MiscData(swordReplace: ItemID.PainterPaintballGun, npcType: NPCID.Painter), (ItemID.PaintScraper, 1), (ItemID.PaintSprayer, 1), (ItemID.Paintbrush, 1), (ItemID.PaintRoller, 1));
 
         AddNewBG("Australian", "Australian", "Just a normal bloke, nothin' special. World's just a little upside down over here.", 
-            "Starts with a cowboy set, a wooden boomerang and is always upside down.",
+            "Starts with a cowboy set, a wooden kylie and is always upside down.",
             new EquipData(ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants), new MiscData(swordReplace: ModContent.ItemType<KylieBoomerang>()));
 
         playerBackgroundDatas.Add(new Bereaved());

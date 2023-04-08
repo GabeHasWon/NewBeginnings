@@ -1,4 +1,3 @@
-- Fixed MrPlagues issue
-- Removed Hay from Farmer, added planter boxes for every herb type
-- Fixed invalid or unloaded origin names crashing
-- Minor Kylie boomerang changes
+- Made the Deprived Lantern an accessory
+- Fixed Australian origin description saying wooden boomerang instead of kylie boomerang
+- Fixed Australian not being able to flip gravity
