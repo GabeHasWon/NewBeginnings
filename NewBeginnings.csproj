@@ -8,6 +8,13 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\Textures\BackgroundIcons\Random.png" />
+    <None Remove="Localization\en-US\Mods.NewBeginnings.Items.hjson" />
+    <None Remove="Localization\en-US\Mods.NewBeginnings.Origins.hjson" />
+    <None Remove="Localization\en-US\Mods.NewBeginnings.UI.hjson" />
+    <None Remove="Localization\en-US\Mods.NewBeginnings.Unlocks.hjson" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
   <ItemGroup>

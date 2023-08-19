@@ -1,5 +1,4 @@
-﻿using MonoMod.RuntimeDetour.HookGen;
-using NewBeginnings.Common.PlayerBackgrounds;
+﻿using NewBeginnings.Common.PlayerBackgrounds;
 using System;
 using Terraria;
 using Terraria.GameContent.UI.States;
@@ -12,8 +11,8 @@ namespace NewBeginnings.Common.Edits
 
         public static void Load()
         {
-            On.Terraria.GameContent.UI.States.UICharacterCreation.FinishCreatingCharacter += UICharacterCreation_FinishCreatingCharacter;
-            On.Terraria.IO.PlayerFileData.CreateAndSave += PlayerFileData_CreateAndSave;
+            On_UICharacterCreation.FinishCreatingCharacter += UICharacterCreation_FinishCreatingCharacter;
+            Terraria.IO.On_PlayerFileData.CreateAndSave += PlayerFileData_CreateAndSave;
 
             MrPlaguesCompat.AddCharCreationDetour();
         }
@@ -25,14 +24,14 @@ namespace NewBeginnings.Common.Edits
             FirstSave = false;
         }
 
-        private static void UICharacterCreation_FinishCreatingCharacter(On.Terraria.GameContent.UI.States.UICharacterCreation.orig_FinishCreatingCharacter orig, UICharacterCreation self)
+        private static void UICharacterCreation_FinishCreatingCharacter(On_UICharacterCreation.orig_FinishCreatingCharacter orig, UICharacterCreation self)
         {
             FirstSave = true;
             orig(self);
             FirstSave = false;
         }
 
-        private static Terraria.IO.PlayerFileData PlayerFileData_CreateAndSave(On.Terraria.IO.PlayerFileData.orig_CreateAndSave orig, Player player)
+        private static Terraria.IO.PlayerFileData PlayerFileData_CreateAndSave(Terraria.IO.On_PlayerFileData.orig_CreateAndSave orig, Player player)
         {
             if (FirstSave)
             {

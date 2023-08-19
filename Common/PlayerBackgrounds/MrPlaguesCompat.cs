@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MonoMod.RuntimeDetour.HookGen;
 using NewBeginnings.Common.Edits;
 using NewBeginnings.Common.UI;
 using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.UI.Chat;
@@ -15,8 +15,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds;
 
 internal class MrPlaguesCompat
 {
-    const string NoticeText = "Click here to open New Beginning's menu!";
-
+    public static LocalizedText NoticeText;
     public static FieldInfo MrPlaguesInternalPlayerField;
 
     static Point? lastClickLocation = null;
@@ -28,9 +27,10 @@ internal class MrPlaguesCompat
     {
         if (ModLoader.TryGetMod("MrPlagueRaces", out Mod mod))
         {
+            NoticeText = Language.GetText("Mods.NewBeginnings.MrPlaguesCompatLine");
             var charUI = mod.Code.GetType("MrPlagueRaces.Common.UI.States.MrPlagueUICharacterCreation");
-
-            HookEndpointManager.Add(charUI.GetMethod("FinishCreatingCharacter", BindingFlags.Instance | BindingFlags.NonPublic), CharCreationHijackSaveDetour.MrPlaguesHookFinishCharacter);
+            var method = charUI.GetMethod("FinishCreatingCharacter", BindingFlags.Instance | BindingFlags.NonPublic);
+            MonoModHooks.Add(method, CharCreationHijackSaveDetour.MrPlaguesHookFinishCharacter);
         }
     }
 
@@ -43,18 +43,18 @@ internal class MrPlaguesCompat
             MrPlaguesInternalPlayerField = charUI.GetField("_player", BindingFlags.Instance | BindingFlags.NonPublic);
             Main.OnTickForThirdPartySoftwareOnly += Main_OnTickForThirdPartySoftwareOnly;
 
-            On.Terraria.UI.UserInterface.Draw += UserInterface_Draw;
+            On_UserInterface.Draw += UserInterface_Draw;
         }
     }
 
     private static Rectangle OpenTextBounds()
     {
-        Vector2 size = FontAssets.ItemStack.Value.MeasureString(NoticeText);
+        Vector2 size = FontAssets.ItemStack.Value.MeasureString(NoticeText.Value);
 
         return new Rectangle((int)(OpenTextPosition.X - (size.X / 2f)), (int)(OpenTextPosition.Y - (size.Y / 2f)), (int)size.X, (int)size.Y);
     }
 
-    private static void UserInterface_Draw(On.Terraria.UI.UserInterface.orig_Draw orig, UserInterface self, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, GameTime time)
+    private static void UserInterface_Draw(On_UserInterface.orig_Draw orig, UserInterface self, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, GameTime time)
     {
         orig(self, spriteBatch, time);
 
@@ -62,8 +62,10 @@ internal class MrPlaguesCompat
         {
             var bounds = OpenTextBounds();
             Color col = hover ? Color.Gray : Color.White;
+            var pos = OpenTextPosition - new Vector2(0, 12);
+            var font = FontAssets.ItemStack.Value;
 
-            ChatManager.DrawColorCodedStringWithShadow(spriteBatch, FontAssets.ItemStack.Value, NoticeText, OpenTextPosition - new Vector2(0, 12), col, Color.Black, 0f, bounds.Size() / 2f, Vector2.One);
+            ChatManager.DrawColorCodedStringWithShadow(spriteBatch, font, NoticeText.Value, pos, col, Color.Black, 0f, bounds.Size() / 2f, Vector2.One);
         }
     }
 
@@ -71,6 +73,7 @@ internal class MrPlaguesCompat
     {
         if (ModLoader.TryGetMod("MrPlagueRaces", out Mod mod)) //Authentic Races compat
         {
+            NoticeText = null;
             MrPlaguesInternalPlayerField = null;
             Main.OnTickForThirdPartySoftwareOnly -= Main_OnTickForThirdPartySoftwareOnly;
         }

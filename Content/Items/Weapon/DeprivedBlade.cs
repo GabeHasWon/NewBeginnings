@@ -6,12 +6,7 @@ namespace NewBeginnings.Content.Items.Weapon
 {
     public class DeprivedBlade : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            Tooltip.SetDefault("Not the blade it used to be");
-
-            Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-        }
+        public override void SetStaticDefaults() => Item.ResearchUnlockCount = 1;
 
         public override void SetDefaults()
         {

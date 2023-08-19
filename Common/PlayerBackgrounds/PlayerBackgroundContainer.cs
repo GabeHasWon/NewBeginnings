@@ -13,16 +13,10 @@ namespace NewBeginnings.Common.PlayerBackgrounds
     internal abstract class PlayerBackgroundContainer
     {
         /// <inheritdoc cref="PlayerBackgroundData.Name"/>
-        public virtual string Name => GetType().Name;
+        public abstract string LanguageKey { get; }
 
-        /// <inheritdoc cref="PlayerBackgroundData.Texture"/>
-        public virtual string Texture => GetType().Name;
-
-        /// <inheritdoc cref="PlayerBackgroundData.Flavour"/>
-        public virtual string Flavour => "TBD";
-
-        /// <inheritdoc cref="PlayerBackgroundData.Description"/>
-        public virtual string Description => "TBD";
+        /// <inheritdoc cref="PlayerBackgroundData.Identifier"/>
+        public virtual string Identifier => GetType().Name;
 
         /// <inheritdoc cref="PlayerBackgroundData.Inventory"/>
         public virtual (int type, int stack)[] Inventory => Array.Empty<(int type, int stack)>();
@@ -43,7 +37,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         /// <summary>Automatically converts a given PlayerBackgroundContainer into a PlayerBackgroundData for ease of use.</summary>
         public static implicit operator PlayerBackgroundData(PlayerBackgroundContainer container)
         {
-            var data = new PlayerBackgroundData(container.Name, container.Texture, container.Flavour, container.Description, container.Equip, container.Misc, container.Inventory)
+            var data = new PlayerBackgroundData(container.LanguageKey, container.Identifier, container.Equip, container.Misc, container.Inventory)
             {
                 Delegates = new DelegateData(container.ClearCondition, container.ModifyWorldGenTasks, container.HasSpecialSpawn, container.GetSpawnPosition, container.ModifyPlayerCreation)
             };

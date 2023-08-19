@@ -8,8 +8,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers;
 
 internal class Pirate : PlayerBackgroundContainer
 {
-    public override string Flavour => "Aye. A real pirate knows when land can be plundered, and plunder they shall!";
-    public override string Description => "Starts with an eye patch, a gold ring, a sextant, a rusty cutlass, a keg and 200 sails.";
+    public override string LanguageKey => "Mods.NewBeginnings.Origins.Pirate";
     public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.Keg, 1), (ItemID.Sail, 200) };
 
     public override EquipData Equip => new(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant);

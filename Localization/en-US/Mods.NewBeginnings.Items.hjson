@@ -1,0 +1,48 @@
+DeprivedLantern: {
+	DisplayName: Deprived Lantern
+	Tooltip:
+		'''
+		Lights up when placed in inventory
+		Infinite duration
+		'''
+}
+
+DimStar: {
+	DisplayName: Dim Star
+	Tooltip: ""
+}
+
+LightStar: {
+	DisplayName: Light Star
+	Tooltip: ""
+}
+
+LumberjackAxe: {
+	DisplayName: Lumberjack Axe
+	Tooltip: Not to be confused with Lucy
+}
+
+LumberjackFlannel: {
+	DisplayName: Lumberjack Flannel
+	Tooltip: "'Incredibly comfortable'"
+}
+
+DeprivedBlade: {
+	DisplayName: Deprived Blade
+	Tooltip: Not the blade it used to be
+}
+
+KylieBoomerang: {
+	DisplayName: Kylie Boomerang
+	Tooltip: "'Surprisingly effective in combat!'"
+}
+
+RustyCutlass: {
+	DisplayName: Rusty Cutlass
+	Tooltip: It has seen better days
+}
+
+WornSpellbook: {
+	DisplayName: Worn Spellbook
+	Tooltip: Trusty, albeit rather weak
+}

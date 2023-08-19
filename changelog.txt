@@ -1,3 +1,6 @@
-- Made the Deprived Lantern an accessory
-- Fixed Australian origin description saying wooden boomerang instead of kylie boomerang
-- Fixed Australian not being able to flip gravity
+- Ported to 1.4.4
+- Added localization to every built-in origin
+- Added localization support to origins, the UI
+- Updated Builder, Thief, Spelunker flavor text
+- Updated origins to use Identifier instead of Texture values for internal reference
+- Updated crossmod to reflect above changes

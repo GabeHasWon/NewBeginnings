@@ -1,55 +1,54 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Localization;
 
-namespace NewBeginnings.Common.UnlockabilitySystem
+namespace NewBeginnings.Common.UnlockabilitySystem;
+
+internal class UnlockSaveData
 {
-    internal class UnlockSaveData
+    public static Dictionary<string, BaseUnlock> achievementsByName = new();
+
+    public static void Complete(string key, bool silent = false, bool noSave = false)
     {
-        public static Dictionary<string, BaseUnlock> achievementsByName = new Dictionary<string, BaseUnlock>();
+        if (!achievementsByName.ContainsKey(key))
+            throw new KeyNotFoundException($"No achievement of name {key} exists. Did you spell it right?");
 
-        public static void Complete(string key, bool silent = false, bool noSave = false)
+        if (achievementsByName[key].Unlocked) //It's unlocked already, skip
+            return;
+
+        achievementsByName[key].Unlocked = true;
+
+        if (!silent)
         {
-            if (!achievementsByName.ContainsKey(key))
-                throw new KeyNotFoundException($"No achievement of name {key} exists. Did you spell it right?");
-
-            if (achievementsByName[key].Unlocked) //It's unlocked already, skip
-                return;
-
-            achievementsByName[key].Unlocked = true;
-
-            if (!silent)
-            {
-                Main.NewText($"Unlocked [c/CFC553:{achievementsByName[key].Name}]!");
-                Main.NewText($"{achievementsByName[key].Description}.", Color.Gray);
-                Main.NewText($"{achievementsByName[key].Benefits}");
-            }
-
-            if (!noSave)
-                UnlockabilityIO.QuickSave(key);
+            Main.NewText(Language.GetText("Mods.NewBeginnings.Unlocks.UnlockText").WithFormatArgs(achievementsByName[key].Name));
+            Main.NewText(achievementsByName[key].Description, Color.Gray);
+            Main.NewText(achievementsByName[key].Rewards);
         }
 
-        internal static void Populate()
-        {
-            achievementsByName.Clear();
+        if (!noSave)
+            UnlockabilityIO.QuickSave(key);
+    }
 
-            AddBasic("Beginner", "Default", "Use your first origin", "Unlocks the [c/A7B5BC:Alternate] origin.");
-            AddBasic("Accursed", "Default", "Defeat the Wall of Flesh while using an origin", "Unlocks the [c/832C2E:Accursed] origin.");
-        }
+    internal static void Populate()
+    {
+        achievementsByName.Clear();
 
-        private static void AddBasic(string name, string tex, string desc, string ben)
-        {
-            BaseUnlock newUnlock = new(name, tex, desc, ben);
-            achievementsByName.Add(newUnlock.Name, newUnlock);
-        }
+        AddBasic("Mods.NewBeginnings.Unlocks.Beginner", "Beginner");
+        AddBasic("Mods.NewBeginnings.Unlocks.Accursed", "Accursed");
+    }
 
-        public static bool Unlocked(string key)
-        {
-            if (!achievementsByName.ContainsKey(key))
-                throw new KeyNotFoundException($"No achievement of name {key} exists. Did you spell it right?");
+    private static void AddBasic(string langKey, string identifier)
+    {
+        BaseUnlock newUnlock = new(langKey, identifier);
+        achievementsByName.Add(newUnlock.Identifier, newUnlock);
+    }
 
-            return achievementsByName[key].Unlocked;
-        }
+    public static bool Unlocked(string key)
+    {
+        if (!achievementsByName.ContainsKey(key))
+            throw new KeyNotFoundException($"No achievement of name {key} exists. Did you spell it right?");
+
+        return achievementsByName[key].Unlocked;
     }
 }

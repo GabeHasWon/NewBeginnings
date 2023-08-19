@@ -1,0 +1,9 @@
+Projectiles: {
+	FeintDagger.DisplayName: Feint Dagger
+	KylieProjectile.DisplayName: Kylie Projectile
+}
+
+MrPlaguesCompatLine: Click here to open New Beginning's menu!
+
+# The space in the below key is intentional. If you're translating to a language with spaces, keep it.
+TitleLine: " [c/8B8B8B:the {0}]"

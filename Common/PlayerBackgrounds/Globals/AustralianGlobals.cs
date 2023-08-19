@@ -8,9 +8,9 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Globals
     {
         public bool IsAustralian => Player is not null && Player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Australian"); //this is such a surreal property name
 
-        public override void Load() => On.Terraria.Graphics.Renderers.LegacyPlayerRenderer.DrawPlayerFull += LegacyPlayerRenderer_DrawPlayerFull;
+        public override void Load() => Terraria.Graphics.Renderers.On_LegacyPlayerRenderer.DrawPlayerFull += LegacyPlayerRenderer_DrawPlayerFull;
 
-        private static void LegacyPlayerRenderer_DrawPlayerFull(On.Terraria.Graphics.Renderers.LegacyPlayerRenderer.orig_DrawPlayerFull orig, LegacyPlayerRenderer self, Camera camera, Terraria.Player drawPlayer)
+        private static void LegacyPlayerRenderer_DrawPlayerFull(Terraria.Graphics.Renderers.On_LegacyPlayerRenderer.orig_DrawPlayerFull orig, LegacyPlayerRenderer self, Camera camera, Terraria.Player drawPlayer)
         {
             float oldGravDir = drawPlayer.gravDir;
             if (drawPlayer.GetModPlayer<AustralianPlayer>().IsAustralian)

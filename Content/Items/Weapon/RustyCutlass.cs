@@ -6,13 +6,7 @@ namespace NewBeginnings.Content.Items.Weapon
 {
     public class RustyCutlass : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Rusty Cutlass");
-            Tooltip.SetDefault("It has seen better days");
-
-            Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-        }
+        public override void SetStaticDefaults() => Item.ResearchUnlockCount = 1;
 
         public override void SetDefaults()
         {

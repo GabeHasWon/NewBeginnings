@@ -9,8 +9,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers
 {
     internal class Bereaved : PlayerBackgroundContainer
     {
-        public override string Flavour => "The umbrella doesn't help when the storm still clouds your mind.";
-        public override string Description => "Starts with a tragic umbrella and funeral set in a graveyard.";
+        public override string LanguageKey => "Mods.NewBeginnings.Origins.Bereaved";
         public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.TragicUmbrella, 1) };
 
         public override EquipData Equip => new(ItemID.FuneralHat, ItemID.FuneralCoat, ItemID.FuneralPants);

@@ -12,7 +12,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
 {
     internal class PlayerBackgroundWorld : ModSystem
     {
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             if (Main.LocalPlayer.GetModPlayer<PlayerBackgroundPlayer>().HasBG()) //Adds an origin's specific worldgen info
             {

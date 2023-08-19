@@ -3,47 +3,45 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace NewBeginnings.Common.PlayerBackgrounds.Containers
+namespace NewBeginnings.Common.PlayerBackgrounds.Containers;
+
+internal class Slayer : PlayerBackgroundContainer
 {
-    internal class Slayer : PlayerBackgroundContainer
+    public override string LanguageKey => "Mods.NewBeginnings.Origins.Slayer";
+    public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.EndlessMusketPouch, 1) };
+    public override MiscData Misc => new(140, 20, swordReplace: ItemID.Boomstick, stars: 4);
+
+    public override bool HasSpecialSpawn() => true;
+
+    public override Point16 GetSpawnPosition()
     {
-        public override string Flavour => "Rip and tear until it is done.";
-        public override string Description => "Spawns with a boomstick, 140 max health and infinite musket balls in Hell.";
-        public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.EndlessMusketPouch, 1) };
-        public override MiscData Misc => new(140, 20, swordReplace: ItemID.Boomstick, stars: 4);
+        const int Offset = 400;
 
-        public override bool HasSpecialSpawn() => true;
+        int x = WorldGen.genRand.NextBool() ? Offset : Main.maxTilesX - Offset;
+        int y = Main.maxTilesY - 160;
+        bool success = false;
 
-        public override Point16 GetSpawnPosition()
+        while (!success)
         {
-            const int Offset = 400;
-
-            int x = WorldGen.genRand.NextBool() ? Offset : Main.maxTilesX - Offset;
-            int y = Main.maxTilesY - 160;
-            bool success = false;
-
-            while (!success)
+            for (int i = y; i < Main.maxTilesY - 40; i++)
             {
-                for (int i = y; i < Main.maxTilesY - 40; i++)
+                bool validOpening = true;
+                for (int j = 0; j < 3; ++j)
+                    if (WorldGen.SolidTile(x, i - j - 1) || WorldGen.SolidTile(x + 1, i - j - 1))
+                        validOpening = false;
+
+                if (validOpening && WorldGen.SolidTile(x, i) && !Collision.LavaCollision(new Vector2(x - 1, i - 3) * 16, 3 * 16, 3 * 16))
                 {
-                    bool validOpening = true;
-                    for (int j = 0; j < 3; ++j)
-                        if (WorldGen.SolidTile(x, i - j - 1) || WorldGen.SolidTile(x + 1, i - j - 1))
-                            validOpening = false;
-
-                    if (validOpening && WorldGen.SolidTile(x, i) && !Collision.LavaCollision(new Vector2(x - 1, i - 3) * 16, 3 * 16, 3 * 16))
-                    {
-                        success = true;
-                        y = i - 3;
-                        break;
-                    }
+                    success = true;
+                    y = i - 3;
+                    break;
                 }
-
-                if (!success)
-                    x += (x < Main.maxTilesX / 2) ? 2 : -2;
             }
 
-            return new Point16(x, y);
+            if (!success)
+                x += (x < Main.maxTilesX / 2) ? 2 : -2;
         }
+
+        return new Point16(x, y);
     }
 }

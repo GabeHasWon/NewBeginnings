@@ -1,96 +1,96 @@
 ﻿using System;
 using System.IO;
 
-namespace NewBeginnings.Common.UnlockabilitySystem
+namespace NewBeginnings.Common.UnlockabilitySystem;
+
+/// <summary>
+/// Class used to save/load data regarding unlocks.<br/>
+/// The needless encoding is necessary.
+/// </summary>
+internal class UnlockabilityIO
 {
-    /// <summary>
-    /// Class used to save/load data regarding unlocks.
-    /// </summary>
-    internal class UnlockabilityIO
+    public const string SaveName = "nb_unlocks";
+    public const int EncryptionKey = 8;
+
+    private static readonly char[] Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ".ToCharArray();
+
+    public static void LoadData()
     {
-        public const string SaveName = "nb_unlocks";
-        public const int EncryptionKey = 8;
+        UnlockSaveData.Populate();
 
-        private static readonly char[] Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ".ToCharArray();
+        string filePath = SecureGetSavePath();
 
-        public static void LoadData()
+        FileStream file = File.Open(filePath, FileMode.OpenOrCreate);
+        using StreamReader reader = new(file);
+
+        string text = reader.ReadToEnd();
+
+        if (text == string.Empty)
+            return;
+
+        string[] keys = text.Split(',');
+
+        foreach (var item in keys)
+            if (item != string.Empty)
+                UnlockSaveData.Complete(Decrypt(item), true, true);
+    }
+
+    private static string SecureGetSavePath()
+    {
+        string path = Directory.GetCurrentDirectory();
+        path = Path.Combine(path, "ModSaveData");
+        Directory.CreateDirectory(path);
+
+        string filePath = Path.Combine(path, $"{SaveName}.txt");
+        return filePath;
+    }
+
+    internal static void QuickSave(string key)
+    {
+        string save = string.Empty;
+
+        if (UnlockSaveData.achievementsByName[key].Unlocked)
+            save += Encrypt(key) + ",";
+
+        string filePath = SecureGetSavePath();
+        using StreamWriter writer = new(filePath, append: true);
+
+        writer.Write(save);
+    }
+
+    private static string Encrypt(string orig)
+    {
+        string str = "";
+
+        foreach (char c in orig)
         {
-            UnlockSaveData.Populate();
+            int origIndex = Array.IndexOf(Characters, c);
+            origIndex += EncryptionKey;
 
-            string filePath = SecureGetSavePath();
+            if (origIndex >= Characters.Length)
+                origIndex -= Characters.Length;
 
-            FileStream file = File.Open(filePath, FileMode.OpenOrCreate);
-            using StreamReader reader = new(file);
-
-            string text = reader.ReadToEnd();
-
-            if (text == string.Empty)
-                return;
-
-            string[] keys = text.Split(',');
-
-            foreach (var item in keys)
-                if (item != string.Empty)
-                    UnlockSaveData.Complete(Decrypt(item), true, true);
+            str += Characters[origIndex];
         }
 
-        private static string SecureGetSavePath()
-        {
-            string path = Directory.GetCurrentDirectory();
-            path = Path.Combine(path, "ModSaveData");
-            Directory.CreateDirectory(path);
+        return str;
+    }
 
-            string filePath = Path.Combine(path, $"{SaveName}.txt");
-            return filePath;
+    private static string Decrypt(string orig)
+    {
+        string str = "";
+
+        foreach (char c in orig)
+        {
+            int origIndex = Array.IndexOf(Characters, c);
+            origIndex -= EncryptionKey;
+
+            if (origIndex < 0)
+                origIndex += Characters.Length;
+
+            str += Characters[origIndex];
         }
 
-        internal static void QuickSave(string key)
-        {
-            string save = string.Empty;
-
-            if (UnlockSaveData.achievementsByName[key].Unlocked)
-                save += Encrypt(key) + ",";
-
-            string filePath = SecureGetSavePath();
-            using StreamWriter writer = new(filePath, append: true);
-
-            writer.Write(save);
-        }
-
-        private static string Encrypt(string orig)
-        {
-            string str = "";
-
-            foreach (char c in orig)
-            {
-                int origIndex = Array.IndexOf(Characters, c);
-                origIndex += EncryptionKey;
-
-                if (origIndex >= Characters.Length)
-                    origIndex -= Characters.Length;
-
-                str += Characters[origIndex];
-            }
-
-            return str;
-        }
-
-        private static string Decrypt(string orig)
-        {
-            string str = "";
-
-            foreach (char c in orig)
-            {
-                int origIndex = Array.IndexOf(Characters, c);
-                origIndex -= EncryptionKey;
-
-                if (origIndex < 0)
-                    origIndex += Characters.Length;
-
-                str += Characters[origIndex];
-            }
-
-            return str;
-        }
+        return str;
     }
 }

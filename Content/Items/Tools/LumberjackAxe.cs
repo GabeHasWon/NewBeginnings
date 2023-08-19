@@ -6,13 +6,7 @@ namespace NewBeginnings.Content.Items.Tools;
 
 internal class LumberjackAxe : ModItem
 {
-	public override void SetStaticDefaults() 
-	{ 
-		DisplayName.SetDefault("Lumber Axe");
-		Tooltip.SetDefault("'Not to be confused with Lucy'");
-
-		Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-	}
+	public override void SetStaticDefaults() => Item.ResearchUnlockCount = 1;
 
 	public override void SetDefaults()
 	{

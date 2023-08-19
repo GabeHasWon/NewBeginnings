@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Generation;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.WorldBuilding;
 
 namespace NewBeginnings.Common.PlayerBackgrounds.Containers
 {
     internal class Accursed : PlayerBackgroundContainer
     {
-        public override string Flavour => "Starts with hardmode already enabled. Good luck!";
-        public override string Description => "Starts with gold tools, the Dryad instead of the Guide, and pearlwood armor - in Hardmode.\nUnlocked by beating the Wall of Flesh with an origin character.";
+        public override string LanguageKey => "Mods.NewBeginnings.Origins.Accursed";
 
         public override EquipData Equip => new(ItemID.PearlwoodHelmet, ItemID.PearlwoodBreastplate, ItemID.PearlwoodGreaves);
         public override MiscData Misc => new(swordReplace: ItemID.GoldBroadsword, pickReplace: ItemID.GoldPickaxe, axeReplace: ItemID.GoldAxe, npcType: NPCID.Dryad, stars: 5);
@@ -21,7 +21,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers
         {
             list.Add(new PassLegacy("Early Hardmode", (GenerationProgress p, Terraria.IO.GameConfiguration config) =>
             {
-                p.Message = "Generating hardmode";
+                p.Message = Language.GetTextValue("Mods.NewBeginnings.Origins.Accursed.Generation");
                 WorldGen.smCallBack(null);
 
                 Main.hardMode = true;

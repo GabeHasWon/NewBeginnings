@@ -71,7 +71,7 @@ internal class UICustomOrigin : UIState
             Top = StyleDimension.FromPixelsAndPercent(0, 0)
         };
 
-        closeButton.OnClick += _return;
+        closeButton.OnLeftClick += _return;
         panel.Append(closeButton);
 
         UIOriginSelection.AddCharacterPreview(panel, _player);

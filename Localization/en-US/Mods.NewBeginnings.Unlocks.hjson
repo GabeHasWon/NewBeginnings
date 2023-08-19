@@ -1,0 +1,13 @@
+Beginner: {
+	DisplayName: Beginner
+	Description: Use your first origin.
+	Rewards: Unlocks the [c/A7B5BC:Alternate] origin.
+}
+
+Accursed: {
+	DisplayName: Accursed
+	Description: Defeat the Wall of Flesh while using an origin.
+	Rewards: Unlocks the [c/832C2E:Accursed] origin.
+}
+
+UnlockText: Unlocked [c/CFC553:{0}]!

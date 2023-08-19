@@ -11,6 +11,7 @@ using NewBeginnings.Common.PlayerBackgrounds;
 using System.Collections.Generic;
 using NewBeginnings.Content.Items.Icons;
 using System.Linq;
+using Terraria.Localization;
 
 namespace NewBeginnings.Common.UI
 {
@@ -77,7 +78,7 @@ namespace NewBeginnings.Common.UI
                 Top = StyleDimension.FromPixelsAndPercent(0, 0)
             };
 
-            closeButton.OnClick += _return;
+            closeButton.OnLeftClick += _return;
             panel.Append(closeButton);
 
             _sortButton = new UIImageButton(ModContent.Request<Texture2D>("NewBeginnings/Assets/Textures/UI/OriginSort"))
@@ -87,7 +88,8 @@ namespace NewBeginnings.Common.UI
                 Left = StyleDimension.FromPixels(BackgroundListWidth + 10),
             };
 
-            _sortButton.Append(new UIText($"Sort by {(_sortByPriority ? "default" : "difficulty")}", 0.8f)
+            _sortButton.Append(new UIText(Language.GetText("Mods.NewBeginnings.UI.SortBy.Line").
+                WithFormatArgs(_sortByPriority ? Language.GetText("Mods.NewBeginnings.UI.SortBy.Default") : Language.GetText("Mods.NewBeginnings.UI.SortBy.Difficulty")), 0.8f)
             {
                 VAlign = 0.5f,
                 Width = StyleDimension.FromPercent(1f),
@@ -138,22 +140,7 @@ namespace NewBeginnings.Common.UI
         private static string GetSplashText()
         {
             int random = Main.rand.Next(12);
-
-            return random switch
-            {
-                0 => "Now with more space!",
-                1 => "By the people who brought you Overseer!",
-                2 => "Not to be confused with MrPlague's Authentic Races!",
-                3 => "15% less sodium, 15% less sugar, 100% better characters!",
-                4 => "Contains a dangerous amount of awful code!",
-                5 => "Has never had and never will have any bugs!",
-                6 => "Purist is only for people who want to look at the mod, not play it!",
-                7 => "Surprisingly popular in Antarctica!",
-                8 => "Sponsored by Team Spirit!",
-                9 => "Contains a significant lack of shaders!",
-                10 => "Confirmed drama-free by researchers!",
-                _ => "Tremor? I hardly know her!"
-            };
+            return Language.GetTextValue("Mods.NewBeginnings.UI.Splash." + random);
         }
 
         internal static void AddCharacterPreview(UIPanel panel, Player player)
@@ -393,7 +380,7 @@ namespace NewBeginnings.Common.UI
                 if (!item.Delegates.ClearCondition())
                     continue;
 
-                var asset = PlayerBackgroundDatabase.backgroundIcons[PlayerBackgroundDatabase.backgroundIcons.ContainsKey(item.Texture) ? item.Texture : "Default"];
+                var asset = PlayerBackgroundDatabase.backgroundIcons[PlayerBackgroundDatabase.backgroundIcons.ContainsKey(item.Identifier) ? item.Identifier : "Default"];
                 UIColoredImageButton currentBGButton = new(asset)
                 {
                     Width = StyleDimension.FromPercent(0.9f),
@@ -405,7 +392,7 @@ namespace NewBeginnings.Common.UI
                 };
                 currentBGButton.SetColor(Color.Gray);
 
-                currentBGButton.OnMouseDown += (UIMouseEvent evt, UIElement listeningElement) => //Click event
+                currentBGButton.OnLeftMouseDown += (UIMouseEvent evt, UIElement listeningElement) => //Click event
                 {
                     BackgroundButtonClick(allBGButtons, item, currentBGButton);
                 };
@@ -466,7 +453,7 @@ namespace NewBeginnings.Common.UI
                 MarginTop = 4f,
             };
             customBGButton.SetColor(Color.Gray);
-            customBGButton.OnClick += CurrentBGButton_OnClick;
+            customBGButton.OnLeftClick += CurrentBGButton_OnClick;
             allBGButtons.Add(customBGButton);
 
             UIText bgName = new("Custom", 1.2f) //Background's name
@@ -487,18 +474,18 @@ namespace NewBeginnings.Common.UI
 
         private PlayerBackgroundData BackgroundButtonClick(UIList allBGButtons, PlayerBackgroundData item, UIColoredImageButton currentBGButton)
         {
-            PlayerBackgroundData useData = item.Name == "Random" ? Main.rand.Next(PlayerBackgroundDatabase.playerBackgroundDatas.SkipLast(1).ToList()) : item; //Hardcoding for random, sucks but eh
-            _descFlavour.SetText(item.Name != "Random" ? useData.Flavour : item.Flavour); //Changes the UIText's value to use the bg's description
-            _descText.SetText(item.Name != "Random" ? useData.Description : item.Description); //Changes the UIText's value to use the bg's description
+            PlayerBackgroundData useData = item.Identifier == "Random" ? Main.rand.Next(PlayerBackgroundDatabase.playerBackgroundDatas.SkipLast(1).ToList()) : item; //Hardcoding for random, sucks but eh
+            _descFlavour.SetText(item.Identifier != "Random" ? useData.Flavour : item.Flavour); //Changes the UIText's value to use the bg's description
+            _descText.SetText(item.Identifier != "Random" ? useData.Description : item.Description); //Changes the UIText's value to use the bg's description
 
-            if (item.Name != "Random")
+            if (item.Identifier != "Random")
                 _statsText.SetText(GetStatsText(useData));
             else
                 _statsText.SetText($"[i:{ItemID.Heart}]??? [i:{ItemID.Star}]???");
 
             _itemContainer.RemoveAllChildren();
 
-            if (item.Name != "Random")
+            if (item.Identifier != "Random")
                 SetItemList(useData);
 
             item.ApplyArmor(_player);
@@ -516,10 +503,11 @@ namespace NewBeginnings.Common.UI
         {
             ResortBGButtons(allBGButtons, buttons);
 
-            sortButton.OnClick += (UIMouseEvent evt, UIElement listeningElement) =>
+            sortButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
             {
                 _sortByPriority = !_sortByPriority;
-                (sortButton.Children.First() as UIText).SetText($"Sort by {(_sortByPriority ? "default" : "difficulty")}");
+                (sortButton.Children.First() as UIText).SetText(Language.GetText("Mods.NewBeginnings.UI.SortBy.Line").
+                    WithFormatArgs(_sortByPriority ? Language.GetText("Mods.NewBeginnings.UI.SortBy.Default") : Language.GetText("Mods.NewBeginnings.UI.SortBy.Difficulty")));
                 sortButton.SetImage(ModContent.Request<Texture2D>(_sortByPriority ? "NewBeginnings/Assets/Textures/UI/OriginSort" : "NewBeginnings/Assets/Textures/UI/OriginSortStar"));
                 sortButton.Width = StyleDimension.FromPixels(32);
                 sortButton.Height = StyleDimension.FromPixels(32);

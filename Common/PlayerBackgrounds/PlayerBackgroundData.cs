@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace NewBeginnings.Common.PlayerBackgrounds
@@ -13,16 +14,17 @@ namespace NewBeginnings.Common.PlayerBackgrounds
     internal struct PlayerBackgroundData
     {
         /// <summary>Name of the background, for use in UI and for internal keys.</summary>
-        public string Name;
+        public LocalizedText Name;
 
-        /// <summary>Key used to get the given asset from <see cref="PlayerBackgroundDatabase.backgroundIcons"/>. Defaults to "Default".</summary>
-        public string Texture;
+        /// <summary>Key used to get the given asset from <see cref="PlayerBackgroundDatabase.backgroundIcons"/>, and is used as an internal name. 
+        /// Defaults to "Default".</summary>
+        public string Identifier;
 
         /// <summary>Flavour text of the background in the character creation UI.</summary>
-        public string Flavour;
+        public LocalizedText Flavour;
 
         /// <summary>Description of the background in the character creation UI.</summary>
-        public string Description;
+        public LocalizedText Description;
 
         /// <summary>Ordered list of every item type and stack size in the inventory. Is ADDED to, rather than REPLACING, the inventory.</summary>
         public (int type, int stack)[] Inventory;
@@ -36,14 +38,13 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         /// <summary>Contains what are functionally hooks, such as modifying worldgen and modifying the player right before they're saved after player creation.</summary>
         public DelegateData Delegates;
 
-        public PlayerBackgroundData(string name, string texName, string flavour, string desc, EquipData? equips, MiscData? misc, params (int, int)[] inv)
+        public PlayerBackgroundData(string langKey, string identifier, EquipData? equips, MiscData? misc, params (int, int)[] inv)
         {
-            Name = name;
-            Texture = texName;
-            Flavour = flavour;
-            Description = desc;
+            Name = Language.GetText(langKey + ".DisplayName");
+            Identifier = identifier;
+            Flavour = Language.GetText(langKey + ".Flavor");
+            Description = Language.GetText(langKey + ".Description");
             Inventory = inv ?? Array.Empty<(int, int)>();
-
             Equip = equips ?? new EquipData(0, 0, 0);
             Misc = misc ?? new MiscData(100, 20, -1, -1, -1);
             Delegates = new();

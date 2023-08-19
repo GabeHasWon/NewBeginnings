@@ -2,6 +2,7 @@
 using MonoMod.Cil;
 using NewBeginnings.Common.PlayerBackgrounds;
 using Terraria;
+using Terraria.Localization;
 
 namespace NewBeginnings.Common.Edits
 {
@@ -9,7 +10,7 @@ namespace NewBeginnings.Common.Edits
     {
         public static void Load()
         {
-            IL.Terraria.GameContent.UI.Elements.UICharacterListItem.DrawSelf += UICharacterListItem_DrawSelf;
+            Terraria.GameContent.UI.Elements.IL_UICharacterListItem.DrawSelf += UICharacterListItem_DrawSelf;
         }
 
         private static void UICharacterListItem_DrawSelf(ILContext il)
@@ -26,9 +27,9 @@ namespace NewBeginnings.Common.Edits
 
             c.EmitDelegate((string input, Player player) =>
             {
-                string name = player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Name;
-                if (name is not null)
-                    return input + $" [c/8B8B8B:the {name}]";
+                string identifier = player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Identifier;
+                if (identifier is not null)
+                    return input + Language.GetText("Mods.NewBeginnings.TitleLine").WithFormatArgs(identifier);
                 return input;
             });
 

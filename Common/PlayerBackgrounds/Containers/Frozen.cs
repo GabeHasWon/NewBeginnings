@@ -8,48 +8,45 @@ using System.Linq;
 using System;
 using Terraria.ModLoader;
 
-namespace NewBeginnings.Common.PlayerBackgrounds.Containers
+namespace NewBeginnings.Common.PlayerBackgrounds.Containers;
+
+internal class Frozen : PlayerBackgroundContainer
 {
-    internal class Frozen : PlayerBackgroundContainer
+    private static Point16 spawnPos = new Point16();
+
+    public override string LanguageKey => "Mods.NewBeginnings.Origins.Frozen";
+    public override (int type, int stack)[] Inventory => new (int type, int stack)[] { (ItemID.Snowball, 999) };
+
+    public override EquipData Equip => new(ItemID.PinkEskimoHood, ItemID.PinkEskimoCoat, ItemID.PinkEskimoPants);
+    public override MiscData Misc => new MiscData(swordReplace: ItemID.SnowballCannon);
+
+    public override bool HasSpecialSpawn() => true;
+    public override Point16 GetSpawnPosition() => spawnPos;
+
+    public override void ModifyWorldGenTasks(List<GenPass> list)
     {
-        private static Point16 spawnPos = new Point16();
+        int index = list.FindIndex(x => x.Name == "Planting Trees");
 
-        public override string Name => "Frozen";
-        public override string Flavour => "After a thousands years frozen (and a couple days making the igloo), they're ready for action.";
-        public override string Description => "Starts with a snowball cannon, a pink snow set and 999 snowballs in an igloo.";
-        public override (int type, int stack)[] Inventory => new (int type, int stack)[] { (ItemID.Snowball, 999) };
+        list.Insert(index - 1, new PassLegacy("Igloo", Igloo));
+    }
 
-        public override EquipData Equip => new(ItemID.PinkEskimoHood, ItemID.PinkEskimoCoat, ItemID.PinkEskimoPants);
-        public override MiscData Misc => new MiscData(swordReplace: ItemID.SnowballCannon);
+    public static void Igloo(GenerationProgress progress, Terraria.IO.GameConfiguration config)
+    {
+        int min = GenVars.snowMinX[0];
+        int max = GenVars.snowMaxX[Array.IndexOf(GenVars.snowMaxX, 0) - 1];
 
-        public override bool HasSpecialSpawn() => true;
-        public override Point16 GetSpawnPosition() => spawnPos;
+        int x = (min + max) / 2;
+        int y = (int)(Main.worldSurface * 0.3f);
 
-        public override void ModifyWorldGenTasks(List<GenPass> list)
-        {
-            int index = list.FindIndex(x => x.Name == "Planting Trees");
+        while (!Main.tile[x, y].HasTile || (Main.tile[x, y].TileType != TileID.IceBlock && Main.tile[x, y].TileType != TileID.SnowBlock))
+            y++;
 
-            list.Insert(index - 1, new PassLegacy("Igloo", Igloo));
-        }
+        Point16 size = new();
+        var mod = ModLoader.GetMod("NewBeginnings");
+        int type = Main.rand.Next(2);
 
-        public static void Igloo(GenerationProgress progress, Terraria.IO.GameConfiguration config)
-        {
-            int min = WorldGen.snowMinX[0];
-            int max = WorldGen.snowMaxX[Array.IndexOf(WorldGen.snowMaxX, 0) - 1];
-
-            int x = (min + max) / 2;
-            int y = (int)(Main.worldSurface * 0.3f);
-
-            while (!Main.tile[x, y].HasTile || (Main.tile[x, y].TileType != TileID.IceBlock && Main.tile[x, y].TileType != TileID.SnowBlock))
-                y++;
-
-            Point16 size = new();
-            var mod = ModLoader.GetMod("NewBeginnings");
-            int type = Main.rand.Next(2);
-
-            StructureHelper.Generator.GetDimensions("Assets/Structures/FrozenIgloo" + type, mod, ref size, false);
-            spawnPos = new Point16(x - (size.X / 2), y - size.Y - 1);
-            StructureHelper.Generator.GenerateStructure("Assets/Structures/FrozenIgloo" + type, spawnPos, mod);
-        }
+        StructureHelper.Generator.GetDimensions("Assets/Structures/FrozenIgloo" + type, mod, ref size, false);
+        spawnPos = new Point16(x - (size.X / 2), y - size.Y - 1);
+        StructureHelper.Generator.GenerateStructure("Assets/Structures/FrozenIgloo" + type, spawnPos, mod);
     }
 }

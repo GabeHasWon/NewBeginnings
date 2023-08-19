@@ -26,7 +26,7 @@ internal class CharCreationEdit
     {
         InternalPlayerField = typeof(UICharacterCreation).GetField("_player", BindingFlags.Instance | BindingFlags.NonPublic);
 
-        IL.Terraria.GameContent.UI.States.UICharacterCreation.MakeInfoMenu += UICharacterCreation_MakeInfoMenu;
+        Terraria.GameContent.UI.States.IL_UICharacterCreation.MakeInfoMenu += UICharacterCreation_MakeInfoMenu;
 
         CharCreationHijackSaveDetour.Load();
         CharNameEdit.Load();
@@ -84,7 +84,7 @@ internal class CharCreationEdit
         };
 
         backgroundButton.SetPadding(0f);
-        backgroundButton.OnMouseDown += BackgroundButton_OnMouseDown;
+        backgroundButton.OnLeftMouseDown += BackgroundButton_OnMouseDown;
 
         parent.Append(backgroundButton);
     }

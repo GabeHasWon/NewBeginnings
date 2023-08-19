@@ -1,0 +1,211 @@
+Purist: {
+	DisplayName: Purist
+	Flavor: The normal Terraria experience.
+	Description: ""
+}
+
+Knight: {
+	DisplayName: Knight
+	Flavor: A noble warrior, clad in iron.
+	Description: Starts with a full set of iron armor and a silver broadsword.
+}
+
+Huntsman: {
+	DisplayName: Huntsman
+	Flavor: Steady hands and keen eyes, a master of the hunt.
+	Description: Starts with a bow, an endless quiver and a hunter cloak.
+}
+
+Wizard: {
+	DisplayName: Wizard
+	Flavor: An apprentice wizard with an affinity for the arcane.
+	Description: Starts with a wizard hat, a topaz staff and a topaz robe, with additional mana but lower max health.
+}
+
+Beastmaster: {
+	DisplayName: Beastmaster
+	Flavor: Raised in the woodlands, they summon beasts to aid their journey.
+	Description: Lower max health but an immediate slime staff and leather whip.
+}
+
+Shinobi: {
+	DisplayName: Shinobi
+	Flavor: A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency.
+	Description: Start with a tabi and a katana but 80 max health.
+}
+
+Alchemist: {
+	DisplayName: Alchemist
+	Flavor: A master of nature and chemicals; prepared for anything.
+	Description: Start with an alchemy table, 50 bottled water and 12 herb bags.
+}
+
+Demoman: {
+	DisplayName: Demoman
+	Flavor: Hurl explosives at ore, enemies, or yourself!
+	Description: Starts with 2 dynamite, 10 bombs, and 15 grenades.
+}
+
+Boomer: {
+	DisplayName: Boomer
+	Flavor: Back in my day...
+	Description: Starts with a lawn mower, sunglasses, BBQ ribs and a grilled squirrel.
+}
+
+Zoomer: {
+	DisplayName: Zoomer
+	Flavor: Terreddit post is popping off today boutta frag some slimes fr fr
+	Description: Starts with goggles, a cell phone and 40 max health.
+}
+
+Tiger: {
+	DisplayName: Tiger
+	Flavor: Lightly more feral than other Terrarians, but not as much as you'd think!
+	Description: Starts with cat ears, a fox tail, tiger climbing gear, and a bladed glove.
+}
+
+Builder: {
+	DisplayName: Builder
+	Flavor: A renowned architect from faraway cities.
+	Description: Starts with a portable stool, an architect gizmo pack, 500 wood and stone, and the Painter instead of the Guide in new worlds.
+}
+
+Thief: {
+	DisplayName: Thief
+	Flavor: Petty thief with a penchant for pickpocketing.
+	Description: Starts with a lucky coin, platinum shortsword and 300 poisoned knives.
+}
+
+Firestarter: {
+	DisplayName: Firestarter
+	Flavor: Some people just want to watch the world burn.
+	Description: Starts with a wand of sparking, 300 molotov cocktails, a flare gun with 50 flares, and 100 torches.
+}
+
+Pirate: {
+	DisplayName: Pirate
+	Flavor: Aye. A real pirate knows when land can be plundered, and plunder they shall!
+	Description: Starts with an eye patch, a gold ring, a sextant, a rusty cutlass, a keg and 200 sails.
+}
+
+Deprived: {
+	DisplayName: Deprived
+	Flavor: A forgotten warrior carrying long-lost tools.
+	Description: Starts with 80 max health, a deprived blade, a deprived lantern and 3 healing potions.
+}
+
+Lumberjack: {
+	DisplayName: Lumberjack
+	Flavor: A humble lumberjack, his flannel and his trusty axe.
+	Description: Starts with a flannel shirt, lumber axe, a sawmill, 12 apples, and 300 of normal, boreal, palm, ebon, shade, rich mahogany, and dynasty wood.
+}
+
+Nobleman: {
+	DisplayName: Nobleman
+	Flavor: A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.
+	Description: Starts with a diamond ring, a gold watch, 20 max health, and a platinum coin - in mediumcore or hardcore only.
+}
+
+Fisherman: {
+	DisplayName: Fisherman
+	Flavor: Slimes want me, fish fear me...
+	Description: Starts with a high test fishing line, angler hat, a reinforced fishing pole, 3 cans of worms, and the Angler instead of the Guide.
+}
+
+Trailblazer: {
+	DisplayName: Trailblazer
+	Flavor: No time to explain. They have places to go, things to see!
+	Description: Starts with hermes boots, an aglet, and an anklet of the wind.
+}
+
+Adventurer: {
+	DisplayName: Adventurer
+	Flavor: Comes with a thirst for exploration and a penchant for boulder traps!
+	Description: Starts with a grappling hook, 100 torches, a full archeologist vanity set and 5 dangersense and spelunker potions.
+}
+
+Farmer: {
+	DisplayName: Farmer
+	Flavor: It ain't much, but it's honest work.
+	Description: Starts with a summer hat, a sickle, 12 hay, and 12 daybloom, blinkroot, moonglow, waterleaf, shiverthorn, deathweed, and fireblossom seeds and their planter boxes.
+}
+
+Spelunker: {
+	DisplayName: Spelunker
+	Flavor: The caves call, and they answer. Those ores aren't gonna mine themselves!
+	Description: Starts with an ancient chisel, mining helmet, a gold pickaxe, an iron minecart, 10 bombs and 10 spelunker potions.
+}
+
+Bookworm: {
+	DisplayName: Bookworm
+	Flavor: Mind over matter. The best way to fight is with a sharpened mind!
+	Description: Starts with a worn spellbook, a guide to plant fiber cordage, 8 books and a guide to critter companionship.
+}
+
+Druid: {
+	DisplayName: Druid
+	Flavor: A herald of nature, engaged with keeping the world alive and healthy!
+	Description: Starts with a guide to plant fiber cordage, a vilethorn, a staff of regrowth, 3 herb bags, and 10 clay pots.
+}
+
+Painter: {
+	DisplayName: Painter
+	Flavor: Art is a form of expression; a way to exist; and a powerful tool - and EXPENSIVE.
+	Description: Starts with a paintball gun, paint scraper, paint sprayer, paintbrush, paint roller, the Painter instead of the Guide and a 25% sale on all Painter stock.
+}
+
+Australian: {
+	DisplayName: Australian
+	Flavor: Just a normal bloke, nothin' special. World's just a little upside down over here.
+	Description: Starts with a cowboy set, a wooden kylie and is always upside down.
+}
+
+Bereaved: {
+	DisplayName: Bereaved
+	Flavor: The umbrella doesn't help when the storm still clouds your mind.
+	Description: Starts with a tragic umbrella and funeral set in a graveyard.
+}
+
+Frozen: {
+	DisplayName: Frozen
+	Flavor: After a thousands years frozen (and a couple days making the igloo), they're ready for action.
+	Description: Starts with a snowball cannon, a pink snow set and 999 snowballs in an igloo.
+}
+
+Slayer: {
+	DisplayName: Slayer
+	Flavor: Rip and tear until it is done.
+	Description: Spawns with a boomstick, 140 max health and infinite musket balls in Hell.
+}
+
+Alternate: {
+	DisplayName: Alternate
+	Flavor: Perhaps, if things had been a little different, this'd be a purist.
+	Description:
+		'''
+		Starts with tin tools instead of copper
+		Unlocked by using your first origin.
+		'''
+}
+
+Accursed: {
+	DisplayName: Accursed
+	Flavor: Starts with hardmode already enabled. Good luck!
+	Description:
+		'''
+		Starts with gold tools, the Dryad instead of the Guide, and pearlwood armor - in Hardmode.
+		Unlocked by beating the Wall of Flesh with an origin character.
+		'''
+	Generation: Generating hardmode
+}
+
+Random: {
+	DisplayName: Random
+	Flavor: Choose a random background.
+	Description: ""
+}
+
+Unloaded: {
+	DisplayName: Unloaded origin
+	Flavor: This is a placeholder generated background for an unloaded cross-mod background.
+}

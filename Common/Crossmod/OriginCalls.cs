@@ -49,32 +49,32 @@ internal static class OriginCalls
 
     private static object AddShortOrigin(object[] objects)
     {
-        AddBasicOrigin(objects, out var _, out var texName, out var name, out var flavour, out var description, out var inventory);
+        AddBasicOrigin(objects, out var _, out var texName, out var name, out var inventory);
 
-        if (objects[6] is not EquipData equip)
-            return ThrowOrReturn("objects[6] (equip) is not EquipData!");
+        if (objects[4] is not EquipData equip)
+            return ThrowOrReturn("objects[4] (equip) is not EquipData!");
 
-        if (objects.Length == 7)
+        if (objects.Length == 5)
         {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, equip, null, inventory));
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, equip, null, inventory));
             return true;
         }
 
-        if (objects[7] is not MiscData misc)
-            return ThrowOrReturn("objects[7] (misc) is not MiscData!");
+        if (objects[5] is not MiscData misc)
+            return ThrowOrReturn("objects[5] (misc) is not MiscData!");
 
-        if (objects.Length == 8)
+        if (objects.Length == 6)
         {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, equip, misc, inventory));
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, equip, misc, inventory));
             return true;
         }
 
-        if (objects[8] is not DelegateData dele)
-            return ThrowOrReturn("objects[7] (misc) is not MiscData!");
+        if (objects[6] is not DelegateData dele)
+            return ThrowOrReturn("objects[6] (misc) is not DelegateData!");
 
         if (objects.Length == 7)
         {
-            var bg = new PlayerBackgroundData(name, texName, flavour, description, equip, misc, inventory)
+            var bg = new PlayerBackgroundData(name, texName, equip, misc, inventory)
             {
                 Delegates = dele
             };
@@ -126,114 +126,107 @@ internal static class OriginCalls
             return true;
         }
 
-        AddBasicOrigin(objects, out var _, out var texName, out var name, out var flavour, out var description, out var inventory);
+        AddBasicOrigin(objects, out var _, out var texName, out var name, out var inventory);
 
-        if (!CastInt(objects[6], out int head))
-            return ThrowOrReturn("objects[6] (head) is not an int!");
+        if (!CastInt(objects[4], out int head))
+            return ThrowOrReturn("objects[4] (head) is not an int!");
 
-        if (!CastInt(objects[7], out int chest))
-            return ThrowOrReturn("objects[7] (chest) is not an int!");
+        if (!CastInt(objects[5], out int chest))
+            return ThrowOrReturn("objects[5] (chest) is not an int!");
 
-        if (!CastInt(objects[8], out int legs))
-            return ThrowOrReturn("objects[8] (legs) is not an int!");
+        if (!CastInt(objects[6], out int legs))
+            return ThrowOrReturn("objects[6] (legs) is not an int!");
+
+        if (objects.Length == 7)
+        {
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, new EquipData(head, chest, legs), null, inventory));
+            return true;
+        }
+
+        if (objects[7] is not int[] accessories)
+            return ThrowOrReturn("objects[7] (accessories) is not an int[]!");
+
+        if (objects.Length == 8)
+        {
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, new EquipData(head, chest, legs, accessories), null, inventory));
+            return true;
+        }
+
+        if (!CastInt(objects[8], out int life))
+            return ThrowOrReturn("objects[8] (life) is not an int or short!");
 
         if (objects.Length == 9)
         {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, new EquipData(head, chest, legs), null, inventory));
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, new EquipData(head, chest, legs, accessories), new MiscData(life), inventory));
             return true;
         }
 
-        if (objects[9] is not int[] accessories)
-            return ThrowOrReturn("objects[9] (accessories) is not an int[]!");
+        if (!CastInt(objects[9], out int mana))
+            return ThrowOrReturn("objects[9] (mana) is not an int or short!");
 
         if (objects.Length == 10)
         {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, new EquipData(head, chest, legs, accessories), null, inventory));
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, new EquipData(head, chest, legs, accessories), new MiscData(life, mana), inventory));
             return true;
         }
 
-        if (!CastInt(objects[10], out int life))
-            return ThrowOrReturn("objects[10] (life) is not an int or short!");
+        if (!CastInt(objects[10], out int npcType))
+            return ThrowOrReturn("objects[10] (npcType) is not an int or short!");
 
         if (objects.Length == 11)
         {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, new EquipData(head, chest, legs, accessories), new MiscData(life), inventory));
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, new EquipData(head, chest, legs, accessories), new MiscData(life, mana, npcType), inventory));
             return true;
         }
 
-        if (!CastInt(objects[11], out int mana))
-            return ThrowOrReturn("objects[11] (mana) is not an int or short!");
+        if (!CastInt(objects[11], out int swordType))
+            return ThrowOrReturn("objects[11] (swordType) is not an int or short!");
 
         if (objects.Length == 12)
         {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, new EquipData(head, chest, legs, accessories), new MiscData(life, mana), inventory));
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, new EquipData(head, chest, legs, accessories), new MiscData(life, mana, npcType, swordType), inventory));
             return true;
         }
 
-        if (!CastInt(objects[12], out int npcType))
-            return ThrowOrReturn("objects[12] (npcType) is not an int or short!");
+        if (!CastInt(objects[12], out int pickType))
+            return ThrowOrReturn("objects[12] (pickType) is not an int or short!");
 
         if (objects.Length == 13)
         {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, new EquipData(head, chest, legs, accessories), new MiscData(life, mana, npcType), inventory));
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, new EquipData(head, chest, legs, accessories), new MiscData(life, mana, npcType, swordType, pickType), inventory));
             return true;
         }
 
-        if (!CastInt(objects[13], out int swordType))
-            return ThrowOrReturn("objects[13] (swordType) is not an int or short!");
+        if (!CastInt(objects[13], out int axeType))
+            return ThrowOrReturn("objects[13] (axeType) is not an int or short!");
 
         if (objects.Length == 14)
         {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, new EquipData(head, chest, legs, accessories),
-                new MiscData(life, mana, npcType, swordType), inventory));
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, new EquipData(head, chest, legs, accessories), new MiscData(life, mana, npcType, swordType, pickType, axeType), inventory));
             return true;
         }
 
-        if (!CastInt(objects[14], out int pickType))
-            return ThrowOrReturn("objects[14] (pickType) is not an int or short!");
+        if (!CastInt(objects[14], out int sortPriority))
+            return ThrowOrReturn("objects[14] (sortPriorty) is not an int or short!");
 
         if (objects.Length == 15)
         {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, new EquipData(head, chest, legs, accessories), 
-                new MiscData(life, mana, npcType, swordType, pickType), inventory));
+            _crossModDatas.Add(new PlayerBackgroundData(name, texName, new EquipData(head, chest, legs, accessories), new MiscData(life, mana, npcType, swordType, pickType, axeType, sortPriority), inventory));
             return true;
         }
 
-        if (!CastInt(objects[15], out int axeType))
-            return ThrowOrReturn("objects[15] (axeType) is not an int or short!");
+        if (!CastInt(objects[15], out int stars))
+            return ThrowOrReturn("objects[15] (stars) is not an int or short!");
 
-        if (objects.Length == 16)
-        {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, new EquipData(head, chest, legs, accessories), 
-                new MiscData(life, mana, npcType, swordType, pickType, axeType), inventory));
-            return true;
-        }
-
-        if (!CastInt(objects[16], out int sortPriority))
-            return ThrowOrReturn("objects[16] (sortPriorty) is not an int or short!");
-
-        if (objects.Length == 17)
-        {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, new EquipData(head, chest, legs, accessories), 
-                new MiscData(life, mana, npcType, swordType, pickType, axeType, sortPriority), inventory));
-            return true;
-        }
-
-        if (!CastInt(objects[17], out int stars))
-            return ThrowOrReturn("objects[17] (stars) is not an int or short!");
-
-        _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, new EquipData(head, chest, legs, accessories), 
-            new MiscData(life, mana, npcType, swordType, pickType, axeType, sortPriority, stars), inventory));
+        _crossModDatas.Add(new PlayerBackgroundData(name, texName, new EquipData(head, chest, legs, accessories), new MiscData(life, mana, npcType, swordType, pickType, axeType, sortPriority, stars), inventory));
         return true;
     }
 
-    private static bool AddBasicOrigin(object[] objects, out Asset<Texture2D> asset, out string texName, out string name, out string flavour, out string description, out (int, int)[] inventory)
+    private static bool AddBasicOrigin(object[] objects, out Asset<Texture2D> asset, out string identifier, out string langKey, out (int, int)[] inventory)
     {
-        texName = string.Empty;
+        identifier = string.Empty;
         asset = null;
-        name = string.Empty;
-        flavour = string.Empty;
-        description = string.Empty;
+        langKey = string.Empty;
         inventory = Array.Empty<(int, int)>();
 
         if (objects.Length < 5)
@@ -244,30 +237,22 @@ internal static class OriginCalls
         asset = objects[0] as Asset<Texture2D>;
 
         if (objects[1] is not string)
-            return ThrowOrReturn("objects[1] is not a string!");
-        texName = objects[1] as string;
+            return ThrowOrReturn("objects[1] (identifier) is not a string!");
+        identifier = objects[1] as string;
 
-        TryRegisterTexture(asset, texName);
+        TryRegisterTexture(asset, identifier);
 
         if (objects[2] is not string)
-            return ThrowOrReturn("objects[2] is not a string!");
-        name = objects[2] as string;
+            return ThrowOrReturn("objects[2] (langKey) is not a string!");
+        langKey = objects[2] as string;
 
-        if (objects[3] is not string)
-            return ThrowOrReturn("objects[3] is not a string!");
-        flavour = objects[3] as string;
+        if (objects[3] is not (int, int)[])
+            return ThrowOrReturn("objects[3] (langKey) is not an (int, int)[]!");
+        inventory = objects[3] as (int, int)[];
 
-        if (objects[4] is not string)
-            return ThrowOrReturn("objects[4] is not a string!");
-        description = objects[4] as string;
-
-        if (objects[5] is not (int, int)[])
-            return ThrowOrReturn("objects[5] is not an (int, int)[]!");
-        inventory = objects[5] as (int, int)[];
-
-        if (objects.Length == 6)
+        if (objects.Length == 4)
         {
-            _crossModDatas.Add(new PlayerBackgroundData(name, texName, flavour, description, null, null, inventory));
+            _crossModDatas.Add(new PlayerBackgroundData(langKey, identifier, null, null, inventory));
             return true;
         }
         return true;
@@ -275,7 +260,11 @@ internal static class OriginCalls
 
     internal static bool ThrowOrReturn(string message)
     {
+#if DEBUG
         throw new Exception(message);
+#else
+        return false;
+#endif
     }
 
     internal static bool CastInt(object val, out int value)

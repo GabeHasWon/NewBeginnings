@@ -16,7 +16,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         public void SetBackground(PlayerBackgroundData data)
         {
             BackgroundData = data;
-            _bgName = data.Name;
+            _bgName = data.Identifier;
         }
 
         //Save / Load data for the player's origin name
@@ -26,19 +26,19 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         {
             _bgName = tag.GetString("bgName");
 
-            if (PlayerBackgroundDatabase.playerBackgroundDatas.Any(x => x.Name == _bgName))
-                BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Name == _bgName);
+            if (PlayerBackgroundDatabase.playerBackgroundDatas.Any(x => x.Identifier == _bgName))
+                BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Identifier == _bgName);
             else if (_bgName is not null && _bgName != string.Empty)
-                BackgroundData = new PlayerBackgroundData(_bgName, "PLACEHOLDER", "PLACEHOLDER", "This is a placeholder generated background for an unloaded cross-mod background.", null, null);
+                BackgroundData = new PlayerBackgroundData(_bgName, "Unloaded", null, null);
         }
 
         public bool HasBG() => _bgName != "" && _bgName != null;
         public bool HasBG(string name) => HasBG() && _bgName == name;
 
         //Misc tMod Hooks
-        public override void OnEnterWorld(Player player)
+        public override void OnEnterWorld()
         {
-            if (BackgroundData.Name != "Purist") //Unlock Beginner/Alternate if the player has an origin
+            if (HasBG() && BackgroundData.Identifier != "Purist") //Unlock Beginner/Alternate if the player has an origin
                 UnlockabilitySystem.UnlockSaveData.Complete("Beginner");
         }
     }

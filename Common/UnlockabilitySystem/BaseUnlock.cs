@@ -1,22 +1,23 @@
-﻿using System;
+﻿using Terraria.Localization;
 
-namespace NewBeginnings.Common.UnlockabilitySystem
+namespace NewBeginnings.Common.UnlockabilitySystem;
+
+internal class BaseUnlock
 {
-    internal class BaseUnlock
-    {
-        public string Name;
-        public string TexName;
-        public string Description;
-        public string Benefits;
-        public bool Unlocked;
+    public string Identifier;
+    public bool Unlocked;
 
-        public BaseUnlock(string name, string tex, string desc, string benefits, bool unlocked = false)
-        {
-            Name = name;
-            TexName = tex;
-            Description = desc;
-            Benefits = benefits;
-            Unlocked = unlocked;
-        }
+    public LocalizedText Name;
+    public LocalizedText Description;
+    public LocalizedText Rewards;
+
+    public BaseUnlock(string langKey, string identifier, bool unlocked = false)
+    {
+        Identifier = identifier;
+        Unlocked = unlocked;
+
+        Name = Language.GetText(langKey + ".DisplayName");
+        Description = Language.GetText(langKey + ".Description");
+        Rewards = Language.GetText(langKey + ".Rewards");
     }
 }

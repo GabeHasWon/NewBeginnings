@@ -8,12 +8,7 @@ namespace NewBeginnings.Content.Items.Weapon
 {
     public class KylieBoomerang : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Wooden Kylie");
-            Tooltip.SetDefault("'Surprisingly effective in combat!'");
-            SacrificeTotal = 1;
-        }
+        public override void SetStaticDefaults() => Item.ResearchUnlockCount = 1;
 
         public override void SetDefaults()
         {

@@ -8,8 +8,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds.Containers;
 
 internal class Adventurer : PlayerBackgroundContainer
 {
-    public override string Flavour => "Comes with a thirst for exploration and a penchant for boulder traps!";
-	public override string Description => "Starts with a grappling hook, 100 torches, a full archeologist vanity set and 5 dangersense and spelunker potions.";
+    public override string LanguageKey => "Mods.NewBeginnings.Origins.Adventurer";
     public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.GrapplingHook, 1), (ItemID.Torch, 100), (ItemID.TrapsightPotion, 5), (ItemID.SpelunkerPotion, 5) };
 
     public override EquipData Equip => new(ItemID.ArchaeologistsHat, ItemID.ArchaeologistsJacket, ItemID.ArchaeologistsPants);
@@ -37,7 +36,7 @@ internal class Adventurer : PlayerBackgroundContainer
 						count++;
 
 			if (count > 8)
-				BoulderTrap(x, y);
+                BoulderTrap(x, y);
 			else
 				i--;
 		}
@@ -46,7 +45,7 @@ internal class Adventurer : PlayerBackgroundContainer
 	/// <summary>
 	/// Copied from vanilla source; ripped out of WorlGen.placeTrap(int, int).
 	/// </summary>
-    private bool BoulderTrap(int x, int y)
+    private static bool BoulderTrap(int x, int y)
     {
 		int adjY = y;
 		int adjX = x;
@@ -75,7 +74,7 @@ internal class Adventurer : PlayerBackgroundContainer
 					tile = Main.tile[i, j];
 					if (tile.TileType == 226)
 					{
-						WorldGen.trapDiag[1, 0]++;
+						//WorldGen.trapDiag[1, 0]++; //1.4.4PORT
 						return false;
 					}
 					tile = Main.tile[i, j];
@@ -97,7 +96,7 @@ internal class Adventurer : PlayerBackgroundContainer
 
 			if (realY < Main.worldSurface)
 			{
-				WorldGen.trapDiag[1, 0]++;
+				//WorldGen.trapDiag[1, 0]++; //1.4.4
 				return false;
 			}
 
@@ -107,7 +106,7 @@ internal class Adventurer : PlayerBackgroundContainer
 
 		if (adjY - realY <= 5 || adjY - realY >= 40)
 		{
-			WorldGen.trapDiag[1, 0]++;
+			//WorldGen.trapDiag[1, 0]++; 1.4.4PORT
 			return false;
 		}
 
@@ -181,7 +180,7 @@ internal class Adventurer : PlayerBackgroundContainer
 			tile = Main.tile[num10, num11];
 			tile.RedWire = true;
 		}
-		WorldGen.trapDiag[1, 1]++;
+		//WorldGen.trapDiag[1, 1]++;
 		return true;
 	}
 }
