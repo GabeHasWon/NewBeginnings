@@ -145,8 +145,10 @@ internal static class PlayerBackgroundDatabase
     private static void AddNewBG(string langKey, string tex, EquipData? equipData = null, MiscData? miscData = null, DelegateData? delegateData = null, params (int type, int stack)[] inv)
     {
         langKey = "Mods.NewBeginnings.Origins." + langKey;
-        var data = new PlayerBackgroundData(langKey, tex, equipData, miscData, inv);
-        data.Delegates = delegateData ?? new DelegateData();
+        var data = new PlayerBackgroundData(langKey, tex, equipData, miscData, inv)
+        {
+            Delegates = delegateData ?? new DelegateData()
+        };
         playerBackgroundDatas.Add(data);
     }
 

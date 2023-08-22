@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using Microsoft.Xna.Framework;
+using System.Linq;
+using System.Numerics;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.WorldBuilding;
 
 namespace NewBeginnings.Common.PlayerBackgrounds
 {
@@ -40,6 +43,32 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         {
             if (HasBG() && BackgroundData.Identifier != "Purist") //Unlock Beginner/Alternate if the player has an origin
                 UnlockabilitySystem.UnlockSaveData.Complete("Beginner");
+        }
+
+        public override void ModifyMaxStats(out StatModifier health, out StatModifier mana)
+        {
+            health = StatModifier.Default;
+            mana = StatModifier.Default;
+
+            if (HasBG()) //This adjusts health to be according to the origin.
+            {
+                int maxLife = BackgroundData.Misc.MaxLife;
+                var scaling = ModContent.GetInstance<NewBeginningsConfig>().HealthScaling;
+
+                if (scaling == NewBeginningsConfig.Scaling.Scaled)
+                {
+                    float factor = 1 - (Player.ConsumedLifeCrystals / (float)Player.LifeCrystalMax);
+                    float modifier = (int)((100 - maxLife) * factor);
+                    health.Base -= modifier;
+                }
+                else if (scaling == NewBeginningsConfig.Scaling.Relative)
+                {
+                    float factor = Player.ConsumedLifeCrystals / (float)Player.LifeCrystalMax;
+                    health.Base = MathHelper.Lerp(maxLife - 100, (maxLife * 4) - 400, factor);
+                }
+                else
+                    health.Base -= 100 - maxLife;
+            }
         }
     }
 }

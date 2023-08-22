@@ -4,6 +4,29 @@ Projectiles: {
 }
 
 MrPlaguesCompatLine: Click here to open New Beginning's menu!
-
 # The space in the below key is intentional. If you're translating to a language with spaces, keep it.
 TitleLine: " [c/8B8B8B:the {0}]"
+
+Configs: {
+	NewBeginningsConfig: {
+		DisplayName: New Beginnings Config
+
+		HealthScaling: {
+			Label: "[i:58] Max Health Scaling"
+			Tooltip:
+				'''
+				Whether origins with higher or lower starting health will scale to 400.
+				Scaled always maxes at 400, regardless of starting health.
+				Flat always maxes at starting health + 300.
+				Relative scales to starting health, where max life crystal health is 400 * (starting health / 100).
+				'''
+		}
+	}
+
+	Scaling: {
+		Tooltip: ""
+		Scaled.Label: Scaled
+		Flat.Label: Flat
+		Relative.Label: Relative
+	}
+}

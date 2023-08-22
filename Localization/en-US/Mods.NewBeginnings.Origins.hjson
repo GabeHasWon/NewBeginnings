@@ -1,6 +1,7 @@
 Purist: {
 	DisplayName: Purist
 	Flavor: The normal Terraria experience.
+	# You will see the Descriptions of several origins be empty, the "" is necessary.
 	Description: ""
 }
 
@@ -196,6 +197,7 @@ Accursed: {
 		Starts with gold tools, the Dryad instead of the Guide, and pearlwood armor - in Hardmode.
 		Unlocked by beating the Wall of Flesh with an origin character.
 		'''
+	# Used by the Accursed's world generation modification.
 	Generation: Generating hardmode
 }
 
@@ -208,4 +210,5 @@ Random: {
 Unloaded: {
 	DisplayName: Unloaded origin
 	Flavor: This is a placeholder generated background for an unloaded cross-mod background.
+	Description: ""
 }

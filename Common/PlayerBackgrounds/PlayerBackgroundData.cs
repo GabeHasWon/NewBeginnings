@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
-using Terraria.ModLoader;
 
 namespace NewBeginnings.Common.PlayerBackgrounds
 {
@@ -50,16 +48,22 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             Delegates = new();
         }
 
-        public void ApplyToPlayer(Player player)
+        /// <summary>
+        /// Applies changes to the player.<br/>
+        /// Note that health changes are applied in <see cref="PlayerBackgroundPlayer.ModifyMaxStats"/> now.
+        /// </summary>
+        /// <param name="player"></param>
+        public readonly void ApplyToPlayer(Player player)
         {
-            ApplyStats(player);
+            player.ConsumedManaCrystals = (Misc.AdditionalMana / 20) - 1;
+
             ApplyAccessories(player);
             ApplyArmor(player);
             ApplyInventory(player);
             ApplyItemReplacements(player);
         }
 
-        private void ApplyItemReplacements(Player player)
+        private readonly void ApplyItemReplacements(Player player)
         {
             if (Misc.CopperShortswordReplacement != -1)
                 player.inventory[0] = new Item(Misc.CopperShortswordReplacement);
@@ -71,13 +75,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 player.inventory[2] = new Item(Misc.CopperAxeReplacement);
         }
 
-        public void ApplyStats(Player player)
-        {
-            player.statLifeMax = Misc.MaxLife > 20 ? Misc.MaxLife : 20;
-            player.statManaMax = Misc.AdditionalMana >= 0 ? Misc.AdditionalMana : 0;
-        }
-
-        public void ApplyAccessories(Player player, bool forced = false)
+        public readonly void ApplyAccessories(Player player, bool forced = false)
         {
             if (Equip.Accessories is null)
                 return;
@@ -105,7 +103,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                     player.armor[3 + i] = new Item(i < Equip.Accessories.Length ? Equip.Accessories[i] : 0);
         }
 
-        public void ApplyArmor(Player player)
+        public readonly void ApplyArmor(Player player)
         {
             if (Equip.Head < 0 || Equip.Body < 0 || Equip.Legs < 0)
                 throw new Exception("Uh oh! Negative armor IDs!");
@@ -115,7 +113,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             player.armor[2] = new Item(Equip.Legs);
         }
 
-        private void ApplyInventory(Player player)
+        private readonly void ApplyInventory(Player player)
         {
             if (Inventory is null || Inventory.Length == 0)
                 return;
@@ -142,7 +140,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         }
 
         /// <summary>Counts the number of items that will be displayed in the character creation UI.</summary>
-        public int DisplayItemCount()
+        public readonly int DisplayItemCount()
         {
             int total = Inventory.Length + Equip.Accessories.Length;
 

@@ -1,6 +1,3 @@
-- Ported to 1.4.4
-- Added localization to every built-in origin
-- Added localization support to origins, the UI
-- Updated Builder, Thief, Spelunker flavor text
-- Updated origins to use Identifier instead of Texture values for internal reference
-- Updated crossmod to reflect above changes
+- Completely overhauled how max life & mana is set
+- Added config for how max life scales, with three options
+- Made the player's title ("Name the Origin") actually localize properly

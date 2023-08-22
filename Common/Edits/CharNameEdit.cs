@@ -27,9 +27,9 @@ namespace NewBeginnings.Common.Edits
 
             c.EmitDelegate((string input, Player player) =>
             {
-                string identifier = player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData.Identifier;
-                if (identifier is not null)
-                    return input + Language.GetText("Mods.NewBeginnings.TitleLine").WithFormatArgs(identifier);
+                var data = player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
+                if (data.Identifier is not null)
+                    return input + Language.GetText("Mods.NewBeginnings.TitleLine").WithFormatArgs(data.Name.Value);
                 return input;
             });
 
