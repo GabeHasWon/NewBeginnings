@@ -1,0 +1,38 @@
+{
+Splash: {
+	// 0: Now with more space!
+	// 1: By the people who brought you Overseer!
+	// 2: Not to be confused with MrPlague's Authentic Races!
+	// 3: 15% less sodium, 15% less sugar, 100% better characters!
+	// 4: Contains a dangerous amount of awful code!
+	// 5: Has never had and never will have any bugs!
+	// 6: Purist is only for people who want to look at the mod, not play it!
+	// 7: Surprisingly popular in Antarctica!
+	// 8: Sponsored by Team Spirit!
+	// 9: Contains a significant lack of shaders!
+	// 10: Confirmed drama-free by researchers!
+	// 11: Tremor? I hardly know her!
+
+	0: 现在有更多空间了!
+	1: 来自那些为你带来监管者的人!
+	2: 别和 MrPlague's Authentic Races 混为一谈了!
+	3: 少添加15%的钠, 少添加15%的糖, 100%更棒的角色!
+	4: 包含大量可怕且危险的代码!
+	5: 从来没有也永远不会有任何错误!
+	6: 纯粹之人只适合那些想要看看mod，但不去玩的人!
+	7: 在南极洲出人意料地受欢迎!
+	8: 由魂灵团队赞助!
+	9: 包含严重缺乏着色器的情况!
+	10: 研究人员确认无剧情!
+	11: 震颤? 我几乎不认识她!
+}
+
+SortBy: {
+	// Line: Sort by {0}
+	// Default: default
+	// Difficulty: difficulty
+	Line: "{0}排序"
+	Default: 默认
+	Difficulty: 难度
+}
+}

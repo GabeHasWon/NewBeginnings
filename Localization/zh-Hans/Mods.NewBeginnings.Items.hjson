@@ -1,0 +1,73 @@
+{
+DeprivedLantern: {
+	// DisplayName: Deprived Lantern
+	/* Tooltip:
+		'''
+		Lights up when placed in inventory
+		Infinite duration
+		''' */
+
+	DisplayName: 被遗忘提灯
+	Tooltip:
+		'''
+		无需装备, 在背包中时便会亮起
+		无限持续时间
+		'''
+}
+
+DimStar: {
+	// DisplayName: Dim Star
+	// Tooltip: ""
+	DisplayName: 暗淡之星
+	Tooltip: ""
+}
+
+LightStar: {
+	// DisplayName: Light Star
+	// Tooltip: ""
+	DisplayName: 照耀之星
+	Tooltip: ""
+}
+
+LumberjackAxe: {
+	// DisplayName: Lumberjack Axe
+	// Tooltip: Not to be confused with Lucy
+	DisplayName: 伐木工的斧头
+	Tooltip: 别和露西斧搞混了
+}
+
+LumberjackFlannel: {
+	// DisplayName: Lumberjack Flannel
+	// Tooltip: "'Incredibly comfortable'"
+	DisplayName: 伐木工的绒衬衫
+	Tooltip: "'极致舒适'"
+}
+
+DeprivedBlade: {
+	// DisplayName: Deprived Blade
+	// Tooltip: Not the blade it used to be
+	DisplayName: 被遗忘之剑
+	Tooltip: 不再是以前的那把剑了
+}
+
+KylieBoomerang: {
+	// DisplayName: Kylie Boomerang
+	// Tooltip: "'Surprisingly effective in combat!'"
+	DisplayName: 木质回飞棒
+	Tooltip: "'在战斗中出乎意料的有效'"
+}
+
+RustyCutlass: {
+	// DisplayName: Rusty Cutlass
+	// Tooltip: It has seen better days
+	DisplayName: 生锈的弯刀
+	Tooltip: 它曾有过一段更好的时光
+}
+
+WornSpellbook: {
+	// DisplayName: Worn Spellbook
+	// Tooltip: Trusty, albeit rather weak
+	DisplayName: 用旧的法术书
+	Tooltip: 尽管并不强力, 但它显然值得信赖
+}
+}
