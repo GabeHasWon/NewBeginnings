@@ -1,3 +1,4 @@
-- Completely overhauled how max life & mana is set
-- Added config for how max life scales, with three options
-- Made the player's title ("Name the Origin") actually localize properly
+- Fixed locked origins being usable through the Random origin
+- Slayer is now a 3 star origin now that the Ash forest exists
+- Added the Confused and the Chef origins
+- Added Trailblazer's Helmet

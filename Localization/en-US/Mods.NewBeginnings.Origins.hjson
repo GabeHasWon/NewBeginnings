@@ -176,7 +176,19 @@ Frozen: {
 Slayer: {
 	DisplayName: Slayer
 	Flavor: Rip and tear until it is done.
-	Description: Spawns with a boomstick, 140 max health and infinite musket balls in Hell.
+	Description: Starts with a boomstick, 140 max health and infinite musket balls in Hell.
+}
+
+Chef: {
+	DisplayName: Chef
+	Flavor: Food magician, famous across the world for their dishes. Looking for distant spices.
+	Description: Starts with a chef's outfit, a bunch of food, a cooking pot, and a bloody machete.
+}
+
+ReallyConfused: {
+	DisplayName: Confused
+	Flavor: Just bewildered. Completely out of the loop. What's happening? Does this bow shoot magic?
+	Description: Starts with a gold bow and 100 arrows. Damage classes are shuffled around permenantly, along with some minor tweaks.
 }
 
 Alternate: {

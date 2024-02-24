@@ -46,6 +46,9 @@ internal static class PlayerBackgroundDatabase
         AddNewBG("Builder", "Builder", new EquipData(0, 0, 0, ItemID.PortableStool, ItemID.ArchitectGizmoPack), new MiscData(npcType : NPCID.Painter), (ItemID.Wood, 500), (ItemID.StoneBlock, 500));
         AddNewBG("Thief", "Thief", new EquipData(0, 0, 0, ItemID.LuckyCoin), new MiscData(stars: 2), (ItemID.PlatinumShortsword, 1), (ItemID.PoisonedKnife, 300)); //replace plat shortsword with thief's dagger
         AddNewBG("Firestarter", "Firestarter", new MiscData(stars: 2), (ItemID.WandofSparking, 1), (ItemID.MolotovCocktail, 300), (ItemID.FlareGun, 1), (ItemID.Flare, 50), (ItemID.Torch, 100));
+        
+        AddNewBG("Chef", "Chef", new EquipData(ItemID.ChefHat, ItemID.ChefShirt, ItemID.ChefPants), 
+            (ItemID.BloodyMachete, 1), (ItemID.CookingPot, 1), (ItemID.CookedFish, 3), (ItemID.Apple, 3), (ItemID.CookedShrimp, 1), (ItemID.FruitSalad, 1));
 
         playerBackgroundDatas.Add(new Pirate());
         
@@ -62,7 +65,7 @@ internal static class PlayerBackgroundDatabase
         }), (ItemID.PlatinumCoin, 1));
 
         AddNewBG("Fisherman", "Fisherman", EquipData.AccFirst(ItemID.HighTestFishingLine, ItemID.AnglerHat), new MiscData(npcType: NPCID.Angler), (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
-        AddNewBG("Trailblazer", "Trailblazer", EquipData.AccFirst(new int[] { ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind }), new MiscData(stars: 1)); //Needs the winged helmet vanity
+        AddNewBG("Trailblazer", "Trailblazer", EquipData.AccFirst(new int[] { ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind }, ModContent.ItemType<TrailblazerHelmet>()), new MiscData(stars: 1));
 
         playerBackgroundDatas.Add(new Adventurer());
 
@@ -83,6 +86,7 @@ internal static class PlayerBackgroundDatabase
         AddNewBG("Alternate", "Alternate", null, new MiscData(swordReplace: ItemID.TinShortsword, pickReplace: ItemID.TinPickaxe, axeReplace: ItemID.TinAxe), new DelegateData(() => UnlockabilitySystem.UnlockSaveData.Unlocked("Beginner")));
 
         playerBackgroundDatas.Add(new Accursed());
+        playerBackgroundDatas.Add(new ReallyConfused());
 
         playerBackgroundDatas.AddRange(OriginCalls._crossModDatas);
 

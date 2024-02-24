@@ -32,7 +32,7 @@ internal class Frozen : PlayerBackgroundContainer
 
     public static void Igloo(GenerationProgress progress, Terraria.IO.GameConfiguration config)
     {
-        int min = GenVars.snowMinX[0];
+        int min = GenVars.snowMinX[0]; //Gets the bounds of the very top of the biome
         int max = GenVars.snowMaxX[Array.IndexOf(GenVars.snowMaxX, 0) - 1];
 
         int x = (min + max) / 2;

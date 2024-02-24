@@ -46,3 +46,8 @@ WornSpellbook: {
 	DisplayName: Worn Spellbook
 	Tooltip: Trusty, albeit rather weak
 }
+
+TrailblazerHelmet: {
+	DisplayName: Trailblazer Helmet
+	Tooltip: "'Godspeed!'"
+}

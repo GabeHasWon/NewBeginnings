@@ -474,7 +474,7 @@ namespace NewBeginnings.Common.UI
 
         private PlayerBackgroundData BackgroundButtonClick(UIList allBGButtons, PlayerBackgroundData item, UIColoredImageButton currentBGButton)
         {
-            PlayerBackgroundData useData = item.Identifier == "Random" ? Main.rand.Next(PlayerBackgroundDatabase.playerBackgroundDatas.SkipLast(1).ToList()) : item; //Hardcoding for random, sucks but eh
+            PlayerBackgroundData useData = item.Identifier == "Random" ? GetValidRandomOrigin() : item; //Hardcoding for random, sucks but eh
             _descFlavour.SetText(item.Identifier != "Random" ? useData.Flavour : item.Flavour); //Changes the UIText's value to use the bg's description
             _descText.SetText(item.Identifier != "Random" ? useData.Description : item.Description); //Changes the UIText's value to use the bg's description
 
@@ -497,6 +497,17 @@ namespace NewBeginnings.Common.UI
 
             currentBGButton.SetColor(Color.White); //"Selects" the button visually.
             return item;
+        }
+
+        private static PlayerBackgroundData GetValidRandomOrigin()
+        {
+            var list = PlayerBackgroundDatabase.playerBackgroundDatas.SkipLast(1).ToList();
+            var origin = Main.rand.Next(list);
+
+            while (!origin.Delegates.ClearCondition.Invoke())
+                origin = Main.rand.Next(list);
+
+            return origin;
         }
 
         private static void SetSort(UIList allBGButtons, List<(int priority, int stars, UIColoredImageButton button)> buttons, UIImageButton sortButton)
