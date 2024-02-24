@@ -1,0 +1,46 @@
+
+{
+	Projectiles: {
+		// FeintDagger.DisplayName: Feint Dagger
+		// KylieProjectile.DisplayName: Kylie Projectile
+		FeintDagger.DisplayName: 佯攻匕首
+		KylieProjectile.DisplayName: 回飞棒投射物
+	}
+
+	// MrPlaguesCompatLine: Click here to open New Beginning's menu!
+	MrPlaguesCompatLine: 点击此处打开 New Beginning 菜单!
+	# The space in the below key is intentional. If you're translating to a language with spaces, keep it.
+	// TitleLine: " [c/8B8B8B:the {0}]"
+	TitleLine: " [c/8B8B8B:the {0}]"
+
+	Configs: {
+		NewBeginningsConfig: {
+			DisplayName: 服务器配置
+
+			HealthScaling: {
+				Label: "[i:58] 生命值比例"
+				/* Tooltip:
+					'''
+					Whether origins with higher or lower starting health will scale to 400.
+					Scaled always maxes at 400, regardless of starting health.
+					Flat always maxes at starting health + 300.
+					Relative scales to starting health, where max life crystal health is 400 * (starting health / 100).
+					''' */
+				Tooltip:
+					'''
+					当你的起始生命值不为100时, 通过此项改变你从生命水晶能够获得的生命值上限
+					刻度: 在使用满生命水晶(15颗)后生命值将为 400, 无论你的起始生命为多少.
+					平滑: 在使用满生命水晶(15颗)后生命值将为 (初始生命值 + 300).
+					比例: 在使用满生命水晶(15颗)后生命值将为 400*(起始生命值/100).
+					'''
+			}
+		}
+
+		Scaling: {
+			Tooltip: ""
+			Scaled.Label: 刻度
+			Flat.Label: 平滑
+			Relative.Label: 比例
+		}
+	}
+}
