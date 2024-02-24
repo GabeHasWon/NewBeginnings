@@ -1,4 +1,11 @@
 - Fixed locked origins being usable through the Random origin
 - Slayer is now a 3 star origin now that the Ash forest exists
 - Added the Confused and the Chef origins
-- Added Trailblazer's Helmet
+- Added Trailblazer's Helmet vanity
+- Added Chinese translation
+- Added better spawn system:
+	Origins will now use their own world spawn instead of the world's default world spawn
+	This makes no change in singleplayer and functions exactly the same
+	In multiplayer, that means each origin will respect their own spawn location
+		For example, if I have Slayer and my friend is a Purist, she will spawn normally, whereas I will spawn in an Ash Forest
+	Changing spawn with beds and such works normally, this only applies to using the default spawn

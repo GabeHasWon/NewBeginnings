@@ -1,9 +1,4 @@
-{
 Beginner: {
-	// DisplayName: Beginner
-	// Description: Use your first origin.
-	// Rewards: Unlocks the [c/A7B5BC:Alternate] origin.
-
 	DisplayName: 初心者
 	Description: 使用你的第一个出身.
 	Rewards: 解锁 [c/A7B5BC:不纯粹之人] 出身.
@@ -15,6 +10,4 @@ Accursed: {
 	Rewards: 解锁 [c/832C2E:被诅咒者] 出身.
 }
 
-// UnlockText: Unlocked [c/CFC553:{0}]!
 UnlockText: 已解锁 [c/CFC553:{0}]!
-}

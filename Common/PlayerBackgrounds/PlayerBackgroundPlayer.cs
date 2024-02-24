@@ -1,17 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using Terraria.WorldBuilding;
 
 namespace NewBeginnings.Common.PlayerBackgrounds
 {
     /// <summary>Handles player-related background functions (i.e. inventory).</summary>
     internal class PlayerBackgroundPlayer : ModPlayer
     {
-        public PlayerBackgroundData BackgroundData = new PlayerBackgroundData();
+        public PlayerBackgroundData BackgroundData = new();
+
+        private readonly Dictionary<Guid, Point16> _originSpawns = [];
 
         private string _bgName = "";
 
@@ -22,8 +25,24 @@ namespace NewBeginnings.Common.PlayerBackgrounds
             _bgName = data.Identifier;
         }
 
-        //Save / Load data for the player's origin name
-        public override void SaveData(TagCompound tag) => tag.Add("bgName", _bgName);
+        //Save / Load data for the player's origin name & spawn (if any)
+        public override void SaveData(TagCompound tag)
+        {
+            tag.Add("bgName", _bgName);
+
+            if (_originSpawns.Count > 0)
+            {
+                tag.Add("originSpawnCount", _originSpawns.Count);
+                int count = 0;
+                
+                foreach (KeyValuePair<Guid, Point16> pair in _originSpawns)
+                {
+                    tag.Add("spawnKey" + count, pair.Key.ToByteArray());
+                    tag.Add("spawnValue" + count, pair.Value);
+                    count++;
+                }
+            }
+        }
 
         public override void LoadData(TagCompound tag)
         {
@@ -33,16 +52,37 @@ namespace NewBeginnings.Common.PlayerBackgrounds
                 BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Identifier == _bgName);
             else if (_bgName is not null && _bgName != string.Empty)
                 BackgroundData = new PlayerBackgroundData(_bgName, "Unloaded", null, null);
+
+            if (tag.TryGet("originSpawnCount", out int count))
+            {
+                for (int i = 0; i < count; ++i)
+                {
+                    Guid key = new(tag.GetByteArray("spawnKey" + i));
+                    Point16 value = tag.Get<Point16>("spawnValue" + i);
+                    _originSpawns.Add(key, value);
+                }
+            }
         }
 
         public bool HasBG() => _bgName != "" && _bgName != null;
         public bool HasBG(string name) => HasBG() && _bgName == name;
+        public void SetOriginSpawn(Point16 point) => _originSpawns.Add(Main.ActiveWorldFileData.UniqueId, point);
 
         //Misc tMod Hooks
-        public override void OnEnterWorld()
+        public override void Load() => On_Player.Spawn += HijackSpawn;
+
+        private void HijackSpawn(On_Player.orig_Spawn orig, Player self, PlayerSpawnContext context)
         {
-            if (HasBG() && BackgroundData.Identifier != "Purist") //Unlock Beginner/Alternate if the player has an origin
-                UnlockabilitySystem.UnlockSaveData.Complete("Beginner");
+            orig(self, context);
+
+            if (self.GetModPlayer<PlayerBackgroundPlayer>()._originSpawns.TryGetValue(Main.ActiveWorldFileData.UniqueId, out Point16 spawn) && (self.SpawnX == -1 || self.SpawnY == -1))
+            {
+                self.SpawnX = spawn.X;
+                self.SpawnY = spawn.Y;
+
+                self.Center = new Vector2(self.SpawnX, self.SpawnY).ToWorldCoordinates();
+                self.fallStart = (int)(self.Center.Y / 16f);
+            }
         }
 
         public override void ModifyMaxStats(out StatModifier health, out StatModifier mana)

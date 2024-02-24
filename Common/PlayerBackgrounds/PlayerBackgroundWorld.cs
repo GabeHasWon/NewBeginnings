@@ -28,9 +28,9 @@ namespace NewBeginnings.Common.PlayerBackgrounds
         {
             var data = Main.LocalPlayer.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
             Point16 newSpawn = data.Delegates.GetSpawnPosition();
-
-            Main.spawnTileX = newSpawn.X;
-            Main.spawnTileY = newSpawn.Y;
+            Main.LocalPlayer.GetModPlayer<PlayerBackgroundPlayer>().SetOriginSpawn(newSpawn);
+            //Main.spawnTileX = newSpawn.X;
+            //Main.spawnTileY = newSpawn.Y;
         }
 
         public override void PostWorldGen()

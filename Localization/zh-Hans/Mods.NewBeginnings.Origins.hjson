@@ -1,282 +1,197 @@
-{
 Purist: {
-	// DisplayName: Purist
 	DisplayName: 纯粹之人
-	// Flavor: The normal Terraria experience.
 	Flavor: 标准的Terraria体验
 	# You will see the Descriptions of several origins be empty, the "" is necessary.
 	Description: ""
 }
 
 Knight: {
-	// DisplayName: Knight
-	// Flavor: A noble warrior, clad in iron.
-	// Description: Starts with a full set of iron armor and a silver broadsword.
 	DisplayName: 骑士
 	Flavor: 一位身披铁甲的荣耀战士
 	Description: 以一整套的铁盔甲和一把银宽剑开始.
 }
 
 Huntsman: {
-	// DisplayName: Huntsman
-	// Flavor: Steady hands and keen eyes, a master of the hunt.
-	// Description: Starts with a bow, an endless quiver and a hunter cloak.
 	DisplayName: 猎人
 	Flavor: 一位眼明手快的狩猎大师
 	Description: 以一把弓, 无尽箭袋和猎人披风开始.
 }
 
 Wizard: {
-	// DisplayName: Wizard
-	// Flavor: An apprentice wizard with an affinity for the arcane.
-	// Description: Starts with a wizard hat, a topaz staff and a topaz robe, with additional mana but lower max health.
 	DisplayName: 巫师
 	Flavor: 一位追寻奥秘的巫师学徒
 	Description: 以巫师帽, 黄玉袍和一把黄玉法杖开始, 同时拥有较高的初始法力和更少的初始生命.
 }
 
 Beastmaster: {
-	// DisplayName: Beastmaster
-	// Flavor: Raised in the woodlands, they summon beasts to aid their journey.
-	// Description: Lower max health but an immediate slime staff and leather whip.
 	DisplayName: 兽王
 	Flavor: 一位发于森林, 野兽为伴的驯兽师
 	Description: 以一把史莱姆召唤杖和皮鞭开始, 但拥有更少的初始生命.
 }
 
 Shinobi: {
-	// DisplayName: Shinobi
-	// Flavor: A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency.
-	// Description: Start with a tabi and a katana but 80 max health.
 	DisplayName: 忍者
 	Flavor: 一位来自东方, 杀人无形的雇佣刺客
 	Description: 以一把武士刀和一双分趾厚底袜开始, 但拥有更少的初始生命.
 }
 
 Alchemist: {
-	// DisplayName: Alchemist
-	// Flavor: A master of nature and chemicals; prepared for anything.
-	// Description: Start with an alchemy table, 50 bottled water and 12 herb bags.
 	DisplayName: 炼金术师
 	Flavor: 一位调和万物的炼金大师
 	Description: 以一张炼药桌,50瓶水和12份草药包开始.
 }
 
 Demoman: {
-	// DisplayName: Demoman
-	// Flavor: Hurl explosives at ore, enemies, or yourself!
-	// Description: Starts with 2 dynamite, 10 bombs, and 15 grenades.
 	DisplayName: 爆破狂
 	Flavor: 向矿石, 敌人或你自己投掷炸药吧!
 	Description: 以2枚炸药, 10枚炸弹, 15枚手榴弹开始.
 }
 
 Boomer: {
-	// DisplayName: Boomer
-	// Flavor: Back in my day...
-	// Description: Starts with a lawn mower, sunglasses, BBQ ribs and a grilled squirrel.
 	DisplayName: 老家伙
 	Flavor: 在我们那个年代...
 	Description: 以割草机, 太阳镜, 烧烤排骨和烤松鼠开始.
 }
 
 Zoomer: {
-	// DisplayName: Zoomer
-	// Flavor: Terreddit post is popping off today boutta frag some slimes fr fr
-	// Description: Starts with goggles, a cell phone and 40 max health.
 	DisplayName: Z青年
 	Flavor: Terreddit 上今天突然弹出来个帖说啥 用手榴弹杀史莱姆 认真的...
 	Description: 以护目镜, 一部手机和仅40的生命值开始.
 }
 
 Tiger: {
-	// DisplayName: Tiger
-	// Flavor: Lightly more feral than other Terrarians, but not as much as you'd think!
-	// Description: Starts with cat ears, a fox tail, tiger climbing gear, and a bladed glove.
 	DisplayName: 老虎
 	Flavor: 比其他泰拉人凶猛一点点, 但没有你想的那么多!
 	Description: 以猫耳朵, 狐狸尾巴, 猛虎攀岩用具和一双利刃手套开始.
 }
 
 Builder: {
-	// DisplayName: Builder
-	// Flavor: A renowned architect from faraway cities.
-	// Description: Starts with a portable stool, an architect gizmo pack, 500 wood and stone, and the Painter instead of the Guide in new worlds.
 	DisplayName: 建筑师
 	Flavor: 一位远道而来的著名建筑师.
 	Description: 以一个梯凳，一个建筑师工具包，500个木头和石头开始, 并且画家将会替代向导作为你的起始NPC
 }
 
 Thief: {
-	// DisplayName: Thief
-	// Flavor: Petty thief with a penchant for pickpocketing.
-	// Description: Starts with a lucky coin, platinum shortsword and 300 poisoned knives.
 	DisplayName: 盗贼
 	Flavor: 一位有扒窃嗜好的小偷.
 	Description: 以一枚幸运硬币, 铂金短剑和300柄毒刀开始.
 }
 
 Firestarter: {
-	// DisplayName: Firestarter
-	// Flavor: Some people just want to watch the world burn.
-	// Description: Starts with a wand of sparking, 300 molotov cocktails, a flare gun with 50 flares, and 100 torches.
 	DisplayName: 纵火犯
 	Flavor: 有些人, 就是想看着世界燃烧.
 	Description: 以一柄火花魔棒，300个燃烧瓶，一把有50枚弹药的照明枪和100个火把开始.
 }
 
 Pirate: {
-	// DisplayName: Pirate
-	// Flavor: Aye. A real pirate knows when land can be plundered, and plunder they shall!
-	// Description: Starts with an eye patch, a gold ring, a sextant, a rusty cutlass, a keg and 200 sails.
 	DisplayName: 海盗
 	Flavor: 是的! 一个真正的海盗知道陆地什么时候能被掠夺，并且他们将会去掠夺！
 	Description: 以眼罩、金戒指、六分仪、生锈的弯刀、小桶和200张帆开始.
 }
 
 Deprived: {
-	// DisplayName: Deprived
-	// Flavor: A forgotten warrior carrying long-lost tools.
-	// Description: Starts with 80 max health, a deprived blade, a deprived lantern and 3 healing potions.
 	DisplayName: 受弃者
 	Flavor: 一位被遗忘的战士, 手持着被遗忘之物.
 	Description: 以80生命值上限, 被遗忘之剑, 被遗忘提灯和3瓶治疗药水开始.
 }
 
 Lumberjack: {
-	// DisplayName: Lumberjack
-	// Flavor: A humble lumberjack, his flannel and his trusty axe.
-	// Description: Starts with a flannel shirt, lumber axe, a sawmill, 12 apples, and 300 of normal, boreal, palm, ebon, shade, rich mahogany, and dynasty wood.
 	DisplayName: 伐木工
 	Flavor: 一位卑微的伐木工, 带着他的法兰绒衬衫和他可靠的斧子.
 	Description: 以法兰绒衬衫, 伐木斧, 锯木机, 12个苹果和一些不同种类的木材各300份开始.
 }
 
 Nobleman: {
-	// DisplayName: Nobleman
-	// Flavor: A hard worker if you think counting money is hard. NOTE: Can only be played in Mediumcore or Hardcore.
-	// Description: Starts with a diamond ring, a gold watch, 20 max health, and a platinum coin - in mediumcore or hardcore only.
 	DisplayName: 贵族
 	Flavor: 如果你认为数钱很难, 那就是一个勤奋的工人. 注: 仅能使用于中核或硬核角色.
 	Description: 以一个钻石戒指, 金表, 仅20的生命值上限, 和一枚铂金币作为开始  - 只能用于中核或硬核角色.
 }
 
 Fisherman: {
-	// DisplayName: Fisherman
-	// Flavor: Slimes want me, fish fear me...
-	// Description: Starts with a high test fishing line, angler hat, a reinforced fishing pole, 3 cans of worms, and the Angler instead of the Guide.
 	DisplayName: 渔夫
 	Flavor: 史莱姆渴望我, 鱼儿们怕着我......
 	Description: 以一个渔夫帽, 一根强化钓竿配上优质钓鱼线, 3罐蠕虫罐头作为开始, 并且渔夫会替代向导成为你的初始NPC.
 }
 
 Trailblazer: {
-	// DisplayName: Trailblazer
-	// Flavor: No time to explain. They have places to go, things to see!
-	// Description: Starts with hermes boots, an aglet, and an anklet of the wind.
 	DisplayName: 开拓者
 	Flavor: 无需多言, 他们要踏遍天涯, 遍览万物!
 	Description: 以赫尔墨斯之靴, 金属扣带和疾风脚镯开始.
 }
 
 Adventurer: {
-	// DisplayName: Adventurer
-	// Flavor: Comes with a thirst for exploration and a penchant for boulder traps!
-	// Description: Starts with a grappling hook, 100 torches, a full archeologist vanity set and 5 dangersense and spelunker potions.
 	DisplayName: 冒险者
 	Flavor: 伴随着探索的渴望和对落石陷阱的嗜好!
 	Description: 以一支抓钩, 100个火把, 一整套的考古学家服装和各5瓶的危险感药水及洞穴探险药水开始.
 }
 
 Farmer: {
-	// DisplayName: Farmer
-	// Flavor: It ain't much, but it's honest work.
-	// Description: Starts with a summer hat, a sickle, 12 hay, and 12 daybloom, blinkroot, moonglow, waterleaf, shiverthorn, deathweed, and fireblossom seeds and their planter boxes.
 	DisplayName: 农夫
 	Flavor: 它不多, 但这是个诚实的工作. (PS: 是个EN meme)
 	Description: 以一个夏日草帽, 一把镰刀, 200份干草, 各种草药的种子各12份和它们的花盆开始.
 }
 
 Spelunker: {
-	// DisplayName: Spelunker
-	// Flavor: The caves call, and they answer. Those ores aren't gonna mine themselves!
-	// Description: Starts with an ancient chisel, mining helmet, a gold pickaxe, an iron minecart, 10 bombs and 10 spelunker potions.
 	DisplayName: 探勘者
 	Flavor: 洞穴在呼唤, 在回应. 那些矿石不会自己掉下来的!
 	Description: 以挖矿头盔, 远古凿子, 金镐, 矿车, 10份炸弹和洞穴探险药水开始.
 }
 
 Bookworm: {
-	// DisplayName: Bookworm
-	// Flavor: Mind over matter. The best way to fight is with a sharpened mind!
-	// Description: Starts with a worn spellbook, a guide to plant fiber cordage, 8 books and a guide to critter companionship.
 	DisplayName: 书呆子
 	Flavor: 心胜于物. 最优的战斗策略便是拥有一个敏锐的脑子!
 	Description: 以一本旧的法术书, 植物绳索编织指南, 小动物指南和8本普通书籍开始.
 }
 
 Druid: {
-	// DisplayName: Druid
-	// Flavor: A herald of nature, engaged with keeping the world alive and healthy!
-	// Description: Starts with a guide to plant fiber cordage, a vilethorn, a staff of regrowth, 3 herb bags, and 10 clay pots.
 	DisplayName: 德鲁伊
 	Flavor: 自然的先驱, 致力于维护世界的活力与健康!
 	Description: 以植物绳索编织指南, 魔刺, 再生之杖, 3份草药袋和10个黏土盆开始.
 }
 
 Painter: {
-	// DisplayName: Painter
-	// Flavor: Art is a form of expression; a way to exist; and a powerful tool - and EXPENSIVE.
-	// Description: Starts with a paintball gun, paint scraper, paint sprayer, paintbrush, paint roller, the Painter instead of the Guide and a 25% sale on all Painter stock.
 	DisplayName: 画家
 	Flavor: 艺术是一种表达形式, 亦是一种生活方式, 一个强大的工具... - 并且, 十分昂贵.
 	Description: 以一把彩弹枪, 画笔和一套喷漆工具开始. 画家会替代向导作为起始NPC, 并且所有的油漆都会打2.5折!
 }
 
 Australian: {
-	// DisplayName: Australian
-	// Flavor: Just a normal bloke, nothin' special. World's just a little upside down over here.
-	// Description: Starts with a cowboy set, a wooden kylie and is always upside down.
 	DisplayName: 澳大利亚人
 	Flavor: 就是个普通人, 没什么特别的. 但是这里的世界有些颠倒了.
 	Description: 以一套牛仔套装, 一个木制回飞棒开始. 但角色始终上下颠倒.
 }
 
 Bereaved: {
-	// DisplayName: Bereaved
-	// Flavor: The umbrella doesn't help when the storm still clouds your mind.
-	// Description: Starts with a tragic umbrella and funeral set in a graveyard.
 	DisplayName: 丧亲之人
 	Flavor: 暴雨仍笼罩着你的心, 雨伞帮不上你任何忙.
 	Description: 以一把悲剧雨伞, 一套葬服在墓地开始.
 }
 
 Frozen: {
-	// DisplayName: Frozen
-	// Flavor: After a thousands years frozen (and a couple days making the igloo), they're ready for action.
-	// Description: Starts with a snowball cannon, a pink snow set and 999 snowballs in an igloo.
 	DisplayName: 冰寒族群
 	Flavor: 在千年的冰霜(和几天建造雪屋的时间)后, 他们准备好行动了.
 	Description: 以雪球炮, 一套粉色防雪套装和999个雪球在雪屋开始.
 }
 
 Slayer: {
-	// DisplayName: Slayer
-	// Flavor: Rip and tear until it is done.
-	// Description: Spawns with a boomstick, 140 max health and infinite musket balls in Hell.
 	DisplayName: 屠杀者
 	Flavor: 前进, 撕碎, 直到它们被消灭.
 	Description: 出生在地狱中, 以140生命值, 三发猎枪和无限弹药袋开始.
 }
 
+Chef: {
+	// DisplayName: Chef
+	// Flavor: Food magician, famous across the world for their dishes. Looking for distant spices.
+	// Description: Starts with a chef's outfit, a bunch of food, a cooking pot, and a bloody machete.
+}
+
+ReallyConfused: {
+	// DisplayName: Confused
+	// Flavor: Just bewildered. Completely out of the loop. What's happening? Does this bow shoot magic?
+	// Description: Starts with a gold bow and 100 arrows. Damage classes are shuffled around permenantly, along with some minor tweaks.
+}
+
 Alternate: {
-	// DisplayName: Alternate
-	// Flavor: Perhaps, if things had been a little different, this'd be a purist.
-	/* Description:
-		'''
-		Starts with tin tools instead of copper
-		Unlocked by using your first origin.
-		''' */
 	DisplayName: 不纯粹之人
 	Flavor: 也许, 如果世界线稍有变动, 这就是一个纯粹之人.
 	Description:
@@ -287,15 +202,6 @@ Alternate: {
 }
 
 Accursed: {
-	// DisplayName: Accursed
-	// Flavor: Starts with hardmode already enabled. Good luck!
-	/* Description:
-		'''
-		Starts with gold tools, the Dryad instead of the Guide, and pearlwood armor - in Hardmode.
-		Unlocked by beating the Wall of Flesh with an origin character.
-		''' */
-	# Used by the Accursed's world generation modification.
-	// Generation: Generating hardmode
 	DisplayName: 被诅咒者
 	Flavor: 直接以困难模式开始, 祝你好运!
 	Description:
@@ -308,20 +214,13 @@ Accursed: {
 }
 
 Random: {
-	// DisplayName: Random
-	// Flavor: Choose a random background.
-	// Description: ""
 	DisplayName: 随机
 	Flavor: 选择一个随机的背景.
 	Description: ""
 }
 
 Unloaded: {
-	// DisplayName: Unloaded origin
-	// Flavor: This is a placeholder generated background for an unloaded cross-mod background.
-	// Description: ""
 	DisplayName: 已删除出身
 	Flavor: This is a placeholder generated background for an unloaded cross-mod background.
 	Description: ""
-}
 }
