@@ -15,8 +15,8 @@ namespace NewBeginnings.Common.PlayerBackgrounds;
 
 internal static class PlayerBackgroundDatabase
 {
-    internal static List<PlayerBackgroundData> playerBackgroundDatas = new();
-    internal static Dictionary<string, Asset<Texture2D>> backgroundIcons = new();
+    internal static List<PlayerBackgroundData> playerBackgroundDatas = [];
+    internal static Dictionary<string, Asset<Texture2D>> backgroundIcons = [];
 
     public static void Populate()
     {
@@ -58,18 +58,18 @@ internal static class PlayerBackgroundDatabase
             (ItemID.PalmWood, 300), (ItemID.Ebonwood, 300), (ItemID.Shadewood, 300), (ItemID.RichMahogany, 300), (ItemID.DynastyWood, 300));
 
         AddNewBG("Nobleman", "Nobleman",
-            EquipData.AccFirst(new int[] { ItemID.DiamondRing, ItemID.GoldWatch }), new MiscData(20, stars: 5, npcType: NPCID.TaxCollector), new DelegateData(modifyCreation: (plr) =>
+            EquipData.AccFirst([ItemID.DiamondRing, ItemID.GoldWatch]), new MiscData(20, stars: 5, npcType: NPCID.TaxCollector), new DelegateData(modifyCreation: (plr) =>
         {
-            if (plr.difficulty == PlayerDifficultyID.SoftCore || plr.difficulty == PlayerDifficultyID.Creative)
+            if (plr.difficulty is PlayerDifficultyID.SoftCore or PlayerDifficultyID.Creative)
                 plr.difficulty = PlayerDifficultyID.MediumCore;
         }), (ItemID.PlatinumCoin, 1));
-
+        
         AddNewBG("Fisherman", "Fisherman", EquipData.AccFirst(ItemID.HighTestFishingLine, ItemID.AnglerHat), new MiscData(npcType: NPCID.Angler), (ItemID.ReinforcedFishingPole, 1), (ItemID.CanOfWorms, 3));
-        AddNewBG("Trailblazer", "Trailblazer", EquipData.AccFirst(new int[] { ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind }, ModContent.ItemType<TrailblazerHelmet>()), new MiscData(stars: 1));
+        AddNewBG("Trailblazer", "Trailblazer", EquipData.AccFirst([ItemID.HermesBoots, ItemID.Aglet, ItemID.AnkletoftheWind], ModContent.ItemType<TrailblazerHelmet>()), new MiscData(stars: 1));
 
         playerBackgroundDatas.Add(new Adventurer());
 
-        AddNewBG("Farmer", "Farmer", new EquipData(ItemID.SummerHat), new MiscData(stars: 2), (ItemID.Sickle, 1), (ItemID.Hay, 200), (ItemID.DaybloomSeeds, 12), (ItemID.BlinkrootSeeds, 12), (ItemID.MoonglowSeeds, 12), (ItemID.WaterleafSeeds, 12), 
+        AddNewBG("Farmer", "Farmer", new EquipData(ItemID.SummerHat), new MiscData(stars: 2), (ItemID.Sickle, 1), (ItemID.Hay, 100), (ItemID.DaybloomSeeds, 12), (ItemID.BlinkrootSeeds, 12), (ItemID.MoonglowSeeds, 12), (ItemID.WaterleafSeeds, 12), 
             (ItemID.ShiverthornSeeds, 12), (ItemID.DeathweedSeeds, 12), (ItemID.FireblossomSeeds, 12), (ItemID.BlinkrootPlanterBox, 5), (ItemID.CorruptPlanterBox, 5), (ItemID.CrimsonPlanterBox, 5), 
             (ItemID.DayBloomPlanterBox, 5), (ItemID.FireBlossomPlanterBox, 5), (ItemID.MoonglowPlanterBox, 5), (ItemID.ShiverthornPlanterBox, 5), (ItemID.WaterleafPlanterBox, 5)); //Gonna need a custom straw hat vanity item to replace the summer hat. 
 
@@ -91,22 +91,24 @@ internal static class PlayerBackgroundDatabase
         playerBackgroundDatas.AddRange(OriginCalls._crossModDatas);
 
         AddNewBGItemlessDesc("Random", "Random", null, new MiscData(sortPriority: 0, stars: 0));
+
+        OriginCalls.RemoveOrigin(["Lumberjack", ModContent.GetInstance<NewBeginnings>()]);
     }
 
     private static void SortBGDatas()
     {
-        Dictionary<int, List<PlayerBackgroundData>> tempData = new();
+        Dictionary<int, List<PlayerBackgroundData>> tempData = [];
 
         foreach (var item in playerBackgroundDatas)
         {
             if (!tempData.ContainsKey(item.Misc.SortPriority))
-                tempData.Add(item.Misc.SortPriority, new List<PlayerBackgroundData>() { item });
+                tempData.Add(item.Misc.SortPriority, [item]);
             else
                 tempData[item.Misc.SortPriority].Add(item);
         }
 
         var keys = tempData.Keys.ToList();
-        List<PlayerBackgroundData> newDatas = new();
+        List<PlayerBackgroundData> newDatas = [];
 
         while (keys.Count > 0)
         {
@@ -129,7 +131,7 @@ internal static class PlayerBackgroundDatabase
         var assets = mod.Assets.GetLoadedAssets();
         var realIcons = mod.GetFileNames().Where(x => x.StartsWith(AssetPath) && x.EndsWith(".rawimg"));
 
-        foreach (var item in realIcons)
+        foreach (string item in realIcons)
             backgroundIcons.Add(item[AssetPath.Length..].Replace(".rawimg", string.Empty), mod.Assets.Request<Texture2D>(item.Replace(".rawimg", string.Empty)));
     }
 

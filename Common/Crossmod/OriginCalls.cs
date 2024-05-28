@@ -3,7 +3,10 @@ using NewBeginnings.Common.PlayerBackgrounds;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace NewBeginnings.Common.Crossmod;
 
@@ -32,8 +35,37 @@ internal static class OriginCalls
             return AddShortOrigin(args[1..]);
         else if (type == "playerhasorigin")
             return PlayerHasOrigin(args[1..]);
+        else if (type == "removeorigin")
+            return RemoveOrigin(args[1..]);
 
         return null;
+    }
+
+    internal static object RemoveOrigin(object[] objects)
+    {
+        if (objects[0] is not string id)
+            return ThrowOrReturn("objects[0] is not a string!");
+
+        if (objects[1] is not Mod mod)
+            return ThrowOrReturn("objects[1] is not a Mod!");
+
+        if (_crossModDatas.Any(x => x.Identifier == id))
+        {
+            _crossModDatas.Remove(_crossModDatas.First(x => x.Identifier == id));
+            ModContent.GetInstance<NewBeginnings>().Logger.Warn($"{mod.DisplayNameClean} removed \"{id}\" cross mod origin from New Beginnings!");
+        }
+        else if (PlayerBackgroundDatabase.playerBackgroundDatas.Any(x => x.Identifier == id))
+        {
+            PlayerBackgroundDatabase.playerBackgroundDatas.Remove(PlayerBackgroundDatabase.playerBackgroundDatas.First(x => x.Identifier == id));
+            ModContent.GetInstance<NewBeginnings>().Logger.Warn($"{mod.DisplayNameClean} removed \"{id}\" in-house origin from New Beginnings!");
+        }
+        else
+        {
+            ModContent.GetInstance<NewBeginnings>().Logger.Info($"Identifier {id} does not correspond to any existing origin.");
+            return false;
+        }
+
+        return true;
     }
 
     private static bool PlayerHasOrigin(object[] objects)
@@ -81,6 +113,7 @@ internal static class OriginCalls
             _crossModDatas.Add(bg);
             return true;
         }
+
         return false;
     }
 
@@ -120,9 +153,9 @@ internal static class OriginCalls
             return true;
         }
 
-        if (objects[0] is PlayerBackgroundData)
+        if (objects[0] is PlayerBackgroundData data)
         {
-            _crossModDatas.Add((PlayerBackgroundData)objects[0]);
+            _crossModDatas.Add(data);
             return true;
         }
 
@@ -255,6 +288,7 @@ internal static class OriginCalls
             _crossModDatas.Add(new PlayerBackgroundData(langKey, identifier, null, null, inventory));
             return true;
         }
+
         return true;
     }
 

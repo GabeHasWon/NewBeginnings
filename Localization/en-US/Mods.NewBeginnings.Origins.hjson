@@ -128,7 +128,7 @@ Adventurer: {
 Farmer: {
 	DisplayName: Farmer
 	Flavor: It ain't much, but it's honest work.
-	Description: Starts with a summer hat, a sickle, 12 hay, and 12 daybloom, blinkroot, moonglow, waterleaf, shiverthorn, deathweed, and fireblossom seeds and their planter boxes.
+	Description: Starts with a summer hat, a sickle, 100 hay, and 12 daybloom, blinkroot, moonglow, waterleaf, shiverthorn, deathweed, and fireblossom seeds and their planter boxes.
 }
 
 Spelunker: {
@@ -220,7 +220,7 @@ Random: {
 }
 
 Unloaded: {
-	DisplayName: Unloaded origin
-	Flavor: This is a placeholder generated background for an unloaded cross-mod background.
+	DisplayName: (Unloaded)
+	Flavor: This is a placeholder background for an unloaded origin.
 	Description: ""
 }
