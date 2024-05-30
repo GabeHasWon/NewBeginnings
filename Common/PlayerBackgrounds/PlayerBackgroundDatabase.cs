@@ -91,8 +91,6 @@ internal static class PlayerBackgroundDatabase
         playerBackgroundDatas.AddRange(OriginCalls._crossModDatas);
 
         AddNewBGItemlessDesc("Random", "Random", null, new MiscData(sortPriority: 0, stars: 0));
-
-        OriginCalls.RemoveOrigin(["Lumberjack", ModContent.GetInstance<NewBeginnings>()]);
     }
 
     private static void SortBGDatas()

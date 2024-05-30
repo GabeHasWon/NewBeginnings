@@ -104,7 +104,7 @@ internal class PlayerBackgroundPlayer : ModPlayer
             else if (scaling == NewBeginningsConfig.Scaling.Relative)
             {
                 float factor = Player.ConsumedLifeCrystals / (float)Player.LifeCrystalMax;
-                health.Base = MathHelper.Lerp(maxLife - 100, (maxLife * 4) - 400, factor);
+                health.Base = MathHelper.Lerp(maxLife - 100, maxLife * 4 - 400, factor);
             }
             else
                 health.Base -= 100 - maxLife;

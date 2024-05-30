@@ -1,5 +1,5 @@
 displayName = New Beginnings
 author = Team Spirit
-version = 1.1.0.4
+version = 1.1.0.5
 homepage = discord.gg/uBNnznSfur
 dllReferences = StructureHelper
