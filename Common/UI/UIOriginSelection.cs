@@ -299,6 +299,7 @@ namespace NewBeginnings.Common.UI
 
                     icon.Append(stackUI);
                 }
+
                 slotBG.Append(icon);
 
                 float width = FontAssets.ItemStack.Value.MeasureString(item.HoverName).X * 0.8f;
@@ -336,6 +337,7 @@ namespace NewBeginnings.Common.UI
                     offset = 0;
                     yOffset++;
                 }
+
                 id++;
             }
         }
@@ -373,7 +375,7 @@ namespace NewBeginnings.Common.UI
             allBGButtons.SetScrollbar(scroll);
             container.Append(scroll);
 
-            List<(int priority, int stars, UIColoredImageButton button)> buttons = new();
+            List<(int priority, int stars, UIColoredImageButton button)> buttons = [];
 
             foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas) //Adds every background into the list as a button
             {
@@ -435,7 +437,7 @@ namespace NewBeginnings.Common.UI
             foreach (var item in buttons)
                 allBGButtons.Add(item.button);
 
-            //AddCustomBGButton(allBGButtons, buttons);
+            AddCustomBGButton(allBGButtons, buttons);
 
             SetSort(allBGButtons, buttons, _sortButton);
         }
