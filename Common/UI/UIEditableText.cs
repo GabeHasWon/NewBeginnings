@@ -27,10 +27,11 @@ internal partial class UIEditableText : UIElement
 
     private readonly string _backingString = "Enter text";
 
-    public bool typing;
-    public bool updated;
-    public bool reset;
     public string currentValue = "";
+
+    private bool _typing;
+    private bool _updated;
+    private bool _reset;
 
     // Composition string is handled at the very beginning of the update
     // In order to check if there is a composition string before backspace is typed, we need to check the previous state
@@ -40,19 +41,17 @@ internal partial class UIEditableText : UIElement
     {
         _backingString = backingText;
         InputType = inputType;
-        Width.Set(130, 0);
-        Height.Set(24, 0);
     }
 
     public void SetTyping()
     {
-        typing = true;
+        _typing = true;
         Main.blockInput = true;
     }
 
     public void SetNotTyping()
     {
-        typing = false;
+        _typing = false;
         Main.blockInput = false;
     }
 
@@ -62,19 +61,19 @@ internal partial class UIEditableText : UIElement
     {
         SetTyping();
         currentValue = "";
-        updated = true;
+        _updated = true;
     }
 
     public override void Update(GameTime gameTime)
     {
-        if (reset)
+        if (_reset)
         {
-            updated = false;
-            reset = false;
+            _updated = false;
+            _reset = false;
         }
 
-        if (updated)
-            reset = true;
+        if (_updated)
+            _reset = true;
 
         if (Main.mouseLeft && !IsMouseHovering)
             SetNotTyping();
@@ -101,7 +100,7 @@ internal partial class UIEditableText : UIElement
             if (newText != currentValue)
             {
                 currentValue = newText;
-                updated = true;
+                _updated = true;
             }
         }
         else if (InputType == InputType.Number && UnreadableRegex().IsMatch(newText)) //I found this regex on SO so no idea if it works right lol
@@ -109,7 +108,7 @@ internal partial class UIEditableText : UIElement
             if (newText != currentValue)
             {
                 currentValue = newText;
-                updated = true;
+                _updated = true;
             }
         }
         else
@@ -117,7 +116,7 @@ internal partial class UIEditableText : UIElement
             if (newText != currentValue)
             {
                 currentValue = newText;
-                updated = true;
+                _updated = true;
             }
         }
 
@@ -126,7 +125,7 @@ internal partial class UIEditableText : UIElement
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        if (typing)
+        if (_typing)
         {
             HandleText();
 
@@ -134,18 +133,23 @@ internal partial class UIEditableText : UIElement
             Main.instance.DrawWindowsIMEPanel(GetDimensions().Position());
         }
 
+        Rectangle rect = GetDimensions().ToRectangle();
         Vector2 pos = GetDimensions().Position() + Vector2.One * 4;
+        Color color = Color.White;
+
+        if (rect.Contains(Main.MouseScreen.ToPoint()))
+            color = new Color(180, 180, 180);
 
         const float Scale = 1f;
         string displayed = currentValue ?? "";
 
         if (displayed != string.Empty)
-            Utils.DrawBorderString(spriteBatch, displayed, pos, Color.White, Scale);
+            Utils.DrawBorderString(spriteBatch, displayed, pos, color, Scale);
         else
-            Utils.DrawBorderString(spriteBatch, _backingString, pos, Color.Gray, Scale);
+            Utils.DrawBorderString(spriteBatch, _backingString, pos, Color.Gray.MultiplyRGB(color), Scale);
             
         // Composition string + cursor drawing below
-        if (!typing)
+        if (!_typing)
             return;
 
         pos.X += FontAssets.MouseText.Value.MeasureString(displayed).X * Scale;

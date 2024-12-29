@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using NewBeginnings.Common.PlayerBackgrounds;
 using NewBeginnings.Content.Items.Icons;
 using System;
 using Terraria;
@@ -61,7 +60,7 @@ internal class UICustomOrigin : UIState
 
         UIOriginSelection.AddCharacterPreview(panel, _player);
 
-        var grid = new UISearchItemGrid()
+        var grid = new UISearchItemGrid(OnClickItem)
         {
             Width = StyleDimension.FromPixelsAndPercent(0, 0.75f),
             Height = StyleDimension.FromPixelsAndPercent(-44, 1f),
@@ -70,9 +69,15 @@ internal class UICustomOrigin : UIState
         panel.Append(grid);
     }
 
-    internal static bool InvalidItemToAdd(Item item) => item.createTile >= TileID.Dirt || item.createWall > WallID.None || item.questItem || item.ammo > AmmoID.None && item.damage > 8 
-        || item.damage > 15 || item.defense > 5 || ItemID.Sets.BossBag[item.type] 
-        || ItemID.Sets.Deprecated[item.type] || item.pick > 80 || item.axe > 15 || item.hammer > 50 || item.wingSlot > 0;
+    public void OnClickItem(UIItemContainer container)
+    {
+
+    }
+
+    internal static bool InvalidItemToAdd(Item it) => it.createTile >= TileID.Dirt || it.createWall > WallID.None || it.questItem || it.ammo > AmmoID.None && it.damage > 15 
+        || it.damage > 15 || it.defense > 5 || ItemID.Sets.BossBag[it.type] || ItemID.Sets.ItemsThatShouldNotBeInInventory[it.type] || it.type <= ItemID.None
+        || ItemID.Sets.Deprecated[it.type] || it.pick > 80 || it.axe > 15 || it.hammer > 50 || it.wingSlot > 0 || it.type == ItemID.BoringBow || ItemID.Sets.IsAPickup[it.type]
+        || it.type == ItemID.ManaCloakStar;
 
     private void BuildSliders(UIPanel panel)
     {
@@ -109,38 +114,12 @@ internal class UICustomOrigin : UIState
         panel.Append(_manaSlider);
     }
 
-    private UIColoredSlider MakeSlider(Func<float> returnFunction, Action<float> updateValue, Func<float, Color> colorMod) 
-        => new UIColoredSlider(LocalizedText.Empty, returnFunction, updateValue, () =>
+    private static UIColoredSlider MakeSlider(Func<float> returnFunction, Action<float> updateValue, Func<float, Color> colorMod) 
+        => new(LocalizedText.Empty, returnFunction, updateValue, () =>
         {
             float value = UILinksInitializer.HandleSliderHorizontalInput(returnFunction.Invoke(), 0f, 1f, PlayerInput.CurrentProfile.InterfaceDeadzoneX, 0.35f);
             updateValue(value);
         }, colorMod, Color.Transparent);
-
-    private void AddStatsCounters(UIPanel panel)
-    {
-        var stats = new UIText(GetStatsText(RealLife, RealMana, (int)_stars))
-        {
-            Top = StyleDimension.FromPixels(4),
-            Width = StyleDimension.FromPixels(4),
-            HAlign = 0f,
-            Height = StyleDimension.FromPixels(44),
-            IsWrapped = false,
-            MarginTop = 8
-        };
-        stats.OnUpdate += (self) => stats.SetText(GetStatsText(RealLife, RealMana, (int)_stars));
-        panel.Append(stats);
-    }
-
-    private static string GetStatsText(int health, int mana, int starsCount)
-    {
-        string stats = $"[i:{ItemID.Heart}]{health} [i:{ItemID.Star}]{mana}";
-        string stars = string.Empty;
-
-        for (int i = 0; i < 5; ++i)
-            stars += starsCount > i ? $"[i:{ModContent.ItemType<LightStar>()}]" : $"[i:{ModContent.ItemType<DimStar>()}]";
-
-        return stars + "   " + stats;
-    }
 
     private string GetSplash()
     {
