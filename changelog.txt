@@ -1,2 +1,2 @@
-- Fixed me forgetting to remove code that removed an origin for testing purposes
-- Please forget you read this
+-- 1.2 --
+- Adds in Custom origin, unlocked by beating the Moon Lord at all

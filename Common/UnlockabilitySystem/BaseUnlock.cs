@@ -2,22 +2,12 @@
 
 namespace NewBeginnings.Common.UnlockabilitySystem;
 
-internal class BaseUnlock
+internal class BaseUnlock(string langKey, string identifier, bool unlocked = false)
 {
-    public string Identifier;
-    public bool Unlocked;
+    public string Identifier = identifier;
+    public bool Unlocked = unlocked;
 
-    public LocalizedText Name;
-    public LocalizedText Description;
-    public LocalizedText Rewards;
-
-    public BaseUnlock(string langKey, string identifier, bool unlocked = false)
-    {
-        Identifier = identifier;
-        Unlocked = unlocked;
-
-        Name = Language.GetText(langKey + ".DisplayName");
-        Description = Language.GetText(langKey + ".Description");
-        Rewards = Language.GetText(langKey + ".Rewards");
-    }
+    public LocalizedText Name = Language.GetText(langKey + ".DisplayName");
+    public LocalizedText Description = Language.GetText(langKey + ".Description");
+    public LocalizedText Rewards = Language.GetText(langKey + ".Rewards");
 }

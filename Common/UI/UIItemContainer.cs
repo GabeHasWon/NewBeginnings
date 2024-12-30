@@ -7,14 +7,16 @@ namespace NewBeginnings.Common.UI;
 
 public class UIItemContainer : UIElement
 {
-    public Item Item { get; }
+    public Item Item { get; private set; }
 
     public UIItemContainer(Item item)
     {
         Item = item;
-        Width.Set(32f, 0f);
-        Height.Set(32f, 0f);
+        Width.Set(32, 0);
+        Height.Set(32, 0);
     }
+
+    public void OverrideItem(Item item) => Item = item;
 
     protected override void DrawSelf(SpriteBatch spriteBatch)
     {

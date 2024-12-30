@@ -1,9 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using NewBeginnings.Common.UnlockabilitySystem;
 using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.UI;
 using Terraria.UI;
@@ -19,12 +22,15 @@ internal class UISearchItemGrid : UIPanel
         ID,
     }
 
+    private readonly static HashSet<int> alwaysInvalidItems = [];
+
     private readonly UIList _list = null;
     private readonly UIEditableText _inputText = null;
     private readonly UIButton<string> _sortButton = null;
     private readonly Action<UIItemContainer> _clickItem = null;
 
     private SortMode _mode = SortMode.Chaos;
+    private int _hideTimer = 0;
 
     public UISearchItemGrid(Action<UIItemContainer> onClick)
     {
@@ -38,7 +44,7 @@ internal class UISearchItemGrid : UIPanel
 
         Append(panel);
 
-        _inputText = new UIEditableText(InputType.Text, "Search for an item - enter to filter")
+        _inputText = new UIEditableText(InputType.Text, UICustomOrigin.Localize("Search"))
         {
             Width = StyleDimension.Fill,
             Height = StyleDimension.Fill,
@@ -48,7 +54,7 @@ internal class UISearchItemGrid : UIPanel
 
         panel.Append(_inputText);
 
-        _sortButton = new UIButton<string>("Sort: Chaos")
+        _sortButton = new UIButton<string>(UICustomOrigin.Localize("SortBy") + LocalizeMode(_mode))
         {
             Width = StyleDimension.FromPixels(160),
             Height = StyleDimension.FromPixels(36),
@@ -78,8 +84,10 @@ internal class UISearchItemGrid : UIPanel
         _list.SetScrollbar(bar);
         Append(bar);
 
-        PopulateGrid();
+        PopulateList();
     }
+
+    private static string LocalizeMode(SortMode mode) => UICustomOrigin.Localize("Sort." + mode);
 
     private void ClickSortButton(UIMouseEvent evt, UIElement listeningElement)
     {
@@ -88,7 +96,7 @@ internal class UISearchItemGrid : UIPanel
         if (_mode > SortMode.ID)
             _mode = SortMode.Chaos;
 
-        (listeningElement as UIButton<string>).SetText("Sort: " + _mode);
+        (listeningElement as UIButton<string>).SetText(UICustomOrigin.Localize("SortBy") + LocalizeMode(_mode));
 
         _list.ManualSortMethod = SortListBy;
         RedoList();
@@ -115,28 +123,100 @@ internal class UISearchItemGrid : UIPanel
     private void RedoList()
     {
         _list.Clear();
-        PopulateGrid();
-        Recalculate();
-        _list.UpdateOrder();
+        PopulateList();
     }
 
-    private void PopulateGrid()
+    private void PopulateList()
     {
+        _hideTimer = 3;
+
+        if (alwaysInvalidItems.Count == 0)
+        {
+            for (int i = 1; i < ItemLoader.ItemCount; ++i)
+            {
+                Item item = ContentSamples.ItemsByType[i];
+
+                if (item.IsAir || item.type == ItemID.None || ItemID.Sets.Deprecated[i] || ItemID.Sets.ItemsThatShouldNotBeInInventory[i]
+                    || item.type == ItemID.ManaCloakStar || item.type == ItemID.BoringBow)
+                    alwaysInvalidItems.Add(i);
+            }
+        }
+
+        List<UIElement> elements = [];
+
         for (int i = 1; i < ItemLoader.ItemCount; ++i)
         {
-            Item item = new(i);
+            Item item = ContentSamples.ItemsByType[i];
+
+            // Necessary, constant checks that invalidate items
+            if (alwaysInvalidItems.Contains(i))
+                continue;
+
+            // Skip if we have a restricted custom background
+            if (!UnlockSaveData.Unlocked("Terrarian") && UICustomOrigin.InvalidItemToAdd(item))
+                continue;
 
             bool notSearch = _inputText.currentValue == string.Empty;
 
-            if (UICustomOrigin.InvalidItemToAdd(item) || !notSearch && !item.Name.Contains(_inputText.currentValue, StringComparison.OrdinalIgnoreCase))
+            // Match search if any search is found
+            if (!notSearch && !MatchSearch(item, _inputText.currentValue))
                 continue;
 
             var image = new UIItemContainer(item);
             image.OnLeftClick += Image_OnLeftClick;
-            _list.Add(image);
-
             image.Append(new UIText(item.Name) { VAlign = 0.5f, Left = StyleDimension.FromPixels(46) });
+            elements.Add(image);
         }
+
+        _list.AddRange(elements);
+    }
+
+    private static bool MatchSearch(Item item, string currentValue)
+    {
+        string value = currentValue;
+
+        if (value.Contains("!a"))
+        {
+            value = value.Replace("!a", "");
+
+            if (item.headSlot <= -1 && item.bodySlot <= -1 && item.legSlot <= -1)
+                return false;
+        }
+        
+        if (value.Contains("!c"))
+        {
+            value = value.Replace("!c", "");
+
+            if (!item.accessory)
+                return false;
+        }
+
+        if (value.Contains("!w"))
+        {
+            value = value.Replace("!w", "");
+
+            if (item.damage <= 0)
+                return false;
+        }
+
+        if (value == string.Empty)
+            return true;
+
+        value = value.Trim();
+        return item.Name.Contains(value, StringComparison.OrdinalIgnoreCase);
+    }
+
+    protected override void DrawChildren(SpriteBatch spriteBatch)
+    {
+        foreach (UIElement element in Elements)
+        {
+            if (element is UIList && _hideTimer > 0)
+                continue;
+
+            element.Draw(spriteBatch);
+        }
+
+        _hideTimer--;
     }
 
     private void Image_OnLeftClick(UIMouseEvent evt, UIElement listeningElement)

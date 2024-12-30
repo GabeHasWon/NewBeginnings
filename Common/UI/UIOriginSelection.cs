@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using NewBeginnings.Content.Items.Icons;
 using System.Linq;
 using Terraria.Localization;
+using NewBeginnings.Common.UnlockabilitySystem;
 
 namespace NewBeginnings.Common.UI
 {
@@ -139,7 +140,7 @@ namespace NewBeginnings.Common.UI
 
         private static string GetSplashText()
         {
-            int random = Main.rand.Next(12);
+            int random = Main.rand.Next(14);
             return Language.GetTextValue("Mods.NewBeginnings.UI.Splash." + random);
         }
 
@@ -434,17 +435,18 @@ namespace NewBeginnings.Common.UI
                 buttons.Add((item.Misc.SortPriority, item.Misc.Stars, currentBGButton));
             }
 
-            foreach (var item in buttons)
-                allBGButtons.Add(item.button);
+            foreach (var (_, _, button) in buttons)
+                allBGButtons.Add(button);
 
-            AddCustomBGButton(allBGButtons, buttons);
+            if (UnlockSaveData.Unlocked("Renewed"))
+                AddCustomBGButton(allBGButtons, buttons);
 
             SetSort(allBGButtons, buttons, _sortButton);
         }
 
         private void AddCustomBGButton(UIList allBGButtons, List<(int priority, int stars, UIColoredImageButton button)> buttons)
         {
-            var asset = PlayerBackgroundDatabase.backgroundIcons["Default"];
+            var asset = PlayerBackgroundDatabase.backgroundIcons["Custom"];
             UIColoredImageButton customBGButton = new(asset)
             {
                 Width = StyleDimension.FromPercent(0.9f),
@@ -458,7 +460,7 @@ namespace NewBeginnings.Common.UI
             customBGButton.OnLeftClick += CurrentBGButton_OnClick;
             allBGButtons.Add(customBGButton);
 
-            UIText bgName = new("Custom", 1.2f) //Background's name
+            UIText bgName = new(Language.GetTextValue("Mods.NewBeginnings.Origins.Custom.DisplayName"), 1.2f) //Background's name
             {
                 HAlign = 0f,
                 VAlign = 0.5f,

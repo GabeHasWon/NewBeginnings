@@ -10,4 +10,16 @@ Accursed: {
 	Rewards: 解锁 [c/832C2E:被诅咒者] 出身.
 }
 
+Renewed: {
+	// DisplayName: Renewed
+	// Description: Defeat the Moon Lord.
+	// Rewards: Unlocks the [c/4D7B77:Custom] origin.
+}
+
+Terrarian: {
+	// DisplayName: Terrarian
+	// Description: Defeat the Moon Lord while using an origin.
+	// Rewards: Completely unrestricts the [c/4D7B77:Custom] origin.
+}
+
 UnlockText: 已解锁 [c/CFC553:{0}]!

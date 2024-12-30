@@ -30,7 +30,7 @@ internal class UnlockabilityIO
 
         string[] keys = text.Split(',');
 
-        foreach (var item in keys)
+        foreach (string item in keys)
             if (item != string.Empty)
                 UnlockSaveData.Complete(Decrypt(item), true, true);
     }

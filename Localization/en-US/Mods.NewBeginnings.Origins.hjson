@@ -224,3 +224,13 @@ Unloaded: {
 	Flavor: This is a placeholder background for an unloaded origin.
 	Description: ""
 }
+
+Custom: {
+	DisplayName: Custom
+	Flavor: The sandbox persists in you, too.
+	Description:
+		'''
+		Starts with whatever you want.
+		Unlocked by beating the Moon Lord.
+		'''
+}

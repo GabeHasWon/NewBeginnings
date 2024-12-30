@@ -7,7 +7,7 @@ namespace NewBeginnings.Common.UnlockabilitySystem;
 
 internal class UnlockSaveData
 {
-    public static Dictionary<string, BaseUnlock> achievementsByName = new();
+    public static Dictionary<string, BaseUnlock> achievementsByName = [];
 
     public static void Complete(string key, bool silent = false, bool noSave = false)
     {
@@ -36,6 +36,8 @@ internal class UnlockSaveData
 
         AddBasic("Mods.NewBeginnings.Unlocks.Beginner", "Beginner");
         AddBasic("Mods.NewBeginnings.Unlocks.Accursed", "Accursed");
+        AddBasic("Mods.NewBeginnings.Unlocks.Renewed", "Renewed");
+        AddBasic("Mods.NewBeginnings.Unlocks.Terrarian", "Terrarian");
     }
 
     private static void AddBasic(string langKey, string identifier)
@@ -46,9 +48,9 @@ internal class UnlockSaveData
 
     public static bool Unlocked(string key)
     {
-        if (!achievementsByName.ContainsKey(key))
+        if (!achievementsByName.TryGetValue(key, out BaseUnlock value))
             throw new KeyNotFoundException($"No achievement of name {key} exists. Did you spell it right?");
 
-        return achievementsByName[key].Unlocked;
+        return value.Unlocked;
     }
 }

@@ -11,10 +11,47 @@ Splash: {
 	9: 包含严重缺乏着色器的情况!
 	10: 研究人员确认无剧情!
 	11: 震颤? 我几乎不认识她!
+	// 12: The BFTA cluster lives in us all!
+	// 13: Open for sponsors!
 }
 
 SortBy: {
 	Line: "{0}排序"
 	Default: 默认
 	Difficulty: 难度
+}
+
+CustomOrigin: {
+	// Inv: Inv
+	// Acc: Acc
+	// Helmet: Helmet
+	// Body: Body
+	// Legs: Legs
+	// Health: Health ({0}/400)
+	// Mana: Mana ({0}/200)
+	// Search: Search for an item - enter to filter
+	// SortBy: "Sort - "
+
+	Sort: {
+		// Chaos: Chaos
+		// Alphabetical: Alphabetical
+		// ID: Internal ID
+	}
+
+	Splashes: {
+		// 0: The real challenge is to start without items!
+		// 1: Asbestos free since 1979!
+		// 2: If you give yourself the Celestial Sigil you can win instantly!
+		// 3: Calamiter? I hardly know her!
+		// 4: Most often paired with fine cuisine!
+		// 5: Not approved by the FDA!
+		// 6: Contains 333% more lore than you'd think!
+		// 7: Player's Choice Award for six years running!
+		// 8: Illegal in 3 countries!
+		// 9: Open source for all to judge!
+		// 10: Soon to be bought by X - The Everything App!
+		// 11: Employee owned & founded!
+		// 12: Creates 98% of balance complaints per capita!
+		// 13: Approved by the Vatican!
+	}
 }

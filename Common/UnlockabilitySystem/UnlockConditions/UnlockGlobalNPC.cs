@@ -12,11 +12,17 @@ internal class UnlockGlobalNPC : GlobalNPC
     {
         bool hasBG = Main.player.Take(Main.maxPlayers).Any(x => x.active && x.GetModPlayer<PlayerBackgroundPlayer>().HasBG());
 
+        if (npc.type == NPCID.MoonLordCore)
+            UnlockSaveData.Complete("Renewed");
+
         if (!hasBG)
             return true;
 
         if (npc.type == NPCID.WallofFlesh)
             UnlockSaveData.Complete("Accursed");
+
+        if (npc.type == NPCID.MoonLordCore)
+            UnlockSaveData.Complete("Terrarian");
 
         return true;
     }
