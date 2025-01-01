@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using NewBeginnings.Common.PlayerBackgrounds.Containers;
+using NewBeginnings.Common.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ namespace NewBeginnings.Common.PlayerBackgrounds;
 internal class PlayerBackgroundPlayer : ModPlayer
 {
     public PlayerBackgroundData BackgroundData = new();
+    public CustomOriginData CustomOriginData = null;
 
     private readonly Dictionary<Guid, Point16> _originSpawns = [];
 
@@ -25,10 +28,17 @@ internal class PlayerBackgroundPlayer : ModPlayer
         _bgName = data.Identifier;
     }
 
-    //Save / Load data for the player's origin name & spawn (if any)
+    //Save / Load data for the player's origin name, custom data & spawn (if any)
     public override void SaveData(TagCompound tag)
     {
         tag.Add("bgName", _bgName);
+
+        if (CustomOriginData is not null && _bgName == "Custom")
+        {
+            TagCompound customData = [];
+            CustomOriginData.SaveData(customData);
+            tag.Add("customData", customData);
+        }
 
         if (_originSpawns.Count > 0)
         {
@@ -47,11 +57,23 @@ internal class PlayerBackgroundPlayer : ModPlayer
     public override void LoadData(TagCompound tag)
     {
         _bgName = tag.GetString("bgName");
+        CustomOriginData = null;
+
+        if (_bgName == "Custom" && tag.TryGet<TagCompound>("customData", out var data))
+        {
+            CustomOriginData = CustomOriginData.Empty;
+            CustomOriginData.LoadData(data);
+        }
 
         if (PlayerBackgroundDatabase.playerBackgroundDatas.Any(x => x.Identifier == _bgName))
             BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Identifier == _bgName);
         else if (_bgName is not null && _bgName != string.Empty)
-            BackgroundData = new PlayerBackgroundData("Mods.NewBeginnings.Origins.Unloaded", "Unloaded", null, null);
+        {
+            if (_bgName == "Custom")
+                BackgroundData = Custom.GetCustomBackground(Player);
+            else
+                BackgroundData = new PlayerBackgroundData("Mods.NewBeginnings.Origins.Unloaded", "Unloaded", null, null);
+        }
 
         if (tag.TryGet("originSpawnCount", out int count))
         {

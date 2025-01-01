@@ -5,6 +5,7 @@ using NewBeginnings.Common.UnlockabilitySystem;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -31,6 +32,8 @@ internal class UISearchItemGrid : UIPanel
 
     private SortMode _mode = SortMode.Chaos;
     private int _hideTimer = 0;
+    private int _timeSinceTyped = 0;
+    private string _oldValue = string.Empty;
 
     public UISearchItemGrid(Action<UIItemContainer> onClick)
     {
@@ -38,7 +41,7 @@ internal class UISearchItemGrid : UIPanel
 
         var panel = new UIPanel()
         {
-            Width = StyleDimension.FromPixelsAndPercent(-180, 1),
+            Width = StyleDimension.FromPixelsAndPercent(-170, 1),
             Height = StyleDimension.FromPixels(36),
         };
 
@@ -76,7 +79,7 @@ internal class UISearchItemGrid : UIPanel
         UIScrollbar bar = new()
         {
             Width = StyleDimension.FromPixels(24),
-            Height = StyleDimension.FromPixelsAndPercent(-40, 1f),
+            Height = StyleDimension.FromPixelsAndPercent(-44, 1f),
             HAlign = 1f,
             VAlign = 1f,
         };
@@ -116,8 +119,15 @@ internal class UISearchItemGrid : UIPanel
     {
         base.Update(gameTime);
 
-        if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+        if (_timeSinceTyped == 10)
             RedoList();
+
+        _timeSinceTyped--;
+
+        if (_inputText.currentValue != _oldValue)
+            _timeSinceTyped = 0;
+
+        _oldValue = _inputText.currentValue;
     }
 
     private void RedoList()
@@ -175,7 +185,14 @@ internal class UISearchItemGrid : UIPanel
     {
         string value = currentValue;
 
-        if (value.Contains("!a"))
+        if (value.Contains("!au"))
+        {
+            value = value.Replace("!au", "");
+
+            if (item.headSlot <= -1 && item.bodySlot <= -1 && item.legSlot <= -1 || item.vanity)
+                return false;
+        }
+        else if (value.Contains("!a"))
         {
             value = value.Replace("!a", "");
 

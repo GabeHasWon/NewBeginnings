@@ -234,3 +234,14 @@ Custom: {
 		Unlocked by beating the Moon Lord.
 		''' */
 }
+
+Inevitable: {
+	// DisplayName: Inevitable
+	// Flavor: Cursed to escar-go away, forever.
+	/* Description:
+		'''
+		Starts with full gold equipment, gold armor, 300 health, 100 mana, +1 all flat damage and +10% all damage.
+		A snail follows you forever. It will kill you if it touches you.
+		Only you can see it.
+		''' */
+}

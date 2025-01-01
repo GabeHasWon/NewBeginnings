@@ -13,6 +13,9 @@ Splash: {
 	11: Tremor? I hardly know her!
 	12: The BFTA cluster lives in us all!
 	13: Open for sponsors!
+	14: Safe for use in and out of water!
+	15: Inedible, but you can still imagine!
+	16: Optimized exclusively for Windows 95 computers!
 }
 
 SortBy: {
@@ -53,5 +56,7 @@ CustomOrigin: {
 		11: Employee owned & founded!
 		12: Creates 98% of balance complaints per capita!
 		13: Approved by the Vatican!
+		14: As seen on YouTube TV!
+		15: Lacking in Vitamins A, C and D!
 	}
 }

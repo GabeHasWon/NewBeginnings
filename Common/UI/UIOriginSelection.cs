@@ -13,6 +13,7 @@ using NewBeginnings.Content.Items.Icons;
 using System.Linq;
 using Terraria.Localization;
 using NewBeginnings.Common.UnlockabilitySystem;
+using NewBeginnings.Common.PlayerBackgrounds.Containers;
 
 namespace NewBeginnings.Common.UI
 {
@@ -140,7 +141,7 @@ namespace NewBeginnings.Common.UI
 
         private static string GetSplashText()
         {
-            int random = Main.rand.Next(14);
+            int random = Main.rand.Next(17);
             return Language.GetTextValue("Mods.NewBeginnings.UI.Splash." + random);
         }
 
@@ -245,7 +246,7 @@ namespace NewBeginnings.Common.UI
             int offset = 0;
             float yOffset = 0;
             int id = 0;
-            List<(int type, int stack)> items = new();
+            List<(int type, int stack)> items = [];
             (int sword, int pick, int axe) = (data.Misc.CopperShortswordReplacement, data.Misc.CopperPickaxeReplacement, data.Misc.CopperAxeReplacement);
 
             if (sword != -1)
@@ -268,7 +269,7 @@ namespace NewBeginnings.Common.UI
             if (legs > ItemID.None)
                 items.Add((legs, 1));
 
-            foreach (var item in data.Equip.Accessories)
+            foreach (int item in data.Equip.Accessories)
                 items.Add((item, 1));
 
             items.AddRange(data.Inventory.ToList());
@@ -277,14 +278,14 @@ namespace NewBeginnings.Common.UI
             {
                 Item item = new(type) { stack = stack, scale = 0.85f };
 
-                UIImage slotBG = new UIImage(TextureAssets.InventoryBack) //Slot background
+                var slotBG = new UIImage(TextureAssets.InventoryBack) //Slot background
                 {
-                    Left = StyleDimension.FromPixels(-6 + (offset * 42)),
-                    Top = StyleDimension.FromPixels(-2 + (yOffset * 38)),
+                    Left = StyleDimension.FromPixels(-6 + offset * 42),
+                    Top = StyleDimension.FromPixels(-2 + yOffset * 38),
                     ImageScale = 0.77f,
                 };
 
-                UIItemIcon icon = new UIItemIcon(item, false) //Item itself
+                var icon = new UIItemIcon(item, false) //Item itself
                 {
                     Left = StyleDimension.FromPixels(10),
                     Top = StyleDimension.FromPixels(9),
@@ -292,7 +293,7 @@ namespace NewBeginnings.Common.UI
 
                 if (stack > 1)
                 {
-                    UIText stackUI = new UIText(stack.ToString(), 0.65f, false)
+                    var stackUI = new UIText(stack.ToString(), 0.65f, false)
                     {
                         Left = StyleDimension.FromPixels(4),
                         Top = StyleDimension.FromPixels(18)
@@ -414,6 +415,9 @@ namespace NewBeginnings.Common.UI
 
                     if (!_player.GetModPlayer<PlayerBackgroundPlayer>().HasBG() || bgData.Name != item.Name)
                     {
+                        if (bgData.Identifier == "Custom")
+                            bgData = Custom.GetCustomBackground(_player);
+
                         bgData.ApplyArmor(_player);
                         bgData.ApplyAccessories(_player, true);
                         _player.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(bgData); //Sets the player's background.

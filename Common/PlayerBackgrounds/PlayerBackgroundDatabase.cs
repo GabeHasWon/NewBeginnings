@@ -87,6 +87,7 @@ internal static class PlayerBackgroundDatabase
 
         playerBackgroundDatas.Add(new Accursed());
         playerBackgroundDatas.Add(new ReallyConfused());
+        playerBackgroundDatas.Add(new Inevitable());
 
         playerBackgroundDatas.AddRange(OriginCalls._crossModDatas);
 

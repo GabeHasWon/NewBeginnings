@@ -1,7 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using NewBeginnings.Common.PlayerBackgrounds;
+using NewBeginnings.Common.PlayerBackgrounds.Containers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
@@ -32,9 +35,11 @@ internal class UICustomOrigin : UIState
     private int RealMana => (int)(_maxMana * 200);
 
     private readonly HashSet<int> _accIds = [];
+    private readonly List<Item> _hotbar = [];
 
     private float _maxLife = 0;
     private float _maxMana = 0;
+    private bool _setData = false;
 
     private UIColoredSlider _lifeSlider = null;
     private UIColoredSlider _manaSlider = null;
@@ -49,6 +54,9 @@ internal class UICustomOrigin : UIState
     {
         _player = player;
         _return = returnAction;
+
+        if (player.GetModPlayer<PlayerBackgroundPlayer>().CustomOriginData is not null)
+            _setData = true;
 
         Setup();
     }
@@ -65,14 +73,30 @@ internal class UICustomOrigin : UIState
         _player.armor[0] = _helmetSlot.Item;
         _player.armor[1] = _bodySlot.Item;
         _player.armor[2] = _legsSlot.Item;
+        _player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData = new Custom();
+
+        ref var customData = ref _player.GetModPlayer<PlayerBackgroundPlayer>().CustomOriginData;
+        customData ??= CustomOriginData.Empty;
+
+        customData.Helmet = new ItemPair(_helmetSlot.Item.type, 1);
+        customData.Body = new ItemPair(_bodySlot.Item.type, 1);
+        customData.Legs = new ItemPair(_legsSlot.Item.type, 1);
 
         int count = 0;
 
         foreach (int id in _accIds)
+        {
+            customData.Accessories[count] = new ItemPair(id, 1);
             _player.armor[3 + count++] = ContentSamples.ItemsByType[id];
+        }
 
         for (int i = 3 + count; i < 8; ++i)
             _player.armor[i] = AirItem;
+
+        for (int i = 0; i < _hotbar.Count; ++i)
+            customData.Hotbar[i] = new(_hotbar[i].type, _hotbar[i].stack);
+
+        _player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData = new Custom();
     }
 
     private void Setup()
@@ -104,20 +128,45 @@ internal class UICustomOrigin : UIState
 
         var grid = new UISearchItemGrid(OnClickItem)
         {
-            Width = StyleDimension.FromPixelsAndPercent(0, 0.75f),
+            Width = StyleDimension.FromPixelsAndPercent(-10, 0.75f),
             Height = StyleDimension.FromPixelsAndPercent(-44, 1f),
             VAlign = 1f
         };
         panel.Append(grid);
+
+        if (_setData)
+        {
+            ref var customData = ref _player.GetModPlayer<PlayerBackgroundPlayer>().CustomOriginData;
+
+            _helmetSlot.OverrideItem(new(customData.Helmet.Id));
+            _bodySlot.OverrideItem(new(customData.Body.Id));
+            _legsSlot.OverrideItem(new(customData.Legs.Id));
+
+            for (int i = 0; i < customData.Hotbar.Length; i++)
+            {
+                ItemPair pair = customData.Hotbar[i];
+
+                if (pair.Id != ItemID.None && pair.Stack != 0)
+                    OnClickItem(new UIItemContainer(new Item(pair.Id, pair.Stack)));
+            }
+
+            for (int i = 0; i < customData.Accessories.Length; i++)
+            {
+                ItemPair pair = customData.Accessories[i];
+
+                if (pair.Id != ItemID.None && pair.Stack != 0)
+                    OnClickItem(new UIItemContainer(new Item(pair.Id, pair.Stack)));
+            }
+        }
     }
 
     private void BuildSlots(UIPanel panel)
     {
         UIPanel hotbarPanel = new()
         {
-            Width = StyleDimension.FromPixels(54),
+            Width = StyleDimension.FromPixels(64),
             Height = StyleDimension.FromPixelsAndPercent(-44, 1),
-            Left = StyleDimension.FromPixels(526),
+            Left = StyleDimension.FromPixels(516),
             VAlign = 1f,
         };
 
@@ -178,22 +227,22 @@ internal class UICustomOrigin : UIState
             Top = StyleDimension.FromPixels(176)
         };
 
-        _legsSlot.OnLeftClick += (_, self) => _legsSlot.OverrideItem(AirItem);
+        _legsSlot.OnLeftClick += (_, _) => _legsSlot.OverrideItem(AirItem);
         _legsSlot.Append(new UIText(Localize("Legs")) { Top = StyleDimension.FromPixels(-20) });
         panel.Append(_legsSlot);
     }
 
     public void OnClickItem(UIItemContainer container)
     {
-        UIItemContainer newContainer = new(container.Item);
+        UIItemContainer newContainer = new(new(container.Item.type));
 
         if (container.Item.headSlot > -1)
-            _helmetSlot.OverrideItem(container.Item);
+            _helmetSlot.OverrideItem(newContainer.Item);
         else if (container.Item.bodySlot > -1)
-            _bodySlot.OverrideItem(container.Item);
+            _bodySlot.OverrideItem(newContainer.Item);
         else if (container.Item.legSlot > -1)
-            _legsSlot.OverrideItem(container.Item);
-        else if (container.Item.accessory && !_accIds.Contains(container.Item.type) && _accList.Count < 5)
+            _legsSlot.OverrideItem(newContainer.Item);
+        else if (container.Item.accessory && !_accIds.Contains(newContainer.Item.type) && _accList.Count < 5)
         {
             newContainer.OnLeftClick += RemoveItemFromAcc;
             _accList.Add(newContainer);
@@ -202,11 +251,18 @@ internal class UICustomOrigin : UIState
         else if (_hotbarList.Count < 10)
         {
             newContainer.OnLeftClick += RemoveItemFromList;
+            newContainer.SetCanStack(true);
+
             _hotbarList.Add(newContainer);
+            _hotbar.Add(newContainer.Item);
         }
     }
 
-    private void RemoveItemFromList(UIMouseEvent evt, UIElement listeningElement) => _hotbarList.Remove(listeningElement);
+    private void RemoveItemFromList(UIMouseEvent evt, UIElement listeningElement)
+    {
+        _hotbarList.Remove(listeningElement);
+        _hotbar.Remove(_hotbar.First(x => x.type == (listeningElement as UIItemContainer).Item.type));
+    }
 
     private void RemoveItemFromAcc(UIMouseEvent evt, UIElement listeningElement)
     {
@@ -263,7 +319,7 @@ internal class UICustomOrigin : UIState
 
     private static string GetSplash()
     {
-        int random = Main.rand.Next(14);
+        int random = Main.rand.Next(16);
         return Localize("Splashes." + random);
     }
 }

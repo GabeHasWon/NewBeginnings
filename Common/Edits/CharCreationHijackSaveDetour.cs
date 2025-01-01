@@ -1,7 +1,11 @@
 ﻿using NewBeginnings.Common.PlayerBackgrounds;
+using NewBeginnings.Common.PlayerBackgrounds.Containers;
+using NewBeginnings.Common.UI;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.GameContent.UI.States;
+using Terraria.ID;
 
 namespace NewBeginnings.Common.Edits
 {
@@ -36,6 +40,9 @@ namespace NewBeginnings.Common.Edits
             if (FirstSave)
             {
                 PlayerBackgroundData data = player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
+
+                if (data.Identifier == "Custom")
+                    data = Custom.GetCustomBackground(player);
 
                 data.ApplyToPlayer(player);
                 data.Delegates.ModifyPlayerCreation?.Invoke(player);
