@@ -119,7 +119,7 @@ internal class UISearchItemGrid : UIPanel
     {
         base.Update(gameTime);
 
-        if (_timeSinceTyped == 10)
+        if (_timeSinceTyped == -10)
             RedoList();
 
         _timeSinceTyped--;
