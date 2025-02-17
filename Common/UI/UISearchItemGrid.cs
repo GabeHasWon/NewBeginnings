@@ -1,11 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using NewBeginnings.Common.UnlockabilitySystem;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -190,6 +188,13 @@ internal class UISearchItemGrid : UIPanel
             value = value.Replace("!au", "");
 
             if (item.headSlot <= -1 && item.bodySlot <= -1 && item.legSlot <= -1 || item.vanity)
+                return false;
+        }
+        else if (value.Contains("!v"))
+        {
+            value = value.Replace("!v", "");
+
+            if (!item.vanity)
                 return false;
         }
         else if (value.Contains("!a"))
