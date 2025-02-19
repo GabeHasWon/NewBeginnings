@@ -5,7 +5,7 @@ This mod adds in player origins (or backgrounds), which allow you to start a new
 These are all accessible by default through the character creation screen; a little button next to the player name switches the menu to player origin mode.
 From then on, choose whichever background you like and enjoy!
 
-There are also a couple of unlockable origins - play more to discover how to unlock these.
+There are also a bunch of unlockable origins - play more to discover how to unlock these.
 
 If you find bugs or want to discuss the mod, join Spirit's discord! discord.gg/uBNnznSfur
 If you need to check the mod's origins outside of the game, check out the GitHub wiki! https://github.com/GabeHasWon/NewBeginnings/wiki

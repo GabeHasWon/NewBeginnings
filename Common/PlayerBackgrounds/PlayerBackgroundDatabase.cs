@@ -31,7 +31,6 @@ internal static class PlayerBackgroundDatabase
     {
         //FORMATTING: Try keeping single line backgrounds clumped together
         //Add new lines to make sure all very long backgrounds fit visibly on the screen at once, and keep them seperated
-
         AddNewBGItemlessDesc("Purist", "Purist", null, new MiscData(sortPriority: 12));
         AddNewBG("Knight", "Knight", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), new MiscData(swordReplace: ItemID.SilverBroadsword, sortPriority: 11, stars: 1));
         AddNewBG("Huntsman", "Huntsman", EquipData.SingleAcc(ItemID.HunterCloak), new MiscData(sortPriority: 11, stars: 1), (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
