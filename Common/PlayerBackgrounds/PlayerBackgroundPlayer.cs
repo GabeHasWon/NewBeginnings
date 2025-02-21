@@ -130,6 +130,11 @@ internal class PlayerBackgroundPlayer : ModPlayer
             }
             else
                 health.Base -= 100 - maxLife;
+
+            if (CustomOriginData is not null)
+            {
+                mana.Base += CustomOriginData.mana;
+            }
         }
     }
 }

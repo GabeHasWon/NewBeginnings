@@ -48,6 +48,9 @@ internal class CustomOriginData
         SavePairArray(Hotbar, "hotbar", tag);
         SavePairArray(Armor, "armor", tag);
         SavePairArray(Accessories, "acc", tag);
+
+        tag.Add("life", (short)life);
+        tag.Add("mana", (short)mana);
     }
 
     public void LoadData(TagCompound tag)
@@ -55,6 +58,12 @@ internal class CustomOriginData
         LoadPairArray(Hotbar, "hotbar", tag);
         LoadPairArray(Armor, "armor", tag);
         LoadPairArray(Accessories, "acc", tag);
+
+        life = tag.GetShort("life");
+        mana = tag.GetShort("mana");
+
+        if (life < 20)
+            life = 20;
     }
 
     private static void LoadPairArray(ItemPair[] pair, string name, TagCompound tag)

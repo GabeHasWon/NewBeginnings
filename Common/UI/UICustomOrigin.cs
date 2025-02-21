@@ -82,6 +82,9 @@ internal class UICustomOrigin : UIState
         customData.Body = new ItemPair(_bodySlot.Item.type, 1);
         customData.Legs = new ItemPair(_legsSlot.Item.type, 1);
 
+        customData.life = RealLife;
+        customData.mana = RealMana;
+
         int count = 0;
 
         foreach (int id in _accIds)

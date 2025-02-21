@@ -111,21 +111,23 @@ internal struct PlayerBackgroundData(string langKey, string identifier, EquipDat
         if (Inventory.Length > player.inventory.Length)
             throw new Exception("Inventory is too big. Fix it.");
 
-        //int offset = player.difficulty == PlayerDifficultyID.Creative ? 10 : 3;
+        int offset = 0;
 
         for (int i = 0; i < Inventory.Length; ++i)
         {
-            if (!player.inventory[i].IsAir) //Skip current item if it's occupied by (presumably) another mod's items beforehand
+            if (!player.inventory[offset].IsAir) // Skip current item if it's occupied by (presumably) another mod's items beforehand
             {
-                //i--;
-                //offset++;
+                i--;
+                offset++;
                 continue;
             }
 
-            player.inventory[i] = new Item(Inventory[i].type)
+            player.inventory[offset] = new Item(Inventory[i].type)
             {
                 stack = Inventory[i].stack
             };
+
+            offset++;
         }
     }
 
