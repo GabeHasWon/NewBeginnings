@@ -1,0 +1,53 @@
+DeprivedLantern: {
+	 DisplayName: Брошенный фонарь
+		Tooltip:
+		'''
+		Светит, пока находится в инвентаре
+		Бесконечная продолжительность
+		''' 
+}
+
+DimStar: {
+	 DisplayName: Тусклая звезда
+	 Tooltip: ""
+}
+
+LightStar: {
+	 DisplayName: Светлая звезда
+	 Tooltip: ""
+}
+
+LumberjackAxe: {
+	 DisplayName: Топор дровосека
+	 Tooltip: Не путать с Люси
+}
+
+LumberjackFlannel: {
+	 DisplayName: Рубашка дровосека
+	 Tooltip: «Невероятно удобная»
+}
+
+DeprivedBlade: {
+	 DisplayName: Брошенный клинок
+	 Tooltip: Этот клинок уже не режет, так как раньше
+}
+
+KylieBoomerang: {
+	 DisplayName: Бумеранг Кайли
+	 Tooltip: «Необычайно полезен в бою!»
+}
+
+RustyCutlass: {
+	 DisplayName: Ржавая абордажная сабля
+	 Tooltip: Она повидала лучшие дни
+}
+
+WornSpellbook: {
+	 DisplayName: Потрёпанная книга заклинаний
+	 Tooltip: Надёжная, хотя и довольно слабая.
+}
+
+TrailblazerHelmet: {
+	 DisplayName: Шлем Первопроходца
+	 Tooltip: «Божественная скорость!»
+}
