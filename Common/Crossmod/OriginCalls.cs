@@ -1,10 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using NewBeginnings.Common.PlayerBackgrounds;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -12,7 +10,7 @@ namespace NewBeginnings.Common.Crossmod;
 
 internal static class OriginCalls
 {
-    internal static List<PlayerBackgroundData> _crossModDatas = new();
+    internal static List<PlayerBackgroundData> _crossModDatas = [];
 
     internal static object Call(object[] args)
     {
@@ -260,7 +258,7 @@ internal static class OriginCalls
         identifier = string.Empty;
         asset = null;
         langKey = string.Empty;
-        inventory = Array.Empty<(int, int)>();
+        inventory = [];
 
         if (objects.Length < 5)
             return ThrowOrReturn("Not enough parameters!");
