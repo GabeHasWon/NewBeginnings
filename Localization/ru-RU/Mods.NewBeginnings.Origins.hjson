@@ -1,7 +1,7 @@
 Purist: {
 	DisplayName: Простак
 	Flavor: Стандартный опыт игры.
-	# You will see theDescriptions of several origins be empty, the "" is necessary.
+	# You will see the Descriptions of several origins be empty, the "" is necessary.
 	Description: ""
 }
 
@@ -210,7 +210,7 @@ Accursed: {
 		Разблокируется после победы над Стеной плоти с персонажем происхождения.
 		'''
 	# Used by the Accursed's world generation modification.
-	 Generation: Переводим мир в хардмод
+	Generation: Переводим мир в хардмод
 }
 
 Random: {
@@ -228,20 +228,20 @@ Unloaded: {
 Custom: {
 	DisplayName: Пользовательский
 	Flavor: Песочница живёт и в тебе.
-	 	Description:
+	Description:
 		'''
 		Начинает с тем, что вы хотите.
 		Разблокируется после победы над Лунным лордом.
-		''' 
+		'''
 }
 
 Inevitable: {
 	DisplayName: Обречённый
 	Flavor: Проклят на вечное бегство.
-		Description:
+	Description:
 		'''
 		Начинает с полным золотым снаряжением, золотой броней, 300 единицами здоровья, 100 маны, увеличением урона на 1 ед. и на 10%
 		Улитка следует за вами вечно. Она убьёт вас своим прикосновением. 
 		Только вы можете её видеть.
-		''' 
+		'''
 }

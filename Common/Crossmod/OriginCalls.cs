@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using NewBeginnings.Common.PlayerBackgrounds;
 using ReLogic.Content;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
@@ -11,6 +13,7 @@ namespace NewBeginnings.Common.Crossmod;
 internal static class OriginCalls
 {
     internal static List<PlayerBackgroundData> _crossModDatas = [];
+    internal static List<Action> _delayedFuncs = [];
 
     internal static object Call(object[] args)
     {
@@ -35,11 +38,22 @@ internal static class OriginCalls
             return PlayerHasOrigin(args[1..]);
         else if (type == "removeorigin")
             return RemoveOrigin(args[1..]);
+        else if (type == "delay")
+            return AddDelayedOrigin(args[1..]);
 
         return null;
     }
 
-    internal static object RemoveOrigin(object[] objects)
+    private static bool AddDelayedOrigin(object[] args)
+    {
+        if (args.Length == 0 || args[0] is not Action action)
+            return ThrowOrReturn("objects[0] is not an Action!");
+
+        _delayedFuncs.Add(action);
+        return true;
+    }
+
+    internal static bool RemoveOrigin(object[] objects)
     {
         if (objects[0] is not string id)
             return ThrowOrReturn("objects[0] is not a string!");
@@ -290,14 +304,7 @@ internal static class OriginCalls
         return true;
     }
 
-    internal static bool ThrowOrReturn(string message)
-    {
-#if DEBUG
-        throw new Exception(message);
-#else
-        return false;
-#endif
-    }
+    internal static bool ThrowOrReturn(string message) => Debugger.IsAttached ? throw new Exception(message) : false;
 
     internal static bool CastInt(object val, out int value)
     {

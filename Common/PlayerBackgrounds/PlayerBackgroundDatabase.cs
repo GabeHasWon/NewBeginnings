@@ -88,6 +88,9 @@ internal static class PlayerBackgroundDatabase
         playerBackgroundDatas.Add(new ReallyConfused());
         playerBackgroundDatas.Add(new Inevitable());
 
+        foreach (var action in OriginCalls._delayedFuncs)
+            action();
+
         playerBackgroundDatas.AddRange(OriginCalls._crossModDatas);
 
         AddNewBGItemlessDesc("Random", "Random", null, new MiscData(sortPriority: 0, stars: 0));
