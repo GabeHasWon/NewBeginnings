@@ -107,8 +107,9 @@ internal class StructBuilders
         if (objects[4] is not Action<Player> modifyCreation)
             return OriginCalls.ThrowOrReturn("objects[4] is not Func<Point16>!");
 
-        if (objects.Length == 4)
+        if (objects.Length == 5)
             return new DelegateData(condition, modifyWorldGen, hasCustomSpawn, actualSpawn, modifyCreation);
+
         return OriginCalls.ThrowOrReturn("objects.Length is greater than 4!");
     }
 }

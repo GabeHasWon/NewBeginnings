@@ -1,3 +1,3 @@
-1.2.0.5
-- Made invalid Mod.Call usage throw if a debugger is attached, silently write an error if not
-- Added Delay method in Mod.Call for avoiding load order issues
+1.2.0.6
+- Fix API issue where Mod.Call for DelegateData would throw for having 5 delegates despite that being a proper overload
+- Replaced Hunter's Endless Quiver with 200 Wooden Arrows

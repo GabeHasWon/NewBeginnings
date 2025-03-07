@@ -33,7 +33,7 @@ internal static class PlayerBackgroundDatabase
         //Add new lines to make sure all very long backgrounds fit visibly on the screen at once, and keep them seperated
         AddNewBGItemlessDesc("Purist", "Purist", null, new MiscData(sortPriority: 12));
         AddNewBG("Knight", "Knight", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), new MiscData(swordReplace: ItemID.SilverBroadsword, sortPriority: 11, stars: 1));
-        AddNewBG("Huntsman", "Huntsman", EquipData.SingleAcc(ItemID.HunterCloak), new MiscData(sortPriority: 11, stars: 1), (ItemID.GoldBow, 1), (ItemID.EndlessQuiver, 1));
+        AddNewBG("Huntsman", "Huntsman", EquipData.SingleAcc(ItemID.HunterCloak), new MiscData(sortPriority: 11, stars: 1), (ItemID.GoldBow, 1), (ItemID.WoodenArrow, 200));
         AddNewBG("Wizard", "Wizard", new EquipData(ItemID.WizardHat, ItemID.TopazRobe, 0), new MiscData(80, 60, swordReplace: ItemID.TopazStaff, sortPriority: 11, stars: 1));
         AddNewBG("Beastmaster", "Beastmaster", new MiscData(80, sortPriority: 11, stars: 1), (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
         AddNewBG("Shinobi", "Shinobi", EquipData.SingleAcc(ItemID.Tabi), new MiscData(80, stars: 1), (ItemID.Katana, 1));
