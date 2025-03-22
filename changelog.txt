@@ -1,3 +1,2 @@
-1.2.0.6
-- Fix API issue where Mod.Call for DelegateData would throw for having 5 delegates despite that being a proper overload
-- Replaced Hunter's Endless Quiver with 200 Wooden Arrows
+1.2.0.7
+- Reduced scale for origin name text in Russian so it's not clipped off (thanks to nexorchik on GitHub!)
