@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -87,7 +87,7 @@ internal class UIOriginSelection : UIState
         {
             Width = StyleDimension.FromPixels(32),
             Height = StyleDimension.FromPixels(32),
-            Left = StyleDimension.FromPixels(BackgroundListWidth + 10),
+            Left = StyleDimension.FromPixels(6),
         };
 
         _sortButton.Append(new UIText(Language.GetText("Mods.NewBeginnings.UI.SortBy.Line").
@@ -120,8 +120,8 @@ internal class UIOriginSelection : UIState
         {
             Width = StyleDimension.FromPixels(BackgroundListWidth),
             HAlign = 0,
-            Height = StyleDimension.FromPixelsAndPercent(-20, 1f),
-            Top = StyleDimension.FromPixels(10),
+            Height = StyleDimension.FromPixelsAndPercent(-40, 1f),
+            Top = StyleDimension.FromPixels(30),
             BackgroundColor = panelColor
         };
         panel.Append(originsListPanel);
@@ -423,7 +423,14 @@ internal class UIOriginSelection : UIState
                     currentBGButton.SetColor(Color.White);
             };
 
-            UIText bgName = new(item.Name, 1.2f) //Background's name
+            float textSize = 1.2f;
+
+            if (LanguageManager.Instance.ActiveCulture.Name == "ru-RU")
+            {
+                textSize = 1f;
+            }
+
+            UIText bgName = new(item.Name, textSize) // Background's name
             {
                 HAlign = 0f,
                 VAlign = 0.5f,
