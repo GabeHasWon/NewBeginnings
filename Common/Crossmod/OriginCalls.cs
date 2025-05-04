@@ -91,9 +91,10 @@ internal static class OriginCalls
         return player.GetModPlayer<PlayerBackgroundPlayer>().HasBG(bgName);
     }
 
-    private static object AddShortOrigin(object[] objects)
+    private static bool AddShortOrigin(object[] objects)
     {
-        AddBasicOrigin(objects, out var _, out var texName, out var name, out var inventory);
+        if (AddBasicOrigin(objects, out var _, out string texName, out string name, out var inventory))
+            return true;
 
         if (objects[4] is not EquipData equip)
             return ThrowOrReturn("objects[4] (equip) is not EquipData!");
@@ -171,7 +172,8 @@ internal static class OriginCalls
             return true;
         }
 
-        AddBasicOrigin(objects, out var _, out var texName, out var name, out var inventory);
+        if (AddBasicOrigin(objects, out var _, out var texName, out var name, out var inventory))
+            return true;
 
         if (!CastInt(objects[4], out int head))
             return ThrowOrReturn("objects[4] (head) is not an int!");
@@ -283,16 +285,19 @@ internal static class OriginCalls
 
         if (objects[1] is not string)
             return ThrowOrReturn("objects[1] (identifier) is not a string!");
+
         identifier = objects[1] as string;
 
         TryRegisterTexture(asset, identifier);
 
         if (objects[2] is not string)
             return ThrowOrReturn("objects[2] (langKey) is not a string!");
+
         langKey = objects[2] as string;
 
         if (objects[3] is not (int, int)[])
             return ThrowOrReturn("objects[3] (langKey) is not an (int, int)[]!");
+
         inventory = objects[3] as (int, int)[];
 
         if (objects.Length == 4)
@@ -301,7 +306,7 @@ internal static class OriginCalls
             return true;
         }
 
-        return true;
+        return false;
     }
 
     internal static bool ThrowOrReturn(string message) => Debugger.IsAttached ? throw new Exception(message) : false;
