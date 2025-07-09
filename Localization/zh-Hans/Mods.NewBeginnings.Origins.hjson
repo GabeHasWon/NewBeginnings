@@ -1,203 +1,203 @@
 Purist: {
 	DisplayName: 纯粹之人
-	Flavor: 标准的Terraria体验
-	# You will see the Descriptions of several origins be empty, the "" is necessary.
+	Flavor: 标准的Terraria体验。
+	# You will see the Descriptions of several origins be empty, the "" is necessary。
 	Description: ""
 }
 
 Knight: {
 	DisplayName: 骑士
-	Flavor: 一位身披铁甲的荣耀战士
-	Description: 以一整套的铁盔甲和一把银宽剑开始.
+	Flavor: 一位身披铁甲的荣耀战士。
+	Description: 以一整套的铁盔甲和一把银宽剑开始。
 }
 
 Huntsman: {
 	DisplayName: 猎人
-	Flavor: 一位眼明手快的狩猎大师
-	Description: 以一把弓, 无尽箭袋和猎人披风开始.
+	Flavor: 一位眼明手快的狩猎大师。
+	Description: 以一把弓, 无尽箭袋和猎人披风开始。
 }
 
 Wizard: {
 	DisplayName: 巫师
-	Flavor: 一位追寻奥秘的巫师学徒
-	Description: 以巫师帽, 黄玉袍和一把黄玉法杖开始, 同时拥有较高的初始法力和更少的初始生命.
+	Flavor: 一位追寻奥秘的巫师学徒。
+	Description: 以巫师帽, 黄玉袍和一把黄玉法杖开始, 同时拥有较高的初始法力和更少的初始生命。
 }
 
 Beastmaster: {
 	DisplayName: 兽王
-	Flavor: 一位发于森林, 野兽为伴的驯兽师
-	Description: 以一把史莱姆召唤杖和皮鞭开始, 但拥有更少的初始生命.
+	Flavor: 一位发于森林, 野兽为伴的驯兽师。
+	Description: 以一把史莱姆召唤杖和皮鞭开始, 但拥有更少的初始生命。
 }
 
 Shinobi: {
 	DisplayName: 忍者
-	Flavor: 一位来自东方, 杀人无形的雇佣刺客
-	Description: 以一把武士刀和一双分趾厚底袜开始, 但拥有更少的初始生命.
+	Flavor: 一位来自东方, 杀人无形的雇佣刺客。
+	Description: 以一把武士刀和一双分趾厚底袜开始, 但拥有更少的初始生命。
 }
 
 Alchemist: {
 	DisplayName: 炼金术师
-	Flavor: 一位调和万物的炼金大师
-	Description: 以一张炼药桌,50瓶水和12份草药包开始.
+	Flavor: 一位调和万物的炼金大师。
+	Description: 以一张炼药桌,50瓶水和12份草药包开始。
 }
 
 Demoman: {
 	DisplayName: 爆破狂
 	Flavor: 向矿石, 敌人或你自己投掷炸药吧!
-	Description: 以2枚炸药, 10枚炸弹, 15枚手榴弹开始.
+	Description: 以2枚炸药, 10枚炸弹, 15枚手榴弹开始。
 }
 
 Boomer: {
 	DisplayName: 老家伙
-	Flavor: 在我们那个年代...
-	Description: 以割草机, 太阳镜, 烧烤排骨和烤松鼠开始.
+	Flavor: 在我们那个年代…
+	Description: 以割草机, 太阳镜, 烧烤排骨和烤松鼠开始。
 }
 
 Zoomer: {
 	DisplayName: Z青年
-	Flavor: Terreddit 上今天突然弹出来个帖说啥 用手榴弹杀史莱姆 认真的...
-	Description: 以护目镜, 一部手机和仅40的生命值开始.
+	Flavor: Terreddit 上今天突然弹出来个帖说啥 用手榴弹杀史莱姆 认真的。。。
+	Description: 以护目镜, 一部手机和仅40的生命值开始。
 }
 
 Tiger: {
 	DisplayName: 老虎
 	Flavor: 比其他泰拉人凶猛一点点, 但没有你想的那么多!
-	Description: 以猫耳朵, 狐狸尾巴, 猛虎攀岩用具和一双利刃手套开始.
+	Description: 以猫耳朵, 狐狸尾巴, 猛虎攀岩用具和一双利刃手套开始。
 }
 
 Builder: {
 	DisplayName: 建筑师
-	Flavor: 一位远道而来的著名建筑师.
-	Description: 以一个梯凳，一个建筑师工具包，500个木头和石头开始, 并且画家将会替代向导作为你的起始NPC
+	Flavor: 一位远道而来的著名建筑师。
+	Description: 以一个梯凳，一个建筑师工具包，500个木头和石头开始, 并且画家将会替代向导作为你的起始NPC。
 }
 
 Thief: {
 	DisplayName: 盗贼
-	Flavor: 一位有扒窃嗜好的小偷.
-	Description: 以一枚幸运硬币, 铂金短剑和300柄毒刀开始.
+	Flavor: 一位有扒窃嗜好的小偷。
+	Description: 以一枚幸运硬币, 铂金短剑和300柄毒刀开始。
 }
 
 Firestarter: {
 	DisplayName: 纵火犯
-	Flavor: 有些人, 就是想看着世界燃烧.
-	Description: 以一柄火花魔棒，300个燃烧瓶，一把有50枚弹药的照明枪和100个火把开始.
+	Flavor: 有些人, 就是想看着世界燃烧。
+	Description: 以一柄火花魔棒，300个燃烧瓶，一把有50枚弹药的照明枪和100个火把开始。
 }
 
 Pirate: {
 	DisplayName: 海盗
 	Flavor: 是的! 一个真正的海盗知道陆地什么时候能被掠夺，并且他们将会去掠夺！
-	Description: 以眼罩、金戒指、六分仪、生锈的弯刀、小桶和200张帆开始.
+	Description: 以眼罩、金戒指、六分仪、生锈的弯刀、小桶和200张帆开始。
 }
 
 Deprived: {
 	DisplayName: 受弃者
-	Flavor: 一位被遗忘的战士, 手持着被遗忘之物.
-	Description: 以80生命值上限, 被遗忘之剑, 被遗忘提灯和3瓶治疗药水开始.
+	Flavor: 一位被遗忘的战士, 手持着被遗忘之物。
+	Description: 以80生命值上限, 被遗忘之剑, 被遗忘提灯和3瓶治疗药水开始。
 }
 
 Lumberjack: {
 	DisplayName: 伐木工
-	Flavor: 一位卑微的伐木工, 带着他的法兰绒衬衫和他可靠的斧子.
-	Description: 以法兰绒衬衫, 伐木斧, 锯木机, 12个苹果和一些不同种类的木材各300份开始.
+	Flavor: 一位卑微的伐木工, 带着他的法兰绒衬衫和他可靠的斧子。
+	Description: 以法兰绒衬衫, 伐木斧, 锯木机, 12个苹果和一些不同种类的木材各300份开始。
 }
 
 Nobleman: {
 	DisplayName: 贵族
-	Flavor: 如果你认为数钱很难, 那就是一个勤奋的工人. 注: 仅能使用于中核或硬核角色.
-	Description: 以一个钻石戒指, 金表, 仅20的生命值上限, 和一枚铂金币作为开始  - 只能用于中核或硬核角色.
+	Flavor: 如果你认为数钱很难, 那就是一个勤奋的工人。 注: 仅能使用于中核或硬核角色。
+	Description: 以一个钻石戒指, 金表, 仅20的生命值上限, 和一枚铂金币作为开始  - 只能用于中核或硬核角色。
 }
 
 Fisherman: {
 	DisplayName: 渔夫
-	Flavor: 史莱姆渴望我, 鱼儿们怕着我......
-	Description: 以一个渔夫帽, 一根强化钓竿配上优质钓鱼线, 3罐蠕虫罐头作为开始, 并且渔夫会替代向导成为你的初始NPC.
+	Flavor: 史莱姆渴望我, 鱼儿们怕着我…
+	Description: 以一个渔夫帽, 一根强化钓竿配上优质钓鱼线, 3罐蠕虫罐头作为开始, 并且渔夫会替代向导成为你的初始NPC。
 }
 
 Trailblazer: {
 	DisplayName: 开拓者
 	Flavor: 无需多言, 他们要踏遍天涯, 遍览万物!
-	Description: 以赫尔墨斯之靴, 金属扣带和疾风脚镯开始.
+	Description: 以赫尔墨斯之靴, 金属扣带和疾风脚镯开始。
 }
 
 Adventurer: {
 	DisplayName: 冒险者
 	Flavor: 伴随着探索的渴望和对落石陷阱的嗜好!
-	Description: 以一支抓钩, 100个火把, 一整套的考古学家服装和各5瓶的危险感药水及洞穴探险药水开始.
+	Description: 以一支抓钩, 100个火把, 一整套的考古学家服装和各5瓶的危险感药水及洞穴探险药水开始。
 }
 
 Farmer: {
 	DisplayName: 农夫
-	Flavor: 它不多, 但这是个诚实的工作. (PS: 是个EN meme)
-	Description: 以一个夏日草帽, 一把镰刀, 200份干草, 各种草药的种子各12份和它们的花盆开始.
+	Flavor: 它不多, 但这是个诚实的工作。 (PS: 是个EN meme)
+	Description: 以一个夏日草帽, 一把镰刀, 200份干草, 各种草药的种子各12份和它们的花盆开始。
 }
 
 Spelunker: {
 	DisplayName: 探勘者
-	Flavor: 洞穴在呼唤, 在回应. 那些矿石不会自己掉下来的!
-	Description: 以挖矿头盔, 远古凿子, 金镐, 矿车, 10份炸弹和洞穴探险药水开始.
+	Flavor: 洞穴在呼唤, 在回应。 那些矿石不会自己掉下来的!
+	Description: 以挖矿头盔, 远古凿子, 金镐, 矿车, 10份炸弹和洞穴探险药水开始。
 }
 
 Bookworm: {
 	DisplayName: 书呆子
-	Flavor: 心胜于物. 最优的战斗策略便是拥有一个敏锐的脑子!
-	Description: 以一本旧的法术书, 植物绳索编织指南, 小动物指南和8本普通书籍开始.
+	Flavor: 心胜于物。 最优的战斗策略便是拥有一个敏锐的脑子!
+	Description: 以一本旧的法术书, 植物绳索编织指南, 小动物指南和8本普通书籍开始。
 }
 
 Druid: {
 	DisplayName: 德鲁伊
 	Flavor: 自然的先驱, 致力于维护世界的活力与健康!
-	Description: 以植物绳索编织指南, 魔刺, 再生之杖, 3份草药袋和10个黏土盆开始.
+	Description: 以植物绳索编织指南, 魔刺, 再生之杖, 3份草药袋和10个黏土盆开始。
 }
 
 Painter: {
 	DisplayName: 画家
-	Flavor: 艺术是一种表达形式, 亦是一种生活方式, 一个强大的工具... - 并且, 十分昂贵.
-	Description: 以一把彩弹枪, 画笔和一套喷漆工具开始. 画家会替代向导作为起始NPC, 并且所有的油漆都会打2.5折!
+	Flavor: 艺术是一种表达形式, 亦是一种生活方式, 一个强大的工具… - 并且, 十分昂贵。
+	Description: 以一把彩弹枪, 画笔和一套喷漆工具开始。 画家会替代向导作为起始NPC, 并且所有的油漆都会打2.5折!
 }
 
 Australian: {
 	DisplayName: 澳大利亚人
-	Flavor: 就是个普通人, 没什么特别的. 但是这里的世界有些颠倒了.
-	Description: 以一套牛仔套装, 一个木制回飞棒开始. 但角色始终上下颠倒.
+	Flavor: 就是个普通人, 没什么特别的。 但是这里的世界有些颠倒了。
+	Description: 以一套牛仔套装, 一个木制回飞棒开始。 但角色始终上下颠倒。
 }
 
 Bereaved: {
 	DisplayName: 丧亲之人
-	Flavor: 暴雨仍笼罩着你的心, 雨伞帮不上你任何忙.
-	Description: 以一把悲剧雨伞, 一套葬服在墓地开始.
+	Flavor: 暴雨仍笼罩着你的心, 雨伞帮不上你任何忙。
+	Description: 以一把悲剧雨伞, 一套葬服在墓地开始。
 }
 
 Frozen: {
 	DisplayName: 冰寒族群
-	Flavor: 在千年的冰霜(和几天建造雪屋的时间)后, 他们准备好行动了.
-	Description: 以雪球炮, 一套粉色防雪套装和999个雪球在雪屋开始.
+	Flavor: 在千年的冰霜(和几天建造雪屋的时间)后, 他们准备好行动了。
+	Description: 以雪球炮, 一套粉色防雪套装和999个雪球在雪屋开始。
 }
 
 Slayer: {
 	DisplayName: 屠杀者
-	Flavor: 前进, 撕碎, 直到它们被消灭.
-	Description: 出生在地狱中, 以140生命值, 三发猎枪和无限弹药袋开始.
+	Flavor: 前进, 撕碎, 直到它们被消灭。
+	Description: 出生在地狱中, 以140生命值, 三发猎枪和无限弹药袋开始。
 }
 
 Chef: {
-	// DisplayName: Chef
-	// Flavor: Food magician, famous across the world for their dishes. Looking for distant spices.
-	// Description: Starts with a chef's outfit, a bunch of food, a cooking pot, and a bloody machete.
+	DisplayName: 厨师
+	Flavor: 烹饪的魔术师，以其菜肴闻名于世。为寻找遥远的香料踏上旅途。
+	Description: 以厨师套装，一堆食物，烹饪锅和血腥砍刀开始。
 }
 
 ReallyConfused: {
-	// DisplayName: Confused
-	// Flavor: Just bewildered. Completely out of the loop. What's happening? Does this bow shoot magic?
-	// Description: Starts with a gold bow and 100 arrows. Damage classes are shuffled around permenantly, along with some minor tweaks.
+	DisplayName: 混乱之人
+	Flavor: 彻底乱套了。完全不合常理。发生什么事了？这弓会发射魔法吗？
+	Description: 以金弓和100支箭开始。伤害类型被永久打乱，还有一些其他小调整。
 }
 
 Alternate: {
 	DisplayName: 不纯粹之人
-	Flavor: 也许, 如果世界线稍有变动, 这就是一个纯粹之人.
+	Flavor: 也许, 如果世界线稍有变动, 这就是一个纯粹之人。
 	Description:
 		'''
-		以一套锡工具而非铜工具开始.
-		使用过任意出身后解锁.
+		以一套锡工具而非铜工具开始。
+		使用过任意出身后解锁。
 		'''
 }
 
@@ -206,42 +206,42 @@ Accursed: {
 	Flavor: 直接以困难模式开始, 祝你好运!
 	Description:
 		'''
-		以一套金工具和珍珠木盔甲开始, 树妖将替代向导作为初始NPC. 并且初始将直接进入困难模式
-		使用一个任意出身角色击败血肉墙后解锁.
+		以一套金工具和珍珠木盔甲开始, 树妖将替代向导作为初始NPC。 并且初始将直接进入困难模式。
+		使用一个任意出身角色击败血肉墙后解锁。
 		'''
-	# Used by the Accursed's world generation modification.
-	Generation: Generating hardmode
+	# Used by the Accursed's world generation modification。
+	Generation: 开启困难模式
 }
 
 Random: {
 	DisplayName: 随机
-	Flavor: 选择一个随机的背景.
+	Flavor: 选择一个随机的背景。
 	Description: ""
 }
 
 Unloaded: {
 	DisplayName: 已删除出身
-	Flavor: This is a placeholder generated background for an unloaded cross-mod background.
+	Flavor: 这是为被卸载的其他模组的出身生成的占位符。
 	Description: ""
 }
 
 Custom: {
-	// DisplayName: Custom
-	// Flavor: The sandbox persists in you, too.
-	/* Description:
+	DisplayName: 定制人
+	Flavor: 你的出身也是沙盒的一部分。
+	Description:
 		'''
-		Starts with whatever you want.
-		Unlocked by beating the Moon Lord.
-		''' */
+		以任何想要的样子开始。
+		击败月亮领主解锁。
+		''' 
 }
 
 Inevitable: {
-	// DisplayName: Inevitable
-	// Flavor: Cursed to escar-go away, forever.
-	/* Description:
+	DisplayName: 蜗牛挑战
+	Flavor: 如果有一只蜗牛追杀你，你干不干？
+	Description:
 		'''
-		Starts with full gold equipment, gold armor, 300 health, 100 mana, +1 all flat damage and +10% all damage.
-		A snail follows you forever. It will kill you if it touches you.
-		Only you can see it.
-		''' */
+		开局就拥有全套金装备，金工具，300生命值，100魔力值，并增加1点固定伤害和额外的10%伤害提升。
+		但会有一只蜗牛永远追杀你，你一旦与蜗牛接触就会立刻死亡。
+		只有你能看见那只蜗牛。
+		''' 
 }

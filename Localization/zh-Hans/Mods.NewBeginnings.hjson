@@ -5,13 +5,13 @@ Projectiles: {
 
 MrPlaguesCompatLine: 点击此处打开 New Beginning 菜单!
 # The space in the below key is intentional. If you're translating to a language with spaces, keep it.
-TitleLine: " [c/8B8B8B:the {0}]"
+TitleLine: " [c/8B8B8B: {0}]"
 
 # Used in the Inevitable's snail death.
 SnailDeath: {
-	// 0: "{0} was too slow."
-	// 1: In the end, {0} was not persistent enough.
-	// 2: "{0}...it was inevitable."
+	0: "{0}太慢了。"
+	1: 最终,{0}还是没能坚持下去。
+	2: "{0}...迎来了命中注定的结局。"
 }
 
 Configs: {
