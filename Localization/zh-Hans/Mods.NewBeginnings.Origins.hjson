@@ -14,7 +14,7 @@ Knight: {
 Huntsman: {
 	DisplayName: 猎人
 	Flavor: 一位眼明手快的狩猎大师。
-	Description: 以一把弓, 无尽箭袋和猎人披风开始。
+	Description: 以一把弓, 200支箭和猎人披风开始。
 }
 
 Wizard: {
