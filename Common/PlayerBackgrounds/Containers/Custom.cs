@@ -9,10 +9,13 @@ internal class Custom : PlayerBackgroundContainer
 {
     public override string LanguageKey => "Mods.NewBeginnings.Origins.Custom";
 
-    public static PlayerBackgroundData GetCustomBackground(Player player)
+    public static PlayerBackgroundData GetCustomBackground(Player player, bool resetLifeAndManaCrystals = false)
     {
-        player.ConsumedManaCrystals = 0;
-        player.ConsumedLifeCrystals = 0;
+        if (resetLifeAndManaCrystals)
+        {
+            player.ConsumedManaCrystals = 0;
+            player.ConsumedLifeCrystals = 0;
+        }
 
         PlayerBackgroundPlayer plr = player.GetModPlayer<PlayerBackgroundPlayer>();
         CustomOriginData customData = plr.CustomOriginData;

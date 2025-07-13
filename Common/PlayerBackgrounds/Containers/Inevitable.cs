@@ -79,7 +79,7 @@ internal class Inevitable : PlayerBackgroundContainer
 
             if (Main.LocalPlayer.Hitbox.Intersects(Hitbox) && !Main.LocalPlayer.dead)
             {
-                string text = Language.GetText("Mods.NewBeginnings.SnailDeath." + Main.rand.Next(3)).Format(Main.LocalPlayer.name);
+                var text = NetworkText.FromKey("Mods.NewBeginnings.SnailDeath." + Main.rand.Next(3), Main.LocalPlayer.name);
                 Main.LocalPlayer.KillMe(PlayerDeathReason.ByCustomReason(text), 9999, 0, false);
             }
         }
