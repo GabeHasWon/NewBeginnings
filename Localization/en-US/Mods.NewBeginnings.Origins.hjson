@@ -14,7 +14,7 @@ Knight: {
 Huntsman: {
 	DisplayName: Huntsman
 	Flavor: Steady hands and keen eyes, a master of the hunt.
-	Description: Starts with a bow, an endless quiver and a hunter cloak.
+	Description: Starts with a bow, 200 arrows and a hunter's cloak.
 }
 
 Wizard: {

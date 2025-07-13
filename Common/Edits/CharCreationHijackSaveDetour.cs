@@ -42,7 +42,7 @@ namespace NewBeginnings.Common.Edits
                 PlayerBackgroundData data = player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
 
                 if (data.Identifier == "Custom")
-                    data = Custom.GetCustomBackground(player);
+                    data = Custom.GetCustomBackground(player, true);
 
                 data.ApplyToPlayer(player);
                 data.Delegates.ModifyPlayerCreation?.Invoke(player);

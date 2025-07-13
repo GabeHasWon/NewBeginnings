@@ -80,7 +80,7 @@ public class FeintDagger : ModProjectile
             points.RemoveAt(0);
     }
 
-    public override void Kill(int timeLeft)
+    public override void OnKill(int timeLeft)
     {
         for (int i = 0; i < 6; ++i)
             Dust.NewDust(Projectile.Center, 1, 1, DustID.BlueFairy, Main.rand.NextFloat(-1, 1) + Projectile.velocity.X * 0.2f, Main.rand.NextFloat(-1, 1) + Projectile.velocity.Y * 0.2f);

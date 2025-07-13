@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -19,21 +20,20 @@ internal class PlayerBackgroundPlayer : ModPlayer
 
     private readonly Dictionary<Guid, Point16> _originSpawns = [];
 
-    private string _bgName = "";
+    internal string bgName = "";
 
-    //BG specific stuff
     public void SetBackground(PlayerBackgroundData data)
     {
         BackgroundData = data;
-        _bgName = data.Identifier;
+        bgName = data.Identifier;
     }
 
     //Save / Load data for the player's origin name, custom data & spawn (if any)
     public override void SaveData(TagCompound tag)
     {
-        tag.Add("bgName", _bgName);
+        tag.Add("bgName", bgName);
 
-        if (CustomOriginData is not null && _bgName == "Custom")
+        if (CustomOriginData is not null && bgName == "Custom")
         {
             TagCompound customData = [];
             CustomOriginData.SaveData(customData);
@@ -56,24 +56,16 @@ internal class PlayerBackgroundPlayer : ModPlayer
 
     public override void LoadData(TagCompound tag)
     {
-        _bgName = tag.GetString("bgName");
+        bgName = tag.GetString("bgName");
         CustomOriginData = null;
 
-        if (_bgName == "Custom" && tag.TryGet<TagCompound>("customData", out var data))
+        if (bgName == "Custom" && tag.TryGet<TagCompound>("customData", out var data))
         {
             CustomOriginData = CustomOriginData.Empty;
             CustomOriginData.LoadData(data);
         }
 
-        if (PlayerBackgroundDatabase.playerBackgroundDatas.Any(x => x.Identifier == _bgName))
-            BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Identifier == _bgName);
-        else if (_bgName is not null && _bgName != string.Empty)
-        {
-            if (_bgName == "Custom")
-                BackgroundData = Custom.GetCustomBackground(Player);
-            else
-                BackgroundData = new PlayerBackgroundData("Mods.NewBeginnings.Origins.Unloaded", "Unloaded", null, null);
-        }
+        SetBackgroundBasedOnName();
 
         if (tag.TryGet("originSpawnCount", out int count))
         {
@@ -86,18 +78,57 @@ internal class PlayerBackgroundPlayer : ModPlayer
         }
     }
 
-    public bool HasBG() => _bgName is not null and not "";
-    public bool HasBG(string name) => HasBG() && _bgName == name;
-    public void SetOriginSpawn(Point16 point) => _originSpawns.Add(Main.ActiveWorldFileData.UniqueId, point);
+    internal void SetBackgroundBasedOnName()
+    {
+        if (PlayerBackgroundDatabase.playerBackgroundDatas.Any(x => x.Identifier == bgName))
+            BackgroundData = PlayerBackgroundDatabase.playerBackgroundDatas.FirstOrDefault(x => x.Identifier == bgName);
+        else if (bgName is not null && bgName != string.Empty)
+        {
+            if (bgName == "Custom")
+                BackgroundData = Custom.GetCustomBackground(Player);
+            else
+                BackgroundData = new PlayerBackgroundData("Mods.NewBeginnings.Origins.Unloaded", "Unloaded", null, null);
+        }
+    }
 
-    //Misc tMod Hooks
+    public override void OnEnterWorld()
+    {
+        if (Main.netMode != NetmodeID.MultiplayerClient)
+            return;
+
+        ModPacket packet = ModContent.GetInstance<NewBeginnings>().GetPacket(6);
+        packet.Write(NewBeginnings.MessageID.SyncPlayerOrigin);
+        packet.Write(bgName);
+        packet.Write((byte)Player.whoAmI);
+        packet.Send();
+    }
+
+    public bool HasBG() => bgName is not null and not "";
+    public bool HasBG(string name) => HasBG() && bgName == name;
+    public void SetOriginSpawn(Point16 point) => _originSpawns.TryAdd(Main.ActiveWorldFileData.UniqueId, point);
     public override void Load() => On_Player.Spawn += HijackSpawn;
 
-    private void HijackSpawn(On_Player.orig_Spawn orig, Player self, PlayerSpawnContext context)
+    private static void HijackSpawn(On_Player.orig_Spawn orig, Player self, PlayerSpawnContext context)
     {
         orig(self, context);
 
-        if (self.GetModPlayer<PlayerBackgroundPlayer>()._originSpawns.TryGetValue(Main.ActiveWorldFileData.UniqueId, out Point16 spawn) && (self.SpawnX == -1 || self.SpawnY == -1))
+        PlayerBackgroundPlayer plr = self.GetModPlayer<PlayerBackgroundPlayer>();
+
+        if (!plr._originSpawns.TryGetValue(Main.ActiveWorldFileData.UniqueId, out _))
+        {
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+            {
+                ModPacket packet = ModContent.GetInstance<NewBeginnings>().GetPacket(6);
+                packet.Write(NewBeginnings.MessageID.RequestPlayerSpawn);
+                packet.Write(plr.bgName);
+                packet.Write((byte)self.whoAmI);
+                packet.Send();
+            }
+            else
+                PlayerBackgroundWorld.SetOriginSpawn(self);
+        }
+
+        if (plr._originSpawns.TryGetValue(Main.ActiveWorldFileData.UniqueId, out var spawn) && self.SpawnX == -1 || self.SpawnY == -1)
         {
             self.SpawnX = spawn.X;
             self.SpawnY = spawn.Y;

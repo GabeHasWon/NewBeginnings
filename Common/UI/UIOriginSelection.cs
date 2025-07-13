@@ -411,7 +411,7 @@ internal class UIOriginSelection : UIState
                 if (!_player.GetModPlayer<PlayerBackgroundPlayer>().HasBG() || bgData.Name != item.Name)
                 {
                     if (bgData.Identifier == "Custom")
-                        bgData = Custom.GetCustomBackground(_player);
+                        bgData = Custom.GetCustomBackground(_player, true);
 
                     bgData.ApplyArmor(_player);
                     bgData.ApplyAccessories(_player, true);
