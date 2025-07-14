@@ -48,6 +48,6 @@ WornSpellbook: {
 }
 
 TrailblazerHelmet: {
-	// DisplayName: Trailblazer Helmet
-	// Tooltip: "'Godspeed!'"
+	DisplayName: 开拓者头盔
+	Tooltip: "'神速!'"
 }
