@@ -1,5 +1,2 @@
-1.2.0.9
-- Updated chinese localization
-- Fixed Custom origins resetting life & mana crystal on reload
-- Made custom origin spawns sync in multiplayer
-- Made entering any world choose a custom origin spawn in both single and multiplayer
+1.2.0.10
+- Fixed logic error causing bad spawns

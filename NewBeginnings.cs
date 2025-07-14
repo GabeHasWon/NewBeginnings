@@ -86,8 +86,12 @@ public class NewBeginnings : Mod
             {
                 int x = reader.ReadInt16();
                 int y = reader.ReadInt16();
-                player.GetModPlayer<PlayerBackgroundPlayer>().SetOriginSpawn(new Point16(x, y));
-                player.Center = new Vector2(x, y).ToWorldCoordinates();
+
+                if (x != -1 && y != -1)
+                {
+                    player.GetModPlayer<PlayerBackgroundPlayer>().SetOriginSpawn(new Point16(x, y));
+                    player.Center = new Vector2(x, y).ToWorldCoordinates();
+                }
             }
         }
     }
