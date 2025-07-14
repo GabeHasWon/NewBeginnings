@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Generation;
@@ -34,6 +33,10 @@ internal class PlayerBackgroundWorld : ModSystem
             return Point16.NegativeOne;
 
         Point16 newSpawn = data.Delegates.GetSpawnPosition();
+
+        if (newSpawn == Point16.Zero)
+            return Point16.NegativeOne;
+
         player.GetModPlayer<PlayerBackgroundPlayer>().SetOriginSpawn(newSpawn);
         return newSpawn;
     }

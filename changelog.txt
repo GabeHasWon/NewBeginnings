@@ -1,2 +1,2 @@
-1.2.0.10
-- Fixed logic error causing bad spawns
+1.2.0.11
+- Fixed players with origins that have no spawn but have a spawn delegate spawning the player at 0, 0
