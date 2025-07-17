@@ -87,7 +87,7 @@ public class NewBeginnings : Mod
                 int x = reader.ReadInt16();
                 int y = reader.ReadInt16();
 
-                if (x != -1 && y != -1)
+                if (x > 0 && y > 0)
                 {
                     player.GetModPlayer<PlayerBackgroundPlayer>().SetOriginSpawn(new Point16(x, y));
                     player.Center = new Vector2(x, y).ToWorldCoordinates();

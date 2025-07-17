@@ -34,7 +34,7 @@ internal class PlayerBackgroundWorld : ModSystem
 
         Point16 newSpawn = data.Delegates.GetSpawnPosition();
 
-        if (newSpawn == Point16.Zero)
+        if (newSpawn.X <= 0 || newSpawn.Y <= 0)
             return Point16.NegativeOne;
 
         player.GetModPlayer<PlayerBackgroundPlayer>().SetOriginSpawn(newSpawn);
