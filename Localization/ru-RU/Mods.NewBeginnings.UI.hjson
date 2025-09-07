@@ -16,12 +16,30 @@ Splash: {
 	14: Безопасно для использования в воде и вне её!
 	15: Несъедобно, но можно вкус всё еще представить!
 	16: Оптимизировано исключительно для компьютеров с Windows 95!
+	// 17: Adjacent to the people who brought you Walbert!
+	// 18: Will revolutionize anthropology in the year 19,781!
+	// 19: Quantum programming? More likely than you think!
+	// 20: Also try Minesweeper!
+	// 21: Forged deep in the depths of a distant volcano!
+	// 22: Supported by a mysterious cabal of powerful developers!
+	// 23: Contains multitudes!
+	// 24: Would never break cross compatibility!
+	// 25: Contains exactly one extremely secret weak spot!
+	// 26: '''"What a great mod!" - Moon Lord'''
+	// 27: Makes a great gift for any holiday!
+	// 28: Not effective as a lethal weapon!
+	// 29: Controls your mind just enough to keep you playing!
 }
 
 SortBy: {
 	Line: Сортировка: {0}
 	Default: стандартная
 	Difficulty: по сложности
+	// DifficultyReverse: difficulty (reverse)
+	// Alphabetically: alphabetical
+	// AlphabeticallyReverse: alphabetical (reverse)
+	// Mod: mod
+	// ModReverse: mod (reverse)
 }
 
 CustomOrigin: {

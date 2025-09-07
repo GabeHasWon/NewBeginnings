@@ -1,3 +1,3 @@
-1.2.0.12
-- Fixed invalid spawns with crossmod origins
-- Please let this be fixed
+1.2.0.14
+- Localized crossmod splash texts
+- Fixed issue where splash texts were used in the wrong place, causing them to fail

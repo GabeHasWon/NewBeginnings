@@ -12,7 +12,7 @@ internal class Pirate : PlayerBackgroundContainer
     public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.Keg, 1), (ItemID.Sail, 200) };
 
     public override EquipData Equip => new(ItemID.EyePatch, 0, 0, ItemID.GoldRing, ItemID.Sextant);
-    public override MiscData Misc => new(swordReplace: ModContent.ItemType<RustyCutlass>(), stars: 2);
+    public override MiscData Misc => new(sword: ModContent.ItemType<RustyCutlass>(), stars: 2);
 
     public override bool HasSpecialSpawn() => true;
 

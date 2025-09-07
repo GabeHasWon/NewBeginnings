@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace NewBeginnings.Common.Crossmod;
@@ -14,6 +15,7 @@ internal static class OriginCalls
 {
     internal static List<PlayerBackgroundData> _crossModDatas = [];
     internal static List<Action> _delayedFuncs = [];
+    internal static List<LocalizedText> _crossModSplashTexts = [];
 
     internal static object Call(object[] args)
     {
@@ -40,8 +42,22 @@ internal static class OriginCalls
             return RemoveOrigin(args[1..]);
         else if (type == "delay")
             return AddDelayedOrigin(args[1..]);
+        else if (type == "splash")
+            return AddSplash(args[1..]);
 
         return null;
+    }
+
+    private static bool AddSplash(object[] args)
+    {
+        if (args.Length <= 0 || args.Length > 1)
+            return ThrowOrReturn("objects[0] is too short or too long!");
+
+        if (args[0] is not LocalizedText splash)
+            return ThrowOrReturn("objects[0] is not a LocalizedText!");
+
+        _crossModSplashTexts.Add(splash);
+        return true;
     }
 
     private static bool AddDelayedOrigin(object[] args)

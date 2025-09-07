@@ -18,7 +18,7 @@ internal class Frozen : PlayerBackgroundContainer
     public override (int type, int stack)[] Inventory => new (int type, int stack)[] { (ItemID.Snowball, 999) };
 
     public override EquipData Equip => new(ItemID.PinkEskimoHood, ItemID.PinkEskimoCoat, ItemID.PinkEskimoPants);
-    public override MiscData Misc => new MiscData(swordReplace: ItemID.SnowballCannon);
+    public override MiscData Misc => new MiscData(sword: ItemID.SnowballCannon);
 
     public override bool HasSpecialSpawn() => true;
     public override Point16 GetSpawnPosition() => spawnPos;

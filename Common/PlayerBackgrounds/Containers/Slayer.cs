@@ -9,7 +9,7 @@ internal class Slayer : PlayerBackgroundContainer
 {
     public override string LanguageKey => "Mods.NewBeginnings.Origins.Slayer";
     public override (int type, int stack)[] Inventory => new (int, int)[] { (ItemID.EndlessMusketPouch, 1) };
-    public override MiscData Misc => new(140, 20, swordReplace: ItemID.Boomstick, stars: 3);
+    public override MiscData Misc => new(140, 20, sword: ItemID.Boomstick, stars: 3);
 
     public override bool HasSpecialSpawn() => true;
 

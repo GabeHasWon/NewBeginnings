@@ -1,7 +1,7 @@
 Purist: {
 	DisplayName: 纯粹之人
 	Flavor: 标准的Terraria体验。
-	# You will see the Descriptions of several origins be empty, the "" is necessary。
+	# You will see the Descriptions of several origins be empty, the "" is necessary.
 	Description: ""
 }
 
@@ -209,7 +209,7 @@ Accursed: {
 		以一套金工具和珍珠木盔甲开始, 树妖将替代向导作为初始NPC。 并且初始将直接进入困难模式。
 		使用一个任意出身角色击败血肉墙后解锁。
 		'''
-	# Used by the Accursed's world generation modification。
+	# Used by the Accursed's world generation modification.
 	Generation: 开启困难模式
 }
 
@@ -232,7 +232,7 @@ Custom: {
 		'''
 		以任何想要的样子开始。
 		击败月亮领主解锁。
-		''' 
+		'''
 }
 
 Inevitable: {
@@ -243,5 +243,5 @@ Inevitable: {
 		开局就拥有全套金装备，金工具，300生命值，100魔力值，并增加1点固定伤害和额外的10%伤害提升。
 		但会有一只蜗牛永远追杀你，你一旦与蜗牛接触就会立刻死亡。
 		只有你能看见那只蜗牛。
-		''' 
+		'''
 }

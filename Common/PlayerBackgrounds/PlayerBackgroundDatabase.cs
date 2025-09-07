@@ -32,9 +32,9 @@ internal static class PlayerBackgroundDatabase
         //FORMATTING: Try keeping single line backgrounds clumped together
         //Add new lines to make sure all very long backgrounds fit visibly on the screen at once, and keep them seperated
         AddNewBGItemlessDesc("Purist", "Purist", null, new MiscData(sortPriority: 12));
-        AddNewBG("Knight", "Knight", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), new MiscData(swordReplace: ItemID.SilverBroadsword, sortPriority: 11, stars: 1));
+        AddNewBG("Knight", "Knight", new EquipData(ItemID.IronHelmet, ItemID.IronChainmail, ItemID.IronGreaves), new MiscData(sword: ItemID.SilverBroadsword, sortPriority: 11, stars: 1));
         AddNewBG("Huntsman", "Huntsman", EquipData.SingleAcc(ItemID.HunterCloak), new MiscData(sortPriority: 11, stars: 1), (ItemID.GoldBow, 1), (ItemID.WoodenArrow, 200));
-        AddNewBG("Wizard", "Wizard", new EquipData(ItemID.WizardHat, ItemID.TopazRobe, 0), new MiscData(80, 60, swordReplace: ItemID.TopazStaff, sortPriority: 11, stars: 1));
+        AddNewBG("Wizard", "Wizard", new EquipData(ItemID.WizardHat, ItemID.TopazRobe, 0), new MiscData(80, 60, sword: ItemID.TopazStaff, sortPriority: 11, stars: 1));
         AddNewBG("Beastmaster", "Beastmaster", new MiscData(80, sortPriority: 11, stars: 1), (ItemID.SlimeStaff, 1), (ItemID.BlandWhip, 1));
         AddNewBG("Shinobi", "Shinobi", EquipData.SingleAcc(ItemID.Tabi), new MiscData(80, stars: 1), (ItemID.Katana, 1));
         AddNewBG("Alchemist", "Alchemist", (ItemID.AlchemyTable, 1), (ItemID.BottledWater, 50), (ItemID.HerbBag, 12));
@@ -51,9 +51,9 @@ internal static class PlayerBackgroundDatabase
 
         playerBackgroundDatas.Add(new Pirate());
         
-        AddNewBG("Deprived", "Deprived", null, new MiscData(80, swordReplace: ModContent.ItemType<DeprivedBlade>(), stars: 2), (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
+        AddNewBG("Deprived", "Deprived", null, new MiscData(80, sword: ModContent.ItemType<DeprivedBlade>(), stars: 2), (ModContent.ItemType<DeprivedLantern>(), 1), (ItemID.HealingPotion, 3));
 
-        AddNewBG("Lumberjack", "Lumberjack", new EquipData(0, ModContent.ItemType<LumberjackFlannel>()), new MiscData(axeReplace: ModContent.ItemType<LumberjackAxe>(), stars: 1), (ItemID.Sawmill, 1), (ItemID.Apple, 12), (ItemID.Wood, 300), (ItemID.BorealWood, 300), 
+        AddNewBG("Lumberjack", "Lumberjack", new EquipData(0, ModContent.ItemType<LumberjackFlannel>()), new MiscData(axe: ModContent.ItemType<LumberjackAxe>(), stars: 1), (ItemID.Sawmill, 1), (ItemID.Apple, 12), (ItemID.Wood, 300), (ItemID.BorealWood, 300), 
             (ItemID.PalmWood, 300), (ItemID.Ebonwood, 300), (ItemID.Shadewood, 300), (ItemID.RichMahogany, 300), (ItemID.DynastyWood, 300));
 
         AddNewBG("Nobleman", "Nobleman",
@@ -75,14 +75,14 @@ internal static class PlayerBackgroundDatabase
         AddNewBG("Spelunker", "Spelunker", EquipData.AccFirst(ItemID.AncientChisel, ItemID.MiningHelmet), new MiscData(stars: 2), (ItemID.GoldPickaxe, 1), (ItemID.Bomb, 10), (ItemID.SpelunkerPotion, 10), (ItemID.Minecart, 1));
         AddNewBG("Bookworm", "Bookworm", new MiscData(stars: 2), (ModContent.ItemType<WornSpellbook>(), 1), (ItemID.CordageGuide, 1), (ItemID.Book, 8), (ItemID.DontHurtCrittersBook, 1));
         AddNewBG("Druid", "Druid", EquipData.SingleAcc(ItemID.CordageGuide), (ItemID.Vilethorn, 1), (ItemID.StaffofRegrowth, 1), (ItemID.HerbBag, 3), (ItemID.ClayPot, 10));
-        AddNewBG("Painter", "Painter", null, new MiscData(swordReplace: ItemID.PainterPaintballGun, npcType: NPCID.Painter), (ItemID.PaintScraper, 1), (ItemID.PaintSprayer, 1), (ItemID.Paintbrush, 1), (ItemID.PaintRoller, 1));
-        AddNewBG("Australian", "Australian", new EquipData(ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants), new MiscData(swordReplace: ModContent.ItemType<KylieBoomerang>()));
+        AddNewBG("Painter", "Painter", null, new MiscData(sword: ItemID.PainterPaintballGun, npcType: NPCID.Painter), (ItemID.PaintScraper, 1), (ItemID.PaintSprayer, 1), (ItemID.Paintbrush, 1), (ItemID.PaintRoller, 1));
+        AddNewBG("Australian", "Australian", new EquipData(ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants), new MiscData(sword: ModContent.ItemType<KylieBoomerang>()));
 
         playerBackgroundDatas.Add(new Bereaved());
         playerBackgroundDatas.Add(new Frozen());
         playerBackgroundDatas.Add(new Slayer());
 
-        AddNewBG("Alternate", "Alternate", null, new MiscData(swordReplace: ItemID.TinShortsword, pickReplace: ItemID.TinPickaxe, axeReplace: ItemID.TinAxe), new DelegateData(() => UnlockabilitySystem.UnlockSaveData.Unlocked("Beginner")));
+        AddNewBG("Alternate", "Alternate", null, new MiscData(sword: ItemID.TinShortsword, pick: ItemID.TinPickaxe, axe: ItemID.TinAxe), new DelegateData(() => UnlockabilitySystem.UnlockSaveData.Unlocked("Beginner")));
 
         playerBackgroundDatas.Add(new Accursed());
         playerBackgroundDatas.Add(new ReallyConfused());

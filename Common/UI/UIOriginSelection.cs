@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.GameContent;
@@ -14,15 +13,27 @@ using System.Linq;
 using Terraria.Localization;
 using NewBeginnings.Common.UnlockabilitySystem;
 using NewBeginnings.Common.PlayerBackgrounds.Containers;
+using NewBeginnings.Common.Crossmod;
 
 namespace NewBeginnings.Common.UI;
 
 internal class UIOriginSelection : UIState
 {
+    public enum SortMode
+    {
+        Default,
+        Difficulty,
+        DifficultyReverse,
+        Alphabetically,
+        AlphabeticallyReverse,
+        Mod,
+        ModReverse
+    }
+
     private const int TotalWidth = 800;
     private const int BackgroundListWidth = 220;
 
-    private static bool _sortByPriority = true;
+    private static SortMode _sortMode = SortMode.Default;
 
     private readonly Player _player;
     private readonly MouseEvent _return;
@@ -33,7 +44,7 @@ internal class UIOriginSelection : UIState
     private UIElement _itemContainer;
     private UIImageButton _sortButton;
 
-    private float BaseHeight => 554f / 1017 * Main.screenHeight;
+    private static float BaseHeight => 554f / 1017 * Main.screenHeight;
 
     public UIOriginSelection(Player player, MouseEvent returnAction)
     {
@@ -45,7 +56,7 @@ internal class UIOriginSelection : UIState
 
     private void Setup()
     {
-        _sortByPriority = true;
+        _sortMode = SortMode.Default;
 
         RemoveAllChildren();
 
@@ -90,8 +101,7 @@ internal class UIOriginSelection : UIState
             Left = StyleDimension.FromPixels(6),
         };
 
-        _sortButton.Append(new UIText(Language.GetText("Mods.NewBeginnings.UI.SortBy.Line").
-            WithFormatArgs(_sortByPriority ? Language.GetText("Mods.NewBeginnings.UI.SortBy.Default") : Language.GetText("Mods.NewBeginnings.UI.SortBy.Difficulty")), 0.8f)
+        _sortButton.Append(new UIText(Language.GetText("Mods.NewBeginnings.UI.SortBy.Line").WithFormatArgs(Language.GetText("Mods.NewBeginnings.UI.SortBy." + _sortMode)), 0.8f)
         {
             VAlign = 0.5f,
             Width = StyleDimension.FromPercent(1f),
@@ -141,8 +151,10 @@ internal class UIOriginSelection : UIState
 
     private static string GetSplashText()
     {
-        int random = Main.rand.Next(17);
-        return Language.GetTextValue("Mods.NewBeginnings.UI.Splash." + random);
+        const int OurMax = 30;
+
+        int random = Main.rand.Next(OurMax + OriginCalls._crossModSplashTexts.Count);
+        return (random >= OurMax ? OriginCalls._crossModSplashTexts[random - OurMax] : Language.GetText("Mods.NewBeginnings.UI.Splash." + random)).Value;
     }
 
     internal static void AddCharacterPreview(UIPanel panel, Player player)
@@ -374,7 +386,7 @@ internal class UIOriginSelection : UIState
         allBGButtons.SetScrollbar(scroll);
         container.Append(scroll);
 
-        List<(int priority, int stars, UIColoredImageButton button)> buttons = [];
+        List<(PlayerBackgroundData data, UIColoredImageButton button)> buttons = [];
 
         foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas) //Adds every background into the list as a button
         {
@@ -438,10 +450,10 @@ internal class UIOriginSelection : UIState
             };
 
             currentBGButton.Append(bgName);
-            buttons.Add((item.Misc.SortPriority, item.Misc.Stars, currentBGButton));
+            buttons.Add((item, currentBGButton));
         }
 
-        foreach (var (_, _, button) in buttons)
+        foreach (var (_, button) in buttons)
             allBGButtons.Add(button);
 
         if (UnlockSaveData.Unlocked("Renewed"))
@@ -450,7 +462,7 @@ internal class UIOriginSelection : UIState
         SetSort(allBGButtons, buttons, _sortButton);
     }
 
-    private void AddCustomBGButton(UIList allBGButtons, List<(int priority, int stars, UIColoredImageButton button)> buttons)
+    private void AddCustomBGButton(UIList allBGButtons, List<(PlayerBackgroundData, UIColoredImageButton button)> buttons)
     {
         var asset = PlayerBackgroundDatabase.backgroundIcons["Custom"];
         UIColoredImageButton customBGButton = new(asset)
@@ -474,13 +486,17 @@ internal class UIOriginSelection : UIState
         };
         customBGButton.Append(bgName);
 
-        buttons.Add((-500, 500, customBGButton));
+        // Dummy data for the random since it doesn't strictly have a useful data; solely sets stuff so that everything is optimal for sorting (and doesn't crash).
+        PlayerBackgroundData data = new()
+        {
+            Misc = new(sortPriority: -500, stars: 500),
+            Name = Language.GetText("Mods.NewBeginnings.Origins.Random.DisplayName")
+        };
+        buttons.Add((data, customBGButton));
     }
 
-    private void CurrentBGButton_OnClick(UIMouseEvent evt, UIElement listeningElement)
-    {
-        Main.MenuUI.SetState(new UICustomOrigin(_player, (UIMouseEvent evt, UIElement listeningElement) => Main.MenuUI.SetState(this)));
-    }
+    private void CurrentBGButton_OnClick(UIMouseEvent evt, UIElement listeningElement) => 
+        Main.MenuUI.SetState(new UICustomOrigin(_player, (evt, listeningElement) => Main.MenuUI.SetState(this)));
 
     private PlayerBackgroundData BackgroundButtonClick(UIList allBGButtons, PlayerBackgroundData item, UIColoredImageButton currentBGButton)
     {
@@ -520,16 +536,32 @@ internal class UIOriginSelection : UIState
         return origin;
     }
 
-    private static void SetSort(UIList allBGButtons, List<(int priority, int stars, UIColoredImageButton button)> buttons, UIImageButton sortButton)
+    private static void SetSort(UIList allBGButtons, List<(PlayerBackgroundData data, UIColoredImageButton button)> buttons, UIImageButton sortButton)
     {
         ResortBGButtons(allBGButtons, buttons);
 
-        sortButton.OnLeftClick += (UIMouseEvent evt, UIElement listeningElement) =>
+        sortButton.OnLeftClick += (evt, listeningElement) =>
         {
-            _sortByPriority = !_sortByPriority;
-            (sortButton.Children.First() as UIText).SetText(Language.GetText("Mods.NewBeginnings.UI.SortBy.Line").
-                WithFormatArgs(_sortByPriority ? Language.GetText("Mods.NewBeginnings.UI.SortBy.Default") : Language.GetText("Mods.NewBeginnings.UI.SortBy.Difficulty")));
-            sortButton.SetImage(ModContent.Request<Texture2D>(_sortByPriority ? "NewBeginnings/Assets/Textures/UI/OriginSort" : "NewBeginnings/Assets/Textures/UI/OriginSortStar"));
+            _sortMode++;
+
+            if (_sortMode > SortMode.AlphabeticallyReverse)
+                _sortMode = SortMode.Default;
+
+            (sortButton.Children.First() as UIText).SetText(Language.GetText("Mods.NewBeginnings.UI.SortBy.Line")
+                .WithFormatArgs(Language.GetText("Mods.NewBeginnings.UI.SortBy." + _sortMode)));
+            string path = "NewBeginnings/Assets/Textures/UI/";
+
+            sortButton.SetImage(ModContent.Request<Texture2D>(path + _sortMode switch
+            {
+                SortMode.Default => "OriginSort",
+                SortMode.Difficulty => "OriginSortStar",
+                SortMode.DifficultyReverse => "OriginSortDifficultyReverse",
+                SortMode.Alphabetically => "OriginSortAlphabet",
+                SortMode.AlphabeticallyReverse => "OriginSortAlphabetRev",
+                SortMode.Mod => "OriginSortMod",
+                _ => "OriginSortModRev"
+            }));
+
             sortButton.Width = StyleDimension.FromPixels(32);
             sortButton.Height = StyleDimension.FromPixels(32);
 
@@ -539,24 +571,49 @@ internal class UIOriginSelection : UIState
         };
     }
 
-    private static void ResortBGButtons(UIList allBGButtons, List<(int priority, int stars, UIColoredImageButton button)> buttons)
+    private static void ResortBGButtons(UIList allBGButtons, List<(PlayerBackgroundData data, UIColoredImageButton button)> buttons)
     {
         //This is some of the ugliest nonsense I've ever written
         allBGButtons.ManualSortMethod = (list) => list.Sort((self, other) =>
         {
-            if (_sortByPriority)
+            var selfData = buttons.Find(x => x.button == self).data; // Find priority by finding the value that has the given button as Item2
+            var otherData = buttons.Find(x => x.button == other).data; // for both the current and next button
+
+            if (_sortMode is SortMode.Mod or SortMode.ModReverse)
             {
-                int mySortPriority = buttons.Find(x => x.button == self).priority; //Find priority by finding the value that has the given button as Item2
-                int otherSortPriority = buttons.Find(x => x.button == other).priority; //for both the current and next button
+                int mySortPriority = selfData.Misc.SortPriority; 
+                int otherSortPriority = otherData.Misc.SortPriority;
 
                 return otherSortPriority.CompareTo(mySortPriority);
             }
+            else if (_sortMode is SortMode.Difficulty or SortMode.DifficultyReverse)
+            {
+                int mySortPriority = selfData.Misc.Stars;
+                int otherSortPriority = otherData.Misc.Stars;
+                int sort = mySortPriority.CompareTo(otherSortPriority);
+
+                if (_sortMode == SortMode.DifficultyReverse)
+                    sort *= -1;
+
+                return sort;
+            }
+            else if (_sortMode is SortMode.Alphabetically or SortMode.AlphabeticallyReverse)
+            {
+                string myName = selfData.Name.Value;
+                string otherName = otherData.Name.Value;
+                int sort = myName.CompareTo(otherName);
+
+                if (_sortMode == SortMode.AlphabeticallyReverse)
+                    sort *= -1;
+
+                return sort;
+            }
             else
             {
-                int mySortPriority = buttons.Find(x => x.button == self).stars; //Find priority by finding the value that has the given button as Item2
-                int otherSortPriority = buttons.Find(x => x.button == other).stars; //for both the current and next button
+                int mySortPriority = selfData.Misc.SortPriority;
+                int otherSortPriority = otherData.Misc.SortPriority;
 
-                return mySortPriority.CompareTo(otherSortPriority);
+                return otherSortPriority.CompareTo(mySortPriority);
             }
         });
 
