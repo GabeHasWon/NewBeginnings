@@ -1,0 +1,39 @@
+Projectiles: {
+	FeintDagger.DisplayName: Daga de engaño
+	KylieProjectile.DisplayName: Proyectil Kylie
+}
+
+MrPlaguesCompatLine: Haga clic aquí para abrir el menú de Nuevo Comienzo.
+# The space in the below key is intentional. If you're translating to a language with spaces, keep it.
+TitleLine: " [c/8B8B8B:the {0}]"
+
+# Used in the Inevitable's snail death.
+SnailDeath: {
+	0: "{0} fue demasiado lento."
+	1: Finalmente, {0} no fue lo suficientemente perseverante.
+	2: "{0}...era inevitable."
+}
+
+Configs: {
+	NewBeginningsConfig: {
+		DisplayName: New Beginnings Config
+
+		HealthScaling: {
+			Label: "[i:58] Escalado de Salud Máxima"
+			Tooltip:
+				'''
+				Los orígenes con un estado de salud inicial mayor o menor escalarán a 400.
+				La escala siempre alcanza un máximo de 400, independientemente de la salud inicial.
+				El valor máximo del plano siempre es la salud inicial + 300.
+				Escalas relativas a la salud inicial, donde la salud máxima del cristal de vida es 400 * (salud inicial / 100).
+				'''
+		}
+	}
+
+	Scaling: {
+		Tooltip: ""
+		Scaled.Label: Escalado
+		Flat.Label: Plano
+		Relative.Label: Relativo
+	}
+}

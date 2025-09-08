@@ -1,0 +1,80 @@
+Splash: {
+	0: ¡Ahora con más espacio!
+	1: ¡Por la gente que te trajo, Supervisor!
+	2: ¡No debe confundirse con las carreras auténticas de MrPlague!
+	3: ¡15% menos sodio, 15% menos azúcar, 100% mejores personajes!
+	4: ¡Contiene una cantidad peligrosa de código horrible!
+	5: ¡Nunca ha tenido ni tendrá ningún error!
+	6: ¡Purista es solo para personas que quieren mirar el mod, no jugarlo!
+	7: ¡Sorprendentemente popular en la Antártida!
+	8: ¡Patrocinado por Team Spirit!
+	9: ¡Contiene una falta significativa de sombreadores!
+	10: ¡Los investigadores confirmaron que no hubo drama!
+	11: ¿Tremor? ¡Apenas la conozco!
+	12: ¡El clúster del BFTA vive en todos nosotros!
+	13: ¡Abierto para patrocinadores!
+	14: ¡Seguro para usar dentro y fuera del agua!
+	15: ¡No es comestible, pero aún así puedes imaginarlo!
+	16: ¡Optimizado exclusivamente para computadoras con Windows 95!
+	17: ¡De los mismos que te trajeron a Walbert!
+	18: ¡Revolucionará la antropología en el año 19.781!
+	19: ¿Programación cuántica? ¡Más probable de lo que crees!
+	20: ¡Prueba también el Buscaminas!
+	21: ¡Forjado en las profundidades de un volcán lejano!
+	22: ¡Respaldado por una misteriosa camarilla de poderosos desarrolladores!
+	23: ¡Contiene multitudes!
+	24: ¡Jamás rompería la compatibilidad entre versiones!
+	25: ¡Contiene exactamente un punto débil ultra secreto!
+	26: '''"¡Qué gran mod!" - Señor de la Luna'''
+	27: ¡Un regalo perfecto para cualquier festividad!
+	28: ¡No es eficaz como arma letal!
+	29: ¡Controla tu mente lo justo para que sigas jugando!
+}
+
+SortBy: {
+	Line: Ordenar por {0}
+	Default: por defecto
+	Difficulty: dificultad
+	DifficultyReverse: dificultad (inverso)
+	Alphabetically: alfabético
+	AlphabeticallyReverse: alfabético (inverso)
+	Mod: mod
+	ModReverse: mod (inverso)
+}
+
+CustomOrigin: {
+	Inv: Inv
+	Acc: Acc
+	Helmet: Casco
+	Body: Cuerpo
+	Legs: Piernas
+	Health: Salud ({0}/400)
+	Mana: Mana ({0}/200)
+	Search: Buscar un artículo - enter para filtrar
+	SortBy: "Ordenar - "
+
+	Sort: {
+		Chaos: Caos
+		Alphabetical: Alfabético
+		ID: ID Interno
+	}
+
+	Splashes: {
+		0: El verdadero desafío es empezar ¡sin objetos!
+		1: ¡Libre de amianto desde 1979!
+		2: ¡Si te entregas el Sigilo Celestial podrás ganar instantáneamente!
+		3: ¿Calamiter? ¡Apenas la conozco!
+		4: ¡La mayoría de las veces se combina con alta cocina!
+		5: ¡No aprobado por la FDA!
+		6: ¡Contiene un 333% más de tradición de lo que crees!
+		7: ¡Ganador del premio Player's Choice por seis años consecutivos!
+		8: ¡Ilegal en 3 países!
+		9: ¡Código abierto para que todos puedan juzgar!
+		10: ¡Pronto será comprado por X - The Everything App!
+		11: ¡De propiedad y fundación de los empleados!
+		12: ¡Genera el 98% de quejas de saldo per cápita!
+		13: ¡Aprobado por el Vaticano!
+		14: ¡Como se vio en YouTube TV!
+		15: ¡Falta de vitaminas A, C y D!
+	}
+}

@@ -1,0 +1,25 @@
+Beginner: {
+	DisplayName: Principiante
+	Description: Utilice su primer origen.
+	Rewards: Desbloquea el origen [c/A7B5BC:Alternativo].
+}
+
+Accursed: {
+	DisplayName: Maldito
+	Description: Derrota el Muro de Carne mientras usas un origen.
+	Rewards: Desbloquea el origen [c/832C2E:Maldito].
+}
+
+Renewed: {
+	DisplayName: Renovado
+	Description: Derrota al Señor de la Luna.
+	Rewards: Desbloquea el origen [c/4D7B77:Personalizado].
+}
+
+Terrarian: {
+	DisplayName: Terrariano
+	Description: Derrota al Señor de la Luna mientras usas un origen.
+	Rewards: Libera completamente el origen [c/4D7B77:Personalizado].
+}
+
+UnlockText: Desbloqueado [c/CFC553:{0}]!
