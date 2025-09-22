@@ -1,0 +1,247 @@
+Purist: {
+	DisplayName: Purista
+	Flavor: La experiencia normal de Terraria.
+	# You will see the Descriptions of several origins be empty, the "" is necessary.
+	Description: ""
+}
+
+Knight: {
+	DisplayName: Caballero
+	Flavor: Un noble guerrero, revestido de hierro.
+	Description: Comienza con un conjunto completo de armadura de hierro y una espada larga de plata.
+}
+
+Huntsman: {
+	DisplayName: Cazador
+	Flavor: Manos firmes y mirada aguda, un maestro de la caza.
+	Description: Comienza con un arco, un carcaj infinito y una capa de cazador.
+}
+
+Wizard: {
+	DisplayName: Mago
+	Flavor: Un aprendiz de mago con afinidad por lo arcano.
+	Description: Comienza con un sombrero de mago, un bastón de topacio y una túnica de topacio, con maná adicional pero menor salud máxima.
+}
+
+Beastmaster: {
+	DisplayName: Domador
+	Flavor: Criados en los bosques, invocan bestias para que los ayuden en su viaje.
+	Description: Menor salud máxima, pero un báculo de limo y un látigo de cuero inmediatos.
+}
+
+Shinobi: {
+	DisplayName: Shinobi
+	Flavor: Un mercenario asesino letal del este. Rápido, ágil y de una eficacia letal.
+	Description: Comienza con un tabi y una katana, pero con 80 de salud máxima.
+}
+
+Alchemist: {
+	DisplayName: Alquimista
+	Flavor: Un maestro de la naturaleza y la química; preparado para todo.
+	Description: Comience con una mesa de alquimia, 50 botellas de agua y 12 bolsitas de hierbas.
+}
+
+Demoman: {
+	DisplayName: Demoledor
+	Flavor: ¡Lanza explosivos al mineral, a los enemigos o a ti mismo!
+	Description: Comienza con 2 dinamitas, 10 bombas y 15 granadas.
+}
+
+Boomer: {
+	DisplayName: Boomer
+	Flavor: En mi época...
+	Description: Comienza con una cortadora de césped, gafas de sol, costillas a la barbacoa y una ardilla a la parrilla.
+}
+
+Zoomer: {
+	DisplayName: Zoomer
+	Flavor: La publicación de Terreddit está causando sensación hoy; a punto de eliminar a algunos inútiles de verdad.
+	Description: Comienza con gafas, un teléfono celular y 40 de salud máxima.
+}
+
+Tiger: {
+	DisplayName: Tigre
+	Flavor: ¡Un poco más salvaje que otros terrarianos, pero no tanto como te imaginas!
+	Description: Comienza con orejas de gato, una cola de zorro, equipo de escalada de tigre y un guante con cuchillas.
+}
+
+Builder: {
+	DisplayName: Constructor
+	Flavor: Un arquitecto de renombre procedente de ciudades lejanas.
+	Description: Comienza con un taburete portátil, un paquete de artilugios de arquitecto, 500 maderas y piedras, y el Pintor en lugar del Guía en nuevos mundos.
+}
+
+Thief: {
+	DisplayName: Ladrón
+	Flavor: Ladrón pequeño con una inclinación por los carteristas.
+	Description: Comienza con una moneda de la suerte, una espada corta de platino y 300 cuchillos envenenados.
+}
+
+Firestarter: {
+	DisplayName: Pirómano
+	Flavor: Algunas personas sólo quieren ver el mundo arder.
+	Description: Comienza con una varita de chispas, 300 cócteles molotov, una pistola de bengalas con 50 bengalas y 100 antorchas.
+}
+
+Pirate: {
+	DisplayName: Pirata
+	Flavor: ¡Sí! Un verdadero pirata sabe cuándo se puede saquear la tierra, ¡y saqueará!
+	Description: Comienza con un parche en el ojo, un anillo de oro, un sextante, un machete oxidado, un barril y 200 velas.
+}
+
+Deprived: {
+	DisplayName: Desterrado
+	Flavor: Un guerrero olvidado que lleva herramientas perdidas hace mucho tiempo.
+	Description: Comienza con 80 de salud máxima, una espada despojada, una linterna despojada y 3 pociones curativas.
+}
+
+Lumberjack: {
+	DisplayName: Leñador
+	Flavor: Un humilde leñador, su franela y su fiel hacha.
+	Description: Comienza con una camisa de franela, un hacha de leñador, un aserradero, 12 manzanas y 300 de madera normal, boreal, de palma, de ébano, de sombra, de caoba intensa y de dinastía.
+}
+
+Nobleman: {
+	DisplayName: Noble
+	Flavor: Un buen trabajador si crees que contar dinero es difícil. NOTA: Solo se puede jugar en nivel medio o extremo.
+	Description: Comienza con un anillo de diamantes, un reloj de oro, 20 de salud máxima y una moneda de platino, solo en nivel medio o extremo
+}
+
+Fisherman: {
+	DisplayName: Pescador
+	Flavor: Los slimes me quieren, los peces me temen...
+	Description: Comienza con una línea de pesca de alta resistencia, un sombrero de pescador, una caña de pescar reforzada, 3 latas de gusanos y el pescador en lugar del guía.
+}
+
+Trailblazer: {
+	DisplayName: Pionero
+	Flavor: No hay tiempo para explicaciones. ¡Tienen lugares adónde ir y cosas que ver!
+	Description: Comienza con unas botas Hermes, un herrete y una tobillera del viento.
+}
+
+Adventurer: {
+	DisplayName: Aventurero
+	Flavor: ¡Viene con sed de exploración y una inclinación por las trampas de rocas!
+	Description: Comienza con un gancho de agarre, 100 antorchas, un completo set de tocador de arqueólogo y 5 pociones de sentido del peligro y espeleología.
+}
+
+Farmer: {
+	DisplayName: Agricultor
+	Flavor: No es mucho, pero es un trabajo honesto.
+	Description: Comienza con un sombrero de verano, una hoz, 100 henos y 12 semillas de Flor de día, raíz parpadeante, luz lunar, hoja de agua, espina temblorosa, hierba de la muerte y flor de fuego y sus jardineras.
+}
+
+Spelunker: {
+	DisplayName: Espeleólogo
+	Flavor: Las cuevas llaman y ellos responden. ¡Esos minerales no se van a extraer solos!
+	Description: Comienza con un cincel antiguo, un casco de minero, un pico de oro, un carro minero de hierro, 10 bombas y 10 pociones de espeleología.
+}
+
+Bookworm: {
+	DisplayName: Erudito
+	Flavor: La mente sobre la materia. ¡La mejor manera de luchar es con una mente aguda!
+	Description: Comienza con un libro de hechizos desgastado, una guía de cuerdas de fibra vegetal, 8 libros y una guía sobre el compañerismo con las criaturas.
+}
+
+Druid: {
+	DisplayName: Druida
+	Flavor: ¡Un heraldo de la naturaleza, comprometido a mantener el mundo vivo y saludable!
+	Description: Comienza con una guía de cordajes de fibra, Espina Vil, Báculo de regeneración, 3 bolsas de hierbas y 10 macetas de barro.
+}
+
+Painter: {
+	DisplayName: Artista
+	Flavor: El arte es una forma de expresión, una manera de existir y una herramienta poderosa (y CARA).
+	Description: Comienza con una pistola de pintura, un raspador de pintura, un pulverizador de pintura, un pincel, un rodillo de pintura, el Pintor en lugar del Guía y una oferta del 25% en todo el stock del Pintor.
+}
+
+Australian: {
+	DisplayName: Australiano
+	Flavor: Solo un tipo normal, nada especial. El mundo está un poco patas arriba aquí.
+	Description: Comienza con un juego de vaqueros, un kylie de madera y siempre está boca abajo.
+}
+
+Bereaved: {
+	DisplayName: Afligido
+	Flavor: El paraguas no ayuda cuando la tormenta aún nubla tu mente.
+	Description: Comienza con un paraguas trágico y un funeral en un cementerio.
+}
+
+Frozen: {
+	DisplayName: Esquimal
+	Flavor: Después de mil años congelados (y un par de días construyendo el iglú), están listos para la acción.
+	Description: Comienza con un cañón de bolas de nieve, un juego de nieve rosa y 999 bolas de nieve en un iglú.
+}
+
+Slayer: {
+	DisplayName: Asesino
+	Flavor: Rasgar y desgarrar hasta que esté listo.
+	Description: Comienza con la explosiva, 140 de salud máxima y balas de mosquete infinitas en el infierno.
+}
+
+Chef: {
+	DisplayName: Chef
+	Flavor: Mago culinario, famoso en todo el mundo por sus platos. En busca de especias lejanas.
+	Description: Comienza con un traje de chef, un montón de comida, una olla y un machete ensangrentado.
+}
+
+ReallyConfused: {
+	DisplayName: Confundido
+	Flavor: Simplemente desconcertado. Totalmente desorientado. ¿Qué pasa? ¿Este arco dispara magia?
+	Description: Comienza con un arco dorado y 100 flechas. Las clases de daño se modifican permanentemente, junto con algunos ajustes menores.
+}
+
+Alternate: {
+	DisplayName: Alternativo
+	Flavor: Quizás, si las cosas hubieran sido un poco diferentes, este sería un purista.
+	Description:
+		'''
+		Comienza con herramientas de hojalata en lugar de cobre.
+		Se desbloquea al usar tu primer origen.
+		'''
+}
+
+Accursed: {
+	DisplayName: Maldito
+	Flavor: Comienza con el modo difícil activado. ¡Buena suerte!
+	Description:
+		'''
+		Comienza con herramientas de oro, la Dríada en lugar del Guía y una armadura de madera perlada, en modo difícil.
+		Se desbloquea al vencer el Muro de Carne con un personaje de origen.
+		'''
+	# Used by the Accursed's world generation modification.
+	Generation: Generando modo difícil
+}
+
+Random: {
+	DisplayName: Aleatorio
+	Flavor: Elige un fondo aleatorio.
+	Description: ""
+}
+
+Unloaded: {
+	DisplayName: (No Cargado)
+	Flavor: Este es un fondo de marcador de posición para un origen no cargado.
+	Description: ""
+}
+
+Custom: {
+	DisplayName: Personalizado
+	Flavor: La caja de arena también persiste en ti, también.
+	Description:
+		'''
+		Empieza con lo que quieras.
+		Se desbloquea al vencer al Señor de la Luna.
+		'''
+}
+
+Inevitable: {
+	DisplayName: Inevitable
+	Flavor: Maldito a desaparecer, para siempre.
+	Description:
+		'''
+		Comienza con equipamiento dorado completo, armadura dorada, 300 de salud, 100 de maná, +1 a todo el daño fijo y +10 % a todo el daño.
+		Un caracol te sigue para siempre. Te matará si te toca.
+		Sólo tú puedes verlo.
+		'''
+}

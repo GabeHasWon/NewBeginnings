@@ -1,0 +1,53 @@
+DeprivedLantern: {
+	DisplayName: Linterna Despojada
+	Tooltip:
+		'''
+		Se ilumina al colocarse en el inventario
+		Duración infinita
+		'''
+}
+
+DimStar: {
+	DisplayName: Estrella tenue
+	Tooltip: ""
+}
+
+LightStar: {
+	DisplayName: Estrella de luz
+	Tooltip: ""
+}
+
+LumberjackAxe: {
+	DisplayName: Hacha de leñador
+	Tooltip: No debe confundirse con Lucy
+}
+
+LumberjackFlannel: {
+	DisplayName: Franela de leñador
+	Tooltip: "'Increíblemente cómodo'"
+}
+
+DeprivedBlade: {
+	DisplayName: Cuchilla Despojada
+	Tooltip: Ya no es la cuchilla que solía ser
+}
+
+KylieBoomerang: {
+	DisplayName: Boomerang Kylie
+	Tooltip: "'¡Sorprendentemente eficaz en combate!'"
+}
+
+RustyCutlass: {
+	DisplayName: Alfanje oxidado
+	Tooltip: Ha visto días mejores
+}
+
+WornSpellbook: {
+	DisplayName: Libro de hechizos desgastado
+	Tooltip: Confiable, aunque bastante débil
+}
+
+TrailblazerHelmet: {
+	DisplayName: Casco Trazador
+	Tooltip: "'¡Que Dios te acompañe!'"
+}
