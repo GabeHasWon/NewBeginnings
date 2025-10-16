@@ -3,6 +3,7 @@ Projectiles: {
 	KylieProjectile.DisplayName: 回飞棒投射物
 }
 
+# This line is used for all crossmod fixes, which includes, so far: Mr Plague's Custom Races, One Piece Mod
 MrPlaguesCompatLine: 点击此处打开 New Beginning 菜单!
 # The space in the below key is intentional. If you're translating to a language with spaces, keep it.
 TitleLine: " [c/8B8B8B: {0}]"
@@ -44,5 +45,19 @@ Configs: {
 		Scaled.Label: 刻度
 		Flat.Label: 平滑
 		Relative.Label: 比例
+	}
+
+	NewBeginningsClientConfig: {
+		// DisplayName: New Beginnings Client Config
+
+		MrPlaguesButtonOffsetY: {
+			// Label: Mr Plagues Button Offset Y
+			// Tooltip: ""
+		}
+
+		HidePlayerOrigins: {
+			// Label: Hide Player Origins
+			// Tooltip: ""
+		}
 	}
 }

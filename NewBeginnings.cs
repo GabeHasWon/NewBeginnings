@@ -29,11 +29,11 @@ public class NewBeginnings : Mod
 
     public override void PostSetupContent()
     {
-        MrPlaguesCompat.PostSetupContent();
+        CrossModUIEditCompat.PostSetupContent();
         PlayerBackgroundDatabase.Populate();
     }
 
-    public override void Unload() => MrPlaguesCompat.Unload();
+    public override void Unload() => CrossModUIEditCompat.Unload();
     public override object Call(params object[] args) => OriginCalls.Call(args);
 
     public override void HandlePacket(BinaryReader reader, int whoAmI)

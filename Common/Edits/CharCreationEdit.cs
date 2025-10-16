@@ -26,10 +26,14 @@ internal class CharCreationEdit
     {
         InternalPlayerField = typeof(UICharacterCreation).GetField("_player", BindingFlags.Instance | BindingFlags.NonPublic);
 
-        Terraria.GameContent.UI.States.IL_UICharacterCreation.MakeInfoMenu += UICharacterCreation_MakeInfoMenu;
+        IL_UICharacterCreation.MakeInfoMenu += UICharacterCreation_MakeInfoMenu;
 
         CharCreationHijackSaveDetour.Load();
-        CharNameEdit.Load();
+
+        if (!ModContent.GetInstance<NewBeginningsClientConfig>().HidePlayerOrigins)
+        {
+            CharNameEdit.Load();
+        }
     }
 
     /// <summary>IL edit that shoves everything we want into the vanilla UI.</summary>
