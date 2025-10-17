@@ -9,8 +9,8 @@ internal class NewBeginningsClientConfig : ModConfig
 {
     public override ConfigScope Mode => ConfigScope.ClientSide;
 
-    [DefaultValue(300)]
-    [Range(0, 1600)]
+    [DefaultValue(300f)]
+    [Range(0f, 1600f)]
     public float MrPlaguesButtonOffsetY { get; set; }
 
     [DefaultValue(false)]
