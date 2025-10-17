@@ -4,60 +4,62 @@ Projectiles: {
 }
 
 # This line is used for all crossmod fixes, which includes, so far: Mr Plague's Custom Races, One Piece Mod
-MrPlaguesCompatLine: Нажмите здесь, чтобы открыть меню «Нового Начала»!
+MrPlaguesCompatLine:
+	'''
+	Нажмите здесь или комбинацию CTRL+O,
+	 чтобы открыть меню New Beginnings!
+	'''
 # The space in the below key is intentional. If you're translating to a language with spaces, keep it.
 TitleLine: " [c/8B8B8B: {0}]"
 
 # Used in the Inevitable's snail death.
 SnailDeath: {
-	0: "{0} был слишком медленным."
-	1: В конце концов, {0} оказался недостаточно упорным.
+	0: Игрок {0} был слишком медленным.
+	1: В конце концов, игрок {0} оказался недостаточно упорным.
 	2: "{0}... это было неизбежно."
 }
 
 Configs: {
 	NewBeginningsConfig: {
-		DisplayName: Конфигурация «Нового начала»
+		DisplayName: Конфигурация New Beginnings
 
 		HealthScaling: {
-			Label: "[i:58] Масштабирование максимального здоровья"
+			Label: "[i:58] Множитель макс. здоровья"
 			Tooltip:
 				'''
-				Определяет, будут ли происхождения с более высоким или низким начальным здоровьем масштабироваться до 400.
-				Масштабированное всегда достигает максимума в 400, независимо от начального здоровья.
-				Фиксированное всегда достигает максимального начального здоровья + 300.
-				Относительное масштабируется в зависимости от начального здоровья, где максимальное здоровье от кристаллов жизни равно 400 * (начальное здоровье / 100).
+				Определяет показатель максимального здоровья, получаемого от кристаллов жизни для персонажей, 
+				чьё происхождение влияет на изначальный запас здоровья.
+				В режиме «Стандарт» максимальное возможное здоровье персонажа будет равно 400 ед., независимо от происхождения
+				В режиме «Фиксированное» максимальное возможное здоровье персонажа будет равно +300 ед. от изначального
+				В режиме «Относительное» максимальное возможное здоровье персонажа будет равно изначальному запасу здоровья × 4
 				'''
-		}
-
-		MrPlaguesButtonOffsetY: {
-			// Label: MrPlague's Compatibility Button Vertical Offset
-			/* Tooltip:
-				'''
-				When using MrPlague's, this will be the offset from the center of the screen that the "Click me" dialogue uses. 
-				Defaults to 300, and caps out at the center and bottom of the screen.
-				''' */
 		}
 	}
 
 	Scaling: {
 		Tooltip: ""
-		Scaled.Label: масштабированное
+		Scaled.Label: стандарт
 		Flat.Label: фиксированное
 		Relative.Label: относительное
 	}
 
 	NewBeginningsClientConfig: {
-		// DisplayName: New Beginnings Client Config
+		DisplayName: Клиентская конфигурация New Beginnings
 
 		MrPlaguesButtonOffsetY: {
-			// Label: Mr Plagues Button Offset Y
-			// Tooltip: ""
+			Label: Смещение клавиши совместимости
+			Tooltip:
+				'''
+				При использовании модов MrPlague's Authentic Races и One Piece Mod, 
+				под меню создания персонажа появляется кнопка для открытия меню New Beginnings.
+				Эта настройка определяет вертикальное смещение кнопки относительно центра экрана.
+				По умолчанию значение равно 300 и ограничено центром и нижней границей экрана.
+				'''
 		}
 
 		HidePlayerOrigins: {
-			// Label: Hide Player Origins
-			// Tooltip: ""
+			Label: Скрыть отображение происхождения персонажей
+			Tooltip: ""
 		}
 	}
 }
