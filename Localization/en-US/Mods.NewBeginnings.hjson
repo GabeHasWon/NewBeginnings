@@ -33,15 +33,6 @@ Configs: {
 				Relative scales to starting health, where max life crystal health is starting health * 4.
 				'''
 		}
-
-		MrPlaguesButtonOffsetY: {
-			Label: MrPlague's Compatibility Button Vertical Offset
-			Tooltip:
-				'''
-				When using MrPlague's, this will be the offset from the center of the screen that the "Click me" dialogue uses. 
-				Defaults to 300, and caps out at the center and bottom of the screen.
-				'''
-		}
 	}
 
 	Scaling: {
@@ -55,8 +46,12 @@ Configs: {
 		DisplayName: New Beginnings Client Config
 
 		MrPlaguesButtonOffsetY: {
-			Label: Mr Plagues Button Offset Y
-			Tooltip: ""
+			Label: Compatibility Button Vertical Offset
+			Tooltip:
+				'''
+				When using Mr Plague's Custom Races or the One Piece Mod, this will be the offset from the center of the screen that the "Click me" dialogue uses. 
+				Defaults to 300, and caps out at the center and bottom of the screen.
+				'''
 		}
 
 		HidePlayerOrigins: {
