@@ -9,7 +9,7 @@ internal class ReallyConfused : PlayerBackgroundContainer
     public override string LanguageKey => "Mods.NewBeginnings.Origins.ReallyConfused";
 
     public override MiscData Misc => new(sword: ItemID.GoldBow, stars: 4);
-    public override (int type, int stack)[] Inventory => new[] { ((int)ItemID.WoodenArrow, 100) };
+    public override (int type, int stack)[] Inventory => [((int)ItemID.WoodenArrow, 100)];
 
     internal class ConfusedPlayer : ModPlayer
     {
@@ -23,7 +23,7 @@ internal class ReallyConfused : PlayerBackgroundContainer
             Player.GetDamage(DamageClass.Summon) = Player.GetDamage(DamageClass.Ranged);
             Player.GetDamage(DamageClass.Ranged) = Player.GetDamage(DamageClass.Magic);
             Player.GetDamage(DamageClass.Magic) = Player.GetDamage(DamageClass.Melee);
-            Player.GetDamage(DamageClass.Melee).CombineWith(summonDamage);
+            Player.GetDamage(DamageClass.Melee) = summonDamage;
 
             Player.GetAttackSpeed(DamageClass.Magic) = Player.GetAttackSpeed(DamageClass.Melee);
             Player.GetDamage(DamageClass.Melee) += (Player.maxMinions - 1) * 0.075f; //Adds extra summons to melee's damage
