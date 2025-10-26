@@ -3,6 +3,7 @@ Projectiles: {
 	KylieProjectile.DisplayName: Proyectil Kylie
 }
 
+# This line is used for all crossmod fixes, which includes, so far: Mr Plague's Custom Races, One Piece Mod
 MrPlaguesCompatLine: Haga clic aquí para abrir el menú de Nuevo Comienzo.
 # The space in the below key is intentional. If you're translating to a language with spaces, keep it.
 TitleLine: " [c/8B8B8B:the {0}]"
@@ -28,15 +29,6 @@ Configs: {
 				Escalas relativas a la salud inicial, donde la salud máxima del cristal de vida es 400 * (salud inicial / 100).
 				'''
 		}
-
-		MrPlaguesButtonOffsetY: {
-			Label: Desplazamiento vertical del botón de compatibilidad de MrPlague
-			Tooltip:
-				'''
-				Al usar MrPlague's, este será el desplazamiento desde el centro de la pantalla que utiliza el diálogo "Haz clic en mí".
-				Por defecto es 300, y se limita entre el centro y la parte inferior de la pantalla.
-				'''
-		}
 	}
 
 	Scaling: {
@@ -50,8 +42,12 @@ Configs: {
 		DisplayName: Configuración del cliente de New Beginnings
 
 		MrPlaguesButtonOffsetY: {
-			Label: Desplazamiento vertical del botón de Mr Plague
-			Tooltip: ""
+			Label: Desplazamiento vertical del botón de compatibilidad de MrPlague
+			Tooltip:
+				'''
+				Al usar MrPlague's, este será el desplazamiento desde el centro de la pantalla que utiliza el diálogo "Haz clic en mí".
+				Por defecto es 300, y se limita entre el centro y la parte inferior de la pantalla.
+				'''
 		}
 
 		HidePlayerOrigins: {

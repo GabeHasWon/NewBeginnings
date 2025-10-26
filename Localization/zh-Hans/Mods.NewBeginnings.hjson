@@ -29,15 +29,6 @@ Configs: {
 				比例: 在使用满生命水晶(15颗)后生命值将为 400*(起始生命值/100).
 				'''
 		}
-
-		MrPlaguesButtonOffsetY: {
-			// Label: MrPlague's Compatibility Button Vertical Offset
-			/* Tooltip:
-				'''
-				When using MrPlague's, this will be the offset from the center of the screen that the "Click me" dialogue uses. 
-				Defaults to 300, and caps out at the center and bottom of the screen.
-				''' */
-		}
 	}
 
 	Scaling: {
@@ -51,8 +42,12 @@ Configs: {
 		// DisplayName: New Beginnings Client Config
 
 		MrPlaguesButtonOffsetY: {
-			// Label: Mr Plagues Button Offset Y
-			// Tooltip: ""
+			// Label: Compatibility Button Vertical Offset
+			/* Tooltip:
+				'''
+				When using Mr Plague's Custom Races or the One Piece Mod, this will be the offset from the center of the screen that the "Click me" dialogue uses. 
+				Defaults to 300, and caps out at the center and bottom of the screen.
+				''' */
 		}
 
 		HidePlayerOrigins: {

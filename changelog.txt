@@ -1,5 +1,2 @@
-1.2.0.16
-- Added compatibility with the One Piece mod
-- Clarified existing functionality for skipping the crossmod "Click me!" prompts with the CTRL+O keybind in case of issues or overlap
-- Added configuration option to not show "the Origin" on players with origins if desired
-- Split configs into Server Side (how health scales) and Client Side (the two UI options)
+1.2.0.17
+- Updated Russian (thanks Nexorchic) and Spanish (thanks Ningunomas, both on GitHub) localization
