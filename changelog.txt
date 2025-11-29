@@ -1,2 +1,2 @@
-1.2.0.17
-- Updated Russian (thanks Nexorchic) and Spanish (thanks Ningunomas, both on GitHub) localization
+1.2.0.18
+- Redid the sliders in the custom creation origin, now work in increments of 5

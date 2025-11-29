@@ -38,9 +38,21 @@ Configs: {
 
 	Scaling: {
 		Tooltip: ""
-		Scaled.Label: стандарт
-		Flat.Label: фиксированное
-		Relative.Label: относительное
+
+		Scaled: {
+			Label: стандарт
+			// Tooltip: ""
+		}
+
+		Flat: {
+			Label: фиксированное
+			// Tooltip: ""
+		}
+
+		Relative: {
+			Label: относительное
+			// Tooltip: ""
+		}
 	}
 
 	NewBeginningsClientConfig: {

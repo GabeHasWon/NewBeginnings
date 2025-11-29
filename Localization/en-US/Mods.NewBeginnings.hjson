@@ -37,9 +37,21 @@ Configs: {
 
 	Scaling: {
 		Tooltip: ""
-		Scaled.Label: Scaled
-		Flat.Label: Flat
-		Relative.Label: Relative
+
+		Scaled: {
+			Label: Scaled
+			Tooltip: ""
+		}
+
+		Flat: {
+			Label: Flat
+			Tooltip: ""
+		}
+
+		Relative: {
+			Label: Relative
+			Tooltip: ""
+		}
 	}
 
 	NewBeginningsClientConfig: {

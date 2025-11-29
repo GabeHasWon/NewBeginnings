@@ -31,18 +31,17 @@ internal class UICustomOrigin : UIState
     private readonly Player _player;
     private readonly MouseEvent _return;
 
-    private int RealLife => (int)MathHelper.Clamp(_maxLife * 400, 20, 400);
-    private int RealMana => (int)(_maxMana * 200);
+    private int RealLife => _lifeSlider.Value;
+    private int RealMana => _manaSlider.Value;
 
     private readonly HashSet<int> _accIds = [];
     private readonly List<Item> _hotbar = [];
 
-    private float _maxLife = 0;
     private float _maxMana = 0;
     private bool _setData = false;
 
-    private UIColoredSlider _lifeSlider = null;
-    private UIColoredSlider _manaSlider = null;
+    private UISlider<int> _lifeSlider = null;
+    private UISlider<int> _manaSlider = null;
 
     private UIItemContainer _helmetSlot = null;
     private UIItemContainer _bodySlot = null;
@@ -280,16 +279,16 @@ internal class UICustomOrigin : UIState
 
     private void BuildSliders(UIPanel panel)
     {
-        _lifeSlider = MakeSlider(() => _maxLife, x => _maxLife = x, x => Color.Lerp(Color.White, Color.Red, x));
-        _lifeSlider.Width = StyleDimension.FromPixels(40);
+        _lifeSlider = new UISlider<int>(100, 5, 5, 400, Color.Red);
+        _lifeSlider.Width = StyleDimension.FromPixels(180);
         _lifeSlider.Height = StyleDimension.FromPixels(12);
-        _lifeSlider.Left = StyleDimension.FromPixels(192);
-        _lifeSlider.Top = StyleDimension.FromPixels(0);
+        _lifeSlider.Left = StyleDimension.FromPixels(50);
+        _lifeSlider.Top = StyleDimension.FromPixels(10);
 
         var healthText = new UIText(Language.GetText("Mods.NewBeginnings.UI.CustomOrigin.Health").Format(RealLife.ToString("#0")), 1f)
         {
-            Left = StyleDimension.Fill,
-            Top = StyleDimension.FromPixels(8),
+            Left = StyleDimension.FromPixelsAndPercent(4, 1),
+            Top = StyleDimension.FromPixels(0),
             VAlign = 0.5f,
         };
 
@@ -297,28 +296,23 @@ internal class UICustomOrigin : UIState
         _lifeSlider.Append(healthText);
         panel.Append(_lifeSlider);
 
-        _manaSlider = MakeSlider(() => _maxMana, x => _maxMana = x, (x) => Color.Lerp(Color.White, Color.Blue, x));
-        _manaSlider.Width = StyleDimension.FromPixels(40);
-        _manaSlider.Height = StyleDimension.FromPixels(0);
-        _manaSlider.Left = StyleDimension.FromPixels(518);
+        _manaSlider = new UISlider<int>(20, 5, 0, 200, Color.Blue);
+        _manaSlider.Width = StyleDimension.FromPixels(180);
+        _manaSlider.Height = StyleDimension.FromPixels(12);
+        _manaSlider.Left = StyleDimension.FromPixels(380);
+        _manaSlider.Top = StyleDimension.FromPixels(10);
 
-        var manaText = new UIText(Language.GetText("Mods.NewBeginnings.UI.CustomOrigin.Mana").Format(RealMana.ToString("#0")), 1f)
+        var manaText = new UIText(Language.GetText("Mods.NewBeginnings.UI.CustomOrigin.Mana").Format((RealMana + 20).ToString("#0")), 1f)
         {
-            Left = StyleDimension.FromPixelsAndPercent(7, 1),
-            Top = StyleDimension.FromPixels(8),
+            Left = StyleDimension.FromPixelsAndPercent(4, 1),
+            Top = StyleDimension.FromPixels(0),
+            VAlign = 0.5f,
         };
 
-        manaText.OnUpdate += (_) => manaText.SetText(Language.GetText("Mods.NewBeginnings.UI.CustomOrigin.Mana").Format(RealMana.ToString("#0")));
+        manaText.OnUpdate += (_) => manaText.SetText(Language.GetText("Mods.NewBeginnings.UI.CustomOrigin.Mana").Format((RealMana + 20).ToString("#0")));
         _manaSlider.Append(manaText);
         panel.Append(_manaSlider);
     }
-
-    private static UIColoredSlider MakeSlider(Func<float> returnFunction, Action<float> updateValue, Func<float, Color> colorMod) 
-        => new(LocalizedText.Empty, returnFunction, updateValue, () =>
-        {
-            float value = UILinksInitializer.HandleSliderHorizontalInput(returnFunction.Invoke(), 0f, 1f, PlayerInput.CurrentProfile.InterfaceDeadzoneX, 0.35f);
-            updateValue(value);
-        }, colorMod, Color.Transparent);
 
     private static string GetSplash()
     {

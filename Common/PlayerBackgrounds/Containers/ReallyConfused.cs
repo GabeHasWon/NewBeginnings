@@ -9,7 +9,7 @@ internal class ReallyConfused : PlayerBackgroundContainer
     public override string LanguageKey => "Mods.NewBeginnings.Origins.ReallyConfused";
 
     public override MiscData Misc => new(sword: ItemID.GoldBow, stars: 4);
-    public override (int type, int stack)[] Inventory => [((int)ItemID.WoodenArrow, 100)];
+    public override (int type, int stack)[] Inventory => [(ItemID.WoodenArrow, 100)];
 
     internal class ConfusedPlayer : ModPlayer
     {

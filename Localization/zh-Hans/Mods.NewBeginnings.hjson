@@ -33,9 +33,21 @@ Configs: {
 
 	Scaling: {
 		Tooltip: ""
-		Scaled.Label: 刻度
-		Flat.Label: 平滑
-		Relative.Label: 比例
+
+		Scaled: {
+			Label: 刻度
+			// Tooltip: ""
+		}
+
+		Flat: {
+			Label: 平滑
+			// Tooltip: ""
+		}
+
+		Relative: {
+			Label: 比例
+			// Tooltip: ""
+		}
 	}
 
 	NewBeginningsClientConfig: {
