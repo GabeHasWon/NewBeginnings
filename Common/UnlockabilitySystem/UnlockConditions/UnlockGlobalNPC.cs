@@ -1,5 +1,5 @@
 ﻿using NewBeginnings.Common.PlayerBackgrounds;
-using System.Linq;
+using NewBeginnings.Common.UnlockabilitySystem.Achievements;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,16 +10,25 @@ internal class UnlockGlobalNPC : GlobalNPC
 {
     public override bool CheckDead(NPC npc)
     {
-        bool hasBG = Main.player.Take(Main.maxPlayers).Any(x => x.active && x.GetModPlayer<PlayerBackgroundPlayer>().HasBG());
+        bool anyBg = false;
+
+        foreach (Player player in Main.ActivePlayers)
+        {
+            if (player.GetModPlayer<PlayerBackgroundPlayer>().HasBG())
+            {
+                anyBg = true;
+                break;
+            }
+        }
 
         if (npc.type == NPCID.MoonLordCore)
             UnlockSaveData.Complete("Renewed");
 
-        if (!hasBG)
+        if (!anyBg)
             return true;
 
         if (npc.type == NPCID.WallofFlesh)
-            UnlockSaveData.Complete("Accursed");
+            UnlockSaveData.Complete("Accursed", AccursedAchievement.Condition);
 
         if (npc.type == NPCID.MoonLordCore)
             UnlockSaveData.Complete("Terrarian");

@@ -1,15 +1,20 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using Terraria.ModLoader.IO;
 
 namespace NewBeginnings.Common.UnlockabilitySystem;
 
+#nullable enable
+
 /// <summary>
-/// Class used to save/load data regarding unlocks.<br/>
-/// The needless encoding is necessary.
+/// Class used to save/load data regarding unlocks.
 /// </summary>
 internal class UnlockabilityIO
 {
-    public const string SaveName = "nb_unlocks";
+    public const string SaveName_Legacy = "nb_unlocks";
+    public const string SaveName = "NewBeginningsUnlocks";
+
     public const int EncryptionKey = 8;
 
     private static readonly char[] Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ".ToCharArray();
@@ -18,62 +23,82 @@ internal class UnlockabilityIO
     {
         UnlockSaveData.Populate();
 
-        string filePath = SecureGetSavePath();
+        string filePath = SecureGetSavePath(true, out bool hasLegacy);
 
-        FileStream file = File.Open(filePath, FileMode.OpenOrCreate);
-        using StreamReader reader = new(file);
+        if (hasLegacy)
+            LoadLegacy(filePath);
+        else
+        {
+            QuickSave(null);
+            TagCompound compound = TagIO.FromFile(filePath, true);
+            string[] unlocks = compound.GetString("unlocks").Split(',');
 
-        string text = reader.ReadToEnd();
-
-        if (text == string.Empty)
-            return;
-
-        string[] keys = text.Split(',');
-
-        foreach (string item in keys)
-            if (item != string.Empty)
-                UnlockSaveData.Complete(Decrypt(item), true, true);
+            foreach (string unlock in UnlockSaveData.achievementsByName.Keys)
+                if (unlocks.Any(x => x.Equals(unlock, StringComparison.OrdinalIgnoreCase)))
+                    UnlockSaveData.Complete(unlock, null, true, true);
+        }
     }
 
-    private static string SecureGetSavePath()
+    private static bool LoadLegacy(string filePath)
+    {
+        // Define a scope for the "used" files here, so we can delete it safely after they're disposed
+        {
+            using FileStream file = File.Open(filePath, FileMode.OpenOrCreate);
+            using StreamReader reader = new(file);
+            string text = reader.ReadToEnd();
+
+            if (text == string.Empty)
+                return false;
+
+            string[] keys = text.Split(',');
+
+            foreach (string item in keys)
+                if (item != string.Empty)
+                    UnlockSaveData.Complete(Decrypt(item), null, true, true);
+        }
+
+        // Replace old file with new
+        File.Delete(filePath);
+
+        foreach (string unlock in UnlockSaveData.achievementsByName.Keys)
+            if (UnlockSaveData.achievementsByName[unlock].Unlocked)
+                QuickSave(unlock);
+
+        return true;
+    }
+
+    private static string SecureGetSavePath(bool allowLegacy, out bool hasLegacy)
     {
         string path = Directory.GetCurrentDirectory();
         path = Path.Combine(path, "ModSaveData");
         Directory.CreateDirectory(path);
+        string filePath = Path.Combine(path, $"{SaveName_Legacy}.txt");
 
-        string filePath = Path.Combine(path, $"{SaveName}.txt");
+        if (Path.Exists(filePath) && allowLegacy)
+            hasLegacy = true;
+        else
+        {
+            hasLegacy = false;
+            filePath = Path.Combine(path, $"{SaveName}.txt");
+        }
+
         return filePath;
     }
 
-    internal static void QuickSave(string key)
+    /// <summary>
+    /// Safely adds a given achievement key to the save data. <paramref name="key"/> can be null if the only goal is to create the file.
+    /// </summary>
+    internal static void QuickSave(string? key)
     {
         string save = string.Empty;
 
-        if (UnlockSaveData.achievementsByName[key].Unlocked)
-            save += Encrypt(key) + ",";
+        if (key != null && UnlockSaveData.achievementsByName[key].Unlocked)
+            save += key + ",";
 
-        string filePath = SecureGetSavePath();
-        using StreamWriter writer = new(filePath, append: true);
-
-        writer.Write(save);
-    }
-
-    private static string Encrypt(string orig)
-    {
-        string str = "";
-
-        foreach (char c in orig)
-        {
-            int origIndex = Array.IndexOf(Characters, c);
-            origIndex += EncryptionKey;
-
-            if (origIndex >= Characters.Length)
-                origIndex -= Characters.Length;
-
-            str += Characters[origIndex];
-        }
-
-        return str;
+        string filePath = SecureGetSavePath(false, out _);
+        TagCompound tag = [];
+        tag.Add("unlocks", save);
+        TagIO.ToFile(tag, filePath, true);
     }
 
     private static string Decrypt(string orig)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Achievements;
 using Terraria.Localization;
 
 namespace NewBeginnings.Common.UnlockabilitySystem;
@@ -9,7 +10,7 @@ internal class UnlockSaveData
 {
     public static Dictionary<string, BaseUnlock> achievementsByName = [];
 
-    public static void Complete(string key, bool silent = false, bool noSave = false)
+    public static void Complete(string key, CustomFlagCondition customFlag = null, bool silent = false, bool noSave = false)
     {
         if (!achievementsByName.ContainsKey(key))
             throw new KeyNotFoundException($"No achievement of name {key} exists. Did you spell it right?");
@@ -28,6 +29,8 @@ internal class UnlockSaveData
 
         if (!noSave)
             UnlockabilityIO.QuickSave(key);
+
+        customFlag?.Complete();
     }
 
     internal static void Populate()
