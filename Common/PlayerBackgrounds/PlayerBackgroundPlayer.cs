@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using NewBeginnings.Common.Crossmod;
 using NewBeginnings.Common.PlayerBackgrounds.Containers;
 using NewBeginnings.Common.UI;
+using NewBeginnings.Common.UnlockabilitySystem;
+using NewBeginnings.Common.UnlockabilitySystem.Achievements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +96,8 @@ internal class PlayerBackgroundPlayer : ModPlayer
 
     public override void OnEnterWorld()
     {
+        UnlockSaveData.Complete("Beginner", BeginnerAchievement.Condition);
+
         if (Main.netMode != NetmodeID.MultiplayerClient)
             return;
 
@@ -105,7 +110,12 @@ internal class PlayerBackgroundPlayer : ModPlayer
 
     public bool HasBG() => bgName is not null and not "";
     public bool HasBG(string name) => HasBG() && bgName == name;
+
+    /// <summary>
+    /// Sets the world spawn for the current world GUID. This should not run in subworlds.
+    /// </summary>
     public void SetOriginSpawn(Point16 point) => _originSpawns.TryAdd(Main.ActiveWorldFileData.UniqueId, point);
+
     public override void Load() => On_Player.Spawn += HijackSpawn;
 
     private static void HijackSpawn(On_Player.orig_Spawn orig, Player self, PlayerSpawnContext context)
@@ -114,7 +124,7 @@ internal class PlayerBackgroundPlayer : ModPlayer
 
         PlayerBackgroundPlayer plr = self.GetModPlayer<PlayerBackgroundPlayer>();
 
-        if (!plr._originSpawns.TryGetValue(Main.ActiveWorldFileData.UniqueId, out _))
+        if (!plr._originSpawns.TryGetValue(Main.ActiveWorldFileData.UniqueId, out _) && !SubworldTooling.InSubworld)
         {
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {

@@ -68,3 +68,25 @@ Configs: {
 		}
 	}
 }
+
+Achievements: {
+	AccursedAchievement: {
+		// FriendlyName: Accursed
+		// Description: Beat the wall of flesh with any origin.
+	}
+
+	BeginnerAchievement: {
+		// FriendlyName: Beginner
+		// Description: Use any origin.
+	}
+
+	RenewedAchievement: {
+		// FriendlyName: Renewed
+		// Description: Beat the Moon Lord with New Beginnings on.
+	}
+
+	TerrarianAchievement: {
+		// FriendlyName: Terrarian
+		// Description: Beat the Moon Lord with any origin.
+	}
+}

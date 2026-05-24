@@ -7,5 +7,9 @@ public class AccursedAchievement : ModAchievement
 {
     internal static CustomFlagCondition Condition = null;
 
-    public override void SetStaticDefaults() => Condition = AddCondition();
+    public override void SetStaticDefaults()
+    {
+        Condition = AddCondition();
+        Achievement.SetCategory(Terraria.Achievements.AchievementCategory.Slayer);
+    }
 }

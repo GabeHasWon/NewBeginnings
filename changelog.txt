@@ -1,2 +1,9 @@
-1.2.0.18
-- Redid the sliders in the custom creation origin, now work in increments of 5
+1.2.1
+- Added proper achievements for all of our custom achievements
+- Allowed Beginner achievement to complete properly
+- Updated Random/Default origin icon sprite
+- Added custom spawn clarification to Pirate origin tooltip
+- Fixed minor spelling mistake in a flavor text
+- Allowed the Deprived Blade to use turn
+- Made the Deprived Lantern give off more red light instead of white-ish
+- Fixed issue where origin spawns would try to be determined in subworlds, which would almost certainly not work properly

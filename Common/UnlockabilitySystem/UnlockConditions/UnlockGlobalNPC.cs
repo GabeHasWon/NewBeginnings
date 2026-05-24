@@ -22,7 +22,7 @@ internal class UnlockGlobalNPC : GlobalNPC
         }
 
         if (npc.type == NPCID.MoonLordCore)
-            UnlockSaveData.Complete("Renewed");
+            UnlockSaveData.Complete("Renewed", RenewedAchievement.Condition);
 
         if (!anyBg)
             return true;
@@ -31,7 +31,7 @@ internal class UnlockGlobalNPC : GlobalNPC
             UnlockSaveData.Complete("Accursed", AccursedAchievement.Condition);
 
         if (npc.type == NPCID.MoonLordCore)
-            UnlockSaveData.Complete("Terrarian");
+            UnlockSaveData.Complete("Terrarian", TerrarianAchievement.Condition);
 
         return true;
     }

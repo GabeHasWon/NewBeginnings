@@ -86,7 +86,7 @@ Firestarter: {
 Pirate: {
 	DisplayName: Pirate
 	Flavor: Aye. A real pirate knows when land can be plundered, and plunder they shall!
-	Description: Starts with an eye patch, a gold ring, a sextant, a rusty cutlass, a keg and 200 sails.
+	Description: Starts with an eye patch, a gold ring, a sextant, a rusty cutlass, a keg and 200 sails on the beach.
 }
 
 Deprived: {

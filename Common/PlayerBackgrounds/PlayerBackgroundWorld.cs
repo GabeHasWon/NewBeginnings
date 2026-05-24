@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NewBeginnings.Common.Crossmod;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Generation;
@@ -27,6 +28,9 @@ internal class PlayerBackgroundWorld : ModSystem
 
     public static Point16 SetOriginSpawn(Player player)
     {
+        if (SubworldTooling.InSubworld)
+            return Point16.NegativeOne;
+
         var data = player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
 
         if (data.Delegates.GetSpawnPosition is null)
