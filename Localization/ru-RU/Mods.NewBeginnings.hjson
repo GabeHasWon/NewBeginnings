@@ -6,7 +6,7 @@ Projectiles: {
 # This line is used for all crossmod fixes, which includes, so far: Mr Plague's Custom Races, One Piece Mod
 MrPlaguesCompatLine:
 	'''
-	Нажмите здесь или комбинацию CTRL+O,
+	Нажмите здесь или комбинацию Ctrl+O,
 	 чтобы открыть меню New Beginnings!
 	'''
 # The space in the below key is intentional. If you're translating to a language with spaces, keep it.
@@ -21,17 +21,17 @@ SnailDeath: {
 
 Configs: {
 	NewBeginningsConfig: {
-		DisplayName: Конфигурация New Beginnings
+		DisplayName: Конфигурация
 
 		HealthScaling: {
-			Label: "[i:58] Множитель макс. здоровья"
+			Label: "[i:58] Множитель максимального здоровья"
 			Tooltip:
 				'''
 				Определяет показатель максимального здоровья, получаемого от кристаллов жизни для персонажей, 
 				чьё происхождение влияет на изначальный запас здоровья.
-				В режиме «Стандарт» максимальное возможное здоровье персонажа будет равно 400 ед., независимо от происхождения
-				В режиме «Фиксированное» максимальное возможное здоровье персонажа будет равно +300 ед. от изначального
-				В режиме «Относительное» максимальное возможное здоровье персонажа будет равно изначальному запасу здоровья × 4
+				В режиме «Стандарт» максимальное возможное здоровье персонажа будет равно 400 ед., независимо от происхождения.
+				В режиме «Фиксированное» максимальное возможное здоровье персонажа будет равно +300 ед. от изначального.
+				В режиме «Относительное» максимальное возможное здоровье персонажа будет равно изначальному запасу здоровья × 4.
 				'''
 		}
 	}
@@ -40,23 +40,23 @@ Configs: {
 		Tooltip: ""
 
 		Scaled: {
-			Label: стандарт
-			// Tooltip: ""
+			Label: Стандарт
+			Tooltip: ""
 		}
 
 		Flat: {
-			Label: фиксированное
-			// Tooltip: ""
+			Label: Фиксированное
+			Tooltip: ""
 		}
 
 		Relative: {
-			Label: относительное
-			// Tooltip: ""
+			Label: Относительное
+			Tooltip: ""
 		}
 	}
 
 	NewBeginningsClientConfig: {
-		DisplayName: Клиентская конфигурация New Beginnings
+		DisplayName: Клиентская конфигурация
 
 		MrPlaguesButtonOffsetY: {
 			Label: Смещение клавиши совместимости
@@ -78,22 +78,22 @@ Configs: {
 
 Achievements: {
 	AccursedAchievement: {
-		// FriendlyName: Accursed
-		// Description: Beat the wall of flesh with any origin.
+		FriendlyName: Проклятый
+		Description: Одолейте Стену плоти, используя любое происхождение.
 	}
 
 	BeginnerAchievement: {
-		// FriendlyName: Beginner
-		// Description: Use any origin.
+		FriendlyName: Новичок
+		Description: Использовать любое происхождение.
 	}
 
 	RenewedAchievement: {
-		// FriendlyName: Renewed
-		// Description: Beat the Moon Lord with New Beginnings on.
+		FriendlyName: Обновлённый
+		Description: Одолейте Лунного лорда с включённым New Beginnings.
 	}
 
 	TerrarianAchievement: {
-		// FriendlyName: Terrarian
-		// Description: Beat the Moon Lord with any origin.
+		FriendlyName: Террариец
+		Description: Одолейте Лунного лорда, используя любое происхождение.
 	}
 }
