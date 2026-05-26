@@ -29,7 +29,12 @@ internal class UnlockabilityIO
             LoadLegacy(filePath);
         else
         {
-            QuickSave(null);
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath);
+                return;
+            }
+
             TagCompound compound = TagIO.FromFile(filePath, true);
             string[] unlocks = compound.GetString("unlocks").Split(',');
 
