@@ -31,9 +31,7 @@ internal class CharCreationEdit
         CharCreationHijackSaveDetour.Load();
 
         if (!ModContent.GetInstance<NewBeginningsClientConfig>().HidePlayerOrigins)
-        {
             CharNameEdit.Load();
-        }
     }
 
     /// <summary>IL edit that shoves everything we want into the vanilla UI.</summary>

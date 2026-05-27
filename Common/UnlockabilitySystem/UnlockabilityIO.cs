@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Terraria.ID;
 using Terraria.ModLoader.IO;
 
 namespace NewBeginnings.Common.UnlockabilitySystem;
@@ -29,13 +30,35 @@ internal class UnlockabilityIO
             LoadLegacy(filePath);
         else
         {
-            if (!File.Exists(filePath))
+            if (!File.Exists(filePath)) // If the file doesn't exist, create it with an empty default
             {
-                File.Create(filePath);
+                QuickSave(null);
                 return;
             }
 
-            TagCompound compound = TagIO.FromFile(filePath, true);
+            using FileStream stream = File.Open(filePath, FileMode.Open);
+
+            if (stream.Length == 0) // If the file exists, but is empty, regenerate it
+            {
+                stream.Close();
+                stream.Dispose();
+
+                QuickSave(null);
+                return;
+            }
+
+            TagCompound compound;
+            
+            try
+            {
+                compound = TagIO.FromStream(stream, true);
+            }
+            catch
+            {
+                // If the file is corrupt or invalid (which is hard to check without opening), we have to throw - hopefully this makes errors easier to catch
+                throw new IOException($"{filePath} is invalid or corrupt. Delete the file and try again.");
+            }
+
             string[] unlocks = compound.GetString("unlocks").Split(',');
 
             foreach (string unlock in UnlockSaveData.achievementsByName.Keys)

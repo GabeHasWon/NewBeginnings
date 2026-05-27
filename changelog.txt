@@ -1,2 +1,4 @@
-1.2.1.1
-- Fixed issue where loading achievements wouldn't work properly, causing achievements to reset on game load
+1.2.1.2
+- Fixed issue where the mod would create an empty file to save
+- Fixed issue where the mod can't load empty save files
+- Added a clarifying error message for when save files are corrupt or invalid (and how to fix it)
