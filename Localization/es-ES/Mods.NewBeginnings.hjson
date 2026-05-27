@@ -71,22 +71,22 @@ Configs: {
 
 Achievements: {
 	AccursedAchievement: {
-		// FriendlyName: Accursed
-		// Description: Beat the Wall of Flesh with any origin.
+		FriendlyName: Maldito
+		Description: Derrota al Muro Carnoso con cualquier origen.
 	}
 
 	BeginnerAchievement: {
-		// FriendlyName: Beginner
-		// Description: Use any origin.
+		FriendlyName: Principiante
+		Description: Usa cualquier origen.
 	}
 
 	RenewedAchievement: {
-		// FriendlyName: Renewed
-		// Description: Beat the Moon Lord with New Beginnings on.
+		FriendlyName: Renovado
+		Description: Derrota al Señor de la Luna con New Beginnings activado.
 	}
 
 	TerrarianAchievement: {
-		// FriendlyName: Terrarian
-		// Description: Beat the Moon Lord with any origin.
+		FriendlyName: Terrariano
+		Description: Derrota al Señor de la Luna con cualquier origen.
 	}
 }
