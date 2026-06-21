@@ -51,16 +51,19 @@ internal class Lycanthrope : PlayerBackgroundContainer
 
         public override bool CanUseItem(Item item)
         {
+            if (!Player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Lycanthrope"))
+                return true;
+
             if (item.shoot > ProjectileID.None && ContentSamples.ProjectilesByType[item.shoot].aiStyle == ProjAIStyleID.Hook)
                 return false;
 
-            return item.mountType == -1 || !Player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Lycanthrope");
+            return item.mountType == -1;
         }
 
         public override void PreUpdate()
         {
             // Force mount active if necessary
-            if (!Player.mount.Active)
+            if (!Player.mount.Active && Player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Lycanthrope"))
                 Player.mount.SetMount(MountID.Wolf, Player);
         }
     }

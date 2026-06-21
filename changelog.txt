@@ -1,3 +1,2 @@
-1.2.1.5
-- Added Lycanthrope origin, which is always a transformed Wolf
-- Updated description
+1.2.1.6
+- Fixed missing checks for Lycanthrope causing all players to become Lycanthrope, whoops
