@@ -88,11 +88,7 @@ public class NewBeginnings : Mod
                 int y = reader.ReadInt16();
 
                 if (x > 0 && y > 0)
-                {
-                    player.GetModPlayer<PlayerBackgroundPlayer>().SetOriginSpawn(new Point16(x, y));
-                    player.Center = new Vector2(x, y).ToWorldCoordinates();
-                    player.fallStart = (int)(player.Center.Y / 16f);
-                }
+                    PlayerBackgroundPlayer.ActuallySetSpawn(player, new Point16(x, y));
             }
         }
     }

@@ -139,13 +139,16 @@ internal class PlayerBackgroundPlayer : ModPlayer
         }
         
         if (plr._originSpawns.TryGetValue(Main.ActiveWorldFileData.UniqueId, out var spawn) && (self.SpawnX == -1 || self.SpawnY == -1))
-        {
-            self.SpawnX = spawn.X;
-            self.SpawnY = spawn.Y;
+            ActuallySetSpawn(self, spawn);
+    }
 
-            self.Center = new Vector2(self.SpawnX, self.SpawnY).ToWorldCoordinates();
-            self.fallStart = (int)(self.Center.Y / 16f);
-        }
+    internal static void ActuallySetSpawn(Player self, Point16 spawn)
+    {
+        self.SpawnX = spawn.X;
+        self.SpawnY = spawn.Y;
+
+        self.Center = new Vector2(self.SpawnX, self.SpawnY).ToWorldCoordinates();
+        self.fallStart = (int)(self.Center.Y / 16f);
     }
 
     public override void ModifyMaxStats(out StatModifier health, out StatModifier mana)

@@ -1,3 +1,3 @@
-1.2.1.4
-- Updated Spanish localization (thanks to Ningunomas on GitHub!)
-- Fixed origin spawns not setting fall start in multiplayer
+1.2.1.5
+- Added Lycanthrope origin, which is always a transformed Wolf
+- Updated description

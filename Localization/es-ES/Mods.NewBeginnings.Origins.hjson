@@ -245,3 +245,13 @@ Inevitable: {
 		Sólo tú puedes verlo.
 		'''
 }
+
+Lycanthrope: {
+	// DisplayName: Lycanthrope
+	// Flavor: An ancient curse changes your form. The moon calls.
+	/* Description:
+		'''
+		Starts with higher max health, silver tools, a Silver Broadsword, a Moon Charm...as a wolf.
+		You cannot use mounts, grapples, most movement items (such as wings, boots) or un-transform.
+		''' */
+}

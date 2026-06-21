@@ -168,7 +168,21 @@ internal class UIOriginSelection : UIState
             HAlign = 0.5f
         };
 
-        element.OnUpdate += (UIElement uiChar) => player.gravDir = player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Australian") ? -1 : 1;
+        element.OnUpdate += (UIElement uiChar) =>
+        {
+            player.gravDir = player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Australian") ? -1 : 1;
+
+            bool wasActive = player.mount.Active;
+
+            if (Main.gameMenu && player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Lycanthrope"))
+            {
+                Lycanthrope.LycanthropePlayer.Mounting = true;
+                player.mount.SetMount(MountID.Wolf, player);
+                Lycanthrope.LycanthropePlayer.Mounting = false;
+            }
+            else if (player.mount.Active)
+                player.mount.Dismount(player);
+        };
         panel.Append(element);
     }
 
