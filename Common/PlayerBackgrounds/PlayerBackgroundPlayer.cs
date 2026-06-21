@@ -137,7 +137,7 @@ internal class PlayerBackgroundPlayer : ModPlayer
             else
                 PlayerBackgroundWorld.SetOriginSpawn(self);
         }
-
+        
         if (plr._originSpawns.TryGetValue(Main.ActiveWorldFileData.UniqueId, out var spawn) && (self.SpawnX == -1 || self.SpawnY == -1))
         {
             self.SpawnX = spawn.X;

@@ -91,6 +91,7 @@ public class NewBeginnings : Mod
                 {
                     player.GetModPlayer<PlayerBackgroundPlayer>().SetOriginSpawn(new Point16(x, y));
                     player.Center = new Vector2(x, y).ToWorldCoordinates();
+                    player.fallStart = (int)(player.Center.Y / 16f);
                 }
             }
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Terraria.ID;
 using Terraria.ModLoader.IO;
 
 namespace NewBeginnings.Common.UnlockabilitySystem;
