@@ -247,11 +247,11 @@ Inevitable: {
 }
 
 Lycanthrope: {
-	// DisplayName: Lycanthrope
-	// Flavor: An ancient curse changes your form. The moon calls.
-	/* Description:
+	DisplayName: Licántropo
+	Flavor: Una maldición ancestral cambia tu forma. La luna te llama.
+	Description:
 		'''
-		Starts with higher max health, silver tools, a Silver Broadsword, a Moon Charm...as a wolf.
-		You cannot use mounts, grapples, most movement items (such as wings, boots) or un-transform.
-		''' */
+		Empiezas con más vida máxima, herramientas de plata, una espada ancha de plata y un amuleto de luna... como lobo.
+		No puedes usar monturas, ganchos, la mayoría de objetos de movimiento (como alas o botas) ni destransformarte.
+		'''
 }
