@@ -46,11 +46,11 @@ CustomOrigin: {
 	Inv: Инв
 	Acc: Акс
 	Helmet: Шлем
-	Body: Туловище
+	Body: Тулов
 	Legs: Ноги
-	Health: Здоровье ({0}/400)
+	Health: HP ({0}/400)
 	Mana: Мана ({0}/200)
-	Search: Поиск предмета — нажмите Enter для сортировки
+	Search: Название предмета
 	SortBy: "Сортировка: "
 
 	Sort: {

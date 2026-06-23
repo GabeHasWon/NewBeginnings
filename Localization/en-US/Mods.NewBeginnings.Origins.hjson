@@ -14,7 +14,7 @@ Knight: {
 Huntsman: {
 	DisplayName: Huntsman
 	Flavor: Steady hands and keen eyes, a master of the hunt.
-	Description: Starts with a bow, 200 arrows and a hunter's cloak.
+	Description: Starts with a gold bow, 200 arrows and a hunter's cloak.
 }
 
 Wizard: {
@@ -26,19 +26,19 @@ Wizard: {
 Beastmaster: {
 	DisplayName: Beastmaster
 	Flavor: Raised in the woodlands, they summon beasts to aid their journey.
-	Description: Lower max health but an immediate slime staff and leather whip.
+	Description: Starts with a slime staff and a leather whip but 80 max health.
 }
 
 Shinobi: {
 	DisplayName: Shinobi
 	Flavor: A deadly mercenary assassin from the east. Fast, nimble, and with lethal efficiency.
-	Description: Start with a tabi and a katana but 80 max health.
+	Description: Starts with a tabi and a katana but 80 max health.
 }
 
 Alchemist: {
 	DisplayName: Alchemist
 	Flavor: A master of nature and chemicals; prepared for anything.
-	Description: Start with an alchemy table, 50 bottled water and 12 herb bags.
+	Description: Starts with an alchemy table, 50 bottled water and 12 herb bags.
 }
 
 Demoman: {

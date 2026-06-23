@@ -453,7 +453,7 @@ internal class UIOriginSelection : UIState
 
             if (LanguageManager.Instance.ActiveCulture.Name == "ru-RU")
             {
-                textSize = 1f;
+                textSize = 0.9f;
             }
 
             UIText bgName = new(item.Name, textSize) // Background's name
@@ -492,7 +492,14 @@ internal class UIOriginSelection : UIState
         customBGButton.OnLeftClick += CurrentBGButton_OnClick;
         allBGButtons.Add(customBGButton);
 
-        UIText bgName = new(Language.GetTextValue("Mods.NewBeginnings.Origins.Custom.DisplayName"), 1.2f) //Background's name
+        float textSize = 1.2f;
+
+        if (LanguageManager.Instance.ActiveCulture.Name == "ru-RU")
+        {
+            textSize = 0.9f;
+        }
+
+        UIText bgName = new(Language.GetTextValue("Mods.NewBeginnings.Origins.Custom.DisplayName"), textSize) //Background's name
         {
             HAlign = 0f,
             VAlign = 0.5f,
