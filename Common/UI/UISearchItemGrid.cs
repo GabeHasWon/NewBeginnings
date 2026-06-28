@@ -3,9 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using NewBeginnings.Common.UnlockabilitySystem;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.UI;
 using Terraria.UI;
@@ -23,6 +25,10 @@ internal class UISearchItemGrid : UIPanel
 
     private readonly static HashSet<int> alwaysInvalidItems = [];
 
+    private static List<UIElement> ResuableElements;
+
+    private static bool _loadingList = false;
+
     private readonly UIList _list = null;
     private readonly UIEditableText _inputText = null;
     private readonly UIButton<string> _sortButton = null;
@@ -30,7 +36,7 @@ internal class UISearchItemGrid : UIPanel
 
     private SortMode _mode = SortMode.Chaos;
     private int _hideTimer = 0;
-    private int _timeSinceTyped = 0;
+    private int _timeSinceTyped = -11;
     private string _oldValue = string.Empty;
 
     public UISearchItemGrid(Action<UIItemContainer> onClick)
@@ -45,7 +51,7 @@ internal class UISearchItemGrid : UIPanel
 
         Append(panel);
 
-        _inputText = new UIEditableText(InputType.Text, UICustomOrigin.Localize("Search"))
+        _inputText = new UIEditableText(InputType.Text, UICustomOrigin.Localize("Search"), panel: false)
         {
             Width = StyleDimension.Fill,
             Height = StyleDimension.Fill,
@@ -122,10 +128,10 @@ internal class UISearchItemGrid : UIPanel
 
         _timeSinceTyped--;
 
-        if (_inputText.currentValue != _oldValue)
+        if (_inputText.Value != _oldValue)
             _timeSinceTyped = 0;
 
-        _oldValue = _inputText.currentValue;
+        _oldValue = _inputText.Value;
     }
 
     private void RedoList()
@@ -134,10 +140,8 @@ internal class UISearchItemGrid : UIPanel
         PopulateList();
     }
 
-    private void PopulateList()
+    private async void PopulateList()
     {
-        _hideTimer = 3;
-
         if (alwaysInvalidItems.Count == 0)
         {
             for (int i = 1; i < ItemLoader.ItemCount; ++i)
@@ -150,33 +154,46 @@ internal class UISearchItemGrid : UIPanel
             }
         }
 
-        List<UIElement> elements = [];
+        _list.Add(new UIText(Language.GetText("Mods.NewBeginnings.UI.Loading")));
+        _loadingList = true;
 
-        for (int i = 1; i < ItemLoader.ItemCount; ++i)
+        await Task.Run(() =>
         {
-            Item item = ContentSamples.ItemsByType[i];
+            ResuableElements ??= [];
+            ResuableElements.Clear();
 
-            // Necessary, constant checks that invalidate items
-            if (alwaysInvalidItems.Contains(i))
-                continue;
+            for (int i = 1; i < ItemLoader.ItemCount; ++i)
+            {
+                Item item = ContentSamples.ItemsByType[i];
 
-            // Skip if we have a restricted custom background
-            if (!UnlockSaveData.Unlocked("Terrarian") && UICustomOrigin.InvalidItemToAdd(item))
-                continue;
+                // Necessary, constant checks that invalidate items
+                if (alwaysInvalidItems.Contains(i))
+                    continue;
 
-            bool notSearch = _inputText.currentValue == string.Empty;
+                // Skip if we have a restricted custom background
+                if (!UnlockSaveData.Unlocked("Terrarian") && UICustomOrigin.InvalidItemToAdd(item))
+                    continue;
 
-            // Match search if any search is found
-            if (!notSearch && !MatchSearch(item, _inputText.currentValue))
-                continue;
+                bool notSearch = _inputText.Value == string.Empty;
 
-            var image = new UIItemContainer(item);
-            image.OnLeftClick += Image_OnLeftClick;
-            image.Append(new UIText(item.Name) { VAlign = 0.5f, Left = StyleDimension.FromPixels(46) });
-            elements.Add(image);
-        }
+                // Match search if any search is found
+                if (!notSearch && !MatchSearch(item, _inputText.Value))
+                    continue;
 
-        _list.AddRange(elements);
+                var image = new UIItemContainer(item);
+                image.OnLeftClick += Image_OnLeftClick;
+                image.Append(new UIText(item.Name) { VAlign = 0.5f, Left = StyleDimension.FromPixels(46) });
+
+                ResuableElements.Add(image);
+            }
+
+            _list.Clear();
+            Main.RunOnMainThread(() =>
+            {
+                _list.AddRange(ResuableElements);
+                _loadingList = false;
+            });
+        });
     }
 
     private static bool MatchSearch(Item item, string currentValue)
@@ -232,7 +249,7 @@ internal class UISearchItemGrid : UIPanel
     {
         foreach (UIElement element in Elements)
         {
-            if (element is UIList && _hideTimer > 0)
+            if (element is UIList && _hideTimer > 0 && !_loadingList)
                 continue;
 
             element.Draw(spriteBatch);
