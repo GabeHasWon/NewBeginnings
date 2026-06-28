@@ -113,7 +113,7 @@ internal class UnlockabilityIO
     }
 
     /// <summary>
-    /// Safely adds a given achievement key to the save data. <paramref name="key"/> can be null if the only goal is to create the file.
+    /// Safely adds a given achievement key to the save data. <paramref name="allKeys"/> can be false if the only goal is to create the file.
     /// </summary>
     internal static void QuickSave(bool allKeys)
     {

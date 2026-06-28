@@ -515,7 +515,8 @@ internal class UIOriginSelection : UIState
         foreach (var (_, button) in buttons)
             allBGButtons.Add(button);
 
-        if (UnlockSaveData.Unlocked("Renewed"))
+        string customName = Language.GetTextValue("Mods.NewBeginnings.Origins.Custom.DisplayName");
+        if (UnlockSaveData.Unlocked("Renewed") && (string.IsNullOrEmpty(text) || customName.StartsWith(text, StringComparison.CurrentCultureIgnoreCase)))
             AddCustomBGButton(allBGButtons, buttons);
 
         SetSort(allBGButtons, buttons, _sortButton);

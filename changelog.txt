@@ -1,3 +1,5 @@
 1.2.1.8
 - Fixed issue where players with no save data would be unable to open the game properly
 - Fixed the new origin search bar being case-sensitive
+- Fixed Custom origin not respecting the search bar properly
+- Updated Russian and Spanish localizations
