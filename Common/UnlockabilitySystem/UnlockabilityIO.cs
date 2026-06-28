@@ -124,8 +124,9 @@ internal class UnlockabilityIO
             foreach (BaseUnlock unlock in UnlockSaveData.achievementsByName.Values)
                 if (unlock.Unlocked)
                     save += unlock.Identifier + ",";
-        
-            save = save[..^1];
+            
+            if (save.Length > 0)
+                save = save[..^1];
         }
 
         string filePath = SecureGetSavePath(false, out _);

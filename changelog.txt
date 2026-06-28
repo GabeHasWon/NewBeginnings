@@ -1,15 +1,3 @@
-1.2.1.7
-- Made the Lycanthrope preview wolf run in the selection menu
-- Adjusted the way the display panel for origins works in several ways:
-	1. Slightly adjusted the buffers/offsets
-	2. Moved the help text directly under the flavor text
-	3. Moved the slider off of the main panel
-	4. Fixed too many items not wrapping properly, hiding a lot of them (namely the Farmer origin)
-	5. Moved the hover text for items to the center, avoiding cropping issues in other languages
-- Improved most of the sort icons in size and quality
-- Added a search bar for searching for origin names
-- Adjusted origin slider bar to the right, giving origin names a little more space
-- Added 10 more splash texts to the standard menu
-- Resolved issue where Custom origin list would refresh twice
-- Resolved major lag when selecting a fully unlocked Custom origin, or when searching with the searchbar
-- Fixed custom achievements backend not saving data properly (only one achievement could be saved at a time)
+1.2.1.8
+- Fixed issue where players with no save data would be unable to open the game properly
+- Fixed the new origin search bar being case-sensitive

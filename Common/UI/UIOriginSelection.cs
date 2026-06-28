@@ -446,7 +446,7 @@ internal class UIOriginSelection : UIState
 
         foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas) //Adds every background into the list as a button
         {
-            if (!string.IsNullOrEmpty(text) && !item.Name.Value.StartsWith(text))
+            if (!string.IsNullOrEmpty(text) && !item.Name.Value.StartsWith(text, StringComparison.CurrentCultureIgnoreCase))
                 continue;
 
             if (!item.Delegates.ClearCondition())
