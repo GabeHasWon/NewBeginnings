@@ -68,7 +68,7 @@ Configs: {
 
 		HidePlayerOrigins: {
 			Label: Hide Player Origins
-			Tooltip: ""
+			Tooltip: If true, player origins will not show on the character selection screen (so it would be just "Player", not "Player the Origin").
 		}
 	}
 }

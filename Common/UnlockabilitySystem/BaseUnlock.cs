@@ -10,4 +10,6 @@ internal class BaseUnlock(string langKey, string identifier, bool unlocked = fal
     public LocalizedText Name = Language.GetText(langKey + ".DisplayName");
     public LocalizedText Description = Language.GetText(langKey + ".Description");
     public LocalizedText Rewards = Language.GetText(langKey + ".Rewards");
+
+    public override string ToString() => $"{Identifier}: {Unlocked}";
 }

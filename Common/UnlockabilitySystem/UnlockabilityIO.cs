@@ -31,7 +31,7 @@ internal class UnlockabilityIO
         {
             if (!File.Exists(filePath)) // If the file doesn't exist, create it with an empty default
             {
-                QuickSave(null);
+                QuickSave(true);
                 return;
             }
 
@@ -42,7 +42,7 @@ internal class UnlockabilityIO
                 stream.Close();
                 stream.Dispose();
 
-                QuickSave(null);
+                QuickSave(false);
                 return;
             }
 
@@ -89,7 +89,7 @@ internal class UnlockabilityIO
 
         foreach (string unlock in UnlockSaveData.achievementsByName.Keys)
             if (UnlockSaveData.achievementsByName[unlock].Unlocked)
-                QuickSave(unlock);
+                QuickSave(true);
 
         return true;
     }
@@ -115,12 +115,18 @@ internal class UnlockabilityIO
     /// <summary>
     /// Safely adds a given achievement key to the save data. <paramref name="key"/> can be null if the only goal is to create the file.
     /// </summary>
-    internal static void QuickSave(string? key)
+    internal static void QuickSave(bool allKeys)
     {
         string save = string.Empty;
 
-        if (key != null && UnlockSaveData.achievementsByName[key].Unlocked)
-            save += key + ",";
+        if (allKeys)
+        {
+            foreach (BaseUnlock unlock in UnlockSaveData.achievementsByName.Values)
+                if (unlock.Unlocked)
+                    save += unlock.Identifier + ",";
+        
+            save = save[..^1];
+        }
 
         string filePath = SecureGetSavePath(false, out _);
         TagCompound tag = [];

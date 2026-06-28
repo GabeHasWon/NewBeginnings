@@ -29,6 +29,16 @@ Splash: {
 	27: ¡Un regalo perfecto para cualquier festividad!
 	28: ¡No es eficaz como arma letal!
 	29: ¡Controla tu mente lo justo para que sigas jugando!
+	// 30: Powered by AI - average intelligence!
+	// 31: Video content provided by Team Spirit!
+	// 32: Not effective as a blunt force weapon!
+	// 33: By the same people that brought you older beginnings!
+	// 34: Also check out Extra Beginnings!
+	// 35: Safe at most temperatures above -30 Celcius!
+	// 36: '''"Interview? For what?" - the Guide'''
+	// 37: Born to choose an origin; forced to Purist!
+	// 38: '''"New Beginnings? What's that?" - Andrew "Redigit" Spinks'''
+	// 39: Listens to your favorite music genre!
 }
 
 SortBy: {
@@ -78,3 +88,6 @@ CustomOrigin: {
 		15: ¡Falta de vitaminas A, C y D!
 	}
 }
+
+// Search: Search
+// Loading: (Loading items)

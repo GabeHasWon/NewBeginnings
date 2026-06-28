@@ -29,6 +29,16 @@ Splash: {
 	27: Makes a great gift for any holiday!
 	28: Not effective as a lethal weapon!
 	29: Controls your mind just enough to keep you playing!
+	30: Powered by AI - average intelligence!
+	31: Video content provided by Team Spirit!
+	32: Not effective as a blunt force weapon!
+	33: By the same people that brought you older beginnings!
+	34: Also check out Extra Beginnings!
+	35: Safe at most temperatures above -30 Celcius!
+	36: '''"Interview? For what?" - the Guide'''
+	37: Born to choose an origin; forced to Purist!
+	38: '''"New Beginnings? What's that?" - Andrew "Redigit" Spinks'''
+	39: Listens to your favorite music genre!
 }
 
 SortBy: {
@@ -78,3 +88,6 @@ CustomOrigin: {
 		15: Lacking in Vitamins A, C and D!
 	}
 }
+
+Search: Search
+Loading: (Loading items)

@@ -14,8 +14,11 @@ using Terraria.Localization;
 using NewBeginnings.Common.UnlockabilitySystem;
 using NewBeginnings.Common.PlayerBackgrounds.Containers;
 using NewBeginnings.Common.Crossmod;
+using System;
 
 namespace NewBeginnings.Common.UI;
+
+#nullable enable
 
 internal class UIOriginSelection : UIState
 {
@@ -33,16 +36,22 @@ internal class UIOriginSelection : UIState
     private const int TotalWidth = 800;
     private const int BackgroundListWidth = 220;
 
+    private static readonly Color PanelColor = new Color(33, 43, 79) * 0.8f;
+
     private static SortMode _sortMode = SortMode.Default;
 
     private readonly Player _player;
     private readonly MouseEvent _return;
 
-    private UIText _statsText;
-    private UIText _descFlavour;
-    private UIText _descText;
-    private UIElement _itemContainer;
-    private UIImageButton _sortButton;
+    private UIText _statsText = null!;
+    private UIText _descFlavour = null!;
+    private UIText _descText = null!;
+    private UIElement _itemContainer = null!;
+    private UIImageButton _sortButton = null!;
+    private UIPanel _originsListPanel = null!;
+    private Action? _resetOriginsAction = null!;
+    private int _lastType = 0;
+    private string _lastTypeValue = "";
 
     private static float BaseHeight => 554f / 1017 * Main.screenHeight;
 
@@ -52,6 +61,14 @@ internal class UIOriginSelection : UIState
         _return = returnAction;
 
         Setup();
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+
+        _resetOriginsAction?.Invoke();
+        _resetOriginsAction = null;
     }
 
     private void Setup()
@@ -71,14 +88,12 @@ internal class UIOriginSelection : UIState
         mainElement.SetPadding(0f);
         Append(mainElement);
 
-        Color panelColor = new Color(33, 43, 79) * 0.8f;
-
         var panel = new UIPanel
         {
             Width = StyleDimension.FromPercent(1f),
             Height = StyleDimension.FromPercent(1f),
             Top = StyleDimension.FromPixels(50f),
-            BackgroundColor = panelColor
+            BackgroundColor = PanelColor
         };
 
         mainElement.Append(panel);
@@ -112,46 +127,82 @@ internal class UIOriginSelection : UIState
 
         panel.Append(_sortButton);
 
+        UIEditableText search = new(InputType.Text, Language.GetTextValue("Mods.NewBeginnings.UI.Search"), s => PersistentlyUpdateOriginOptions(s, panel))
+        {
+            Width = StyleDimension.FromPixels(222),
+            Height = StyleDimension.FromPixels(36),
+            Top = StyleDimension.FromPixels(40)
+        };
+
+        search.OnUpdate += _ => ContinuousOriginUpdating(search, panel);
+        panel.Append(search);
+
         AddCharacterPreview(panel, _player);
 
         var descriptionPanel = new UIPanel
         {
-            Width = StyleDimension.FromPixelsAndPercent(-BackgroundListWidth - 10, 1f),
+            Width = StyleDimension.FromPixelsAndPercent(-BackgroundListWidth - 34, 1f),
+            Left = StyleDimension.FromPixels(-24),
             HAlign = 1f,
             Height = StyleDimension.FromPixelsAndPercent(-40, 1f),
             Top = StyleDimension.FromPixels(30),
-            BackgroundColor = panelColor
+            BackgroundColor = PanelColor
         };
         panel.Append(descriptionPanel);
 
-        BuildDescription(descriptionPanel);
+        BuildDescription(descriptionPanel, panel);
 
-        var originsListPanel = new UIPanel
+        _originsListPanel = new UIPanel
         {
             Width = StyleDimension.FromPixels(BackgroundListWidth),
             HAlign = 0,
-            Height = StyleDimension.FromPixelsAndPercent(-40, 1f),
-            Top = StyleDimension.FromPixels(30),
-            BackgroundColor = panelColor
+            Height = StyleDimension.FromPixelsAndPercent(-90, 1f),
+            Top = StyleDimension.FromPixels(80),
+            BackgroundColor = PanelColor
         };
-        panel.Append(originsListPanel);
+        panel.Append(_originsListPanel);
 
-        BuildBackgroundSelections(originsListPanel);
+        BuildBackgroundSelections(_originsListPanel);
 
         string str = GetSplashText();
         UIText text = new(str, 1 - str.Length / 200f)
         {
             HAlign = 0.88f,
-            Top = StyleDimension.FromPixels(10),
+            Top = StyleDimension.FromPixels(6),
         };
 
         text.OnUpdate += (UIElement affectedElement) => text.TextColor = Main.MouseTextColorReal;
         panel.Append(text);
     }
 
+    private void ContinuousOriginUpdating(UIEditableText text, UIPanel panel)
+    {
+        if (_lastTypeValue != text.Value)
+            PersistentlyUpdateOriginOptions(text.Value, panel);
+     
+        _lastTypeValue = text.Value;
+    }
+
+    private void PersistentlyUpdateOriginOptions(string text, UIPanel panel) => _resetOriginsAction = () =>
+    {
+        _originsListPanel?.Remove();
+
+        _originsListPanel = new UIPanel
+        {
+            Width = StyleDimension.FromPixels(BackgroundListWidth),
+            HAlign = 0,
+            Height = StyleDimension.FromPixelsAndPercent(-90, 1f),
+            Top = StyleDimension.FromPixels(80),
+            BackgroundColor = PanelColor
+        };
+        panel.Append(_originsListPanel);
+
+        BuildBackgroundSelections(_originsListPanel, text);
+    };
+
     private static string GetSplashText()
     {
-        const int OurMax = 30;
+        const int OurMax = 40;
 
         int random = Main.rand.Next(OurMax + OriginCalls._crossModSplashTexts.Count);
         return (random >= OurMax ? OriginCalls._crossModSplashTexts[random - OurMax] : Language.GetText("Mods.NewBeginnings.UI.Splash." + random)).Value;
@@ -168,7 +219,7 @@ internal class UIOriginSelection : UIState
             HAlign = 0.5f
         };
 
-        element.OnUpdate += (UIElement uiChar) =>
+        element.OnUpdate += uiChar =>
         {
             player.gravDir = player.GetModPlayer<PlayerBackgroundPlayer>().HasBG("Australian") ? -1 : 1;
 
@@ -178,6 +229,7 @@ internal class UIOriginSelection : UIState
             {
                 Lycanthrope.LycanthropePlayer.Mounting = true;
                 player.mount.SetMount(MountID.Wolf, player);
+                player.velocity.X = 2;
                 Lycanthrope.LycanthropePlayer.Mounting = false;
             }
             else if (player.mount.Active)
@@ -186,11 +238,11 @@ internal class UIOriginSelection : UIState
         panel.Append(element);
     }
 
-    private void BuildDescription(UIPanel panel)
+    private void BuildDescription(UIPanel panel, UIPanel parentPanel)
     {
         var list = new UIList() //List for use in the description
         {
-            Width = StyleDimension.FromPercent(0.98f),
+            Width = StyleDimension.FromPercent(1),
             Height = StyleDimension.FromPixelsAndPercent(0, 1f),
             PaddingLeft = 8,
             PaddingRight = 8,
@@ -201,12 +253,12 @@ internal class UIOriginSelection : UIState
         var scrollBar = new UIScrollbar() //Scrollbar for above list
         {
             HAlign = 1f,
-            Height = StyleDimension.FromPixelsAndPercent(-8, 1f),
-            Top = StyleDimension.FromPixels(4),
+            Height = StyleDimension.FromPixelsAndPercent(-51, 1f),
+            Top = StyleDimension.FromPixels(35),
         };
 
         list.SetScrollbar(scrollBar);
-        panel.Append(scrollBar);
+        parentPanel.Append(scrollBar);
 
         var bgData = _player.GetModPlayer<PlayerBackgroundPlayer>().BackgroundData;
         _statsText = new UIText(GetStatsText(bgData))
@@ -229,25 +281,26 @@ internal class UIOriginSelection : UIState
         };
         list.Add(_descFlavour);
 
-        _itemContainer = new();
-        SetItemList(bgData, true);
-        list.Add(_itemContainer);
-
         _descText = new UIText(bgData.Description, 0.9f)
         {
             TextColor = Color.Gray,
-            Top = StyleDimension.FromPercent(0.1f),
+            Top = StyleDimension.FromPixelsAndPercent(12, 0.1f),
             Width = StyleDimension.FromPixelsAndPercent(-8, 1f),
-            Height = StyleDimension.FromPixels(10),
+            Height = StyleDimension.FromPixels(20),
             IsWrapped = true,
-            MarginTop = 8
+            MarginTop = 8,
+            HAlign = 1
         };
         list.Add(_descText);
+
+        _itemContainer = new();
+        SetItemList(bgData, true);
+        list.Add(_itemContainer);
     }
 
-    private void SetItemList(PlayerBackgroundData data, bool resetItemContainer = false)
+    private float SetItemList(PlayerBackgroundData data, bool resetItemContainer = false)
     {
-        var descItemHeight = StyleDimension.FromPixels(data.DisplayItemCount() == 0 ? 0 : 54 + 32 * (data.DisplayItemCount() / 12f));
+        var descItemHeight = StyleDimension.FromPixels(data.DisplayItemCount() == 0 ? 0 : 54 + 32 * (int)(data.DisplayItemCount() / 12f));
 
         if (resetItemContainer) //Creates a new item container
         {
@@ -304,7 +357,7 @@ internal class UIOriginSelection : UIState
             var slotBG = new UIImage(TextureAssets.InventoryBack) //Slot background
             {
                 Left = StyleDimension.FromPixels(-6 + offset * 42),
-                Top = StyleDimension.FromPixels(-2 + yOffset * 38),
+                Top = StyleDimension.FromPixels(14 + yOffset * 38),
                 ImageScale = 0.77f,
             };
 
@@ -327,37 +380,23 @@ internal class UIOriginSelection : UIState
 
             slotBG.Append(icon);
 
-            float width = FontAssets.ItemStack.Value.MeasureString(item.HoverName).X * 0.8f;
-
-            UIText name = new(item.HoverName, 0.8f)
+            UIText name = new(item.HoverName, 0.9f)
             {
                 Width = StyleDimension.FromPixels(42),
-                Top = StyleDimension.FromPixels(-10),
+                Top = StyleDimension.FromPixels(0),
                 HAlign = 0.5f,
                 DynamicallyScaleDownToWidth = true,
             };
 
-            if (id == 0 || id % 5 == 1)
-            {
-                name.Top = StyleDimension.FromPixels(-10);
-                name.HAlign = 0f;
-                name.Left = StyleDimension.FromPixels(6);
-            }
-            else if (id % 5 == 0)
-            {
-                name.Top = StyleDimension.FromPixels(-10);
-                name.HAlign = 1f;
-            }
-
             name.DynamicallyScaleDownToWidth = true;
 
-            icon.OnMouseOver += (UIMouseEvent evt, UIElement listeningElement) => slotBG.Append(name);
-            icon.OnMouseOut += (UIMouseEvent evt, UIElement listeningElement) => slotBG.RemoveChild(name);
+            icon.OnMouseOver += (evt, listeningElement) => _itemContainer.Append(name);
+            icon.OnMouseOut += (evt, listeningElement) => _itemContainer.RemoveChild(name);
 
             _itemContainer.Append(slotBG);
 
             offset++;
-            if (10 + offset * 32 > TotalWidth - BackgroundListWidth + 20) //ew hardcoding but nothing works
+            if (152 + offset * 42 > TotalWidth - BackgroundListWidth) //ew hardcoding but nothing works
             {
                 offset = 0;
                 yOffset++;
@@ -365,6 +404,8 @@ internal class UIOriginSelection : UIState
 
             id++;
         }
+        
+        return yOffset;
     }
 
     private static string GetStatsText(PlayerBackgroundData bgData)
@@ -379,7 +420,7 @@ internal class UIOriginSelection : UIState
     }
 
     /// <summary>Builds the origin list and buttons.</summary>
-    private void BuildBackgroundSelections(UIPanel container)
+    private void BuildBackgroundSelections(UIPanel container, string? text = null)
     {
         UIList allBGButtons = new() //List of all background buttons
         {
@@ -394,6 +435,7 @@ internal class UIOriginSelection : UIState
         {
             HAlign = 1f,
             Height = StyleDimension.FromPixelsAndPercent(-8, 1f),
+            Left = StyleDimension.FromPixels(4),
             Top = StyleDimension.FromPixels(4)
         };
 
@@ -404,6 +446,9 @@ internal class UIOriginSelection : UIState
 
         foreach (var item in PlayerBackgroundDatabase.playerBackgroundDatas) //Adds every background into the list as a button
         {
+            if (!string.IsNullOrEmpty(text) && !item.Name.Value.StartsWith(text))
+                continue;
+
             if (!item.Delegates.ClearCondition())
                 continue;
 
@@ -540,7 +585,7 @@ internal class UIOriginSelection : UIState
         _player.GetModPlayer<PlayerBackgroundPlayer>().SetBackground(useData); //...and sets it.
 
         foreach (var button in allBGButtons.Where(x => x is UIColoredImageButton))
-            (button as UIColoredImageButton).SetColor(Color.Gray);
+            (button as UIColoredImageButton)!.SetColor(Color.Gray);
 
         currentBGButton.SetColor(Color.White); //"Selects" the button visually.
         return item;
@@ -568,7 +613,7 @@ internal class UIOriginSelection : UIState
             if (_sortMode > SortMode.AlphabeticallyReverse)
                 _sortMode = SortMode.Default;
 
-            (sortButton.Children.First() as UIText).SetText(Language.GetText("Mods.NewBeginnings.UI.SortBy.Line")
+            (sortButton.Children.First() as UIText)!.SetText(Language.GetText("Mods.NewBeginnings.UI.SortBy.Line")
                 .WithFormatArgs(Language.GetText("Mods.NewBeginnings.UI.SortBy." + _sortMode)));
             string path = "NewBeginnings/Assets/Textures/UI/";
 

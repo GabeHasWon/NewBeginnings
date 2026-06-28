@@ -28,7 +28,7 @@ internal class UnlockSaveData
         }
 
         if (!noSave)
-            UnlockabilityIO.QuickSave(key);
+            UnlockabilityIO.QuickSave(true);
 
         customFlag?.Complete();
     }
