@@ -10,7 +10,7 @@ MrPlaguesCompatLine:
 	 чтобы открыть меню New Beginnings!
 	'''
 # The space in the below key is intentional. If you're translating to a language with spaces, keep it.
-TitleLine: " [c/8B8B8B: {0}]"
+TitleLine: ", [c/8B8B8B:{0}]"
 
 # Used in the Inevitable's snail death.
 SnailDeath: {
@@ -71,7 +71,7 @@ Configs: {
 
 		HidePlayerOrigins: {
 			Label: Скрыть отображение происхождения персонажей
-			Tooltip: ""
+			Tooltip: Происхождение персонажа не будут показываться рядом с его именем в меню выбора персонажа.
 		}
 	}
 }

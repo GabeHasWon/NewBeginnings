@@ -40,7 +40,7 @@ RustyCutlass: {
 
 WornSpellbook: {
 	DisplayName: Потрёпанная книга заклинаний
-	Tooltip: Надёжная, хотя и довольно слабая.
+	Tooltip: Надёжная, хотя и довольно слабая
 }
 
 TrailblazerHelmet: {
