@@ -4,15 +4,19 @@ Projectiles: {
 }
 
 # This line is used for all crossmod fixes, which includes, so far: Mr Plague's Custom Races, One Piece Mod
-MrPlaguesCompatLine: 点击此处打开 New Beginning 菜单!
+MrPlaguesCompatLine:
+	'''
+	点击此处打开新起点菜单！
+	（或按CTRL+O）
+	'''
 # The space in the below key is intentional. If you're translating to a language with spaces, keep it.
 TitleLine: " [c/8B8B8B: {0}]"
 
 # Used in the Inevitable's snail death.
 SnailDeath: {
 	0: "{0}太慢了。"
-	1: 最终,{0}还是没能坚持下去。
-	2: "{0}...迎来了命中注定的结局。"
+	1: 最终，{0}还是没能坚持下去。
+	2: "{0}……迎来了命中注定的结局。"
 }
 
 Configs: {
@@ -20,13 +24,13 @@ Configs: {
 		DisplayName: 服务器配置
 
 		HealthScaling: {
-			Label: "[i:58] 生命值比例"
+			Label: "[i:58] 最大生命值比例"
 			Tooltip:
 				'''
-				当你的起始生命值不为100时, 通过此项改变你从生命水晶能够获得的生命值上限
-				刻度: 在使用满生命水晶(15颗)后生命值将为 400, 无论你的起始生命为多少.
-				平滑: 在使用满生命水晶(15颗)后生命值将为 (初始生命值 + 300).
-				比例: 在使用满生命水晶(15颗)后生命值将为 400*(起始生命值/100).
+				无论出身的初始生命值较高或较低，最终都会按比例增加至400。
+				“按比例”始终以400为上限，无论初始生命值如何。
+				“固定”始终以初始生命值+300为上限。
+				“相对”比例会基于初始生命值，其中生命水晶可达到的最大生命值为初始生命值*4。
 				'''
 		}
 	}
@@ -35,58 +39,58 @@ Configs: {
 		Tooltip: ""
 
 		Scaled: {
-			Label: 刻度
+			Label: 按比例
 			// Tooltip: ""
 		}
 
 		Flat: {
-			Label: 平滑
+			Label: 固定
 			// Tooltip: ""
 		}
 
 		Relative: {
-			Label: 比例
+			Label: 相对
 			// Tooltip: ""
 		}
 	}
 
 	NewBeginningsClientConfig: {
-		// DisplayName: New Beginnings Client Config
+		DisplayName: 新起点客户端配置
 
 		MrPlaguesButtonOffsetY: {
-			// Label: Compatibility Button Vertical Offset
-			/* Tooltip:
+			Label: 兼容按钮垂直偏移
+			Tooltip:
 				'''
-				When using Mr Plague's Custom Races or the One Piece Mod, this will be the offset from the center of the screen that the "Click me" dialogue uses. 
-				Defaults to 300, and caps out at the center and bottom of the screen.
-				''' */
+				当使用Mr Plague's Custom Races或One Piece模组时，此值将是“点击我”对话框相对于屏幕中心的偏移量。
+				默认值为300，并以屏幕中心和底部为上限。
+				'''
 		}
 
 		HidePlayerOrigins: {
-			// Label: Hide Player Origins
-			// Tooltip: If true, player origins will not show on the character selection screen (so it would be just "Player", not "Player the Origin").
+			Label: 隐藏玩家出身
+			Tooltip: 如果为true，玩家出身将不会显示在角色选择屏幕上（因此它只显示为“玩家”，而非“玩家出身”）。
 		}
 	}
 }
 
 Achievements: {
 	AccursedAchievement: {
-		// FriendlyName: Accursed
-		// Description: Beat the Wall of Flesh with any origin.
+		FriendlyName: 被诅咒者
+		Description: 使用任意出身击败血肉墙。
 	}
 
 	BeginnerAchievement: {
-		// FriendlyName: Beginner
-		// Description: Use any origin.
+		FriendlyName: 初心者
+		Description: 使用任意出身。
 	}
 
 	RenewedAchievement: {
-		// FriendlyName: Renewed
-		// Description: Beat the Moon Lord with New Beginnings on.
+		FriendlyName: 新的开始
+		Description: 在启用新起点时击败月亮领主。 
 	}
 
 	TerrarianAchievement: {
-		// FriendlyName: Terrarian
-		// Description: Beat the Moon Lord with any origin.
+		FriendlyName: 泰拉人
+		Description: 使用任意出身击败月亮领主。
 	}
 }

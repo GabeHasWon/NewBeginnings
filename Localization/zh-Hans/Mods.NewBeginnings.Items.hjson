@@ -2,7 +2,7 @@ DeprivedLantern: {
 	DisplayName: 被遗忘提灯
 	Tooltip:
 		'''
-		无需装备, 在背包中时便会亮起
+		放置在物品栏中时亮起
 		无限持续时间
 		'''
 }
@@ -24,7 +24,7 @@ LumberjackAxe: {
 
 LumberjackFlannel: {
 	DisplayName: 伐木工的绒衬衫
-	Tooltip: "'极致舒适'"
+	Tooltip: "“极致舒适”"
 }
 
 DeprivedBlade: {
@@ -34,7 +34,7 @@ DeprivedBlade: {
 
 KylieBoomerang: {
 	DisplayName: 木质回飞棒
-	Tooltip: "'在战斗中出乎意料的有效'"
+	Tooltip: "“在战斗中出乎意料的有效”"
 }
 
 RustyCutlass: {
@@ -44,10 +44,10 @@ RustyCutlass: {
 
 WornSpellbook: {
 	DisplayName: 用旧的法术书
-	Tooltip: 尽管并不强力, 但它显然值得信赖
+	Tooltip: 值得信赖，尽管相当弱
 }
 
 TrailblazerHelmet: {
 	DisplayName: 开拓者头盔
-	Tooltip: "'神速!'"
+	Tooltip: "“神速！”"
 }

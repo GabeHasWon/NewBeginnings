@@ -1,55 +1,55 @@
 Splash: {
-	0: 现在有更多空间了!
-	1: 来自那些为你带来监管者的人!
-	2: 别和 MrPlague's Authentic Races 混为一谈了!
-	3: 少添加15%的钠, 少添加15%的糖, 100%更棒的角色!
-	4: 包含大量可怕且危险的代码!
-	5: 从来没有也永远不会有任何错误!
-	6: 纯粹之人只适合那些想要看看mod，但不去玩的人!
-	7: 在南极洲出人意料地受欢迎!
-	8: 由魂灵团队赞助!
-	9: 包含严重缺乏着色器的情况!
-	10: 研究人员确认无剧情!
-	11: 震颤? 我几乎不认识她!
-	12: BFTA讨论串存在于我们所有人之中!
-	13: 对赞助商开放!
-	14: 可在水下和水上安全使用!
-	15: 不可食用，但你仍然可以想象!
-	16: 专为Windows 95计算机优化!
-	// 17: Adjacent to the people who brought you Walbert!
-	// 18: Will revolutionize anthropology in the year 19,781!
-	// 19: Quantum programming? More likely than you think!
-	// 20: Also try Minesweeper!
-	// 21: Forged deep in the depths of a distant volcano!
-	// 22: Supported by a mysterious cabal of powerful developers!
-	// 23: Contains multitudes!
-	// 24: Would never break cross compatibility!
-	// 25: Contains exactly one extremely secret weak spot!
-	// 26: '''"What a great mod!" - Moon Lord'''
-	// 27: Makes a great gift for any holiday!
-	// 28: Not effective as a lethal weapon!
-	// 29: Controls your mind just enough to keep you playing!
-	// 30: Powered by AI - average intelligence!
-	// 31: Video content provided by Team Spirit!
-	// 32: Not effective as a blunt force weapon!
-	// 33: By the same people that brought you older beginnings!
-	// 34: Also check out Extra Beginnings!
-	// 35: Safe at most temperatures above -30 Celcius!
-	// 36: '''"Interview? For what?" - the Guide'''
-	// 37: Born to choose an origin; forced to Purist!
-	// 38: '''"New Beginnings? What's that?" - Andrew "Redigit" Spinks'''
-	// 39: Listens to your favorite music genre!
+	0: 现在有更多空间了！
+	1: 来自那些为你带来监察者的人！
+	2: 别和MrPlague's Authentic Races混淆了！
+	3: 少添加15%的钠，少添加15%的糖，100%更棒的角色！
+	4: 包含大量可怕且危险的代码！
+	5: 从来没有也永远不会有任何错误！
+	6: 纯粹之人只适合那些想要看看模组，但不去玩的人！
+	7: 在南极洲出人意料地受欢迎！
+	8: 由魂灵团队赞助！
+	9: 包含严重缺乏着色器的情况！
+	10: 研究人员确认无剧情！
+	11: 震颤? 我几乎不认识她！
+	12: BFTA讨论串存在于我们所有人之中！
+	13: 对赞助商开放！
+	14: 可在水下和水上安全使用！
+	15: 不可食用，但你仍然可以想象！
+	16: 专为Windows 95计算机优化！
+	17: 来自那些为你带来Walbert的人！
+	18: 将在公元 19,781 年彻底革新人类学！
+	19: 量子编程？可能性比你想象的要大！
+	20: 也试试扫雷吧！
+	21: 锻造于遥远火山深处的烈焰之中！
+	22: 由一个神秘而强大的开发者密会提供支持！
+	23: 包罗万象！
+	24: 绝不会破坏跨模组兼容性！
+	25: 恰好包含一个极其隐蔽的弱点！
+	26: “真是个好模组！”——月亮领主
+	27: 适合任何节日的绝佳礼物！
+	28: 作为致命武器无效！
+	29: 恰到好处地控制你的心智，让你欲罢不能！
+	30: 由AI驱动——平均水平的智能！
+	31: 视频内容由魂灵团队提供！
+	32: 作为钝器无效！
+	33: 来自那些为你带来老起点的某些人！
+	34: 也来看看Extra Beginnings吧！
+	35: 在大多数零下30摄氏度以上的温度下安全！
+	36: “面试？为了什么？”——向导
+	37: 生来为选择出身，却被逼为纯净之人！
+	38: '''“新起点？那是什么？”——Andrew "Redigit" Spinks'''
+	39: 倾听你最喜欢的音乐类型！
 }
 
 SortBy: {
-	Line: "{0}排序"
+	Line: "按{0}排序"
 	Default: 默认
 	Difficulty: 难度
-	// DifficultyReverse: difficulty (reverse)
-	// Alphabetically: alphabetical
-	// AlphabeticallyReverse: alphabetical (reverse)
-	// Mod: mod
-	// ModReverse: mod (reverse)
+	DifficultyReverse: 难度（反向）
+	Alphabetically: 字母顺序
+	AlphabeticallyReverse: 字母顺序（反向）
+	Mod: 模组
+	ModReverse: 模组（反向）
 }
 
 CustomOrigin: {
@@ -58,8 +58,8 @@ CustomOrigin: {
 	Helmet: 头盔
 	Body: 胸甲
 	Legs: 护腿
-	Health: 生命值({0}/400)
-	Mana: 魔力值({0}/200)
+	Health: 生命值（{0}/400）
+	Mana: 魔力值（{0}/200）
 	Search: 搜索物品 - 按enter键筛选
 	SortBy: "排序方式 - "
 
@@ -70,24 +70,24 @@ CustomOrigin: {
 	}
 
 	Splashes: {
-		0: 真正的挑战是无物品开局!
-		1: 从1979年起停用石棉!
-		2: 如果你给自己天界符，你可以立即通关!
-		3: 卡拉米提?我不认识她!
-		4: 最常与美食搭配!
-		5: 未经美国食品药品监督管理局批准!
-		6: 包含的知识比你想象的多333%!
-		7: 连续六年获得球员选择奖!
-		8: 在3个国家非法!
-		9: 开源供所有人评判!
-		10: 即将被X收购-一切App!
-		11: 工人合作社运营!
-		12: 制造了98%的平衡问题!
-		13: 罗马教廷认证!
-		14: 请在YouTube TV上观看!
-		15: 缺乏维生素A、C和D!
+		0: 真正的挑战是无物品开局！
+		1: 从1979年起停用石棉！
+		2: 如果你给自己天界符，你可以立即通关！
+		3: 灾厄？我不认识她！
+		4: 通常与美食搭配！
+		5: 未经美国食品药品监督管理局批准！
+		6: 包含比你想象中多333%的传说！
+		7: 连续六年荣获玩家选择奖！
+		8: 在3个国家非法！
+		9: 开源代码，任人评判！
+		10: 即将被 X——万能应用——收购！
+		11: 员工所有，员工创立！
+		12: 人均制造了98%的平衡性投诉！
+		13: 经梵蒂冈批准！
+		14: 请在YouTube TV上观看！
+		15: 缺乏维生素A、C和D！
 	}
 }
 
-// Search: Search
-// Loading: (Loading items)
+Search: 搜索
+Loading: （正在加载物品）
